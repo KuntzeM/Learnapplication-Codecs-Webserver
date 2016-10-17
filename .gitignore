@@ -3,6 +3,8 @@
 /public/storage
 /vendor
 
+*.lock
+
 Homestead.json
 Homestead.yaml
 

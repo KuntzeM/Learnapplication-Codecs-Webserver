@@ -1,2 +1,0 @@
-# Medienprojekt-Applikation
-

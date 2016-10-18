@@ -35,9 +35,12 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', ['as' => 'admin', 'uses' => 'Backend\AdminController@get_index']);
     Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
+
     Route::get('/admin/configurations', ['as' => 'configurations', 'uses' => 'Backend\ConfigurationsController@get_index']);
     Route::get('/admin/codecs', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@get_index']);
     Route::get('/admin/media', ['as' => 'media', 'uses' => 'Backend\MediaController@get_index']);
+
+    Route::post('/admin/configurations', ['as' => 'configurations.update', 'uses' => 'Backend\ConfigurationsController@update']);
 
     Route::post('/admin/codec', 'Backend\CodecsController@new_codec');
     Route::delete('/admin/codec/{id}', 'Backend\CodecsController@delete_codec');
@@ -55,6 +58,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/admin/media/upload', ['uses' => 'Backend\MediaController@upload_media']);
     Route::post('/admin/media/{id}', 'Backend\MediaController@get_media');
+
+
 });
 
 /*

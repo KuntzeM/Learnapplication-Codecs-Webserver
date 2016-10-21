@@ -41,7 +41,7 @@
                 error: $.proxy(function (data) {
                     var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                             '<strong>Error!</strong> codec configuration couldn\'t change! </div> ';
-                    $(code).insertAfter('.navbar');
+                    $('.alert_box').append(code);
 
                     $(".ajax_alert ").fadeTo(2000, 500).slideUp(500, function () {
                         $(this).remove();
@@ -51,7 +51,7 @@
 
                     var code = '<div class="ajax_alert alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                             '<strong>Success!</strong> codec configuration ' + data.name + ' is ' + data.active_msg + ' </div> ';
-                    $(code).insertAfter('.navbar');
+                    $('.alert_box').append(code);
 
                     $(".ajax_alert ").fadeTo(2000, 500).slideUp(500, function () {
                         $(this).remove();

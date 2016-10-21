@@ -9,6 +9,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Hash;
+use LRedis;
 
 class ConfigData
 {
@@ -59,5 +60,10 @@ class ConfigData
         $config->value = $this->media_server;
         $config->save();
 
+    }
+
+    public function sendMessage(){
+        $redis = LRedis::connection();
+        $redis->publish('message', 'test');
     }
 }

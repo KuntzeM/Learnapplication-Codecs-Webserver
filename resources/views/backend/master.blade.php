@@ -23,23 +23,24 @@
     </div>
     @section('nav')
     @show
-    @if ($errors->hasBag('success'))
-        @foreach ($errors->getBag('success')->messages() as $error)
-            <div class="alert alert-success">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Success!</strong> {!! $error[0] !!}
-            </div>
-        @endforeach
-    @endif
-    @if ($errors->hasBag('error'))
-        @foreach ($errors->getBag('error')->messages() as $error)
-            <div class="alert alert-error">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Error!</strong> {!! $error[0] !!}
-            </div>
-        @endforeach
-    @endif
-
+    <div class="alert_box">
+        @if ($errors->hasBag('success'))
+            @foreach ($errors->getBag('success')->messages() as $error)
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Success!</strong> {!! $error[0] !!}
+                </div>
+            @endforeach
+        @endif
+        @if ($errors->hasBag('error'))
+            @foreach ($errors->getBag('error')->messages() as $error)
+                <div class="alert alert-error">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Error!</strong> {!! $error[0] !!}
+                </div>
+            @endforeach
+        @endif
+    </div>
 
     <div class='container'>
         @yield('content')

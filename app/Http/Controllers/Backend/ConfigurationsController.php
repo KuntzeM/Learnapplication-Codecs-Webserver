@@ -15,7 +15,7 @@ class ConfigurationsController extends Controller
     public function get_index()
     {
         $config = ConfigData::getInstance();
-
+        //$config->sendMessage();
         return View::make('backend.configurations.index', ['title' => 'Configurations', 'config' => $config]);
     }
 

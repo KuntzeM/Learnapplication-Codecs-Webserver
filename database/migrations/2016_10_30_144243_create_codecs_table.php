@@ -1,8 +1,4 @@
 <?php
-/**
- * Copyright (c) 2016. by Julia Peter & Mathias Kuntze
- * media project TU Ilmenau
- */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +14,7 @@ class CreateCodecsTable extends Migration
     public function up()
     {
         Schema::create('codecs', function (Blueprint $table) {
+            $table->engine = "InnoDB";
             $table->increments('codec_id');
             $table->string('name')->unique();
             $table->string('ffmpeg_codec');
@@ -27,15 +24,7 @@ class CreateCodecsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('codec_configs', function (Blueprint $table) {
-            $table->increments('codec_config_id');
-            $table->integer('codec_id')->unsigned();
-            $table->foreign('codec_id')->references('config_id')->on('codecs');
-            $table->string('name')->unique();
-            $table->string('ffmpeg_parameters');
-            $table->boolean('active');
-            $table->timestamps();
-        });
+
     }
 
     /**
@@ -46,6 +35,6 @@ class CreateCodecsTable extends Migration
     public function down()
     {
         Schema::drop('codecs');
-        Schema::drop('codec_configs');
+
     }
 }

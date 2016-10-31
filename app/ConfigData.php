@@ -36,9 +36,12 @@ class ConfigData
         $this->email = $user->email;
         $this->password = $user->password;
         $user->save();
-        $config = Configuration::where('name', 'media_server')->first();
 
+        $config = Configuration::where('name', 'media_server')->first();
         $this->media_server = $config->value;
+
+        $config = Configuration::where('name', 'api_key')->first();
+        $this->api_key = $config->value;
     }
 
     public function update()
@@ -60,10 +63,11 @@ class ConfigData
         $config->value = $this->media_server;
         $config->save();
 
+        $config = Configuration::where('name', 'api_key')->first();
+        $config->value = $this->api_key;
+        $config->save();
+
     }
 
-    public function sendMessage(){
-        $redis = LRedis::connection();
-        $redis->publish('message', 'test');
-    }
+
 }

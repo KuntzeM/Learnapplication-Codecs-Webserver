@@ -66,12 +66,24 @@
 
     <div class="form-group">
         <label for="media_server">Media Server IP:</label>
+        <p class="help-block">for example: 127.0.0.1:3000</p>
         <div>
             {!! Form::text('media_server', $config->media_server, array('class' => 'form-control ' . ((count($errors->get('media_server'))) ?  'alert-danger' : ''))) !!}
         </div>
         @if(count($errors->get('media_server')))
             <div class="permanent alert alert-danger">
                 @foreach($errors->get('media_server') as $error)
+                    <p>{!! $error !!}</p>
+                @endforeach
+            </div>
+        @endif
+        <label for="api_key">API Secret Key:</label>
+        <div>
+            {!! Form::text('api_key', $config->api_key, array('class' => 'form-control ' . ((count($errors->get('api_key'))) ?  'alert-danger' : ''))) !!}
+        </div>
+        @if(count($errors->get('api_key')))
+            <div class="permanent alert alert-danger">
+                @foreach($errors->get('api_key') as $error)
                     <p>{!! $error !!}</p>
                 @endforeach
             </div>

@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         #'Illuminate\Html\HtmlServiceProvider',
         /*
          * Package Service Providers...
@@ -233,7 +234,8 @@ return [
         'Html' => 'Illuminate\Html\HtmlFacade',
         'Input' => Illuminate\Support\Facades\Input::class,
         'Active' => 'HieuLe\Active\Facades\Active',
-
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
     ],
 
 ];

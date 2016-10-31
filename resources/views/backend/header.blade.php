@@ -24,7 +24,6 @@
         </div>
     </div>
 </nav>
-<script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 
 <div class="container">
     <div class="row">
@@ -33,20 +32,4 @@
         </div>
     </div>
 </div>
-<script>
-    var socket = io.connect('192.168.178.100:5000', {origin: '192.168.178.100:5000'});
-    socket.on('connect', function() {
-        log('connect');
-    });
-    socket.on('message', function(data) {
-        log('message: ' + data);
-    });
-    socket.on('disconnect', function() {
-        log('disconnect');
-    });
-    socket.connect();
-/*
-    socket.on('message', function (data) {
-        $( "#messages" ).append( "<p>"+data+"</p>" );
-    });*/
-</script>
+

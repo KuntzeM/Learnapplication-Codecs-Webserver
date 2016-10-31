@@ -10,7 +10,9 @@
         "laravelcollective/html": "5.3.*",
         "hieu-le/active": "dev-master",
         "illuminate/html": "5.0.*",
-        "predis/predis": "*"
+        "predis/predis": "*",
+        "tymon/jwt-auth": "0.5.*",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

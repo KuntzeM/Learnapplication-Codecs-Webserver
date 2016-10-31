@@ -9,4 +9,5 @@ class Configuration extends Model
 {
     protected $table = 'configurations';
     protected $primaryKey = 'id';
+    public $timestamps = false;
 }

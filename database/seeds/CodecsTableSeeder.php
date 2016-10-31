@@ -33,7 +33,8 @@ class CodecsTableSeeder extends Seeder
         DB::table('codec_configs')->insert([
             'name' => '1000 kbit/s',
             'codec_id' => 1,
-            'ffmpeg_parameters' => '-b 1000',
+            'ffmpeg_bitrate' => '1000',
+            'ffmpeg_parameters' => '',
             'active' => false,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()

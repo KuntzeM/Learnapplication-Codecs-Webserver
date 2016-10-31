@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\Process\Process;
 use View;
 
 class CodecsController extends Controller
@@ -149,7 +148,8 @@ class CodecsController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'codec_id' => 'required',
-            'ffmpeg_parameters' => 'required'
+            'ffmpeg_parameters' => '',
+            'ffmpeg_bitrate' => 'required | integer'
         ]);
 
         if ($validator->fails()) {
@@ -160,6 +160,7 @@ class CodecsController extends Controller
 
         $codec_config->name = $request->name;
         $codec_config->ffmpeg_parameters = $request->ffmpeg_parameters;
+        $codec_config->ffmpeg_bitrate = $request->ffmpeg_bitrate;
         $codec_config->save();
 
         return redirect('/admin/codecs')->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is updated', 'success');
@@ -170,7 +171,8 @@ class CodecsController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'codec_id' => 'required',
-            'ffmpeg_parameters' => 'required'
+            'ffmpeg_parameters' => '',
+            'ffmpeg_bitrate' => 'required | integer'
         ]);
 
         if ($validator->fails()) {
@@ -182,7 +184,8 @@ class CodecsController extends Controller
 
         $codec_config = new CodecConfigs();
         $codec_config->name = $request->name;
-        $codec_config->ffmpeg_parameters = $request->ffmpeg_parameters;
+        $codec_config->ffmpeg_bitrate = $request->ffmpeg_parameters;
+        $codec_config->ffmpeg_parameters = '';
         $codec_config->codec_id = $request->codec_id;
         $codec_config->active = false;
         $codec_config->save();

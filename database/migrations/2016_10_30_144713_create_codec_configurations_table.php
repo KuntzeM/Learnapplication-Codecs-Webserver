@@ -19,7 +19,8 @@ class CreateCodecConfigurationsTable extends Migration
             $table->increments('codec_config_id');
             $table->integer('codec_id')->unsigned();
             $table->foreign('codec_id')->references('codec_id')->on('codecs');
-            $table->string('name')->unique();
+            $table->string('name');
+            $table->string('ffmpeg_bitrate');
             $table->string('ffmpeg_parameters');
             $table->boolean('active');
             $table->timestamps();

@@ -42,6 +42,17 @@
         @endif
         </div>
     <div class="form-group">
+        <label for="ffmpeg_bitrate">ffmpeg bitrate:</label>
+        <div>
+            {!! Form::text('ffmpeg_bitrate', ((empty($codec_config->ffmpeg_bitrate)) ? Input::old('ffmpeg_bitrate') : $codec_config->ffmpeg_bitrate), array('class' => 'form-control ' . ((count($errors->get('ffmpeg_bitrate'))) ?  'alert-danger' : ''))) !!}
+        </div>
+        @if(count($errors->get('ffmpeg_bitrate')))
+            <div class="permanent alert alert-danger">
+                @foreach($errors->get('ffmpeg_bitrate') as $error)
+                    <p>{!! $error !!}</p>
+                @endforeach
+            </div>
+        @endif
         <label for="ffmpeg_parameters">ffmpeg parameter:</label>
         <div>
             {!! Form::text('ffmpeg_parameters', ((empty($codec_config->ffmpeg_parameters)) ? Input::old('ffmpeg_parameters') : $codec_config->ffmpeg_parameters), array('class' => 'form-control ' . ((count($errors->get('ffmpeg_parameters'))) ?  'alert-danger' : ''))) !!}

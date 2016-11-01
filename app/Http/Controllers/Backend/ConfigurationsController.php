@@ -14,22 +14,9 @@ class ConfigurationsController extends Controller
 {
     public function get_index()
     {
-        #$client = new Client();
-        /*
-        $res = $client->request('GET', 'http://localhost:3000/public/video', [
-            'auth' => ['user', 'pass']
-        ]);
-        echo $res->getStatusCode();
-        // 200
-                echo $res->getHeaderLine('content-type');
-        // 'application/json; charset=utf8'
-                echo $res->getBody();
-        // {"type":"User"...'
-        */
-        // Send an asynchronous request.
 
         $config = ConfigData::getInstance();
-        //$config->sendMessage();
+
         return View::make('backend.configurations.index', ['title' => 'Configurations', 'config' => $config]);
     }
 
@@ -43,7 +30,8 @@ class ConfigurationsController extends Controller
             'password' => 'min:5|confirmed',
             'password_confirmation' => 'same:password',
             'media_server' => 'required|active_url',
-            'api_key' => 'required'
+            'api_key' => 'required',
+            'api_expire' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -59,6 +47,7 @@ class ConfigurationsController extends Controller
         $configData->password = $request->password;
         $configData->media_server = $request->media_server;
         $configData->api_key = $request->api_key;
+        $configData->api_expire = $request->api_expire;
 
         $configData->update();
 

@@ -19,6 +19,8 @@ class ConfigData
     public $email;
     public $password;
     public $media_server;
+    public $api_key;
+    public $api_expire;
 
 
     public static function getInstance()
@@ -42,6 +44,9 @@ class ConfigData
 
         $config = Configuration::where('name', 'api_key')->first();
         $this->api_key = $config->value;
+
+        $config = Configuration::where('name', 'api_expire')->first();
+        $this->api_expire = intval($config->value);
     }
 
     public function update()
@@ -67,6 +72,9 @@ class ConfigData
         $config->value = $this->api_key;
         $config->save();
 
+        $config = Configuration::where('name', 'api_expire')->first();
+        $config->value = intval($this->api_expire);
+        $config->save();
     }
 
 

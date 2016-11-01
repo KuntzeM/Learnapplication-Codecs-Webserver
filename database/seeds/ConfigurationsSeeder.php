@@ -13,11 +13,15 @@ class ConfigurationsSeeder extends Seeder
     {
         DB::table('configurations')->insert([
             'name' => 'media_server',
-            'value' => '127.0.0.1'
+            'value' => '127.0.0.1:3000'
         ]);
         DB::table('configurations')->insert([
             'name' => 'api_key',
             'value' => '1234567890'
+        ]);
+        DB::table('configurations')->insert([
+            'name' => 'api_expire',
+            'value' => '60'
         ]);
     }
 }

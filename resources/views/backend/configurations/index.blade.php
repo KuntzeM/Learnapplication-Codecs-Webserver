@@ -88,6 +88,17 @@
                 @endforeach
             </div>
         @endif
+        <label for="api_expire">API Expire Time (in minutes):</label>
+        <div>
+            {!! Form::text('api_expire', $config->api_expire, array('class' => 'form-control ' . ((count($errors->get('api_expire'))) ?  'alert-danger' : ''))) !!}
+        </div>
+        @if(count($errors->get('api_expire')))
+            <div class="permanent alert alert-danger">
+                @foreach($errors->get('api_expire') as $error)
+                    <p>{!! $error !!}</p>
+                @endforeach
+            </div>
+        @endif
     </div>
     <button type="submit" data-toggle="modal" class="btn btn-default">
         <span class="glyphicon glyphicon-save"></span> Save

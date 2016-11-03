@@ -1,13 +1,16 @@
+{!!Html::script('js/jquery-3.1.0.min.js') !!}
+{!!Html::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css') !!}
+{!!Html::style('css/bootstrap.min.css')!!}
+{!!Html::style('css/backend.css')!!}
+{!!Html::script('js/bootstrap.min.js')!!}
+{!!Html::script('js/jquery.ui.widget.js')!!}
+
 <!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Admin Area</title>
-    <script type="application/javascript" src="../js/jquery-3.1.0.min.js"></script>
-    {!!Html::style('css/bootstrap.min.css')!!}
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    {!!Html::style('css/backend.css')!!}
-    {!!Html::script('js/bootstrap.min.js')!!}
+
     <style>
         body {
             margin-top: 5%;

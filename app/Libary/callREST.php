@@ -53,4 +53,9 @@ class callREST
         });
         $promise->wait();
     }
+
+    public function getToken()
+    {
+        return $this->token;
+    }
 }

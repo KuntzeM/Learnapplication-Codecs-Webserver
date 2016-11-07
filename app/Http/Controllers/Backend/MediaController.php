@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Libary\callREST;
@@ -40,8 +41,10 @@ class MediaController extends Controller
     public function upload_media()
     {
         $media = new Media();
+        $config = ConfigData::getInstance();
+
         $rest = new callREST();
-        return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'token' => $rest->getToken()]);
+        return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'token' => $rest->getToken(), 'url' => $config->media_server]);
     }
 
     public function save_media()

@@ -1,6 +1,7 @@
 @extends('backend.master')
 {!!Html::style('css/jquery.fileupload.css')  !!}
 {!!Html::style('css/jquery.fileupload-ui.css')  !!}
+
 @section('nav')
     @parent
     @include('backend.header')
@@ -8,14 +9,20 @@
 @stop
 
 @section('content')
-
-
+    {!!Html::script('js/jquery.ui.widget.js')  !!}
+    {!!Html::script('js/jquery.iframe-transport.js')  !!}
     {!!Html::script('js/jquery.fileupload.js')  !!}
 
-    {!!Html::script('js/jquery.iframe-transport.js')  !!}
+    {!!Html::script('js/jquery.fileupload-process.js')  !!}
+    {!!Html::script('js/jquery.fileupload-validate.js')  !!}
+    {!!Html::script('js/jquery.fileupload-image.js')  !!}
+    {!!Html::script('js/jquery.fileupload-video.js')  !!}
+
 
     <!-- {!!Html::script('js/cors/jquery.postmessage-transport.js')  !!}
     {!!Html::script('js/cors/jquery.xdr-transport.js')  !!}-->
+
+
 
 
     <h3 class="item_details">{!! $title !!}</h3>
@@ -41,6 +48,7 @@
             </div>
         @endif
 
+
     <!-- The fileinput-button span is used to style the file input field as button -->
         <span class="btn btn-success fileinput-button">
             <i class="glyphicon glyphicon-plus"></i>
@@ -50,13 +58,13 @@
             <input type="hidden" name="token" value="{!! $token !!}"/>
             <input type="hidden" name="media_type" value="image"/>
         </span>
-    </div>
 
+    </div>
     <a class="item_details" title="back without save" href="/admin/media">
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>
     </a>
-    <button id="send" type="button" data-toggle="modal" class="btn btn-default">
+    <button id="send" type="button" disabled="disabled" data-toggle="modal" class="btn btn-default">
         <span class="glyphicon glyphicon-save"></span> Save
     </button>
     <div class="progress">
@@ -69,34 +77,47 @@
 
     {!! Form::close() !!}
     <script type="text/javascript">
+        $(function () {
 
-        $('#fileupload').fileupload({
-         forceIframeTransport: true,
-            type: 'POST',
-         multipart: true,
-            dataType: 'json',
-            processData: false,
-            contentType: false,
-            done: function (e, data) {
-             console.log(e.message);
-             console.log(data);
+            $('#file').fileupload({
+                forceIframeTransport: true,
+                type: 'POST',
+                multipart: true,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                singleFileUploads: true,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: '100000',
+                done: function (e, data) {
+                    //console.log(e.message);
+                    //console.log(data);
+                },
+                add: function (e, data) {
+                    $('#send').click(function () {
+                        data.submit();
+                    });
+                },
+                progressall: function (e, data) {
+                    console.log(e);
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('.progress-bar').attr("aria-valuenow", progress)
+                            .text(progress + '%')
+                            .css('width', progress + '%');
+                },
+                // progressServerRate: 0.5,
+                // progressServerDecayExp: 3.5
+            }).bind('fileuploadsubmit', function (e, data) {
+                data = new FormData($('form')[0]);
 
-         },
-            add: function (e, data) {
-                $('#send').click(function () {
-                    data.submit();
+            }).bind('fileuploadfail', function (e, data) {
+                $.each(data.files, function (index) {
+                    var error = $('<span class="text-danger"/>').text('File upload failed.');
+                    $(data.context.children()[index])
+                            .append('<br>')
+                            .append(error);
                 });
-         },
-            progressall: function (e, data) {
-         var progress = parseInt(data.loaded / data.total * 100, 10);
-                $('.progress-bar').attr("aria-valuenow", progress)
-                        .text(progress + '%')
-                        .css('width', progress + '%');
-         }
-        }).bind('fileuploadsubmit', function (e, data) {
-            var request = new FormData($('form')[0]);
-            data = request;
-
+            });
         });
 
     </script>

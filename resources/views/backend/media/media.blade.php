@@ -23,7 +23,7 @@
     @if($new)
         {!! Form::open(['url' => $url . '/auth/image', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
     @else
-        {!! Form::open(['url' => $url . '/public/image/' . $media->media_id, 'method' => 'post'])  !!}
+        {!! Form::open(['url' => $url . '/auth/image/' . $media->media_id, 'method' => 'post'])  !!}
     @endif
 
     <div class="form-group">
@@ -48,6 +48,7 @@
             <!-- The file input field used as target for the file upload widget -->
             <input id="fileupload" type="file" name="files">
             <input type="hidden" name="token" value="{!! $token !!}"/>
+            <input type="hidden" name="media_type" value="image"/>
         </span>
     </div>
 

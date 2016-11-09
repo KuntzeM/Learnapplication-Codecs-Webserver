@@ -13,7 +13,7 @@ class ConfigurationsSeeder extends Seeder
     {
         DB::table('configurations')->insert([
             'name' => 'media_server',
-            'value' => '127.0.0.1:3000'
+            'value' => 'http://127.0.0.1:3000'
         ]);
         DB::table('configurations')->insert([
             'name' => 'api_key',

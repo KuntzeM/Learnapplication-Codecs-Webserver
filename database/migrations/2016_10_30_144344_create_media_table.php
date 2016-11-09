@@ -19,11 +19,11 @@ class CreateMediaTable extends Migration
             $table->timestamps();
             $table->enum('media_type', ['video', 'image']);
             $table->string('origin_file');
-            $table->string('name')->unique();
+            $table->string('name');
             $table->boolean('active');
             $table->boolean('demo');
             $table->string('owner');
-            $table->string('manifest');
+            $table->string('manifest')->default('');
         });
     }
 

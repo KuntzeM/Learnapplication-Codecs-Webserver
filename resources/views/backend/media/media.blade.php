@@ -54,7 +54,7 @@
             <i class="glyphicon glyphicon-plus"></i>
             <span>Add files...</span>
             <!-- The file input field used as target for the file upload widget -->
-            <input id="fileupload" type="file" name="files">
+            <input id="file" type="file" name="files">
             <input type="hidden" name="token" value="{!! $token !!}"/>
             <input type="hidden" name="media_type" value="image"/>
         </span>
@@ -64,7 +64,7 @@
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>
     </a>
-    <button id="send" type="button" disabled="disabled" data-toggle="modal" class="btn btn-default">
+    <button id="send" type="button" data-toggle="modal" class="btn btn-default">
         <span class="glyphicon glyphicon-save"></span> Save
     </button>
     <div class="progress">

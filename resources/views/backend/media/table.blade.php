@@ -11,38 +11,45 @@
         <div class="panel-body">
             no media uploaded
         </div>
-        @forelse  ($media as $m)
+    @else
+        <table class="table">
+            <thead>
             <tr>
-                <td class="pointer"><span data-row="media_{{ $loop->iteration }}_config"
-                                          class="clickable_icon fa fa-chevron-right" title="show configurations"></span></td>
+                <th class="number">#</th>
+                <th>thumbnail</th>
+                <th class="name">name</th>
+                <th class="date">last change</th>
+                <th class="date">origin file path on media server</th>
+                <th class="options">options</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            @forelse ($media as $m)
+
+                <tr>
                 <td>{{ $loop->iteration }}</td>
+                    <td class="thumbnail">
+                        @if ($name == "Image")
+                            <img width="300" src="{!! $url . '/public/media/' . $m->media_id !!}" controls>
+
+                        @else
+                            <video width="300">
+                                <source src="{!! $url . '/public/media/' . $m->media_id !!}">
+                            </video>
+                        @endif
+                    </td>
                 <td>{{ $m->name }}</td>
-                <td>{{ $m->orgin_file }}</td>
                 <td>{{ $m->created_at }}</td>
+                    <td>{{ $m->origin_file }}</td>
                 <td class="options">
-                    {!! Form::open(['action' => ['Backend\MediaController@get_media', 0, $m->media_id],
-                                    'method' => 'get'])  !!}
 
-                    <button type="submit" class="btn btn-default"><span
-                                class="glyphicon glyphicon-plus-sign"></span></button>
-                    {!! Form::close() !!}
-
-                    <a title="update media {{ $m->name }}" href="/admin/media/{{ $m->media_id }}">
-                        <button type="button" class="btn btn-default"><span
-                                    class="glyphicon glyphicon-pencil"></span></button>
-                        {!! Form::open(['action' => ['Backend\MediaController@delete_media', $m->media_id],
-                                        'method' => 'delete'])  !!}
-                        @include('backend.modal_delete', ['modal_id'=>'delete_' . $m->media_id,
-                        'title'=>'Are you sure you want to delete this media?',
-                        'body'=>'<p>Delete media ' . $m->name . '</p>'])
-                        <button type="button" title="delete media {{ $m->name }}" data-toggle="modal"
-                                class="btn btn-danger" data-target="#delete_{{ $m->media_id }}"><span
-                                    class="glyphicon glyphicon-trash"></span></button>
-                        {!! Form::close() !!}
                 </td>
 
             </tr>
             @endforeach
+        </table>
     @endif
 </div>
 

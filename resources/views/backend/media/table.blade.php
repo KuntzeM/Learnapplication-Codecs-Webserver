@@ -32,17 +32,17 @@
                 <td>{{ $loop->iteration }}</td>
                     <td class="thumbnail">
                         @if ($name == "Image")
-                            <img width="300" src="{!! $url . '/public/media/' . $m->media_id !!}" controls>
+                            <img width="300" src="{!! $m->getUrl('300') !!}">
 
                         @else
-                            <video width="300">
-                                <source src="{!! $url . '/public/media/' . $m->media_id !!}">
+                            <video width="300" controls>
+                                <source src="{!! $m->getUrl('300') !!}">
                             </video>
                         @endif
                     </td>
                 <td>{{ $m->name }}</td>
                 <td>{{ $m->created_at }}</td>
-                    <td>{{ $m->origin_file }}</td>
+                <td><input type="text" disabled value="{{ $m->origin_file }}" /></td>
                 <td class="options">
 
                 </td>

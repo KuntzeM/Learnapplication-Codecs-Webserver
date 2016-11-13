@@ -11,8 +11,8 @@
 
 
 
-    @include('backend.media.table', ['url' => $url, 'name'=>'Video', 'media'=>$video_media])
-    @include('backend.media.table', ['url' => $url, 'name'=>'Image', 'media'=>$image_media])
+    @include('backend.media.table', ['name'=>'Video', 'media'=>$video_media])
+    @include('backend.media.table', ['name'=>'Image', 'media'=>$image_media])
 
 
 

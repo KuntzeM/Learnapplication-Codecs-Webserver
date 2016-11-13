@@ -12,12 +12,18 @@ use View;
 
 class ConfigurationsController extends Controller
 {
+    public function __construct()
+    {
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
+    }
+
     public function get_index()
     {
 
         $config = ConfigData::getInstance();
 
-        return View::make('backend.configurations.index', ['title' => 'Configurations', 'config' => $config]);
+        return View::make('backend.configurations.index', ['url'=> $this->url, 'title' => 'Configurations', 'config' => $config]);
     }
 
     public function update(Request $request)

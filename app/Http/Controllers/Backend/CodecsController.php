@@ -11,21 +11,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use View;
+use App\ConfigData;
 
 class CodecsController extends Controller
 {
 
     public function __construct()
     {
-        #$this->middleware('auth');
-
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
     }
 
     public function get_index()
     {
         $video_codecs = Codecs::where('media_type', 'video')->get();
         $image_codecs = Codecs::where('media_type', 'image')->get();
-        return View::make('backend.codecs.index', ['video_codecs' => $video_codecs, 'image_codecs' => $image_codecs]);
+        return View::make('backend.codecs.index', ['url'=> $this->url, 'video_codecs' => $video_codecs, 'image_codecs' => $image_codecs]);
     }
 
     public function get_singleCodec($id)

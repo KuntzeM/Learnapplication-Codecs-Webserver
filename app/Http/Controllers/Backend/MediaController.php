@@ -15,15 +15,16 @@ class MediaController extends Controller
 
     public function __construct()
     {
-        #$this->middleware('auth');
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
     }
 
     public function get_index()
     {
-        $config = ConfigData::getInstance();
+
         $video_media = Media::where('media_type', 'video')->get();
         $image_media = Media::where('media_type', 'image')->get();
-        return View::make('backend.media.index', ['url' => $config->media_server, 'video_media' => $video_media, 'image_media' => $image_media]);
+        return View::make('backend.media.index', ['url'=> $this->url, 'video_media' => $video_media, 'image_media' => $image_media]);
     }
 
     public function get_media($id)

@@ -4,6 +4,7 @@
 {!!Html::style('css/backend.css')!!}
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
+{!!Html::script('js/functions.js')!!}
 
 <!DOCTYPE html>
 <html lang='en'>
@@ -17,8 +18,11 @@
         }
     </style>
 </head>
-<body>
+<script>
+    setInterval("checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box')", 2000);
 
+</script>
+<body>
     <div class="page-header">
         <h1>Admin Area
             <small>for Learning Applikation</small>
@@ -37,7 +41,7 @@
         @endif
         @if ($errors->hasBag('error'))
             @foreach ($errors->getBag('error')->messages() as $error)
-                <div class="alert alert-error">
+                <div class="alert alert-danger">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                     <strong>Error!</strong> {!! $error[0] !!}
                 </div>

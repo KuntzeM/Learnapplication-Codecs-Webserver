@@ -12,7 +12,7 @@
     Admin Area
 
     <script>
-        setInterval("ajaxd()", 1000);
+       // setInterval("ajaxd()", 1000);
 
         function ajaxd() {
             $.ajax({

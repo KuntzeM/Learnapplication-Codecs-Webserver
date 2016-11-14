@@ -26,6 +26,7 @@ class AuthController extends Controller
     |
     */
 
+
     /**
      * Where to redirect users after login / registration.
      *

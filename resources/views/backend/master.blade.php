@@ -18,10 +18,7 @@
         }
     </style>
 </head>
-<script>
-    setInterval("checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box')", 2000);
 
-</script>
 <body>
     <div class="page-header">
         <h1>Admin Area

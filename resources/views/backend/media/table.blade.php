@@ -42,7 +42,7 @@
                     </td>
                 <td>{{ $m->name }}</td>
                 <td>{{ $m->created_at }}</td>
-                <td><input type="text" disabled value="{{ $m->origin_file }}" /></td>
+                    <td><input type="text" readonly value="{{ $m->origin_file }}"/></td>
                 <td class="options">
 
                 </td>

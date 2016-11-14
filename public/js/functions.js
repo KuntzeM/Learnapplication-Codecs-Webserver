@@ -6,6 +6,7 @@ function checkMediaServerStatus(url, element){
 
     $.ajax({
         url: url,
+        cache: false,
         crossDomain: true,
         dataType: 'json',
         error: function(data){
@@ -19,6 +20,6 @@ function checkMediaServerStatus(url, element){
             $('#server_status').remove();
             //console.log(data);
         },
-        timeout: 1000 // sets timeout to 3 seconds
+        timeout: 100 // sets timeout to 1 second
     });
 }

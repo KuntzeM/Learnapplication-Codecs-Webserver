@@ -18,6 +18,7 @@ class CreateCodecsTable extends Migration
             $table->increments('codec_id');
             $table->string('name')->unique();
             $table->string('ffmpeg_codec');
+            $table->string('extension', 20);
             $table->enum('media_type', ['video', 'image']);
             $table->text('documentation_de')->nullable();
             $table->text('documentation_en')->nullable();

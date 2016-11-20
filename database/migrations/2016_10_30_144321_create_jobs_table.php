@@ -14,15 +14,12 @@ class CreateJobsTable extends Migration
     public function up()
     {
         Schema::create('jobs', function (Blueprint $table) {
-            $table->engine = "InnoDB";
-            $table->bigIncrements('id');
-            $table->string('queue');
-            $table->longText('payload');
-            $table->tinyInteger('attempts')->unsigned();
+            $table->increments('id');
+            $table->unsignedInteger('media_id');
+            $table->unsignedInteger('codec_config_id');
+            $table->tinyInteger('attempts')->unsigned()->default(0);
             $table->unsignedInteger('reserved_at')->nullable();
-            $table->unsignedInteger('available_at');
-            $table->unsignedInteger('created_at');
-            $table->index(['queue', 'reserved_at']);
+            $table->timestamps();
         });
     }
 

@@ -21,6 +21,6 @@ class CodecConfigs extends Model
 
     public function media_codec_configs()
     {
-        return $this->belongsToMany('App\Codecs', 'codec_id');
+        return $this->belongsToMany('App\Media', 'media_id');
     }
 }

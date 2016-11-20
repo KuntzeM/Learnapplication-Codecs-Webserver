@@ -3,16 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\ConfigData;
 
 class Media extends Model
 {
     protected $table = 'media';
     protected $primaryKey = 'media_id';
 
+
     public function media_codec_configs()
     {
         return $this->hasMany('App\MediaCodecConfig', 'media_id');
+    }
+
+    public function codec_configs()
+    {
+        return $this->media_codec_configs->codec_config;
     }
 
     public function getUrl($resize_width = null){

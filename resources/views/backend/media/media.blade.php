@@ -31,7 +31,7 @@
     <h3 class="item_details">{!! $title !!}</h3>
 
     @if($new)
-        {!! Form::open(['url' => $url . '/auth/image', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
+        {!! Form::open(['url' => $url . '/auth/media', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
     @else
         {!! Form::open(['url' => $url . '/auth/image/' . $media->media_id, 'method' => 'post'])  !!}
     @endif

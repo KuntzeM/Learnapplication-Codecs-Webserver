@@ -39,6 +39,7 @@ class callREST
 
     }
 
+    /*
     public function getImage($id = null)
     {
 
@@ -46,6 +47,22 @@ class callREST
         $client = new Client();
 
         $request = new \GuzzleHttp\Psr7\Request('GET', $configData->media_server . '/public/image', [
+            'x-access-token' => $this->token
+        ]);
+        $promise = $client->sendAsync($request)->then(function ($response) {
+            var_dump(\GuzzleHttp\json_decode($response->getBody()));
+        });
+        $promise->wait();
+    }
+    */
+
+    public function postStartTranscoding()
+    {
+
+        $configData = ConfigData::getInstance();
+        $client = new Client();
+
+        $request = new \GuzzleHttp\Psr7\Request('POST', $configData->media_server . '/auth/startTranscoding', [
             'x-access-token' => $this->token
         ]);
         $promise = $client->sendAsync($request)->then(function ($response) {

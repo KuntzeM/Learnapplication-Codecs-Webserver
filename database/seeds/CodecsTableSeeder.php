@@ -14,6 +14,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([
             'name' => 'H.264',
             'ffmpeg_codec' => 'libx264',
+            'extension' => 'mov',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
@@ -23,6 +24,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([
             'name' => 'H.265 / HEVC',
             'ffmpeg_codec' => 'libx265',
+            'extension' => 'avi',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',

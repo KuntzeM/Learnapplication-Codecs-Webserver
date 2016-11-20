@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Libary\callREST;
 use App\Media;
-use Illuminate\Support\Facades\Input;
 use View;
 
 class MediaController extends Controller
@@ -24,6 +23,7 @@ class MediaController extends Controller
 
         $video_media = Media::where('media_type', 'video')->get();
         $image_media = Media::where('media_type', 'image')->get();
+        dd($video_media[0]->codec_configs);
         return View::make('backend.media.index', ['url'=> $this->url, 'video_media' => $video_media, 'image_media' => $image_media]);
     }
 
@@ -51,14 +51,13 @@ class MediaController extends Controller
 
     public function save_media()
     {
-        $media = new Media();
+        /*$media = new Media();
         return Response::json('success', 200);
         $file = Input::file('file');
         $destinationPath = 'storage';
-// If the uploads fail due to file system, you can try doing public_path().'/uploads'
+
         $filename = str_random(12);
-//$filename = $file->getClientOriginalName();
-//$extension =$file->getClientOriginalExtension();
+
         $upload_success = Input::file('file')->move($destinationPath, $filename);
 
         if ($upload_success) {
@@ -67,5 +66,6 @@ class MediaController extends Controller
             return Response::json('error', 400);
         }
         //return View::make('backend.media.media', ['media' => $media, 'new'=>true, 'title' => 'New Media']);
+        */
     }
 }

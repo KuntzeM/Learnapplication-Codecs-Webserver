@@ -59,6 +59,19 @@
             </div>
         @endif
     </div>
+    <div class="form-group">
+        <label for="extension">extension:</label>
+        <div>
+            {!! Form::text('extension', ((empty($codec->extension)) ? Input::old('extension') : $codec->extension), array('class' => 'form-control ' . ((count($errors->get('ffmpeg_codec'))) ?  'alert-danger' : ''))) !!}
+        </div>
+        @if(count($errors->get('extension')))
+            <div class="permanent alert alert-danger">
+                @foreach($errors->get('extension') as $error)
+                    <p>{!! $error !!}</p>
+                @endforeach
+            </div>
+        @endif
+    </div>
     <a class="item_details" title="back without save" href="/admin/codecs">
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>

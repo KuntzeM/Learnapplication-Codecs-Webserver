@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\CodecConfigs;
 use App\Codecs;
+use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -11,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use View;
-use App\ConfigData;
 
 class CodecsController extends Controller
 {
@@ -75,7 +75,7 @@ class CodecsController extends Controller
             $new = true;
         }
 
-        return View::make('backend.codecs.codec', ['codec' => $codec, 'title' => $title, 'new' => $new]);
+        return View::make('backend.codecs.codec', ['url' => $this->url, 'codec' => $codec, 'title' => $title, 'new' => $new]);
     }
 
     public function get_codec_config($id = null, $codec_id = null)
@@ -92,7 +92,7 @@ class CodecsController extends Controller
             $codec_config->codec = Codecs::findOrFail($codec_id);
         }
 
-        return View::make('backend.codecs.codec_config', ['codec_config' => $codec_config, 'title' => $title, 'new' => $new]);
+        return View::make('backend.codecs.codec_config', ['url' => $this->url, 'codec_config' => $codec_config, 'title' => $title, 'new' => $new]);
     }
 
     public function update_codec(Request $request, $id)
@@ -101,7 +101,8 @@ class CodecsController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:codecs,name,' . $id . ',codec_id',
-            'ffmpeg_codec' => 'required'
+            'ffmpeg_codec' => 'required',
+            'extension' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -112,6 +113,7 @@ class CodecsController extends Controller
 
         $codec->name = $request->name;
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
+        $codec->extension = $request->extension;
         $codec->save();
 
         return redirect('/admin/codecs')->withErrors('codec ' . $codec->name . ' is updated', 'success');
@@ -122,7 +124,8 @@ class CodecsController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:codecs',
             'ffmpeg_codec' => 'required',
-            'media_type' => 'required'
+            'media_type' => 'required',
+            'extension' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -136,6 +139,7 @@ class CodecsController extends Controller
         $codec->name = $request->name;
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
         $codec->media_type = $request->media_type;
+        $codec->extension = $request->extension;
         $codec->save();
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec->name . ' is created', 'success');
@@ -185,8 +189,8 @@ class CodecsController extends Controller
 
         $codec_config = new CodecConfigs();
         $codec_config->name = $request->name;
-        $codec_config->ffmpeg_bitrate = $request->ffmpeg_parameters;
-        $codec_config->ffmpeg_parameters = '';
+        $codec_config->ffmpeg_bitrate = $request->ffmpeg_bitrate;
+        $codec_config->ffmpeg_parameters = $request->ffmpeg_parameters;
         $codec_config->codec_id = $request->codec_id;
         $codec_config->active = false;
         $codec_config->save();

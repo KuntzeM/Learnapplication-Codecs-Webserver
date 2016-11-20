@@ -6,11 +6,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Libary\FFMpegQueue;
+use App\Job;
+use App\Media;
 use View;
-use App\ConfigData;
+
 
 class AdminController extends Controller
 {
@@ -20,6 +22,11 @@ class AdminController extends Controller
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
 
+        $job = new Job(1, 3);
+        $job->save();
+
+
+
     }
 
     public function get_index()
@@ -27,6 +34,15 @@ class AdminController extends Controller
 
 
         return View::make('backend.index', array('url'=> $this->url, 'pid' => "1"));
+    }
+
+    public function appendJobs()
+    {
+        $medias = Media::findall();
+
+        dd($medias);
+
+
     }
 
 

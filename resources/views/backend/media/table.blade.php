@@ -15,6 +15,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th class="expand"></th>
                 <th class="number">#</th>
                 <th>thumbnail</th>
                 <th class="name">name</th>
@@ -29,6 +30,9 @@
             @forelse ($media as $m)
 
                 <tr>
+                    <td class="pointer"><span data-row="media_{{ $loop->iteration }}_config"
+                                              class="clickable_icon fa fa-chevron-right"
+                                              title="show configurations"></span></td>
                 <td>{{ $loop->iteration }}</td>
                     <td class="thumbnail">
                         @if ($name == "Image")
@@ -48,6 +52,40 @@
                 </td>
 
             </tr>
+                @if (count($m->getTranscodedFiles()) == 0)
+                    <tr class="media_{{ $loop->iteration }}_config" style="display: none">
+                        <td colspan="6">
+                            no codec configurations created
+                        </td>
+                    </tr>
+                @else
+                    @forelse ($m->getTranscodedFiles() as $config)
+                        <tr class="codec_config media_{{ $m->media_id }}_config" style="display: none">
+                            <td></td>
+                            <td></td>
+                            <td colspan="2">{!! $config['codec_name'] . ' - ' . $config['codec_config_name']!!}</td>
+                            <td>
+
+                                @if($config['media_codec_config_id'] > 0)
+                                    <span class="btn btn-success"><i
+                                                class="glyphicon glyphicon-ok-circle"></i></span>
+                                @else
+                                    <span class="btn btn-danger"><i
+                                                class="glyphicon glyphicon-remove-circle"></i></span>
+                                @endif
+                            </td>
+
+                            <td class="options">
+
+                            </td>
+
+                        </tr>
+            @endforeach
+            @endif
+
+
+
+
             @endforeach
         </table>
     @endif

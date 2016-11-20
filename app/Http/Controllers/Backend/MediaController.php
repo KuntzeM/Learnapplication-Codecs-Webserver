@@ -23,7 +23,7 @@ class MediaController extends Controller
 
         $video_media = Media::where('media_type', 'video')->get();
         $image_media = Media::where('media_type', 'image')->get();
-        dd($video_media[0]->codec_configs);
+
         return View::make('backend.media.index', ['url'=> $this->url, 'video_media' => $video_media, 'image_media' => $image_media]);
     }
 

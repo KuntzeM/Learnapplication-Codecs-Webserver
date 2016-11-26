@@ -9,7 +9,6 @@ namespace App\Http\Controllers\Backend;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Job;
 use App\Media;
 use View;
 
@@ -22,8 +21,6 @@ class AdminController extends Controller
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
 
-        $job = new Job(1, 3);
-        $job->save();
 
 
 

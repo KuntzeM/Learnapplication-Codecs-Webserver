@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Libary\callREST;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use View;
@@ -16,8 +15,7 @@ class ConfigurationsController extends Controller
     {
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
-        $rest = new callREST();
-        $rest->postStartTranscoding();
+
     }
 
     public function get_index()

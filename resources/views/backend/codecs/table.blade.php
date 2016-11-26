@@ -25,8 +25,8 @@
             <tbody>
             @forelse  ($codecs as $codec)
                 <tr>
-                    <td class="pointer"><span data-row="codec_{{ $loop->iteration }}_config"
-                              class="clickable_icon fa fa-chevron-right" title="show configurations"></span></td>
+                    <td class="pointer"><span data-row="codec_{{ $codec->codec_id }}_config"
+                                              class="clickable_icon fa fa-chevron-right" title="show configurations"></span></td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $codec->name }}</td>
                     <td>{{ $codec->ffmpeg_codec }}</td>
@@ -59,7 +59,7 @@
                     </td>
                 </tr>
                 @if (count($codec->codec_configs) == 0)
-                    <tr class="codec_{{ $loop->iteration }}_config" style="display: none">
+                    <tr class="codec_{{ $codec->codec_id }}_config" style="display: none">
                         <td colspan="6">
                             no codec configurations created
                         </td>

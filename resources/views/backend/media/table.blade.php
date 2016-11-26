@@ -30,7 +30,7 @@
             @forelse ($media as $m)
 
                 <tr>
-                    <td class="pointer"><span data-row="media_{{ $loop->iteration }}_config"
+                    <td class="pointer"><span data-row="media_{{ $m->media_id }}_config"
                                               class="clickable_icon fa fa-chevron-right"
                                               title="show configurations"></span></td>
                 <td>{{ $loop->iteration }}</td>
@@ -48,13 +48,25 @@
                 <td>{{ $m->created_at }}</td>
                     <td><input type="text" readonly value="{{ $m->origin_file }}"/></td>
                 <td class="options">
-
+                    <a title="update media file {{ $m->name }}" href="/admin/media/{{ $m->media_id }}">
+                        <button type="button" class="btn btn-default"><span
+                                    class="glyphicon glyphicon-pencil"></span></button>
+                    </a>
+                    {!! Form::open(['action' => ['Backend\MediaController@delete_media', $m->media_id],
+                                        'method' => 'delete'])  !!}
+                    @include('backend.modal_delete', ['modal_id'=>'delete_' . $m->media_id,
+                    'title'=>'Are you sure you want to delete this media file?',
+                    'body'=>'<p>Delete Media file ' . $m->name . '</p>'])
+                    <button type="button" title="delete codec {{ $m->name }}" data-toggle="modal"
+                            class="btn btn-danger" data-target="#delete_{{ $m->media_id }}"><span
+                                class="glyphicon glyphicon-trash"></span></button>
+                    {!! Form::close() !!}
                 </td>
 
             </tr>
                 @if (count($m->getTranscodedFiles()) == 0)
-                    <tr class="media_{{ $loop->iteration }}_config" style="display: none">
-                        <td colspan="6">
+                    <tr class="media_{{ $m->media_id }}_config" style="display: none">
+                        <td colspan="7">
                             no codec configurations created
                         </td>
                     </tr>
@@ -63,19 +75,30 @@
                         <tr class="codec_config media_{{ $m->media_id }}_config" style="display: none">
                             <td></td>
                             <td></td>
-                            <td colspan="2">{!! $config['codec_name'] . ' - ' . $config['codec_config_name']!!}</td>
+                            <td colspan="3">{!! $config['codec_name'] . ' - ' . $config['codec_config_name']!!}</td>
                             <td>
 
-                                @if($config['media_codec_config_id'] > 0)
-                                    <span class="btn btn-success"><i
-                                                class="glyphicon glyphicon-ok-circle"></i></span>
-                                @else
-                                    <span class="btn btn-danger"><i
-                                                class="glyphicon glyphicon-remove-circle"></i></span>
-                                @endif
+
                             </td>
 
                             <td class="options">
+                                @if($config['status'] == 1)
+                                    <button disabled type="button" data-config-id="{!! $config['codec_config_id'] !!}"
+                                            data-media-id="{!! $m->media_id !!}"
+                                            class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span>
+                                    </button>
+                                @elseif($config['status'] == -1)
+                                    <button type="button" data-config-id="{!! $config['codec_config_id'] !!}"
+                                            data-media-id="{!! $m->media_id !!}"
+                                            class="process_transcoding btn btn-danger"><span
+                                                class="glyphicon glyphicon-remove-sign"></span></button>
+                                @else
+                                    <button disabled type="button" data-config-id="{!! $config['codec_config_id'] !!}"
+                                            data-media-id="{!! $m->media_id !!}"
+                                            class="btn btn-warning"><span
+                                                class="glyphicon glyphicon-info-sign"></span></button>
+                                @endif
+
 
                             </td>
 

@@ -66,9 +66,22 @@ class callREST
             'x-access-token' => $this->token
         ]);
         $promise = $client->sendAsync($request)->then(function ($response) {
-            var_dump(\GuzzleHttp\json_decode($response->getBody()));
+            //var_dump(\GuzzleHttp\json_decode($response->getBody()));
         });
-        $promise->wait();
+        //$promise->wait();
+    }
+
+    public function deleteMedia($id)
+    {
+
+        $configData = ConfigData::getInstance();
+        $client = new Client();
+
+        $request = new \GuzzleHttp\Psr7\Request('DELETE', $configData->media_server . '/auth/media/' . $id, [
+            'x-access-token' => $this->token
+        ]);
+        $promise = $client->send($request);
+        return $promise;
     }
 
     public function getToken()

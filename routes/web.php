@@ -57,8 +57,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/codec_config/{id}/{codec_id}', ['uses' => 'Backend\CodecsController@get_codec_config']);
 
     Route::get('/admin/media/upload', ['uses' => 'Backend\MediaController@upload_media']);
-    Route::post('/admin/media/upload', ['uses' => 'Backend\MediaController@save_media']);
-    Route::post('/admin/media/{id}', 'Backend\MediaController@get_media');
+    Route::post('/admin/media/{id}', ['uses' => 'Backend\MediaController@update_media']);
+    Route::get('/admin/media/{id}', ['uses' => 'Backend\MediaController@get_media']);
+    Route::delete('/admin/media/{id}', ['uses' => 'Backend\MediaController@delete_media']);
 
 
 });
@@ -68,7 +69,7 @@ Route::group(['middleware' => ['auth']], function () {
  */
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/ajax/activate_codec_config', 'Backend\AjaxController@activateCodecConfig');
-    Route::post('/ffmpeg/progress', 'FFMpegController@getProgress');
+    Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
 });
 
 

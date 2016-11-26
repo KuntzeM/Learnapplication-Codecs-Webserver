@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Media extends Model
 {
     protected $table = 'media';
@@ -15,10 +16,6 @@ class Media extends Model
         return $this->hasMany('App\MediaCodecConfig', 'media_id');
     }
 
-    private function existConfig($config_id, $media_codec_config)
-    {
-
-    }
 
     public function getTranscodedFiles()
     {
@@ -40,11 +37,33 @@ class Media extends Model
                 $media_codec_config_id = $media_codec_config[0]->media_codec_config_id;
             }
 
+            /*
+             * status:
+             * -1 => no transcoded video
+             * 0 => job is in queue
+             * 1 => video exists
+             */
+
+            if ($media_codec_config_id == 0) {
+
+                $job = Job::where('media_id', $this->media_id)->first();
+
+                if ($job) {
+                    $status = 0;
+                } else {
+                    $status = -1;
+                }
+            } else {
+                $status = 1;
+            }
+
+
             $tmp = [
                 'codec_config_id' => $codec_config['codec_config_id'],
                 'codec_name' => $codec_config->codec_name,
                 'codec_config_name' => $codec_config->cc_name,
                 'media_codec_config_id' => $media_codec_config_id,
+                'status' => $status
             ];
 
             array_push($output, $tmp);

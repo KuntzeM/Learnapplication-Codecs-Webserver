@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use View;
 
@@ -37,8 +36,8 @@ class CodecsController extends Controller
     public function delete_codec($id)
     {
         $codec = Codecs::findOrFail($id);
-        Session::flash('message', $codec->name . ' and ' . count($codec->codec_configs) . ' Configurations are deleted!');
-        Session::flash('alert-class', 'success');
+        //Session::flash('message', $codec->name . ' and ' . count($codec->codec_configs) . ' Configurations are deleted!');
+        //Session::flash('alert-class', 'success');
         foreach ($codec->codec_configs as $config) {
             $config->delete();
         }
@@ -154,7 +153,7 @@ class CodecsController extends Controller
             'name' => 'required',
             'codec_id' => 'required',
             'ffmpeg_parameters' => '',
-            'ffmpeg_bitrate' => 'required | integer'
+            'ffmpeg_bitrate' => 'required | numeric'
         ]);
 
         if ($validator->fails()) {
@@ -177,7 +176,7 @@ class CodecsController extends Controller
             'name' => 'required',
             'codec_id' => 'required',
             'ffmpeg_parameters' => '',
-            'ffmpeg_bitrate' => 'required | integer'
+            'ffmpeg_bitrate' => 'required | numeric'
         ]);
 
         if ($validator->fails()) {

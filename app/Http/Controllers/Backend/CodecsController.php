@@ -7,6 +7,9 @@ use App\Codecs;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Job;
+use App\Libary\callREST;
+use App\Media;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -139,6 +142,7 @@ class CodecsController extends Controller
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
         $codec->media_type = $request->media_type;
         $codec->extension = $request->extension;
+        $codec->active = true;
         $codec->save();
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec->name . ' is created', 'success');
@@ -167,6 +171,21 @@ class CodecsController extends Controller
         $codec_config->ffmpeg_bitrate = $request->ffmpeg_bitrate;
         $codec_config->save();
 
+        if ($request->start_transcoding) {
+            $media = Media::where('media_type', $codec_config->codec->media_type);
+            foreach ($media->cursor() as $item) {
+
+                $job = new Job();
+                $job->media_id = $item->media_id;
+                $job->codec_config_id = $codec_config->codec_config_id;
+
+                $job->save();
+
+            };
+            $rest = new callREST();
+            $rest->postStartTranscoding();
+        }
+
         return redirect('/admin/codecs')->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is updated', 'success');
     }
 
@@ -193,6 +212,21 @@ class CodecsController extends Controller
         $codec_config->codec_id = $request->codec_id;
         $codec_config->active = false;
         $codec_config->save();
+
+        if ($request->start_transcoding) {
+            $media = Media::where('media_type', $codec_config->codec->media_type);
+            foreach ($media->cursor() as $item) {
+
+                $job = new Job();
+                $job->media_id = $item->media_id;
+                $job->codec_config_id = $codec_config->codec_config_id;
+
+                $job->save();
+
+            };
+            $rest = new callREST();
+            $rest->postStartTranscoding();
+        }
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is created', 'success');
     }

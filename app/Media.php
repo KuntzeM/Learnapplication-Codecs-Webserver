@@ -46,7 +46,7 @@ class Media extends Model
 
             if ($media_codec_config_id == 0) {
 
-                $job = Job::where('media_id', $this->media_id)->first();
+                $job = Job::where('media_id', $this->media_id)->where('codec_config_id', $codec_config['codec_config_id'])->first();
 
                 if ($job) {
                     $status = 0;

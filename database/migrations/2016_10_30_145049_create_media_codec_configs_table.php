@@ -17,7 +17,7 @@ class CreateMediaCodecConfigsTable extends Migration
             $table->engine = "InnoDB";
             $table->increments('media_codec_config_id');
             $table->integer('codec_config_id')->unsigned();
-            $table->foreign('codec_config_id')->references('codec_config_id')->on('codec_configs');
+            //$table->foreign('codec_config_id')->references('codec_config_id')->on('codec_configs');
             $table->integer('media_id')->unsigned();
             $table->foreign('media_id')->references('media_id')->on('media');
             $table->string('file_path');

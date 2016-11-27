@@ -65,6 +65,12 @@
             </div>
         @endif
     </div>
+    <div class="form-group">
+        <label for="start_transcoding">Start Transcoding:</label>
+        <div>
+            {!! Form::checkbox('start_transcoding', '1', true) !!}
+        </div>
+    </div>
     <a class="item_details" title="back without save" href="/admin/codecs">
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>

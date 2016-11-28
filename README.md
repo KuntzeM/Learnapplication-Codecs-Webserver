@@ -15,11 +15,12 @@ Sollte bei der Installation entwas nicht funktionieren z.B. ein Fehler bei der I
 
 1 Web-Applikation downloaden
 
-`git clone https://github.com/KuntzeM/Medienprojekt-WebServer.git`
+`https://github.com/KuntzeM/Medienprojekt-MediaServer.git`
 
 2 leere MySQL Datenbank anlegen
 
 3 Einstellungen in .env ändern
+
 
 ```
 APP_URL=http://medienprojekt.dev
@@ -65,4 +66,4 @@ Die Abhänigkeiten werden mit dem Befehl
  ```
  php composer.phar update
  ```
- installiert.
+installiert.

@@ -7,6 +7,9 @@ Betreuer: Dipl.-Inf. Thomas Köllmer
 
 Professor: Prof. Karlheinz Brandenburg
 
+#### Probleme bei der Installation?
+Sollte bei der Installation entwas nicht funktionieren z.B. ein Fehler bei der Installation der Abhängigkeiten auftreten, dann schreibe bitte ein Issue hier in github. Wir werden uns zeitnah um das Problem kümmern.
+
 
 ### Installation
 

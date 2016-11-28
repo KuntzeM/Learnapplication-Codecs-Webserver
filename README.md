@@ -13,12 +13,13 @@ Sollte bei der Installation entwas nicht funktionieren z.B. ein Fehler bei der I
 
 ### Installation
 
-1. Web-Applikation downloaden
+1 Web-Applikation downloaden
 
 `git clone https://github.com/KuntzeM/Medienprojekt-WebServer.git`
 
-2. leere MySQL Datenbank anlegen
-3. Einstellungen in .env ändern
+2 leere MySQL Datenbank anlegen
+
+3 Einstellungen in .env ändern
 
 ```
 APP_URL=http://medienprojekt.dev
@@ -30,12 +31,12 @@ DB_DATABASE=database_name
 DB_USERNAME=database_username
 DB_PASSWORD=database_password
 ``` 
-4. fehlende Abhängigkeiten per Konsole installieren
+4 fehlende Abhängigkeiten per Konsole installieren
 ```
 php composer.phar update
 ```
 
-5. Datenbank-Tabellen anlegen
+5 Datenbank-Tabellen anlegen
 
 ```
 php artisan migrate:install
@@ -43,7 +44,7 @@ php artisan migrate:refresh --seed
 ```
 _(--seed: Argument erstellt Datenbankeinträge u.a. Konfigurationseinstellungen)_
 
-6. Web-Applikation müsste nun funktionieren
+6 Web-Applikation müsste nun funktionieren
 z.B.
 
 http://medienprojekt.dev für Frontend
@@ -54,7 +55,7 @@ default user: admin
 
 default password: admin
 
-7. Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-WebServer
+7 Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-WebServer
 
 
 ### Abhängigkeiten

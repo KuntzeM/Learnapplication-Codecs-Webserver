@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-    Video
+    @include('frontend.file_grid', ['files'=>$files])
 
 
 @stop

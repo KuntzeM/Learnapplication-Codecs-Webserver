@@ -12,9 +12,9 @@
     {!!Html::script('js/jquery.ui.widget.js')  !!}
     {!!Html::script('js/jquery.iframe-transport.js')  !!}
     {!!Html::script('js/jquery.fileupload.js')  !!}
-    <script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>
-    <!-- The Canvas to Blob plugin is included for image resizing functionality -->
-    <script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    {!!Html::script('js/cors/load-image.all.min.js')  !!}
+    {!!Html::script('js/cors/canvas-to-blob.min.js')  !!}
+
 
     {!!Html::script('js/jquery.fileupload-process.js')  !!}
     {!!Html::script('js/jquery.fileupload-validate.js')  !!}

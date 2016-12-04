@@ -8,11 +8,21 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Media;
 
 class VideoController extends Controller
 {
+    private function getVideos(){
+        return Media::where('media_type', 'video')->get();
+    }
+
+
     public function index()
     {
-        return view('frontend.video');
+        $files = $this->getVideos();
+        $num_files = count($files);
+        $rows = ceil($num_files/4);
+
+        return view('frontend.video', ['files'=> $files, 'num_files'=>$num_files, 'rows'=>$rows]);
     }
 }

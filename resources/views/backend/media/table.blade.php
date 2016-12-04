@@ -56,7 +56,8 @@
                                         'method' => 'delete'])  !!}
                     @include('backend.modal_delete', ['modal_id'=>'delete_' . $m->media_id,
                     'title'=>'Are you sure you want to delete this media file?',
-                    'body'=>'<p>Delete Media file ' . $m->name . '</p>'])
+                    'body'=>'<p>Delete Media file ' . $m->name . '</p>',
+                    'button'=>'Delete'])
                     <button type="button" title="delete codec {{ $m->name }}" data-toggle="modal"
                             class="btn btn-danger" data-target="#delete_{{ $m->media_id }}"><span
                                 class="glyphicon glyphicon-trash"></span></button>
@@ -82,20 +83,26 @@
                             </td>
 
                             <td class="options">
+                                @include('backend.modal_delete', ['modal_id'=>'transcode_' . $config['codec_config_id'] . '_' . $m->media_id,
+                                'title'=>'File is transcoded or is in queue!',
+                                'body'=>'<p>Would you like to transcode the file again?</p>',
+                                'button'=>'Ok',
+                                'attr' => 'class="process_transcoding btn btn-success" data-media-id="' . $m->media_id .'" data-config-id="' . $config['codec_config_id'] . '" data-toggle="modal" data-target="#transcode_' . $config['codec_config_id'] . '_' . $m->media_id . '"'])
                                 @if($config['status'] == 1)
-                                    <button disabled type="button" data-config-id="{!! $config['codec_config_id'] !!}"
-                                            data-media-id="{!! $m->media_id !!}"
-                                            class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span>
+                                    <button type="button" data-config-id="{!! $config['codec_config_id'] !!}"
+                                            data-toggle="modal" data-target="#transcode_{!! $config['codec_config_id'] . '_' . $m->media_id !!}" data-media-id="{!! $m->media_id !!}"
+                                            data-backdrop=""
+                                            class="transcode_status_{!! $config['codec_config_id'] . '_' . $m->media_id !!}  btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span>
                                     </button>
                                 @elseif($config['status'] == -1)
                                     <button type="button" data-config-id="{!! $config['codec_config_id'] !!}"
                                             data-media-id="{!! $m->media_id !!}"
-                                            class="process_transcoding btn btn-danger"><span
+                                            class="process_transcoding transcode_status_{!! $config['codec_config_id'] . '_' . $m->media_id !!} btn btn-danger"><span
                                                 class="glyphicon glyphicon-remove-sign"></span></button>
                                 @else
-                                    <button disabled type="button" data-config-id="{!! $config['codec_config_id'] !!}"
+                                    <button type="button" data-config-id="{!! $config['codec_config_id'] !!}"
                                             data-media-id="{!! $m->media_id !!}"
-                                            class="btn btn-warning"><span
+                                            class="transcode_status_{!! $config['codec_config_id'] . '_' . $m->media_id !!}  btn btn-warning"><span
                                                 class="glyphicon glyphicon-info-sign"></span></button>
                                 @endif
 

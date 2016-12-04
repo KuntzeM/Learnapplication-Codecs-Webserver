@@ -51,7 +51,8 @@
                                         'method' => 'delete'])  !!}
                         @include('backend.modal_delete', ['modal_id'=>'delete_' . $codec->codec_id,
                         'title'=>'Are you sure you want to delete this codec?',
-                        'body'=>'<p>Delete Codec ' . $codec->name . '</p><p>Delete '. count($codec->codec_configs) .' Configurations</p>'])
+                        'body'=>'<p>Delete Codec ' . $codec->name . '</p><p>Delete '. count($codec->codec_configs) .' Configurations</p>',
+                        'button'=>'Delete'])
                         <button type="button" title="delete codec {{ $codec->name }}" data-toggle="modal"
                                 class="btn btn-danger" data-target="#delete_{{ $codec->codec_id }}"><span
                                     class="glyphicon glyphicon-trash"></span></button>
@@ -97,7 +98,8 @@
                                         'method' => 'delete'])  !!}
                                 @include('backend.modal_delete', ['modal_id'=>'delete_config_' . $config->codec_config_id,
                                 'title'=>'Are you sure you want to delete this codec configuration?',
-                                'body'=>'<p>Delete Codec Configuration ' . $config->name . '</p>'])
+                                'body'=>'<p>Delete Codec Configuration ' . $config->name . '</p>',
+                                 'button'=>'Delete'])
                                 <button type="button" data-toggle="modal" class="btn btn-danger"
                                         data-target="#delete_config_{{ $config->codec_config_id }}"><span
                                             class="glyphicon glyphicon-trash"></span></button>

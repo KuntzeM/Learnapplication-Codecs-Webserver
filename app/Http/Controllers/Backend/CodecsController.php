@@ -142,7 +142,7 @@ class CodecsController extends Controller
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
         $codec->media_type = $request->media_type;
         $codec->extension = $request->extension;
-        $codec->active = true;
+        //$codec->active = true;
         $codec->save();
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec->name . ' is created', 'success');

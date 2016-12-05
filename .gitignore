@@ -1,7 +1,7 @@
 # laravel specific stuff:
 #/node_modules
 /public/storage
-#/vendor
+/vendor/*
 
 *.lock
 

@@ -8,9 +8,17 @@ Betreuer: Dipl.-Inf. Thomas Köllmer
 Professor: Prof. Karlheinz Brandenburg
 
 #### Probleme bei der Installation?
-Sollte bei der Installation entwas nicht funktionieren z.B. ein Fehler bei der Installation der Abhängigkeiten auftreten, dann schreibe bitte ein Issue hier in github. Wir werden uns zeitnah um das Problem kümmern.
+Sollte bei der Installation etwas nicht funktionieren z.B. ein Fehler bei der Installation der Abhängigkeiten auftreten, dann schreibe bitte ein Issue hier in github. Wir werden uns zeitnah um das Problem kümmern.
 
-
+### Benötigte Software
+* PHP-Webserver und MYSQL-Server
+```
+sudo apt-get install apache2 php5 mysql-server php5-mysql
+sudo service apache2 restart
+```
+* Alternativen:
+  * LAMP
+  * XAMPP
 ### Installation
 
 1 Web-Applikation downloaden
@@ -23,6 +31,7 @@ Sollte bei der Installation entwas nicht funktionieren z.B. ein Fehler bei der I
 
 
 ```
+...
 APP_URL=http://medienprojekt.dev
 
 DB_CONNECTION=mysql
@@ -31,7 +40,9 @@ DB_PORT=3306
 DB_DATABASE=database_name
 DB_USERNAME=database_username
 DB_PASSWORD=database_password
+...
 ``` 
+
 4 fehlende Abhängigkeiten per Konsole installieren
 ```
 php composer.phar update

@@ -24,7 +24,7 @@ sudo service apache2 restart
 
 1 Web-Applikation downloaden
 
-`https://github.com/KuntzeM/Medienprojekt-MediaServer.git`
+`git clone https://github.com/KuntzeM/Medienprojekt-WebServer.git`
 
 2 leere MySQL Datenbank anlegen
 

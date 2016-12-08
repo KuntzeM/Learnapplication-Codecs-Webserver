@@ -11,14 +11,15 @@ Professor: Prof. Karlheinz Brandenburg
 Sollte bei der Installation etwas nicht funktionieren z.B. ein Fehler bei der Installation der Abhängigkeiten auftreten, dann schreibe bitte ein Issue hier in github. Wir werden uns zeitnah um das Problem kümmern.
 
 ### Benötigte Software
-* PHP-Webserver und MYSQL-Server
+* Apache-Webserver und MYSQL-Server
 ```
 sudo apt-get install apache2 php5 mysql-server php5-mysql
 sudo service apache2 restart
 ```
 * Alternativen:
-  * LAMP
-  * XAMPP
+  * Linux: LAMP
+  * Windows: XAMPP
+  
 ### Installation
 
 1 Web-Applikation downloaden

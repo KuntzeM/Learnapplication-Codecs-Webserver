@@ -18,6 +18,26 @@ class AjaxController extends Controller
         #$this->middleware('auth');
     }
 
+    public function getMediaConfigs(Request $request){
+        try {
+            $output = array();
+            $media = Media::findOrFail($request->media_id);
+            foreach ($media->media_codec_configs as $media_codec_config){
+                array_push($output, $media_codec_config->getMediaCodecInfos());
+            }
+
+            $status = 200;
+        } catch (ModelNotFoundException $e) {
+            $status = 404;
+        }
+
+
+
+
+
+        return response()->json(array('media' => json_encode($output)), $status);
+    }
+
     public function activateCodecConfig(Request $request)
     {
 

@@ -4,6 +4,7 @@
 {!!Html::style('css/frontend.css')!!}
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
+{!!Html::script('js/functions_frontend.js')!!}
 <!DOCTYPE html>
 <html lang='en'>
 <head>

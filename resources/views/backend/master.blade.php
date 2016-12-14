@@ -4,7 +4,7 @@
 {!!Html::style('css/backend.css')!!}
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
-{!!Html::script('js/functions.js')!!}
+{!!Html::script('js/functions_backend.js')!!}
 
 <!DOCTYPE html>
 <html lang='en'>

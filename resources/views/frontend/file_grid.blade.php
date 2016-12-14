@@ -14,7 +14,6 @@
                 @if(count($file['media_codec_configs'])>0)
                 <div class="col-xs-6 col-md-2">
                         <a class="thumbnail">
-                        n
                             @if($file->media_type=='image')
                                 <img src="{!! $file->getUrl('300') !!}">
                             @else
@@ -30,22 +29,6 @@
             @endforeach
         </div>
     @endif
-
-
 </div>
 
 
-<script>
-    $(function () {
-        $('.open_grid').click(function(){
-           $('#grid').toggle();
-        });
-        
-        $('.select_media').click(function () {
-            $('input[type=text].open_grid').val($(this).attr('data-name'));
-
-            $('#grid').toggle();
-        })
-    });
-
-</script>

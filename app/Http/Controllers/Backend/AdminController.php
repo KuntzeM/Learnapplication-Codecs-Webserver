@@ -10,6 +10,7 @@ use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Media;
+use App\Job;
 use View;
 
 
@@ -28,19 +29,11 @@ class AdminController extends Controller
 
     public function get_index()
     {
-
-
-        return View::make('backend.index', array('url'=> $this->url, 'pid' => "1"));
+        $jobs = Job::all();
+        return View::make('backend.index', array('url'=> $this->url, 'jobs' => $jobs));
     }
 
-    public function appendJobs()
-    {
-        $medias = Media::findall();
 
-        dd($medias);
-
-
-    }
 
 
 }

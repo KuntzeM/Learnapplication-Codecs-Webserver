@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/ajax/activate_codec_config', 'Backend\AjaxController@activateCodecConfig');
     Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
+    Route::post('/admin/ajax/start_transcoding', 'Backend\AjaxController@startTranscoding');
 });
 
 

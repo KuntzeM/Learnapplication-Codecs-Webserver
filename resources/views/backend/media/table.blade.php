@@ -101,7 +101,8 @@
                                                 class="glyphicon glyphicon-remove-sign"></span></button>
                                 @else
                                     <button type="button" data-config-id="{!! $config['codec_config_id'] !!}"
-                                            data-media-id="{!! $m->media_id !!}"
+                                            data-toggle="modal" data-target="#transcode_{!! $config['codec_config_id'] . '_' . $m->media_id !!}" data-media-id="{!! $m->media_id !!}"
+                                            data-backdrop=""
                                             class="transcode_status_{!! $config['codec_config_id'] . '_' . $m->media_id !!}  btn btn-warning"><span
                                                 class="glyphicon glyphicon-info-sign"></span></button>
                                 @endif

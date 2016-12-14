@@ -18,6 +18,7 @@ class CreateJobsTable extends Migration
             $table->unsignedInteger('media_id');
             $table->unsignedInteger('codec_config_id');
             $table->tinyInteger('attempts')->unsigned()->default(0);
+            $table->Integer('process')->unsigned()->default(0);
             $table->unsignedInteger('reserved_at')->nullable();
             $table->timestamps();
         });

@@ -22,8 +22,8 @@ class CodecsTableSeeder extends Seeder
             'updated_at' => new DateTime()
         ]);
         DB::table('codecs')->insert([
-            'name' => 'H.265 / HEVC',
-            'ffmpeg_codec' => 'libx265',
+            'name' => 'VP9',
+            'ffmpeg_codec' => 'libvpx-vp9',
             'extension' => 'mkv',
             'media_type' => 'video',
             'documentation_de' => '',

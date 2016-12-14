@@ -63,4 +63,13 @@ class AjaxController extends Controller
 
         return response()->json(array('message' => 'success'), $status);
     }
+
+    public function startTranscoding(Request $request)
+    {
+
+        $rest = new callREST();
+        $status = $rest->postStartTranscoding();
+
+        //return response()->json(array('message' => 'success'), $status);
+    }
 }

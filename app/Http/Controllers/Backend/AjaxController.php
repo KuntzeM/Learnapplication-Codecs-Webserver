@@ -8,7 +8,9 @@ use App\Http\Requests;
 use App\Job;
 use App\Libary\callREST;
 use App\Media;
+use App\MediaCodecConfig;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class AjaxController extends Controller
@@ -20,22 +22,17 @@ class AjaxController extends Controller
 
     public function getMediaConfigs(Request $request){
         try {
-            $output = array();
-            $media = Media::findOrFail($request->media_id);
-            foreach ($media->media_codec_configs as $media_codec_config){
-                array_push($output, $media_codec_config->getMediaCodecInfos());
-            }
+            $output = DB::table('media_codec_configs')
+                ->leftJoin('codec_configs', 'codec_configs.codec_config_id', '=', 'media_codec_configs.codec_config_id')
+                ->leftJoin('codecs', 'codecs.codec_id', '=', 'codec_configs.codec_id')
+                ->select('media_codec_configs.media_codec_config_id', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
+                ->where('media_codec_configs.media_id', '=', $request->media_id)->get();
 
-            $status = 200;
+            return response()->json(array('media' => json_encode($output)), 200);
         } catch (ModelNotFoundException $e) {
-            $status = 404;
+            return response()->json(array('message' => 'error', 404));
         }
 
-
-
-
-
-        return response()->json(array('media' => json_encode($output)), $status);
     }
 
     public function activateCodecConfig(Request $request)

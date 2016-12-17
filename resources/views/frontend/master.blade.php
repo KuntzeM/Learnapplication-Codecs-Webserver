@@ -2,8 +2,12 @@
 {!!Html::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css') !!}
 {!!Html::style('css/bootstrap.min.css')!!}
 {!!Html::style('css/frontend.css')!!}
+{!!Html::style('css/splitview/cocoen.min.css')!!}
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
+{!!Html::script('js/splitview/requestAnimationFrame.min.js')!!}
+{!!Html::script('js/splitview/cocoen.min.js')!!}
+
 {!!Html::script('js/functions_frontend.js')!!}
 <!DOCTYPE html>
 <html lang='en'>
@@ -16,6 +20,9 @@
             margin-top: 5%;
         }
     </style>
+    <script>
+        var url = "{!! $url !!}";
+    </script>
 </head>
 <body>
 <div class='container-fluid'>

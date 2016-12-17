@@ -11,8 +11,17 @@ use App\Http\Requests;
 use App\Media;
 use App\CodecConfigs;
 use DB;
+use App\ConfigData;
 class ImageController extends Controller
 {
+
+    public function __construct()
+    {
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
+
+
+    }
 
     private function getImages(){
         return Media::where('media_type', 'image')->get();
@@ -25,6 +34,6 @@ class ImageController extends Controller
         $num_files = count($files);
         $rows = ceil($num_files/4);
 
-        return view('frontend.image', ['files'=> $files, 'num_files'=>$num_files, 'rows'=>$rows]);
+        return view('frontend.image', ['files'=> $files, 'num_files'=>$num_files, 'rows'=>$rows, 'url'=>$this->url]);
     }
 }

@@ -1,5 +1,5 @@
 <div class="input-group">
-    <input type="text" class="form-control open_grid" placeholder="Bild auswählen">
+    <input type="text" class="form-control open_grid" value="Bild auswählen" placeholder="Bild auswählen">
     <span class="input-group-btn">
         <button class="btn btn-default open_grid" type="button">Auswählen!</button>
     </span>

@@ -9,9 +9,17 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Media;
+use App\ConfigData;
 
 class VideoController extends Controller
 {
+    public function __construct()
+    {
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
+
+    }
+
     private function getVideos(){
         return Media::where('media_type', 'video')->get();
     }

@@ -9,6 +9,7 @@ use App\Job;
 use App\Libary\callREST;
 use App\Media;
 use App\MediaCodecConfig;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,23 @@ class AjaxController extends Controller
 
             $status = 200;
         } catch (ModelNotFoundException $e) {
-            $status = 404;
+            try{
+                $media = Media::findOrFail($request->media_id);
+                $codec_configs = CodecConfigs::all();
+
+                foreach ($codec_configs as $codec_config){
+                    if($codec_config->codec->media_type == $media->media_type){
+                        $job = new Job();
+                        $job->media_id = $request->media_id;
+                        $job->codec_config_id = $codec_config->codec_config_id;
+                        $job->save();
+                    }
+
+                }
+                $status = 200;
+            }catch(ModelNotFoundException $e2){
+                $status = 404;
+            }
         }
 
         $rest = new callREST();

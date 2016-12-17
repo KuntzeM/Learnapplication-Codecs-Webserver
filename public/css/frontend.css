@@ -36,16 +36,6 @@ h3 {
     margin-top: 5px;
 
 }
-.alert_box{
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-}
-
-.alert.permanent {
-    margin-top: 5px;
-}
 
 .page-header {
     width: 80%;
@@ -74,41 +64,33 @@ h3 {
     text-align: center;
 }
 
-td {
-    vertical-align: middle !important;
+
+.codec_select{
+    margin-top: 20px;
+    width: 30% !important;
+    float: right !important;
+}
+.codec_select:first-child{
+    float: left !important;
 }
 
-td.options a, td.options form {
+#media_files img{
+    margin-top: 10px;
+    width: 50%;
+}
+#media_files img#media_file_1{
+    z-index: 1;
+}
+#media_files img#media_file_1{
+    z-index: 100;
+}
+
+#media_files img.dualview{
+    position: relative;
     float: left;
-    padding-right: 5px;
-    padding-bottom: 5px;
+    width: 50%;
 }
+#media_files img.overview{
 
-td.options {
-    text-align: right;
+
 }
-
-th.expand {
-    width: 30px;
-}
-
-th.number {
-    width: 30px;
-}
-
-th.name {
-    width: 300px;
-}
-
-th.date {
-    width: 200px;
-}
-
-th.options {
-    width: 200px;
-}
-
-tr.codec_config {
-    background-color: #eee;
-}
-

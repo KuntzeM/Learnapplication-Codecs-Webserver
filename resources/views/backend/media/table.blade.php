@@ -48,6 +48,17 @@
                 <td>{{ $m->created_at }}</td>
                     <td><input type="text" readonly value="{{ $m->origin_file }}"/></td>
                 <td class="options">
+                    @include('backend.modal_delete', ['modal_id'=>'transcode_' . $m->media_id,
+                                'title'=>'File is transcoded or is in queue!',
+                                'body'=>'<p>Would you like to transcode the file again?</p>',
+                                'button'=>'Ok',
+                                'attr' => 'class="process_transcoding btn btn-success" data-media-id="' . $m->media_id .'" data-toggle="modal" data-target="#transcode_' . $m->media_id . '"'])
+                    <button type="button"
+                            data-toggle="modal" data-target="#transcode_{!! $m->media_id !!}" data-media-id="{!! $m->media_id !!}"
+                            data-backdrop=""
+                            class="transcode_status_{!! $m->media_id !!} btn btn-info">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                    </button>
                     <a title="update media file {{ $m->name }}" href="/admin/media/{{ $m->media_id }}">
                         <button type="button" class="btn btn-default"><span
                                     class="glyphicon glyphicon-pencil"></span></button>

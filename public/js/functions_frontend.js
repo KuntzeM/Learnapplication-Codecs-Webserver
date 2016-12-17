@@ -2,8 +2,7 @@
  * Created by mathias on 13.11.16.
  */
 
-function selectMediaFile(element, token) {
-    console.log('test');
+function selectMediaFile(element, token, url) {
     $('input[type=text].open_grid').val($(element).attr('data-name'));
 
     $('#grid').toggle();
@@ -33,11 +32,16 @@ function selectMediaFile(element, token) {
                     $('select[name=media_file_1_select]').append(group);
                     $('select[name=media_file_2_select]').append(group);
                 }
-                var element = '<option value="' + obj[i].media_codec_config_id + '">'+obj[i].codec_config_name+'</option>';
+                var element = '<option value="' + obj[i].media_codec_config_id + '">'+currentLine + ' ' + obj[i].codec_config_name+'</option>';
                 $('select[name=media_file_1_select] optgroup#'+currentLine).append(element);
                 $('select[name=media_file_2_select] optgroup#'+currentLine).append(element);
 
             }
+            $('select[name=media_file_1_select] option').first().attr('select', 'select')
+            $('select[name=media_file_1_select] option').trigger('change');
+            $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select')
+            $('select[name=media_file_2_select] option').trigger('change');
+            //$('.cocoen').cocoen();
         }
     });
 
@@ -45,8 +49,12 @@ function selectMediaFile(element, token) {
 }
 
 $(function(){
-    $('select[name=media_file_1_select]').onchange(function(){
-        $('#media_file_1 img').remove();
-        var img = '<img src="" />'
+    $('select[name=media_file_1_select]').change(function(){
+        //$('#media_file_1').children('img').remove();
+        //var img = '<img src="' + url + '/public/media_codec/' + $(this).val() + '" />';
+        $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
+    });
+    $('select[name=media_file_2_select]').change(function(){
+        $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
     });
 });

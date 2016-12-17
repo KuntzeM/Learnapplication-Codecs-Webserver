@@ -8,11 +8,19 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\ConfigData;
 class AboutController extends Controller
 {
+    public function __construct()
+    {
+        $config = ConfigData::getInstance();
+        $this->url = $config->media_server;
+
+
+    }
+
     public function index()
     {
-        return view('frontend.about');
+        return view('frontend.about', ['url'=>$this->url]);
     }
 }

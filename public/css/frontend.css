@@ -64,33 +64,59 @@ h3 {
     text-align: center;
 }
 
+#codec_selection #mode_group{
+    float: left;
+    margin-top: 20px;
+    width: 40%;
+    text-align: center;
+}
+#codec_selection #mode_group button{
+    padding: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 
-.codec_select{
+}
+#codec_selection #mode_group button img{
+
+}
+#codec_selection .codec_select{
     margin-top: 20px;
     width: 30% !important;
     float: right !important;
 }
-.codec_select:first-child{
+#codec_selection .codec_select:first-child{
     float: left !important;
 }
 
-#media_files img{
-    margin-top: 10px;
-    width: 50%;
+#media_files{
+    clear:left;
 }
-#media_files img#media_file_1{
+#media_files div img{
+    margin-top: 10px;
+}
+#media_files div img#media_file_1{
     z-index: 1;
 }
-#media_files img#media_file_1{
+#media_files div img#media_file_2{
     z-index: 100;
 }
 
-#media_files img.dualview{
+#media_files.dualview div img{
     position: relative;
     float: left;
     width: 50%;
 }
-#media_files img.overview{
+#media_files.splitview div img{
 
 
 }
+
+#media_files.overview div img{
+    width: 80%;
+    position: absolute;
+
+}
+#media_files.overview div img#media_file_2:hover{
+    opacity: 0;
+}
+

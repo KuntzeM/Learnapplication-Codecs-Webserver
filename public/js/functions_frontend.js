@@ -42,6 +42,7 @@ function selectMediaFile(element, token, url) {
             $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select')
             $('select[name=media_file_2_select] option').trigger('change');
             //$('.cocoen').cocoen();
+
         }
     });
 
@@ -57,4 +58,35 @@ $(function(){
     $('select[name=media_file_2_select]').change(function(){
         $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
     });
+    $('#mode_group button').click(function(){
+        $(this).removeClass('btn-default');
+        $(this).siblings().removeClass('btn-success');
+        $(this).addClass('btn-success');
+        $('#media_files').removeClass();
+        
+
+        $('#media_files').addClass($(this).attr('data-mode'));
+        if($(this).attr('data-mode') == 'splitview'){
+            $('#media_files.splitview').imagesCompare({
+                initVisibleRatio: 0.2,
+                interactionMode: "drag",
+                addSeparator: true,
+                addDragHandle: true,
+                animationDuration: 450,
+                animationEasing: "linear",
+                precision: 2
+            });
+        }else{
+            $('#media_files').unbind().removeData();
+            $('#media_files').removeAttr('style');
+            $('.images-compare-separator').remove();
+            $('.images-compare-handle').remove();
+            $('#media_files div').removeAttr('class');
+            $('#media_files div').removeAttr('class');
+            $('#media_files div').removeAttr('style');
+            $('#media_files div').removeAttr('ratio');
+
+        }
+
+    })
 });

@@ -12,12 +12,22 @@
 
     <div id="codec_selection">
         {!! Form::select('media_file_1_select', array(), null, array('class' => 'form-control codec_select')) !!}
+        <div id="mode_group">
+            <button title="Dualview" alt="Dualview" id="button_dualview" data-mode="dualview" class="btn btn-success"><img src="img/dualview.gif" /></button>
+            <button title="Splitview" alt="Splitview" id="button_splitview" data-mode="splitview" class="btn btn-default"><img src="img/splitview.gif" /></button>
+            <button title="Overview" alt="Overview" id="button_overview" data-mode="overview" class="btn  btn-default"><img src="img/overview.gif" /></button>
+        </div>
+
         {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select')) !!}
     </div>
 
-    <div id="media_files">
-        <img src="" class="dualview" id="media_file_1" />
-        <img src="" class="dualview" id="media_file_2" />
+    <div id="media_files" class="dualview">
+        <div>
+            <img src="" id="media_file_1" />
+        </div>
+        <div>
+            <img src="" id="media_file_2" />
+        </div>
     </div>
 
     <script>
@@ -29,6 +39,7 @@
             $('.select_media').click(function(){
                 selectMediaFile(this, '{!! csrf_token() !!}', "{!! $url !!}");
             })
+
 
         });
 

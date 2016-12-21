@@ -13,7 +13,7 @@
             @foreach($files as $file)
                 @if(count($file['media_codec_configs'])>0)
                 <div class="col-xs-6 col-md-2">
-                        <a class="thumbnail">
+                        <a class="thumbnail select_media">
                             @if($file->media_type=='image')
                                 <img src="{!! $file->getUrl('300') !!}">
                             @else
@@ -21,7 +21,7 @@
                                     <source src="{!! $file->getUrl('300') !!}">
                                 </video>
                             @endif
-                            <button data-name="{!! $file->name !!}" data-id="{!! $file->media_id !!}"  type="button" class="select_media btn btn-info">Auswählen</button>
+                            <button data-name="{!! $file->name !!}" data-id="{!! $file->media_id !!}"  type="button" class="btn btn-info">Auswählen</button>
                         </a>
 
                 </div>

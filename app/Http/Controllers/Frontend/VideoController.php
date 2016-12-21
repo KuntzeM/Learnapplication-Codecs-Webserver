@@ -31,6 +31,6 @@ class VideoController extends Controller
         $num_files = count($files);
         $rows = ceil($num_files/4);
 
-        return view('frontend.video', ['files'=> $files, 'num_files'=>$num_files, 'rows'=>$rows]);
+        return view('frontend.video', ['url' => $this->url, 'files' => $files, 'num_files' => $num_files, 'rows' => $rows]);
     }
 }

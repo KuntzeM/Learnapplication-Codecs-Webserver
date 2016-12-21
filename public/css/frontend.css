@@ -91,7 +91,8 @@ h3 {
 #media_files{
     clear:left;
 }
-#media_files div img{
+
+#media_files div * {
     margin-top: 10px;
 }
 #media_files div img#media_file_1{
@@ -102,6 +103,12 @@ h3 {
 }
 
 #media_files.dualview div img{
+    position: relative;
+    float: left;
+    width: 50%;
+}
+
+#media_files.dualview div video {
     position: relative;
     float: left;
     width: 50%;
@@ -120,3 +127,10 @@ h3 {
     opacity: 0;
 }
 
+#video-controls button {
+    float: left;
+}
+
+#video-controls input {
+    width: 80%;
+}

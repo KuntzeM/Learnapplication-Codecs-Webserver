@@ -28,13 +28,15 @@ function selectMediaFile(element, token, url) {
             for(var i=0; i<obj.length; i++){
                 if(currentLine != obj[i].codec_name){
                     currentLine = obj[i].codec_name;
-                    var group = '<optgroup label="' + currentLine +'" id="' + currentLine + '"></optgroup>';
+
+                    var group = '<optgroup label="' + currentLine + '" id="' + currentLine.replace('.', '') + '"></optgroup>';
                     $('select[name=media_file_1_select]').append(group);
                     $('select[name=media_file_2_select]').append(group);
                 }
+                console.log('select[name=media_file_1_select] optgroup#' + currentLine.replace('.', ''));
                 var element = '<option value="' + obj[i].media_codec_config_id + '">'+currentLine + ' ' + obj[i].codec_config_name+'</option>';
-                $('select[name=media_file_1_select] optgroup#'+currentLine).append(element);
-                $('select[name=media_file_2_select] optgroup#'+currentLine).append(element);
+                $('select[name=media_file_1_select] optgroup#' + currentLine.replace('.', '')).append(element);
+                $('select[name=media_file_2_select] optgroup#' + currentLine.replace('.', '')).append(element);
 
             }
             $('select[name=media_file_1_select] option').first().attr('select', 'select')
@@ -53,10 +55,18 @@ $(function(){
     $('select[name=media_file_1_select]').change(function(){
         //$('#media_file_1').children('img').remove();
         //var img = '<img src="' + url + '/public/media_codec/' + $(this).val() + '" />';
-        $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
+        if ($('#media_file_1').length) {
+            $('#media_file_1 source').attr('src', url + '/public/media_codec/' + $(this).val());
+        } else {
+            $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
+        }
     });
     $('select[name=media_file_2_select]').change(function(){
-        $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
+        if ($('#media_file_2').length) {
+            $('#media_file_2 source').attr('src', url + '/public/media_codec/' + $(this).val());
+        } else {
+            $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
+        }
     });
     $('#mode_group button').click(function(){
         $(this).removeClass('btn-default');

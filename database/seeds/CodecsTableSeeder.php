@@ -63,7 +63,7 @@ class CodecsTableSeeder extends Seeder
         ### VP8
         DB::table('codecs')->insert([ # id: 2
             'name' => 'VP8',
-            'ffmpeg_codec' => 'libvpx-vp8',
+            'ffmpeg_codec' => 'libvpx',
             'extension' => 'mkv',
             'media_type' => 'video',
             'documentation_de' => '',

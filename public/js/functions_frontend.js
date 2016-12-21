@@ -55,14 +55,14 @@ $(function(){
     $('select[name=media_file_1_select]').change(function(){
         //$('#media_file_1').children('img').remove();
         //var img = '<img src="' + url + '/public/media_codec/' + $(this).val() + '" />';
-        if ($('#media_file_1').length) {
+        if ($('#media_file_1  source').length) {
             $('#media_file_1 source').attr('src', url + '/public/media_codec/' + $(this).val());
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
     });
     $('select[name=media_file_2_select]').change(function(){
-        if ($('#media_file_2').length) {
+        if ($('#media_file_2 source').length) {
             $('#media_file_2 source').attr('src', url + '/public/media_codec/' + $(this).val());
         } else {
             $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());

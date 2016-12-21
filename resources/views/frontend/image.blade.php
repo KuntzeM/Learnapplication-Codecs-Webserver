@@ -33,11 +33,11 @@
     <script>
         $(function () {
             $('.open_grid').click(function(){
-                $('#grid').toggle();
+                $('#grid').toggle("slow");
             });
 
             $('.select_media').click(function(){
-                selectMediaFile(this, '{!! csrf_token() !!}', "{!! $url !!}");
+                selectMediaFile($(this).children('button')[0], '{!! csrf_token() !!}', "{!! $url !!}");
             })
 
 

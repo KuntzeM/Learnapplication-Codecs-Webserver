@@ -50,33 +50,6 @@ class CodecsTableSeeder extends Seeder
             'updated_at' => new DateTime()
         ]);
         DB::table('codec_configs')->insert([
-            'name' => '2000 kbit/s',
-            'codec_id' => 1,
-            'ffmpeg_bitrate' => '2000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '1000 kbit/s',
-            'codec_id' => 1,
-            'ffmpeg_bitrate' => '1000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '500 kbit/s',
-            'codec_id' => 1,
-            'ffmpeg_bitrate' => '500',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
             'name' => '250 kbit/s',
             'codec_id' => 1,
             'ffmpeg_bitrate' => '250',
@@ -95,33 +68,6 @@ class CodecsTableSeeder extends Seeder
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '2000 kbit/s',
-            'codec_id' => 2,
-            'ffmpeg_bitrate' => '2000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '1000 kbit/s',
-            'codec_id' => 2,
-            'ffmpeg_bitrate' => '1000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '500 kbit/s',
-            'codec_id' => 2,
-            'ffmpeg_bitrate' => '500',
-            'ffmpeg_parameters' => '',
-            'active' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -203,33 +149,6 @@ class CodecsTableSeeder extends Seeder
             'updated_at' => new DateTime()
         ]);
         DB::table('codec_configs')->insert([
-            'name' => '2000 kbit/s',
-            'codec_id' => 3,
-            'ffmpeg_bitrate' => '2000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '1000 kbit/s',
-            'codec_id' => 3,
-            'ffmpeg_bitrate' => '1000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '500 kbit/s',
-            'codec_id' => 3,
-            'ffmpeg_bitrate' => '500',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
             'name' => '250 kbit/s',
             'codec_id' => 3,
             'ffmpeg_bitrate' => '250',
@@ -248,33 +167,6 @@ class CodecsTableSeeder extends Seeder
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '2000 kbit/s',
-            'codec_id' => 4,
-            'ffmpeg_bitrate' => '2000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '1000 kbit/s',
-            'codec_id' => 4,
-            'ffmpeg_bitrate' => '1000',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        DB::table('codec_configs')->insert([
-            'name' => '500 kbit/s',
-            'codec_id' => 4,
-            'ffmpeg_bitrate' => '500',
-            'ffmpeg_parameters' => '',
-            'active' => true,
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);

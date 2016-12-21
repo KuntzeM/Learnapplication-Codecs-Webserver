@@ -17,7 +17,7 @@ function selectMediaFile(element, token, url) {
         cache: false,
         dataType: 'json',
         error: function(data){
-            console.log('error');
+            console.log(data.message);
         },
         success: function(data){
             console.log(data);

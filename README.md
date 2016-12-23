@@ -79,3 +79,51 @@ Die Abhänigkeiten werden mit dem Befehl
  php composer.phar update
  ```
 installiert.
+
+
+
+## Docker ##
+
+We'll use 3 container:
+ - MYSQL databse
+ - MediaServer
+ - WebServer
+
+
+
+### MySQL ###
+
+Run MYSQL directly from image 
+
+    docker run --name mp-mysql -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=medienprojekt -e MYSQL_USER=medienprojekt -e MYSQL_PASSWORD=NBjBGYqXGHeQcq77 -d mysql/mysql-server:5.6
+
+
+
+### MediaServer ###
+
+In checked out Mediaserver src: 
+
+Build Mediaserver
+
+    docker build -t mediaserver .
+    
+Start Mediaserver with link to mysql as host "mysqlserver"
+ 
+    docker run --link mp-mysql:mysqlserver mediaserver
+    
+    
+    
+### Webserver ###
+    
+In checked out Webserver with link to mysql as host "mysqlserver"
+    
+Build Webserver 
+
+    docker build -t webserver .
+    
+Start
+
+    docker run --link mp-mysql:mysqlserver -p 8055:80 webserver
+    
+    
+Application is exposed at port 8055.

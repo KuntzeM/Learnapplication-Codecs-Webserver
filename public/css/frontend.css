@@ -95,10 +95,12 @@ h3 {
 #media_files div * {
     margin-top: 10px;
 }
-#media_files div img#media_file_1{
+
+#media_files div #media_file_1 {
     z-index: 1;
 }
-#media_files div img#media_file_2{
+
+#media_files div #media_file_2 {
     z-index: 100;
 }
 
@@ -136,12 +138,13 @@ h3 {
     margin-top: 5px;
 }
 
-#media_files.overview div img{
+#media_files.overview div * {
     width: 80%;
     position: absolute;
 
 }
-#media_files.overview div img#media_file_2:hover{
+
+#media_files.overview div #media_file_2:hover {
     opacity: 0;
 }
 

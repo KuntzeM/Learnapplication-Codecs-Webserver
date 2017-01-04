@@ -2,6 +2,15 @@
  * Created by mathias on 13.11.16.
  */
 
+function skipVideoFromSlider(videoTag) {
+    console.log($(videoTag).get(0).duration);
+
+    var time = $(videoTag).get(0).duration * ($('#seek-bar').val() / 100.0);
+    console.log(time);
+    // Update the video time
+    $(videoTag).get(0).currentTime = time;
+}
+
 function selectMediaFile(element, token, url) {
     $('input[type=text].open_grid').val($(element).attr('data-name'));
 
@@ -43,7 +52,7 @@ function selectMediaFile(element, token, url) {
             $('select[name=media_file_1_select] option').trigger('change');
             $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select')
             $('select[name=media_file_2_select] option').trigger('change');
-            //$('.cocoen').cocoen();
+            //$('#seek-bar').val(0);
 
         }
     });
@@ -55,15 +64,54 @@ $(function(){
     $('select[name=media_file_1_select]').change(function(){
         //$('#media_file_1').children('img').remove();
         //var img = '<img src="' + url + '/public/media_codec/' + $(this).val() + '" />';
-        if ($('#media_file_1  source').length) {
+        if ($('#media_file_1').is('video')) {
+
+            $('#media_file_1 source').remove();
+            $('<source />').appendTo('#media_file_1');
             $('#media_file_1 source').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_1')[0].load();
+
+            if ($('#media_file_2').get(0).paused == false) {
+                $('#media_file_1').get(0).play();
+            }
+
+
+            $('#media_file_1').onloadeddata = function () {
+                skipVideoFromSlider('#media_file_1');
+                /*
+                 var time = $('#media_file_2').get(0).currentTime; // * ($(this).val() / 100);
+                 console.log(time);
+                 if(!isNaN(time)) {
+                 $('#media_file_1').get(0).currentTime = time;
+                 }*/
+            };
+
+
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
     });
     $('select[name=media_file_2_select]').change(function(){
-        if ($('#media_file_2 source').length) {
+        if ($('#media_file_2').is('video')) {
+            $('#media_file_2 source').remove();
+            $('<source />').appendTo('#media_file_2');
             $('#media_file_2 source').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_2')[0].load();
+
+            if ($('#media_file_1').get(0).paused == false) {
+                $('#media_file_2').get(0).play();
+            }
+
+            $('#media_file_2').onloadeddata = function () {
+                skipVideoFromSlider('#media_file_2');
+                /*
+                 var time = $('#media_file_2').get(0).currentTime; // * ($(this).val() / 100);
+                 console.log(time);
+                 if(!isNaN(time)) {
+                 $('#media_file_1').get(0).currentTime = time;
+                 }*/
+            };
+
         } else {
             $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
         }

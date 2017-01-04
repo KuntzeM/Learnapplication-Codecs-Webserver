@@ -1,5 +1,6 @@
 @extends('frontend.master')
 
+{!!Html::script('http://cdn.dashjs.org/latest/dash.all.min.js')!!}
 
 @section('nav')
     @parent
@@ -23,30 +24,30 @@
 
         {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select')) !!}
     </div>
-
-    <div id="media_files" class="dualview">
-        <div>
-            <video id="media_file_1" id="media_file_1">
-                <source src="http://127.0.0.1:3000/public/media_codec/24" type="video/mp4">
-                <p>
-                    Your browser doesn't support HTML5 video.
-                </p>
-            </video>
-        </div>
-        <div>
-            <video id="media_file_2">
-                <source src="http://127.0.0.1:3000/public/media_codec/23" type="video/mp4">
-                <p>
-                    Your browser doesn't support HTML5 video.
-                </p>
-            </video>
-        </div>
-    </div>
     <!-- Video Controls -->
     <div id="video-controls">
         <button type="button" class="btn btn-default" id="play-pause">Play</button>
         <input type="range" id="seek-bar" value="0"/>
     </div>
+    <div id="media_files" class="dualview">
+        <div>
+            <video id="media_file_1" loop>
+
+                <p>
+                    Your browser doesn't support HTML5 video.
+                </p>
+            </video>
+        </div>
+        <div>
+            <video id="media_file_2" loop>
+
+                <p>
+                    Your browser doesn't support HTML5 video.
+                </p>
+            </video>
+        </div>
+    </div>
+
     <script>
         $(function () {
             $('.open_grid').click(function () {
@@ -71,11 +72,8 @@
             });
             $('#seek-bar').change(function () {
                 // Calculate the new time
-
-                var time = $('#media_file_1').get(0).duration * ($(this).val() / 100);
-                // Update the video time
-                $('#media_file_1').get(0).currentTime = time;
-                $('#media_file_2').get(0).currentTime = time;
+                skipVideoFromSlider('#media_file_1');
+                skipVideoFromSlider('#media_file_2');
             });
 
             $('#media_file_1').get(0).addEventListener("timeupdate", function () {
@@ -88,8 +86,15 @@
             $('#media_file_1').get(0).addEventListener("ended", function () {
                 $('#play-pause').text('play');
             });
+            $('#media_file_1').get(0).addEventListener("loadeddata", function () {
+                skipVideoFromSlider('#media_file_1');
+            });
+            $('#media_file_2').get(0).addEventListener("loadeddata", function () {
+                skipVideoFromSlider('#media_file_2');
+            });
 
         });
 
     </script>
+
 @stop

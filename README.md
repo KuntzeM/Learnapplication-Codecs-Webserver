@@ -13,7 +13,8 @@ Sollte bei der Installation etwas nicht funktionieren z.B. ein Fehler bei der In
 ### Benötigte Software
 * Apache-Webserver und MYSQL-Server
 ```
-sudo apt-get install apache2 php5 mysql-server php5-mysql libapache2-mod-php5
+sudo apt-get install apache2 php5 mysql-server php5-mysql libapache2-mod-php5 phpmyadmin
+sudo a2enmod rewrite
 sudo service apache2 restart
 ```
 * Alternativen:
@@ -68,7 +69,7 @@ default user: admin
 
 default password: admin
 
-7 Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-WebServer
+7 Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-MediaServer
 
 
 ### Abhängigkeiten

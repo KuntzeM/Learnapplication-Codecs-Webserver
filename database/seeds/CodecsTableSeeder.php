@@ -15,7 +15,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([ # id: 1
             'name' => 'H.264',
             'ffmpeg_codec' => 'libx264',
-            'extension' => 'mkv',
+            'extension' => 'mp4',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
@@ -64,7 +64,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([ # id: 2
             'name' => 'VP8',
             'ffmpeg_codec' => 'libvpx',
-            'extension' => 'mkv',
+            'extension' => 'webm',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
@@ -114,7 +114,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([ # id: 3
             'name' => 'VP9',
             'ffmpeg_codec' => 'libvpx-vp9',
-            'extension' => 'mkv',
+            'extension' => 'webm',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',
@@ -163,7 +163,7 @@ class CodecsTableSeeder extends Seeder
         DB::table('codecs')->insert([ # id: 4
             'name' => 'Theora',
             'ffmpeg_codec' => 'libtheora',
-            'extension' => 'mkv',
+            'extension' => 'ogg',
             'media_type' => 'video',
             'documentation_de' => '',
             'documentation_en' => '',

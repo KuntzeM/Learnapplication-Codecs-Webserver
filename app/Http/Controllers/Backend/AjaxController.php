@@ -8,7 +8,6 @@ use App\Http\Requests;
 use App\Job;
 use App\Libary\callREST;
 use App\Media;
-use App\MediaCodecConfig;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -105,5 +104,20 @@ class AjaxController extends Controller
         $status = $rest->postStartTranscoding();
 
         //return response()->json(array('message' => 'success'), $status);
+    }
+
+    public function getTranscodingProcesses(Request $request)
+    {
+
+        $jobs = Job::all();
+        $output = array();
+        foreach ($jobs as $job) {
+            $tmp = array('id' => $job->id, 'name' => $job->getMedia()->name, 'media_type' => $job->getMedia()->media_type, 'codec' => $job->getCodecConfiguration()->codec->name,
+                'codec_config' => $job->getCodecConfiguration()->name, 'process' => $job->process);
+            $output[] = $tmp;
+        }
+
+        return response()->json(array('message' => 'success', 'jobs' => $output), 200);
+
     }
 }

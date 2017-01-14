@@ -32,20 +32,27 @@
                         <th class="name">Media Type</th>
                         <th class="date">Codec</th>
                         <th>Configuration</th>
-                        <th class="date">Attempts</th>
+                        <!--     <th class="date">Attempts</th> -->
                         <th class="options">Process</th>
                     </tr>
                     </thead>
                     <tbody>
                         @foreach($jobs as $job)
-                            <tr id="">
+                            <tr class="job" id="job_{{$job->id}}">
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $job->getMedia()->name }}</td>
                                 <td>{{ $job->getMedia()->media_type }}</td>
                                 <td>{{ $job->getCodecConfiguration()->codec->name  }}</td>
                                 <td>{{ $job->getCodecConfiguration()->name }}</td>
-                                <td>{{ $job->attempts }}</td>
-                                <td>{{ $job->process }} %</td>
+                            <!--     <td>{{ $job->attempts }}</td> -->
+                                <td class="process">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $job->process }}"
+                                             aria-valuemin="0" aria-valuemax="100" style="width: {{ $job->process }}%;">
+                                            {{ $job->process }}%
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -75,7 +82,9 @@
             });
         });
 
-
+        $(function () {
+            setInterval("getTranscodingProcesses(\'<?php echo csrf_token() ?>\', \'dasdfasd\')", 500);
+        });
 
     </script>
 @stop

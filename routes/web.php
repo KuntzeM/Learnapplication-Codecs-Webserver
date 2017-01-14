@@ -71,9 +71,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/ajax/activate_codec_config', 'Backend\AjaxController@activateCodecConfig');
     Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
     Route::post('/admin/ajax/start_transcoding', 'Backend\AjaxController@startTranscoding');
+    Route::post('/admin/ajax/getTranscodingProcesses', 'Backend\AjaxController@getTranscodingProcesses');
 });
 Route::group(['middleware' => ['web']], function () {
     Route::post('/ajax/get_media_config', 'Backend\AjaxController@getMediaConfigs');
+
 });
 
 Route::get('socket', 'SocketController@index');

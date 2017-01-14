@@ -47,14 +47,18 @@
                 elementsLoaded = 0;
 
             function onImageLoaded(){
+                console.log(elementsLoaded);
+                console.log(totalImagesCount);
                 if (elementsLoaded >= totalImagesCount) {
                     init();
                 }
             }
 
             images.each(function() {
+
+
                 // Image already loaded (cached)
-                if ($(this)[0].complete) {
+                if ($(this).ready()) {
                     totalImagesCount--;
                     onImageLoaded();
                 } else {
@@ -68,6 +72,7 @@
                         onImageLoaded();
                     });
                 }
+
             });
         }
 

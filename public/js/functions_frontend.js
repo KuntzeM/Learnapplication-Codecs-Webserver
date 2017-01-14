@@ -3,10 +3,8 @@
  */
 
 function skipVideoFromSlider(videoTag) {
-    console.log($(videoTag).get(0).duration);
 
     var time = $(videoTag).get(0).duration * ($('#seek-bar').val() / 100.0);
-    console.log(time);
     // Update the video time
     $(videoTag).get(0).currentTime = time;
 }
@@ -29,7 +27,7 @@ function selectMediaFile(element, token, url) {
             console.log(data.message);
         },
         success: function(data){
-            console.log(data);
+
             obj = JSON.parse(data['media']);
             var currentLine = '';
             $('select[name=media_file_1_select] optgroup').remove();
@@ -42,7 +40,7 @@ function selectMediaFile(element, token, url) {
                     $('select[name=media_file_1_select]').append(group);
                     $('select[name=media_file_2_select]').append(group);
                 }
-                console.log('select[name=media_file_1_select] optgroup#' + currentLine.replace('.', ''));
+
                 var element = '<option value="' + obj[i].media_codec_config_id + '">'+currentLine + ' ' + obj[i].codec_config_name+'</option>';
                 $('select[name=media_file_1_select] optgroup#' + currentLine.replace('.', '')).append(element);
                 $('select[name=media_file_2_select] optgroup#' + currentLine.replace('.', '')).append(element);

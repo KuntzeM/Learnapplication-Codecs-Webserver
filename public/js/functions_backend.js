@@ -50,7 +50,7 @@ function getTranscodingProcesses(token, element) {
             $('.job.remove .progress-bar').text('100%');
             $('.job.remove .progress-bar').attr('aria-valuenow', 100);
             $('.job.remove .progress-bar').css('width', 100 + '%');
-            $('.job.remove').remove();
+            $('.job.remove').fadeOut();
         }
     });
 }

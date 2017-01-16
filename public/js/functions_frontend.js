@@ -47,9 +47,9 @@ function selectMediaFile(element, token, url) {
 
             }
             $('select[name=media_file_1_select] option').first().attr('select', 'select')
-            //$('select[name=media_file_1_select] option').trigger('change');
+            $('select[name=media_file_1_select] option').trigger('change');
             $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select')
-            //$('select[name=media_file_2_select] option').trigger('change');
+            $('select[name=media_file_2_select] option').trigger('change');
             //$('#seek-bar').val(0);
 
         }

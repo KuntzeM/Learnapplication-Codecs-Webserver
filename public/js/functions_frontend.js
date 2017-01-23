@@ -88,6 +88,25 @@ $(function(){
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
+
+        $.ajax({
+            url: '/ajax/get_codec_documentation',
+            type: 'get',
+            data: {
+                media_codec_config_id:  $(this).val(),
+            },
+            cache: false,
+            error: function(data){
+                console.log(data.message);
+            },
+            success: function(data){
+
+                $('#media_file_1_documentation').html(data['documentation_de'])
+
+            }
+        });
+
+
     });
     $('select[name=media_file_2_select]').change(function(){
         if ($('#media_file_2').is('video')) {

@@ -62,7 +62,7 @@
     <div class="form-group">
         <label for="extension">extension:</label>
         <div>
-            {!! Form::text('extension', ((empty($codec->extension)) ? Input::old('extension') : $codec->extension), array('class' => 'form-control ' . ((count($errors->get('ffmpeg_codec'))) ?  'alert-danger' : ''))) !!}
+            {!! Form::text('extension', ((empty($codec->extension)) ? Input::old('extension') : $codec->extension), array('class' => 'form-control ' . ((count($errors->get('extension'))) ?  'alert-danger' : ''))) !!}
         </div>
         @if(count($errors->get('extension')))
             <div class="permanent alert alert-danger">

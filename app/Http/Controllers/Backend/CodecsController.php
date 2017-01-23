@@ -230,4 +230,36 @@ class CodecsController extends Controller
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is created', 'success');
     }
+
+    public function get_documentation($id)
+    {
+        try {
+            $codec = Codecs::findOrFail($id);
+            return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => $codec]);
+
+        } catch (ModelNotFoundException $e) {
+            return redirect('/admin/codecs')->withErrors('Codec mit der ID ' . $id . ' konnte nicht gefunden werden!', 'error');
+        }
+
+    }
+
+    public function update_documentation(Request $request, $id)
+    {
+        $codec = Codecs::findOrFail($id);
+
+        $validator = Validator::make($request->all(), [
+            'documentation_de' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+        $codec->documentation_de = $request->documentation_de;
+        $codec->save();
+
+        return redirect('/admin/codecs')->withErrors('Dokumenation von Codec ' . $codec->name . ' wurde gespeichert', 'success');
+    }
 }

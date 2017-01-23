@@ -120,4 +120,11 @@ class AjaxController extends Controller
         return response()->json(array('message' => 'success', 'jobs' => $output), 200);
 
     }
+
+    public function getCodecConfiguration(Request $request)
+    {
+
+
+        return response()->json(array('message' => 'success', 'documentation_de'=>'yes'));
+    }
 }

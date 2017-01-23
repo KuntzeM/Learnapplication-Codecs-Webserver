@@ -48,6 +48,10 @@
         </div>
     </div>
 
+
+    <div id="media_file_1_documentation"></div>
+    <div id="media_file_2_documentation"></div>
+
     <script>
         $(function () {
             $('.open_grid').click(function () {

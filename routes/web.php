@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/codec/{id}', 'Backend\CodecsController@update_codec');
     Route::get('/admin/codec', ['uses' => 'Backend\CodecsController@get_codec']);
     Route::get('/admin/codec/{id}', ['uses' => 'Backend\CodecsController@get_codec']);
+    Route::get('/admin/codec/documentation/{id}', ['uses' => 'Backend\CodecsController@get_documentation']);
+    Route::post('/admin/codec/documentation/{id}', ['uses' => 'Backend\CodecsController@update_documentation']);
 
 
     Route::post('/admin/codec_config', 'Backend\CodecsController@new_codec_config');
@@ -75,6 +77,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Route::group(['middleware' => ['web']], function () {
     Route::post('/ajax/get_media_config', 'Backend\AjaxController@getMediaConfigs');
+    Route::get('/ajax/get_codec_documentation', 'Backend\AjaxController@getCodecConfiguration');
 
 });
 

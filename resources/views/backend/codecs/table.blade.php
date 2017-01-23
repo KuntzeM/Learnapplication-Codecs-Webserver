@@ -43,7 +43,7 @@
                             <button type="button" class="btn btn-default"><span
                                         class="glyphicon glyphicon-pencil"></span></button>
                         </a>
-                        <a title="edit documentation" href="/admin/codec_docu">
+                        <a title="edit documentation" href="/admin/codec/documentation/{{ $codec->codec_id }}">
                             <button type="button" class="btn btn-default"><span
                                         class="glyphicon glyphicon-comment"></span></button>
                         </a>
@@ -74,7 +74,7 @@
                             <td>{{ $config->ffmpeg_parameters }}</td>
                             <td></td>
                             <td class="options">
-                                <a title="activate configuration" href="#">
+                                <!--<a title="activate configuration" href="#">
                                     @if($config->active)
                                         <button type="button" data-id="{!! $config->codec_config_id !!}"
                                                 class="activate_config btn btn-success"><span
@@ -84,7 +84,7 @@
                                                 class="activate_config btn btn-danger"><span
                                                     class="glyphicon glyphicon-remove-circle"></span></button>
                                     @endif
-                                </a>
+                                </a>-->
                                 <a title="update configuration {{ $config->name }}"
                                    href="/admin/codec_config/{{ $config->codec_config_id }}">
                                     <button type="button" class="btn btn-default"><span

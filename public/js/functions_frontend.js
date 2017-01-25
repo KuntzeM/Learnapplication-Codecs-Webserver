@@ -29,10 +29,13 @@ function selectMediaFile(element, token, url) {
         success: function(data){
 
             obj = JSON.parse(data['media']);
-            var currentLine = '';
+            var currentLine = ' ';
             $('select[name=media_file_1_select] optgroup').remove();
             $('select[name=media_file_2_select] optgroup').remove();
             for(var i=0; i<obj.length; i++){
+                if(obj[i].codec_name == null){
+                    continue;
+                }
                 if(currentLine != obj[i].codec_name){
                     currentLine = obj[i].codec_name;
 
@@ -88,6 +91,7 @@ $(function(){
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
+        /*
 
         $.ajax({
             url: '/ajax/get_codec_documentation',
@@ -104,7 +108,7 @@ $(function(){
                 $('#media_file_1_documentation').html(data['documentation_de'])
 
             }
-        });
+        });*/
 
 
     });

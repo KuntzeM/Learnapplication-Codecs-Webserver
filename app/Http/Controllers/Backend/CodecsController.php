@@ -13,6 +13,7 @@ use App\Media;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use View;
 
 class CodecsController extends Controller
@@ -231,11 +232,12 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is created', 'success');
     }
 
-    public function get_documentation($id)
+    public function get_documentation($type, $id)
     {
         try {
             $codec = Codecs::findOrFail($id);
-            return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => $codec]);
+            $documentation = ($type == 'compare') ? $codec->documentation_compare : $codec->documentation_full;
+            return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => $codec, 'type' => $type, 'documentation' => $documentation]);
 
         } catch (ModelNotFoundException $e) {
             return redirect('/admin/codecs')->withErrors('Codec mit der ID ' . $id . ' konnte nicht gefunden werden!', 'error');
@@ -248,7 +250,8 @@ class CodecsController extends Controller
         $codec = Codecs::findOrFail($id);
 
         $validator = Validator::make($request->all(), [
-            'documentation_de' => 'required'
+            'documentation' => 'required',
+            'type' => Rule::in(['compare', 'full'])
         ]);
 
         if ($validator->fails()) {
@@ -257,9 +260,12 @@ class CodecsController extends Controller
                 ->withErrors($validator);
         }
 
-        $codec->documentation_de = $request->documentation_de;
+
+        $codec->{'documentation_' . $request->type} = $request->documentation;
         $codec->save();
 
         return redirect('/admin/codecs')->withErrors('Dokumenation von Codec ' . $codec->name . ' wurde gespeichert', 'success');
+
+
     }
 }

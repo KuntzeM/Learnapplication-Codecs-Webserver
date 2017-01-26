@@ -27,6 +27,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/video', ['as' => 'video', 'uses' => 'Frontend\VideoController@index']);
     Route::get('/', ['as' => 'home', 'uses' => 'Frontend\HomeController@index']);
     Route::get('/about', ['as' => 'about', 'uses' => 'Frontend\AboutController@index']);
+    Route::get('/codecs', ['as' => 'codecs', 'uses' => 'Frontend\CodecsController@index']);
+    Route::get('/codecs/{id}', ['as' => 'codecs', 'uses' => 'Frontend\CodecsController@index']);
 
 });
 /*
@@ -42,13 +44,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/admin/configurations', ['as' => 'configurations.update', 'uses' => 'Backend\ConfigurationsController@update']);
 
-    Route::post('/admin/codec', 'Backend\CodecsController@new_codec');
-    Route::delete('/admin/codec/{id}', 'Backend\CodecsController@delete_codec');
-    Route::post('/admin/codec/{id}', 'Backend\CodecsController@update_codec');
-    Route::get('/admin/codec', ['uses' => 'Backend\CodecsController@get_codec']);
-    Route::get('/admin/codec/{id}', ['uses' => 'Backend\CodecsController@get_codec']);
-    Route::get('/admin/codec/documentation/{id}', ['uses' => 'Backend\CodecsController@get_documentation']);
-    Route::post('/admin/codec/documentation/{id}', ['uses' => 'Backend\CodecsController@update_documentation']);
+    Route::post('/admin/codec', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@new_codec']);
+    Route::delete('/admin/codec/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@delete_codec']);
+    Route::post('/admin/codec/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@update_codec']);
+    Route::get('/admin/codec', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@get_codec']);
+    Route::get('/admin/codec/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@get_codec']);
+    Route::get('/admin/codec/documentation/{type}/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@get_documentation']);
+    Route::post('/admin/codec/documentation/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@update_documentation']);
+
 
 
     Route::post('/admin/codec_config', 'Backend\CodecsController@new_codec_config');
@@ -77,7 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 Route::group(['middleware' => ['web']], function () {
     Route::post('/ajax/get_media_config', 'Backend\AjaxController@getMediaConfigs');
-    Route::get('/ajax/get_codec_documentation', 'Backend\AjaxController@getCodecConfiguration');
+    Route::get('/ajax/get_codec_documentation', 'Backend\AjaxController@getCodecDocumentation');
 
 });
 

@@ -12,18 +12,20 @@
 
 
 
-    <h3 class="item_details">Dokumentation: {!! $codec->name !!}</h3>
+    <h3 class="item_details">Dokumentation {{ ($type == 'compare')? 'Vergleich' : 'Übersicht' }}
+        : {!! $codec->name !!} </h3>
 
 
     {!! Form::open(['action' => ['Backend\CodecsController@update_documentation', $codec->codec_id], 'method' => 'post'])  !!}
-
+    <input type="hidden" value="{{$type}}" name="type"/>
     <div class="form-group">
         <div>
-            <textarea name="documentation_de" class="form-control {!! ((count($errors->get('documentation_de'))) ?  'alert-danger' : '')  !!}">{{((empty($codec->documentation_de)) ? Input::old('documentation_de') : $codec->documentation_de)}}</textarea>
+            <textarea name="documentation"
+                      class="form-control {!! ((count($errors->get('documentation'))) ?  'alert-danger' : '')  !!}">{{((empty($documentation)) ? Input::old('documentation') : $documentation)}}</textarea>
         </div>
-        @if(count($errors->get('documentation_de')))
+        @if(count($errors->get('documentation')))
             <div class="permanent alert alert-danger">
-                @foreach($errors->get('documentation_de') as $error)
+                @foreach($errors->get('documentation') as $error)
                     <p>{!! $error !!}</p>
                 @endforeach
             </div>

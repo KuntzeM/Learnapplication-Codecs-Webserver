@@ -91,13 +91,14 @@ $(function(){
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
-        /*
+
 
         $.ajax({
             url: '/ajax/get_codec_documentation',
             type: 'get',
             data: {
                 media_codec_config_id:  $(this).val(),
+                type: 'compare'
             },
             cache: false,
             error: function(data){
@@ -105,10 +106,10 @@ $(function(){
             },
             success: function(data){
 
-                $('#media_file_1_documentation').html(data['documentation_de'])
+                $('#media_file_1_documentation').html(data['documentation'])
 
             }
-        });*/
+        });
 
 
     });
@@ -136,13 +137,33 @@ $(function(){
         } else {
             $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
         }
+
+        $.ajax({
+            url: '/ajax/get_codec_documentation',
+            type: 'get',
+            data: {
+                media_codec_config_id: $(this).val(),
+                type: 'compare'
+            },
+            cache: false,
+            error: function (data) {
+                console.log(data.message);
+            },
+            success: function (data) {
+
+                $('#media_file_2_documentation').html(data['documentation'])
+
+            }
+        });
     });
     $('#mode_group button').click(function(){
         $(this).removeClass('btn-default');
         $(this).siblings().removeClass('btn-success');
         $(this).addClass('btn-success');
         $('#media_files').removeClass();
-        
+        $(this).attr('disabled', true);
+        $(this).siblings().attr('disabled', false);
+
 
         $('#media_files').addClass($(this).attr('data-mode'));
         if($(this).attr('data-mode') == 'splitview'){

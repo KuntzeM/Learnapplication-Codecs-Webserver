@@ -14,7 +14,8 @@
     <div id="codec_selection">
         {!! Form::select('media_file_1_select', array(), null, array('class' => 'form-control codec_select')) !!}
         <div id="mode_group">
-            <button title="Dualview" alt="Dualview" id="button_dualview" data-mode="dualview" class="btn btn-success">
+            <button disabled title="Dualview" alt="Dualview" id="button_dualview" data-mode="dualview"
+                    class="btn btn-success">
                 <img src="img/dualview.gif"/></button>
             <!--<button title="Splitview" alt="Splitview" id="button_splitview" data-mode="splitview"
                     class="btn btn-default"><img src="img/splitview.gif"/></button> -->

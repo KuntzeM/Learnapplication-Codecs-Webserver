@@ -35,17 +35,23 @@
                         {!! Form::open(['action' => ['Backend\CodecsController@get_codec_config', 0, $codec->codec_id],
                                         'method' => 'get'])  !!}
 
-                        <button type="submit" class="btn btn-default"><span
+                        <button type="submit" title="Zu Codec {{ $codec->name }} eine Configuration hinzufügen"
+                                class="btn btn-default"><span
                                     class="glyphicon glyphicon-plus-sign"></span></button>
                         {!! Form::close() !!}
 
-                        <a title="update codec {{ $codec->name }}" href="/admin/codec/{{ $codec->codec_id }}">
+                        <a title="Codec {{ $codec->name }} ändern" href="/admin/codec/{{ $codec->codec_id }}">
                             <button type="button" class="btn btn-default"><span
                                         class="glyphicon glyphicon-pencil"></span></button>
                         </a>
-                        <a title="edit documentation" href="/admin/codec/documentation/{{ $codec->codec_id }}">
+                        <a title="Vergleichsdokumentation ändern"
+                           href="/admin/codec/documentation/compare/{{ $codec->codec_id }}">
                             <button type="button" class="btn btn-default"><span
                                         class="glyphicon glyphicon-comment"></span></button>
+                        </a>
+                        <a title="Dokumentation ändern" href="/admin/codec/documentation/full/{{ $codec->codec_id }}">
+                            <button type="button" class="btn btn-default"><span
+                                        class="glyphicon glyphicon-blackboard"></span></button>
                         </a>
                         {!! Form::open(['action' => ['Backend\CodecsController@delete_codec', $codec->codec_id],
                                         'method' => 'delete'])  !!}
@@ -53,7 +59,7 @@
                         'title'=>'Are you sure you want to delete this codec?',
                         'body'=>'<p>Delete Codec ' . $codec->name . '</p><p>Delete '. count($codec->codec_configs) .' Configurations</p>',
                         'button'=>'Delete'])
-                        <button type="button" title="delete codec {{ $codec->name }}" data-toggle="modal"
+                        <button type="button" title="Codec {{ $codec->name }} löschen" data-toggle="modal"
                                 class="btn btn-danger" data-target="#delete_{{ $codec->codec_id }}"><span
                                     class="glyphicon glyphicon-trash"></span></button>
                         {!! Form::close() !!}

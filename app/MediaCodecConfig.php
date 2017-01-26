@@ -2,17 +2,15 @@
 
 namespace App;
 
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use App\CodecConfigs;
-
 
 class MediaCodecConfig extends Model
 {
+    public $codec_config_name;
     protected $table = 'media_codec_configs';
     protected $primaryKey = 'media_codec_config_id';
-
-    public $codec_config_name;
     protected $codec_config;
     /**
      * MediaCodecConfig constructor.
@@ -40,6 +38,12 @@ class MediaCodecConfig extends Model
         }
 
 
+    }
+
+    public function getCodecConfig()
+    {
+
+        return CodecConfigs::where('codec_config_id', $this->codec_config_id)->first();
     }
 
 

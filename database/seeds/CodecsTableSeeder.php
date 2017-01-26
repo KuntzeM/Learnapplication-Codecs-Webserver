@@ -17,8 +17,8 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'libx264',
             'extension' => 'mp4',
             'media_type' => 'video',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -66,8 +66,8 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'libvpx',
             'extension' => 'webm',
             'media_type' => 'video',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -116,8 +116,8 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'libvpx-vp9',
             'extension' => 'webm',
             'media_type' => 'video',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -157,18 +157,19 @@ class CodecsTableSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
-        
-        
-        # Theora
+
+
+        # mpeg2
         DB::table('codecs')->insert([ # id: 4
-            'name' => 'Theora',
-            'ffmpeg_codec' => 'libtheora',
-            'extension' => 'ogg',
+            'name' => 'mpeg2',
+            'ffmpeg_codec' => 'mpeg2video',
+            'extension' => 'mp4',
             'media_type' => 'video',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
+            'updated_at' => new DateTime(),
+            'convert' => true
         ]);
         DB::table('codec_configs')->insert([
             'name' => '2000 kbit/s',
@@ -215,8 +216,8 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'jpg',
             'extension' => 'jpg',
             'media_type' => 'image',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -265,8 +266,8 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'png',
             'extension' => 'png',
             'media_type' => 'image',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -288,10 +289,11 @@ class CodecsTableSeeder extends Seeder
             'ffmpeg_codec' => 'jp2',
             'extension' => 'jp2',
             'media_type' => 'image',
-            'documentation_de' => '',
-            'documentation_en' => '',
+            'documentation_compare' => '',
+            'documentation_full' => '',
             'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
+            'updated_at' => new DateTime(),
+            'convert' => true
         ]);
         DB::table('codec_configs')->insert([
             'name' => '75%',
@@ -320,19 +322,7 @@ class CodecsTableSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
-        DB::table('codec_configs')->insert([
-            'name' => '10%',
-            'codec_id' => 7,
-            'ffmpeg_bitrate' => '10',
-            'ffmpeg_parameters' => '',
-            'active' => true,
-            'created_at' => new DateTime(),
-            'updated_at' => new DateTime()
-        ]);
-        
-        
-        
-        
+
 
     }
 }

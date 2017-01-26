@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Job;
 use App\Libary\callREST;
 use App\Media;
+use App\MediaCodecConfig;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -121,10 +122,21 @@ class AjaxController extends Controller
 
     }
 
-    public function getCodecConfiguration(Request $request)
+    public function getCodecDocumentation(Request $request)
     {
 
+        try {
+            if (!in_array($request->type, ['compare', 'full'])) {
+                throw new ModelNotFoundException('wrong documentation type!');
+            }
 
-        return response()->json(array('message' => 'success', 'documentation_de'=>'yes'));
+            $mediaConfig = MediaCodecConfig::findOrFail($request->media_codec_config_id);
+
+
+            return response()->json(array('message' => 'success', 'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
+        } catch (ModelNotFoundException $e) {
+            return response()->sendHeaders(404);//json(array('message' => $e->getMessage()));
+        }
+
     }
 }

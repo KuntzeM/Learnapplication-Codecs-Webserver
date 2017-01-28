@@ -24,7 +24,7 @@
      Setup, Layout, and Status Functions
      ---------------------------------------------------------*/
 
-// We retrieve config settings from filemanager.config.js
+// We retrieve config settings from filemanager.config.json
     var loadConfigFile = function (type) {
         var json = null;
         type = (typeof type === "undefined") ? "user" : type;
@@ -34,11 +34,11 @@
                 var url = './scripts/' + $.urlParam('config');
                 userconfig = $.urlParam('config');
             } else {
-                var url = './scripts/filemanager.config.js';
-                userconfig = 'filemanager.config.js';
+                var url = './scripts/filemanager.config.json';
+                userconfig = 'filemanager.config.json';
             }
         } else {
-            var url = './scripts/filemanager.config.js.default';
+            var url = './scripts/filemanager.config.json.default';
         }
 
         $.ajax({

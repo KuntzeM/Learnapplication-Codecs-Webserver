@@ -72,6 +72,19 @@
             </div>
         @endif
     </div>
+    <div class="form-group">
+        <label for="convert">convert:</label>
+        <div>
+            {!! Form::checkbox('convert', 1, ((($codec->convert == 0) and (Input::old('extension')) == null) ? false : true), array('class' => ' ' . ((count($errors->get('convert'))) ?  'alert-danger' : ''))) !!}
+        </div>
+        @if(count($errors->get('convert')))
+            <div class="permanent alert alert-danger">
+                @foreach($errors->get('convert') as $error)
+                    <p>{!! $error !!}</p>
+                @endforeach
+            </div>
+        @endif
+    </div>
     <a class="item_details" title="back without save" href="/admin/codecs">
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>

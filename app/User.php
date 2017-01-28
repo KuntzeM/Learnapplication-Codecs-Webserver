@@ -2,8 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
+
 
 class User extends Authenticatable
 {
@@ -26,4 +28,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function accessMediasAll()
+    {
+        return Auth::check();
+        // return true for access to all medias
+    }
+
+    public function accessMediasFolder()
+    {
+        return Auth::check();// return true for access to one folder
+    }
 }

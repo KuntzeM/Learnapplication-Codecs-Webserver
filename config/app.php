@@ -179,7 +179,8 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        'HieuLe\Active\ActiveServiceProvider'
+        'HieuLe\Active\ActiveServiceProvider',
+        Bestmomo\Filemanager\FilemanagerServiceProvider::class,
 
     ],
 

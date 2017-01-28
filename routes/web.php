@@ -36,6 +36,7 @@ Route::group(['middleware' => ['web']], function () {
  */
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', ['as' => 'admin', 'uses' => 'Backend\AdminController@get_index']);
+
     Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
 
     Route::get('/admin/configurations', ['as' => 'configurations', 'uses' => 'Backend\ConfigurationsController@get_index']);

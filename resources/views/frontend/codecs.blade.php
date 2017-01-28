@@ -33,7 +33,7 @@
     <article class="codec_documentation">
         <h2>{{$titel}}</h2>
     @if($content != null)
-        {{$content}}
+        {!! $content  !!}
     @else
         <!--  Hier kann irgend ein Text stehen!  -->
 

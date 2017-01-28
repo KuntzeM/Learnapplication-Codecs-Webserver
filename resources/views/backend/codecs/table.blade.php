@@ -18,6 +18,8 @@
                 <th class="number">#</th>
                 <th class="name">name</th>
                 <th>ffmpeg</th>
+                <th>extension</th>
+                <th>save as H264</th>
                 <th class="date">last change</th>
                 <th class="options">options</th>
             </tr>
@@ -30,6 +32,8 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $codec->name }}</td>
                     <td>{{ $codec->ffmpeg_codec }}</td>
+                    <td>{{ $codec->extension }}</td>
+                    <td>{{ ($codec->convert)?'yes':'no' }}</td>
                     <td>{{ $codec->created_at }}</td>
                     <td class="options">
                         {!! Form::open(['action' => ['Backend\CodecsController@get_codec_config', 0, $codec->codec_id],
@@ -67,7 +71,7 @@
                 </tr>
                 @if (count($codec->codec_configs) == 0)
                     <tr class="codec_{{ $codec->codec_id }}_config" style="display: none">
-                        <td colspan="6">
+                        <td colspan="8">
                             no codec configurations created
                         </td>
                     </tr>
@@ -78,6 +82,8 @@
                             <td></td>
                             <td>{{ $config->name }}</td>
                             <td>{{ $config->ffmpeg_parameters }}</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td class="options">
                                 <!--<a title="activate configuration" href="#">
@@ -91,15 +97,17 @@
                                                     class="glyphicon glyphicon-remove-circle"></span></button>
                                     @endif
                                 </a>-->
-                                <a title="update configuration {{ $config->name }}"
+                                    <span style="width: 45px; float:left;">&nbsp;</span>
+
+                                    <a title="update configuration {{ $config->name }}"
                                    href="/admin/codec_config/{{ $config->codec_config_id }}">
                                     <button type="button" class="btn btn-default"><span
                                                 class="glyphicon glyphicon-pencil"></span>
                                     </button>
                                 </a>
-                                <span style="width: 45px; float:left;">
-                                    &nbsp;
-                                </span>
+
+                                    <span style="width: 45px; float:left;">&nbsp;</span>
+                                    <span style="width: 45px; float:left;">&nbsp;</span>
                                 {!! Form::open(['action' => ['Backend\CodecsController@delete_codec_config', $config->codec_config_id],
                                         'method' => 'delete'])  !!}
                                 @include('backend.modal_delete', ['modal_id'=>'delete_config_' . $config->codec_config_id,

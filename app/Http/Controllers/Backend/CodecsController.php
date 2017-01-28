@@ -86,7 +86,7 @@ class CodecsController extends Controller
 
         try {
             $codec_config = CodecConfigs::findOrFail($id);
-            $title = 'Change Codec';
+            $title = 'Change Codec Configuration';
             $new = false;
         } catch (ModelNotFoundException $e) {
             $codec_config = new CodecConfigs();
@@ -117,6 +117,7 @@ class CodecsController extends Controller
         $codec->name = $request->name;
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
         $codec->extension = $request->extension;
+        $codec->convert = boolval($request->convert);
         $codec->save();
 
         return redirect('/admin/codecs')->withErrors('codec ' . $codec->name . ' is updated', 'success');
@@ -143,6 +144,7 @@ class CodecsController extends Controller
         $codec->ffmpeg_codec = $request->ffmpeg_codec;
         $codec->media_type = $request->media_type;
         $codec->extension = $request->extension;
+        $codec->convert = $request->convert;
         //$codec->active = true;
         $codec->save();
 

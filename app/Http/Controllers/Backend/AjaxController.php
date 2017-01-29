@@ -29,7 +29,7 @@ class AjaxController extends Controller
                 ->select('media_codec_configs.media_codec_config_id', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
                 ->where('media_codec_configs.media_id', '=', $request->media_id)->get();
 
-            return response()->json(array('media' => json_encode($output)), 200);
+            return response()->json(array('media' => $output), 200);
         } catch (ModelNotFoundException $e) {
             return response()->json(array('message' => 'error', 404));
         }

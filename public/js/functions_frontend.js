@@ -30,7 +30,14 @@ function selectMediaFile(element, token, url) {
         },
         success: function(data){
 
-            obj = JSON.parse(data['media']);
+            obj = data['media']; //JSON.parse(data['media']);
+            console.log(obj);
+            function sortfunction(a, b) {
+                return (a.codec_name < b.codec_name ? -1 : (a.codec_name > b.codec_name ? 1 : 0));
+            }
+
+            obj.sort(sortfunction);
+            console.log(obj);
             var currentLine = ' ';
             $('select[name=media_file_1_select] optgroup').remove();
             $('select[name=media_file_2_select] optgroup').remove();

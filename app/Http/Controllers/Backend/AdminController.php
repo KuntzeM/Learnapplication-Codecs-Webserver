@@ -12,7 +12,6 @@ use App\Http\Requests;
 use App\Job;
 use View;
 
-
 class AdminController extends Controller
 {
 

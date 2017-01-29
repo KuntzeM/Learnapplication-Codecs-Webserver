@@ -20,9 +20,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="{{ Route::currentRouteNamed('home') ? 'active' : '' }}"><a href="/">Willkommen</a></li>
-                <li class="{{ Route::currentRouteNamed('codecs') ? 'active' : '' }}"><a href="/codecs">Codecs</a></li>
-                <li class="{{ Route::currentRouteNamed('image') ? 'active' : '' }}"><a href="/image">Image</a></li>
-                <li class="{{ Route::currentRouteNamed('video') ? 'active' : '' }}"><a href="/video">Video</a></li>
+                <li class="{{ Route::currentRouteNamed('codecs') ? 'active' : '' }}"><a href="/codecs">Kodierungsverfahren</a>
+                </li>
+                <li class="{{ Route::currentRouteNamed('image') ? 'active' : '' }}"><a href="/image">Bildkodierung</a>
+                </li>
+                <li class="{{ Route::currentRouteNamed('video') ? 'active' : '' }}"><a href="/video">Videokodierung</a>
+                </li>
                 <li class="{{ Route::currentRouteNamed('about') ? 'active' : '' }}"><a href="/about">Impressum</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

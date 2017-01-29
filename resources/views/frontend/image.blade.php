@@ -8,25 +8,58 @@
 @stop
 
 @section('content')
-    @include('frontend.file_grid', ['files'=>$files])
+    <div class="jumbotron">
+        @include('frontend.file_grid', ['files'=>$files])
+        <a href="#" class="tooltip_icon second" data-toggle="tooltip" data-placement="top"
+           title="2. Wählen ein Kodierungsverfahren für die linke Seite aus!"><img width="32" alt="2" src="img/2.gif"/></a>
+        <a href="#" class="tooltip_icon fourth" data-toggle="tooltip" data-placement="top"
+           title="4. Wähle eine Vergleichsmethode aus!"><img width="32" alt="4" src="img/4.gif"/></a>
+        <div id="codec_selection">
+            <select name='media_file_1_select' class='form-control codec_select' disabled></select>
+            <div id="mode_group">
+                <button disabled title="Dualview" alt="Dualview" id="button_dualview" data-mode="dualview"
+                        class="btn btn-success"><img src="img/dualview.gif"/></button>
+                <button disabled title="Splitview" alt="Splitview" id="button_splitview" data-mode="splitview"
+                        class="btn btn-default"><img src="img/splitview.gif"/></button>
+                <button disabled title="Overview" alt="Overview" id="button_overview" data-mode="overview"
+                        class="btn  btn-default"><img src="img/overview.gif"/></button>
+            </div>
 
-    <div id="codec_selection">
-        {!! Form::select('media_file_1_select', array(), null, array('class' => 'form-control codec_select')) !!}
-        <div id="mode_group">
-            <button disabled title="Dualview" alt="Dualview" id="button_dualview" data-mode="dualview"
-                    class="btn btn-success"><img src="img/dualview.gif"/></button>
-            <button title="Splitview" alt="Splitview" id="button_splitview" data-mode="splitview" class="btn btn-default"><img src="img/splitview.gif" /></button>
-            <button title="Overview" alt="Overview" id="button_overview" data-mode="overview" class="btn  btn-default"><img src="img/overview.gif" /></button>
+            {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select', 'disabled')) !!}
         </div>
-
-        {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select')) !!}
+        <a href="#" class="tooltip_icon third" data-toggle="tooltip" data-placement="top"
+           title="3. Wähle das zweite Kodierungsverfahren zum vergleichen aus!"><img width="32" alt="3"
+                                                                                     src="img/3.gif"/></a>
     </div>
-
+    <div id="informations" style="display: none">
+        <div class="information_1">
+            <p>
+                <label>codec:</label><span class="codec"></span>
+            </p>
+            <p>
+                <label>quality:</label><span class="bitrate"></span>
+            </p>
+            <p>
+                <label>file size:</label><span class="filesize"></span>
+            </p>
+        </div>
+        <div class="information information_2">
+            <p>
+                <label>codec:</label><span class="codec"></span>
+            </p>
+            <p>
+                <label>quality:</label><span class="bitrate"></span>
+            </p>
+            <p>
+                <label>file size:</label><span class="filesize"></span>
+            </p>
+        </div>
+    </div>
     <div id="media_files" class="dualview">
-        <div>
+        <div class="media_file_1">
             <img src="" id="media_file_1" />
         </div>
-        <div>
+        <div class="media_file_2">
             <img src="" id="media_file_2" />
         </div>
     </div>
@@ -40,10 +73,11 @@
     <script>
         $(function () {
             $('.open_grid').click(function(){
-                $('#grid').toggle("slow");
+                $('#grid').toggle("fast");
             });
 
             $('.select_media').click(function(){
+
                 selectMediaFile($(this).children('button')[0], '{!! csrf_token() !!}', "{!! $url !!}");
             })
 

@@ -10,9 +10,11 @@ function skipVideoFromSlider(videoTag) {
 }
 
 function selectMediaFile(element, token, url) {
+
     $('input[type=text].open_grid').val($(element).attr('data-name'));
 
     $('#grid').toggle();
+
 
     $.ajax({
         url: '/ajax/get_media_config',
@@ -49,22 +51,24 @@ function selectMediaFile(element, token, url) {
                 $('select[name=media_file_2_select] optgroup#' + currentLine.replace('.', '')).append(element);
 
             }
-            $('select[name=media_file_1_select] option').first().attr('select', 'select')
+            $('select[name=media_file_1_select] option').first().attr('select', 'select');
             $('select[name=media_file_1_select] option').trigger('change');
-            $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select')
+            $('select[name=media_file_2_select] option').first().next().next().attr('select', 'select');
             $('select[name=media_file_2_select] option').trigger('change');
-            //$('#seek-bar').val(0);
+
+
+            $('.codec_select').attr('disabled', false);
+            $('#button_splitview').attr('disabled', false);
+            $('#button_overview').attr('disabled', false);
 
         }
     });
 
-
 }
 
 $(function(){
+    $('[data-toggle="tooltip"]').tooltip();
     $('select[name=media_file_1_select]').change(function(){
-        //$('#media_file_1').children('img').remove();
-        //var img = '<img src="' + url + '/public/media_codec/' + $(this).val() + '" />';
         if ($('#media_file_1').is('video')) {
 
             $('#media_file_1 source').remove();
@@ -79,19 +83,14 @@ $(function(){
 
             $('#media_file_1').onloadeddata = function () {
                 skipVideoFromSlider('#media_file_1');
-                /*
-                 var time = $('#media_file_2').get(0).currentTime; // * ($(this).val() / 100);
-                 console.log(time);
-                 if(!isNaN(time)) {
-                 $('#media_file_1').get(0).currentTime = time;
-                 }*/
             };
 
+            $('#video-controls *').attr('disabled', false);
 
         } else {
             $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
         }
-
+        $('#informations').show();
 
         $.ajax({
             url: '/ajax/get_codec_documentation',
@@ -107,6 +106,9 @@ $(function(){
             success: function(data){
 
                 $('#media_file_1_documentation').html(data['documentation'])
+                $('.information_1 .codec').html(data['codec']);
+                $('.information_1 .bitrate').html(data['config']);
+                $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
 
             }
         });
@@ -126,12 +128,6 @@ $(function(){
 
             $('#media_file_2').onloadeddata = function () {
                 skipVideoFromSlider('#media_file_2');
-                /*
-                 var time = $('#media_file_2').get(0).currentTime; // * ($(this).val() / 100);
-                 console.log(time);
-                 if(!isNaN(time)) {
-                 $('#media_file_1').get(0).currentTime = time;
-                 }*/
             };
 
         } else {
@@ -152,6 +148,9 @@ $(function(){
             success: function (data) {
 
                 $('#media_file_2_documentation').html(data['documentation'])
+                $('.information_2 .codec').html(data['codec']);
+                $('.information_2 .bitrate').html(data['config']);
+                $('.information_2 .filesize').html(Math.round(100 * parseFloat(data['size']) / 1024 / 1024) / 100 + ' MB');
 
             }
         });

@@ -1,6 +1,6 @@
 <div class="page-header">
-    <h1>Überschrift
-        <small>für Frontend</small>
+    <h1>Lernanwendung
+        <small>Vergleich verschiedene Bild- und Videokodierungsverfahren</small>
     </h1>
 </div>
 <nav class="navbar navbar-default">

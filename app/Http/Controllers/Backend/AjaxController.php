@@ -133,7 +133,11 @@ class AjaxController extends Controller
             $mediaConfig = MediaCodecConfig::findOrFail($request->media_codec_config_id);
 
 
-            return response()->json(array('message' => 'success', 'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
+            return response()->json(array('message' => 'success',
+                'codec' => $mediaConfig->getCodecConfig()->codec->name,
+                'config' => $mediaConfig->getCodecConfig()->name,
+                'size' => $mediaConfig->size,
+                'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
         } catch (ModelNotFoundException $e) {
             return response()->sendHeaders(404);//json(array('message' => $e->getMessage()));
         }

@@ -8,19 +8,22 @@ function checkMediaServerStatus(url, element){
         url: url,
         cache: false,
         crossDomain: true,
-        dataType: 'json',
+        type: 'GET',
+        dataType: "json",
         error: function(data){
             console.log('timeout');
+
             if($('#server_status').length == 0){
                 $(element).append("<div id='server_status' class='alert alert-danger'><strong>Error!</strong> No Connection to MediaServer!</div>");
             }
 
         },
         success: function(data){
+            console.log(data);
             $('#server_status').remove();
             //console.log(data);
         },
-        timeout: 100 // sets timeout to 1 second
+        timeout: 1000 // sets timeout to 1 second
     });
 }
 

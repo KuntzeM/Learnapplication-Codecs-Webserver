@@ -39,11 +39,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@logout']);
 
+    Route::get('/admin/log', ['as' => 'log', 'uses' => 'Backend\LogController@get_index']);
+
     Route::get('/admin/configurations', ['as' => 'configurations', 'uses' => 'Backend\ConfigurationsController@get_index']);
     Route::get('/admin/codecs', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@get_index']);
     Route::get('/admin/media', ['as' => 'media', 'uses' => 'Backend\MediaController@get_index']);
 
     Route::post('/admin/configurations', ['as' => 'configurations.update', 'uses' => 'Backend\ConfigurationsController@update']);
+
 
     Route::post('/admin/codec', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@new_codec']);
     Route::delete('/admin/codec/{id}', ['as' => 'codecs', 'uses' => 'Backend\CodecsController@delete_codec']);

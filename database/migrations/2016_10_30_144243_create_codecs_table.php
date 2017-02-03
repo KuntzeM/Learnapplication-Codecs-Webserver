@@ -20,8 +20,8 @@ class CreateCodecsTable extends Migration
             $table->string('ffmpeg_codec');
             $table->string('extension', 20);
             $table->enum('media_type', ['video', 'image']);
-            $table->text('documentation_compare')->nullable();
-            $table->text('documentation_full')->nullable();
+            $table->longText('documentation_compare')->nullable();
+            $table->longText('documentation_full')->nullable();
             $table->boolean('convert')->default(false);
             $table->timestamps();
         });

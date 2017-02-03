@@ -22,8 +22,8 @@
                 </li>
                 <li class="{{ (Route::is('codecs') || Route::is('codec')) ? 'active' : '' }}"><a href="/admin/codecs">Codecs</a>
                 </li>
-                <li class="{{ Route::is('media') ? 'active' : '' }}"><a href="/admin/media">Media
-                        Files</a></li>
+                <li class="{{ Route::is('media') ? 'active' : '' }}"><a href="/admin/media">MediaFiles</a></li>
+                <li class="{{ Route::is('log') ? 'active' : '' }}"><a href="/admin/log">log</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </div>

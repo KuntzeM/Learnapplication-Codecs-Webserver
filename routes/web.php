@@ -81,7 +81,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
     Route::post('/admin/ajax/start_transcoding', 'Backend\AjaxController@startTranscoding');
     Route::post('/admin/ajax/getTranscodingProcesses', 'Backend\AjaxController@getTranscodingProcesses');
+    Route::get('/admin/log/reload', 'Backend\LogController@reload_index');
+    Route::get('/admin/log/debugLevel', 'Backend\LogController@getDebugLevel');
+    Route::post('/admin/log/debugLevel', 'Backend\LogController@setDebugLevel');
+    Route::post('/admin/log/clearLog', 'Backend\LogController@clearLog');
 });
+
 Route::group(['middleware' => ['web']], function () {
     Route::post('/ajax/get_media_config', 'Backend\AjaxController@getMediaConfigs');
     Route::get('/ajax/get_codec_documentation', 'Backend\AjaxController@getCodecDocumentation');

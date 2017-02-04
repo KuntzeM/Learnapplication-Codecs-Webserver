@@ -112,3 +112,12 @@ tr.codec_config {
     background-color: #eee;
 }
 
+.dataTables_filter input {
+    margin-right: 10px;
+}
+
+.toolbar {
+    float: left;
+    margin-left: 30%;
+    margin-bottom: 10px;
+}

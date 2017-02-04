@@ -39,22 +39,6 @@ class callREST
 
     }
 
-    /*
-    public function getImage($id = null)
-    {
-
-        $configData = ConfigData::getInstance();
-        $client = new Client();
-
-        $request = new \GuzzleHttp\Psr7\Request('GET', $configData->media_server . '/public/image', [
-            'x-access-token' => $this->token
-        ]);
-        $promise = $client->sendAsync($request)->then(function ($response) {
-            var_dump(\GuzzleHttp\json_decode($response->getBody()));
-        });
-        $promise->wait();
-    }
-    */
 
     public function postStartTranscoding()
     {
@@ -69,6 +53,35 @@ class callREST
             //var_dump(\GuzzleHttp\json_decode($response->getBody()));
         });
         //$promise->wait();
+    }
+
+    public function getDebugLevel()
+    {
+
+        $configData = ConfigData::getInstance();
+        $client = new Client();
+
+        $request = new \GuzzleHttp\Psr7\Request('GET', $configData->media_server . '/auth/debugLevel', [
+            'x-access-token' => $this->token
+        ]);
+        $promise = $client->send($request);
+        $json = json_decode($promise->getBody());
+        return $json->debugLevel;
+    }
+
+    public function setDebugLevel($debugLevel)
+    {
+
+        $configData = ConfigData::getInstance();
+        $client = new Client();
+
+        $request = new \GuzzleHttp\Psr7\Request('POST', $configData->media_server . '/auth/debugLevel', [
+            'x-access-token' => $this->token,
+
+        ], json_encode($debugLevel));
+        $promise = $client->sendAsync($request)->then(function ($response) {
+            //var_dump(\GuzzleHttp\json_decode($response->getBody()));
+        });
     }
 
     public function deleteMedia($id)

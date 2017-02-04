@@ -57,3 +57,46 @@ function getTranscodingProcesses(token, element) {
         }
     });
 }
+
+
+$(function () {
+    var table = $('#log-table').DataTable({
+        processing: false,
+        serverSide: true,
+        ajax: 'http://medienprojekt.dev/admin/log/reload',
+        columns: [
+            {data: 'created_at', name: 'created_at'},
+            {data: 'level', name: 'level'},
+            {data: 'message', name: 'message'}
+        ],
+        order: [0, 'desc'],
+        "dom": 'l<"toolbar">frtip',
+        initComplete: function () {
+
+
+            this.api().columns([1]).every(function () {
+                var column = this;
+                var label = $('<label id="level-filter">Level Filter: </label>').appendTo($('#log-table_filter'));
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo(label)
+                    .on('change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                select.append('<option value="info">info</option>')
+                select.append('<option value="warn">warning</option>')
+                select.append('<option value="error">error</option>')
+            });
+        }
+
+    });
+
+    setInterval(function () {
+        table.ajax.reload(null, false);
+    }, 1000);
+});

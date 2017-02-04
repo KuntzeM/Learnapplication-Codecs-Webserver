@@ -17,7 +17,7 @@ class CreateLogTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->enum('level', ['error', 'warn', 'info']);
-            $table->text('message')->default('');
+            $table->text('message');
         });
     }
 

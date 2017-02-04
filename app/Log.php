@@ -4,10 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Log extends Model
 {
+
+
     protected $table = 'log';
     protected $primaryKey = 'id';
+
 
     static public function getErrors()
     {
@@ -16,6 +20,6 @@ class Log extends Model
 
     static public function getWarnings()
     {
-        return Log::where('level', 'warning')->get();
+        return Log::where('level', 'warn')->get();
     }
 }

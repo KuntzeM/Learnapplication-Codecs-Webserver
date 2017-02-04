@@ -9,12 +9,12 @@
         "laravel/framework": "5.3.*",
         "laravelcollective/html": "5.3.*",
         "hieu-le/active": "dev-master",
-        "illuminate/html": "5.0.*",
+      "illuminate/html": "dev-master",
         "predis/predis": "*",
         "tymon/jwt-auth": "0.5.*",
       "guzzlehttp/guzzle": "~6.0",
-      "bestmomo/filemanager": "1.1.*"
-
+      "bestmomo/filemanager": "1.1.*",
+      "yajra/laravel-datatables-oracle": "6.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

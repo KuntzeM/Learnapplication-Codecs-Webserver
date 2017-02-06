@@ -60,43 +60,36 @@ class AjaxController extends Controller
 
     public function processTranscoding(Request $request)
     {
+        if ($request->codec_config_id != null) {
 
-        try {
-            $codec_config = CodecConfigs::findOrFail($request->codec_config_id);
-            $media = Media::findOrFail($request->media_id);
+            $status = \App\Libary\REST\Job::addJob($request->media_id, $request->codec_config_id);
+            if ($status) {
+                $this->startTranscoding($request);
+                return response()->json(array('message' => 'success'), 200);
+            } else {
+                return response()->json(array('message' => 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
+            }
 
-            $job = new Job();
-            $job->media_id = $request->media_id;
-            $job->codec_config_id = $request->codec_config_id;
-
-            $job->save();
-
-            $status = 200;
-        } catch (ModelNotFoundException $e) {
+        } else {
             try{
                 $media = Media::findOrFail($request->media_id);
                 $codec_configs = CodecConfigs::all();
 
                 foreach ($codec_configs as $codec_config){
+
                     if($codec_config->codec->media_type == $media->media_type){
-                        $job = new Job();
-                        $job->media_id = $request->media_id;
-                        $job->codec_config_id = $codec_config->codec_config_id;
-                        $job->save();
+                        $status = \App\Libary\REST\Job::addJob($media->media_id, $codec_config->codec_config_id);
                     }
 
                 }
-                $status = 200;
+                $this->startTranscoding($request);
+                return response()->json(array('message' => 'success'), 200);
             }catch(ModelNotFoundException $e2){
-                $status = 404;
+                return response()->json(array('message' => 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
             }
         }
-
-        $rest = new callREST();
-        $rest->postStartTranscoding();
-
-        return response()->json(array('message' => 'success'), $status);
     }
+
 
     public function startTranscoding(Request $request)
     {
@@ -104,7 +97,6 @@ class AjaxController extends Controller
         $rest = new callREST();
         $status = $rest->postStartTranscoding();
 
-        //return response()->json(array('message' => 'success'), $status);
     }
 
     public function getTranscodingProcesses(Request $request)

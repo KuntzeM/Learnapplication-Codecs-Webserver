@@ -49,6 +49,7 @@ class MediaController extends Controller
         return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'token' => $rest->getToken(), 'url' => $config->media_server]);
     }
 
+
     public function update_media(Request $request, $id)
     {
         $media = Media::findOrFail($id);
@@ -69,6 +70,7 @@ class MediaController extends Controller
         return redirect('/admin/media')->withErrors('media with id ' . $media->media_id . ' is updated', 'success');
     }
 
+    /*
     public function delete_media($id)
     {
         $media = Media::findOrFail($id);
@@ -88,5 +90,5 @@ class MediaController extends Controller
             return redirect('/admin/media')->withErrors($media->name . ' cannot delete!', 'error');
         }
 
-    }
+    }*/
 }

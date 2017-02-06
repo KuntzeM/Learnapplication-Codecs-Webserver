@@ -1,6 +1,6 @@
 <script>
-    checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box');
-    setInterval("checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box')", 2000);
+    //checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box');
+    //setInterval("checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box')", 2000);
 
 </script>
 <nav class="navbar navbar-default">

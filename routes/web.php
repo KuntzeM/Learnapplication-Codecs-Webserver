@@ -29,8 +29,30 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/about', ['as' => 'about', 'uses' => 'Frontend\AboutController@index']);
     Route::get('/codecs', ['as' => 'codecs', 'uses' => 'Frontend\CodecsController@index']);
     Route::get('/codecs/{id}', ['as' => 'codecs', 'uses' => 'Frontend\CodecsController@index']);
-
 });
+
+/**
+ * MEDIA API
+ */
+Route::group(['middleware' => ['web']], function () {
+    Route::get('/getMedia/{media_type}/{name}', ['uses' => 'StorageNodeJS@getMedia']);
+});
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/postMedia', ['uses' => 'StorageNodeJS@postMedia']);
+    Route::delete('/deleteMedia/{media_type}/{name}', ['uses' => 'StorageNodeJS@deleteMedia']);
+});
+
+/**
+ * LOG API
+ */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/log/reload', 'Backend\LogController@reload_index');
+    Route::get('/admin/log/debugLevel', 'Backend\LogController@getDebugLevel');
+    Route::post('/admin/log/debugLevel', 'Backend\LogController@setDebugLevel');
+    Route::post('/admin/log/deleteLog', 'Backend\LogController@deleteLog');
+});
+
+
 /*
  * Backend Authentifications
  */
@@ -81,10 +103,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
     Route::post('/admin/ajax/start_transcoding', 'Backend\AjaxController@startTranscoding');
     Route::post('/admin/ajax/getTranscodingProcesses', 'Backend\AjaxController@getTranscodingProcesses');
-    Route::get('/admin/log/reload', 'Backend\LogController@reload_index');
-    Route::get('/admin/log/debugLevel', 'Backend\LogController@getDebugLevel');
-    Route::post('/admin/log/debugLevel', 'Backend\LogController@setDebugLevel');
-    Route::post('/admin/log/clearLog', 'Backend\LogController@clearLog');
 });
 
 Route::group(['middleware' => ['web']], function () {
@@ -93,6 +111,3 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-Route::get('socket', 'SocketController@index');
-Route::post('sendmessage', 'SocketController@sendMessage');
-Route::get('writemessage', 'SocketController@writemessage');

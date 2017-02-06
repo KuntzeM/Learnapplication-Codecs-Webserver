@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Libary\callREST;
-use App\Log;
 use Illuminate\Http\Request;
 use View;
 use Yajra\Datatables\Datatables;
@@ -28,20 +27,7 @@ class LogController extends Controller
 
     public function reload_index()
     {
-        return Datatables::of(Log::query())->setRowClass(function ($log) {
-            switch ($log->level) {
-                case 'info':
-                    return 'info';
-                    break;
-                case 'warn':
-                    return 'warning';
-                    break;
-                case 'error':
-                    return 'danger';
-                    break;
-            }
-
-        })->make(true);
+        return \App\Libary\REST\Log::getLog();
     }
 
     public function getDebugLevel()
@@ -57,10 +43,14 @@ class LogController extends Controller
         $rest->setDebugLevel($request->debugLevel);
     }
 
-    public function clearLog(Request $request)
+    public function deleteLog(Request $request, $id)
     {
-        Log::truncate();
-        return response()->json(array('message' => 'success'), 200);
+        try {
+            \App\Libary\REST\Log::deleteLog();
+            return response()->json(array('message' => 'success'), 200);
+        } catch (\Exception $e) {
+            return response()->json(array('message' => 'error'), 404);
+        }
     }
 
 }

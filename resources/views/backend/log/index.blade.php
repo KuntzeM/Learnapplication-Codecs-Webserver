@@ -29,7 +29,7 @@
                     data: {
                         '_token': '{{ csrf_token() }}'
                     },
-                    url: '/admin/log/clearLog', //'/admin/log/debugLevel',
+                    url: '/admin/log/deleteLog', //'/admin/log/debugLevel',
                     error: function (data) {
                         alert('log konnte nicht gelöscht werden');
                         $(b).attr('disabled', false);

@@ -73,13 +73,11 @@ class Media extends Model
     }
 
     public function getUrl($resize_width = null){
-        $config = ConfigData::getInstance();
         $size = '';
         if($resize_width != null){
-            $size = '?size=' . intval($resize_width);
+            //$size = '?size=' . intval($resize_width);
         }
 
-
-        return join(DIRECTORY_SEPARATOR, [$config->media_server, 'public/media', $this->media_id]) . $size;
+        return url(join(DIRECTORY_SEPARATOR, ['getMedia', $this->media_type, $this->origin_file])) . $size;
     }
 }

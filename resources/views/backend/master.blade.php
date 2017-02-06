@@ -1,14 +1,14 @@
 {!!Html::script('js/jquery-3.1.0.min.js') !!}
 {!!Html::style('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css') !!}
 {!!Html::style('css/bootstrap.min.css')!!}
-{!!Html::style('//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css')!!}
+{!!Html::style('https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css')!!}
 {!!Html::style('css/backend.css')!!}
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
 {!!Html::script('js/functions_backend.js')!!}
 {!!Html::script('js/tinymce/tinymce.min.js')!!}
 {!!Html::script('js/jquery.ajax-cross-origin.min.js')!!}
-{!!Html::script('//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js')!!}
+{!!Html::script('https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js')!!}
 <!DOCTYPE html>
 <html lang='en'>
 <head>

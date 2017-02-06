@@ -62,8 +62,14 @@ function getTranscodingProcesses(token, element) {
 $(function () {
     var table = $('#log-table').DataTable({
         processing: false,
-        serverSide: true,
-        ajax: 'http://medienprojekt.dev/admin/log/reload',
+        serverSide: false,
+        "paging": false,
+        "ordering": false,
+        "info": false,
+        ajax: {
+            url: 'http://medienprojekt.dev/admin/log/reload',
+            dataSrc: ""
+        },
         columns: [
             {data: 'created_at', name: 'created_at'},
             {data: 'level', name: 'level'},
@@ -88,15 +94,15 @@ $(function () {
                             .draw();
                     });
 
-                select.append('<option value="info">info</option>')
-                select.append('<option value="warn">warning</option>')
-                select.append('<option value="error">error</option>')
+                select.append('<option value="info">info</option>');
+                select.append('<option value="warn">warning</option>');
+                select.append('<option value="error">error</option>');
             });
         }
 
     });
 
-    setInterval(function () {
+    /*setInterval(function () {
         table.ajax.reload(null, false);
-    }, 1000);
+     }, 1000);*/
 });

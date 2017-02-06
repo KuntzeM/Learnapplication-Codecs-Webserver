@@ -13,6 +13,7 @@ use App\CodecConfigs;
 use App\ConfigData;
 use App\Media;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
@@ -48,62 +49,40 @@ class Job
         self::$token = $token;
     }
 
-    static public function addJob($media_id, $codec_config_id)
+    static public function createJobPackage($media_id, $codec_config_id)
     {
         try {
             $codec_config = CodecConfigs::findOrFail($codec_config_id);
             $media = Media::findOrFail($media_id);
-            try {
-                $output = $media->media_id . '_' . $codec_config->codec_config_id . '_' . md5($media->name . microtime(false) . rand(1, 10)) . '.' . $codec_config->codec->extension;
+            $output = $media->media_id . '_' . $codec_config->codec_config_id . '_' . md5($media->name . microtime(false) . rand(1, 10)) . '.' . $codec_config->codec->extension;
 
-                Job::postJob($media->media_type, $media->origin_file, $codec_config->codec->ffmpeg_codec, $codec_config->ffmpeg_bitrate, $codec_config->ffmpeg_parameters, $output);
-            } catch (\Exception $e) {
-                return false;
-            }
+            $output = [
+                'media_type' => $media->media_type,
+                'name' => $media->origin_file,
+                'codec' => $codec_config->codec->ffmpeg_codec,
+                'bitrate' => $codec_config->ffmpeg_bitrate,
+                'optional' => $codec_config->ffmpeg_parameters,
+                'output' => $output
+            ];
+            return $output;
         } catch (ModelNotFoundException $e) {
-            return false;
+            throw new ModelNotFoundException($e->getMessage());
         }
 
-        return true;
     }
 
-    static private function postJob($media_type, $name, $codec, $bitrate, $optional, $output)
+    static public function postJob($package)
     {
         self::init();
 
         $client = new Client();
         try {
-            $client->postAsync(self::$url . '/jobs/post', [
-                'multipart' => [
-                    [
-                        'name' => 'token',
-                        'contents' => self::$token
-                    ],
-                    [
-                        'name' => 'media_type',
-                        'contents' => $media_type
-                    ],
-                    [
-                        'name' => 'name',
-                        'contents' => $name
-                    ],
-                    [
-                        'name' => 'codec',
-                        'contents' => $codec
-                    ],
-                    [
-                        'name' => 'bitrate',
-                        'contents' => $bitrate
-                    ],
-                    [
-                        'name' => 'optional',
-                        'contents' => $optional
-                    ],
-                    [
-                        'name' => 'output',
-                        'contents' => $output
-                    ],
 
+
+            $client->post(self::$url . '/jobs/post', [
+                'form_params' => $package,
+                'headers' => [
+                    'x-access-token' => self::$token
                 ]
             ]);
         } catch (\Exception $e) {

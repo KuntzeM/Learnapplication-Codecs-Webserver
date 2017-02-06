@@ -62,30 +62,34 @@ class AjaxController extends Controller
     {
         if ($request->codec_config_id != null) {
 
-            $status = \App\Libary\REST\Job::addJob($request->media_id, $request->codec_config_id);
-            if ($status) {
-                $this->startTranscoding($request);
+            try {
+                $package = \App\Libary\REST\Job::createJobPackage($request->media_id, $request->codec_config_id);
+                \App\Libary\REST\Job::postJob($package);
+                //$this->startTranscoding($request);
                 return response()->json(array('message' => 'success'), 200);
-            } else {
-                return response()->json(array('message' => 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
+            } catch (\Exception $e) {
+                return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
             }
+
 
         } else {
             try{
                 $media = Media::findOrFail($request->media_id);
                 $codec_configs = CodecConfigs::all();
-
+                $packages = array();
                 foreach ($codec_configs as $codec_config){
 
                     if($codec_config->codec->media_type == $media->media_type){
-                        $status = \App\Libary\REST\Job::addJob($media->media_id, $codec_config->codec_config_id);
+                        $package = \App\Libary\REST\Job::createJobPackage($media->media_id, $codec_config->codec_config_id);
+                        array_push($packages, $package);
                     }
 
                 }
-                $this->startTranscoding($request);
+                \App\Libary\REST\Job::postJob($packages);
+                //$this->startTranscoding($request);
                 return response()->json(array('message' => 'success'), 200);
-            }catch(ModelNotFoundException $e2){
-                return response()->json(array('message' => 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
+            } catch (ModelNotFoundException $e) {
+                return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
             }
         }
     }

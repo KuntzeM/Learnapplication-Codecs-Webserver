@@ -62,6 +62,7 @@ class Job
                 'codec' => $codec_config->codec->ffmpeg_codec,
                 'bitrate' => $codec_config->ffmpeg_bitrate,
                 'optional' => $codec_config->ffmpeg_parameters,
+                'convert' => $codec_config->codec->convert,
                 'output' => $output
             ];
             return $output;

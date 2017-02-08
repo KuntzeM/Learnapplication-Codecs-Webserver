@@ -26,7 +26,6 @@ class AdminController extends Controller
 
     public function get_index()
     {
-
         $jobs = Job::all();
         return View::make('backend.index', array('url'=> $this->url, 'jobs' => $jobs));
     }

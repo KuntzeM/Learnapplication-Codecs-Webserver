@@ -12,6 +12,7 @@ namespace App\Libary\REST;
 use App\CodecConfigs;
 use App\ConfigData;
 use App\Media;
+use App\MediaCodecConfig;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -54,7 +55,17 @@ class Job
         try {
             $codec_config = CodecConfigs::findOrFail($codec_config_id);
             $media = Media::findOrFail($media_id);
-            $output = $media->media_id . '_' . $codec_config->codec_config_id . '_' . md5($media->name . microtime(false) . rand(1, 10)) . '.' . $codec_config->codec->extension;
+
+            try{
+                $mmc = MediaCodecConfig::where('media_id', $media_id)->where('codec_config_id', $codec_config_id)->firstOrFail();
+
+            }catch (ModelNotFoundException $e){
+                $mmc = new MediaCodecConfig();
+                $mmc->file_path = $media->media_id . '_' . $codec_config->codec_config_id . '_' . md5($media->name . microtime(false) . rand(1, 10)) . '.' . $codec_config->codec->extension;
+                $mmc->media_id = $media->media_id;
+                $mmc->codec_config_id = $codec_config->codec_config_id;
+                $mmc->save();
+            }
 
             $output = [
                 'media_type' => $media->media_type,
@@ -63,7 +74,7 @@ class Job
                 'bitrate' => $codec_config->ffmpeg_bitrate,
                 'optional' => $codec_config->ffmpeg_parameters,
                 'convert' => $codec_config->codec->convert,
-                'output' => $output
+                'output' => $mmc->file_path
             ];
             return $output;
         } catch (ModelNotFoundException $e) {

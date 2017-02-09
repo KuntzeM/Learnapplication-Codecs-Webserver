@@ -10,33 +10,63 @@
 
 @section('content')
     <h3 class="item_details">Log</h3>
-    <table class="table table-bordered" id="log-table">
-        <thead>
-        <tr>
-            <th>Zeit</th>
-            <th>Level</th>
-            <th>Meldung</th>
-        </tr>
-        </thead>
-    </table>
+    <div class="form-group">
+        <input class="btn btn-default" type="button" id="removeLog" value="Log löschen"/>
+    </div>
+    <table id="log" data-paging="true" data-sorting="true"></table>
     <script>
+
+        function reloadLogTable(ft) {
+
+
+        }
+
         $(function () {
-            $('<input type="button" class="btn btn-default" value="Log löschen" />').appendTo($('.toolbar')).click(function () {
-                var b = $(this);
-                b.attr('disabled', true);
+
+            var ft = FooTable.init('#log', {
+                "columns": [
+                    {
+                        "name": "created_at",
+                        "title": "Zeit",
+                        "style": {"width": 200, "height": 50},
+                        "sorted": true,
+                        "direction": "DESC"
+                    },
+                    {"name": "level", "title": "Level", "style": {"width": 150}},
+                    {"name": "message", "title": "Meldung", "sortable": false}
+                ],
+                "rows": $.ajax({
+                    type: 'GET',
+                    url: '/admin/log/reload',
+                    dataType: 'json'
+                }),
+                "filtering": {
+                    "enabled": true
+                },
+                "components": {
+                    "filtering": FooTable.MyFiltering
+                },
+                "paging": {
+                    "limit": 10,
+                    "size": 20
+                }
+            });
+
+            setInterval(function (ft) {
                 $.ajax({
-                    type: 'POST',
-                    data: {
-                        '_token': '{{ csrf_token() }}'
-                    },
-                    url: '/admin/log/deleteLog', //'/admin/log/debugLevel',
-                    error: function (data) {
-                        alert('log konnte nicht gelöscht werden');
-                        $(b).attr('disabled', false);
-                    },
+                    type: 'GET',
+                    url: '/admin/log/reload',
+                    dataType: 'json',
                     success: function (data) {
-                        $(b).attr('disabled', false);
+                        ft.rows.load(data);
                     }
+                });
+            }, 10000, ft);
+
+            $('#removeLog').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/admin/log/delete'
                 });
             });
         });

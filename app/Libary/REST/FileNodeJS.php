@@ -24,17 +24,17 @@ class FileNodeJS
         self::init();
 
         $client = new Client();
-        $header = [
-            'x-access-token' => self::$token
-        ];
+
         try {
-            $response = $client->get(self::$url . '/media/get/' . $media_type . '/' . $name, $header);
+            $response = $client->get(self::$url . '/media/get/' . $media_type . '/' . $name, [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
             return ['file' => $response->getBody(), 'statuscode' => $response->getStatusCode(), 'mime' => $response->getHeader('Content-Type')];
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
-
-
     }
 
     static private function init()
@@ -65,13 +65,12 @@ class FileNodeJS
                         'contents' => $media_type
                     ],
                     [
-                        'name' => 'token',
-                        'contents' => self::$token
-                    ],
-                    [
                         'name' => 'file',
                         'contents' => fopen($file, 'r')
                     ]
+                ],
+                'headers' => [
+                    'x-access-token' => self::$token
                 ]
             ]);
             return 200;
@@ -86,12 +85,10 @@ class FileNodeJS
         self::init();
 
         $client = new Client();
-        $header = [
-            'x-access-token' => self::$token
-        ];
+
         try {
             $client->delete(self::$url . '/media/delete/' . $media_type . '/' . $name, [
-                headers => [
+                'headers' => [
                     'x-access-token' => self::$token
                 ]
             ]);

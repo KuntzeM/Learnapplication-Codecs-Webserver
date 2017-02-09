@@ -32,7 +32,7 @@ class AdminController extends Controller
 
     public function get_jobs()
     {
-        $response = \App\Libary\REST\Job::getLog();
+        $response = \App\Libary\REST\Jobs::getJobs();
 
         return $response;
     }

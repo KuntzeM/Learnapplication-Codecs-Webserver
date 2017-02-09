@@ -19,21 +19,22 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
 
-class Job
+class Jobs
 {
     static private $url;
     static private $token;
 
-    static public function getJob()
+    static public function getJobs()
     {
         self::init();
 
         $client = new Client();
-        $header = [
-            'x-access-token' => self::$token
-        ];
         try {
-            $response = $client->get(self::$url . '/job/get', $header);
+            $response = $client->get(self::$url . '/jobs/get', [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
             return $response->getBody();
         } catch (\Exception $e) {
             throw new \Exception($e);
@@ -102,27 +103,19 @@ class Job
         }
     }
 
-    static public function deleteLog()
+
+    static public function postStartTranscoding()
     {
         self::init();
-
-        /**
-         * TODO: delete job
-         */
-    }
-
-    static public function getLog()
-    {
-        self::init();
-
         $client = new Client();
         try {
 
-            $response = $client->get(self::$url . '/jobs/get', [
+            $response = $client->post(self::$url . '/jobs/startTranscoding', [
                 'headers' => [
                     'x-access-token' => self::$token
                 ]
             ]);
+
             return $response->getBody();
         } catch (\Exception $e) {
             throw new \Exception($e);

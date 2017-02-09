@@ -8,12 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 
-class StorageNodeJS extends Controller
+class StorageMediaController extends Controller
 {
     public function getMedia($media_type, $name)
     {
-
-
         try {
             $file = FileNodeJS::getFile($media_type, $name);
             $response = Response::make($file['file'], $file['statuscode']);
@@ -30,21 +28,6 @@ class StorageNodeJS extends Controller
 
     public function postMedia(Request $request)
     {
-
-        /**
-         * TODO: check if file exists!
-         */
-        /*
-        $rules = array(
-            'file' => 'image',
-        );
-        $validation = Validator::make($request->all(), $rules);
-
-        if ($validation->fails())
-        {
-            return Response::json('error', 400);
-        }*/
-
         $file = $request->file;
         $media_type = $request->media_type;
 
@@ -76,8 +59,6 @@ class StorageNodeJS extends Controller
         } catch (\Exception $e) {
             return redirect('/admin/media')->withErrors('Datei konnte nicht gelöscht werden! ' . $e->getMessage(), 'error');
         }
-
-
     }
 
 }

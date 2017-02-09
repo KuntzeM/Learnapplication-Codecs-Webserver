@@ -23,7 +23,6 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th class="number">#</th>
                         <th class="name">Media File</th>
                         <th class="name">Media Type</th>
                         <th class="date">Codec</th>
@@ -62,7 +61,7 @@
         });
 
         $(function () {
-            setInterval("getTranscodingProcesses(\'<?php echo csrf_token() ?>\', \'dasdfasd\')", 500);
+            setInterval("getTranscodingProcesses(\'<?php echo csrf_token() ?>\')", 500);
         });
 
     </script>

@@ -21,29 +21,20 @@ class LogController extends Controller
 
     public function get_index()
     {
-        $rest = new callREST();
-        return View::make('backend.log.index', ['url' => $this->url, 'token' => $rest->getToken()]);
+        return View::make('backend.log.index', ['url' => $this->url]);
     }
 
     public function reload_index()
     {
-        return \App\Libary\REST\Log::getLog();
+        try {
+            return \App\Libary\REST\Log::getLog();
+        } catch (\Exception $e) {
+            return array();
+        }
+
     }
 
-    public function getDebugLevel()
-    {
-        $rest = new callREST();
-
-        return $rest->getDebugLevel();
-    }
-
-    public function setDebugLevel(Request $request)
-    {
-        $rest = new callREST();
-        $rest->setDebugLevel($request->debugLevel);
-    }
-
-    public function deleteLog(Request $request, $id)
+    public function deleteLog(Request $request)
     {
         try {
             \App\Libary\REST\Log::deleteLog();

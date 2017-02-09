@@ -6,7 +6,7 @@ use App\CodecConfigs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Job;
-use App\Libary\callREST;
+use App\Libary\REST\Log;
 use App\Media;
 use App\MediaCodecConfig;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
-    public function __construct()
-    {
-        #$this->middleware('auth');
-    }
 
     public function getMediaConfigs(Request $request){
         try {
@@ -36,26 +32,11 @@ class AjaxController extends Controller
 
     }
 
-    public function activateCodecConfig(Request $request)
+    public function getStatus(Request $request)
     {
+        $request = Log::getStatus();
 
-        try {
-            $codec_config = CodecConfigs::findOrFail($request->codec_config_id);
-            if ($codec_config->active) {
-                $codec_config->active = false;
-                $active_msg = 'deactivated';
-            } else {
-                $codec_config->active = true;
-                $active_msg = 'activated';
-            }
-            $codec_config->save();
-            $status = 200;
-        } catch (ModelNotFoundException $e) {
-            $status = 404;
-        }
-
-
-        return response()->json(array('name' => $codec_config->name, 'active_msg' => $active_msg), $status);
+        return $request;
     }
 
     public function processTranscoding(Request $request)
@@ -63,9 +44,9 @@ class AjaxController extends Controller
         if ($request->codec_config_id != null) {
 
             try {
-                $package = \App\Libary\REST\Job::createJobPackage($request->media_id, $request->codec_config_id);
-                \App\Libary\REST\Job::postJob($package);
-                //$this->startTranscoding($request);
+                $package = \App\Libary\REST\Jobs::createJobPackage($request->media_id, $request->codec_config_id);
+                \App\Libary\REST\Jobs::postJob($package);
+
                 return response()->json(array('message' => 'success'), 200);
             } catch (\Exception $e) {
                 return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
@@ -80,12 +61,12 @@ class AjaxController extends Controller
                 foreach ($codec_configs as $codec_config){
 
                     if($codec_config->codec->media_type == $media->media_type){
-                        $package = \App\Libary\REST\Job::createJobPackage($media->media_id, $codec_config->codec_config_id);
+                        $package = \App\Libary\REST\Jobs::createJobPackage($media->media_id, $codec_config->codec_config_id);
                         array_push($packages, $package);
                     }
 
                 }
-                \App\Libary\REST\Job::postJob($packages);
+                \App\Libary\REST\Jobs::postJob($packages);
                 //$this->startTranscoding($request);
                 return response()->json(array('message' => 'success'), 200);
             } catch (ModelNotFoundException $e) {
@@ -98,8 +79,12 @@ class AjaxController extends Controller
     public function startTranscoding(Request $request)
     {
 
-        $rest = new callREST();
-        $status = $rest->postStartTranscoding();
+        try {
+            $response = \App\Libary\REST\Jobs::postStartTranscoding();
+            return response()->json(array('message' => $response->getContents()), 200);
+        } catch (\Exception $e) {
+            return response()->json(array('message' => $e->getMessage()), 404);
+        }
 
     }
 

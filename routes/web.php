@@ -35,11 +35,11 @@ Route::group(['middleware' => ['web']], function () {
  * MEDIA API
  */
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/getMedia/{media_type}/{name}', ['uses' => 'StorageNodeJS@getMedia']);
+    Route::get('/getMedia/{media_type}/{name}', ['uses' => 'StorageMediaController@getMedia']);
 });
 Route::group(['middleware' => ['auth']], function () {
-    Route::post('/postMedia', ['uses' => 'StorageNodeJS@postMedia']);
-    Route::delete('/deleteMedia/{media_type}/{name}', ['uses' => 'StorageNodeJS@deleteMedia']);
+    Route::post('/postMedia', ['uses' => 'StorageMediaController@postMedia']);
+    Route::delete('/deleteMedia/{media_type}/{name}', ['uses' => 'StorageMediaController@deleteMedia']);
 });
 
 /**
@@ -47,9 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
  */
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/log/reload', 'Backend\LogController@reload_index');
-    Route::get('/admin/log/debugLevel', 'Backend\LogController@getDebugLevel');
-    Route::post('/admin/log/debugLevel', 'Backend\LogController@setDebugLevel');
-    Route::post('/admin/log/deleteLog', 'Backend\LogController@deleteLog');
+    Route::get('/admin/log/delete', 'Backend\LogController@deleteLog');
+    Route::get('/admin/log/status', 'Backend\AjaxController@getStatus');
 });
 
 /**
@@ -59,7 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin/jobs/get', 'Backend\AdminController@get_jobs');
 });
 
-/*
+/**
  * Backend Authentifications
  */
 Route::group(['middleware' => ['auth']], function () {
@@ -105,7 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
  * AJAX Authentifications
  */
 Route::group(['middleware' => ['auth']], function () {
-    Route::post('/admin/ajax/activate_codec_config', 'Backend\AjaxController@activateCodecConfig');
+    //   Route::post('/admin/ajax/activate_codec_config', 'Backend\AjaxController@activateCodecConfig');
     Route::post('/admin/ajax/process_transcoding', 'Backend\AjaxController@processTranscoding');
     Route::post('/admin/ajax/start_transcoding', 'Backend\AjaxController@startTranscoding');
     Route::post('/admin/ajax/getTranscodingProcesses', 'Backend\AjaxController@getTranscodingProcesses');

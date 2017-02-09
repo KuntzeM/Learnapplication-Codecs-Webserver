@@ -1,6 +1,6 @@
 <script>
-    //checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box');
-    //setInterval("checkMediaServerStatus('{!! $url . "/public/status" !!}', '.alert_box')", 2000);
+    checkMediaServerStatus('.alert_box');
+    setInterval("checkMediaServerStatus('.alert_box')", 2000);
 
 </script>
 <nav class="navbar navbar-default">
@@ -26,6 +26,10 @@
                 <li class="{{ Route::is('log') ? 'active' : '' }}"><a href="/admin/log">Log</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><span id="server_status" class="label label-danger">Server Status</span></li>
+                <li><span id="coding_status" class="label label-default">Coding Status</span></li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -37,4 +41,5 @@
         </div>
     </div>
 </div>
+
 

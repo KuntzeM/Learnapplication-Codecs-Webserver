@@ -19,11 +19,12 @@ class Log
         self::init();
 
         $client = new Client();
-        $header = [
-            'x-access-token' => self::$token
-        ];
         try {
-            $response = $client->get(self::$url . '/log/get', $header);
+            $response = $client->get(self::$url . '/log/get', [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
             return $response->getBody();
         } catch (\Exception $e) {
             throw new \Exception($e);
@@ -45,14 +46,35 @@ class Log
         self::init();
 
         $client = new Client();
-        $header = [
-            'x-access-token' => self::$token
-        ];
+
         try {
-            $response = $client->get(self::$url . '/log/delete', $header);
+            $response = $client->get(self::$url . '/log/delete', [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
     }
+
+    static public function getStatus()
+    {
+        self::init();
+
+        $client = new Client();
+
+        try {
+            $response = $client->get(self::$url . '/public/status', [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
+            return $response->getBody();
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
+    }
+
 
 }

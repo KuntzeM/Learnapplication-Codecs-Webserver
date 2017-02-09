@@ -30,6 +30,13 @@ class AdminController extends Controller
         return View::make('backend.index', array('url'=> $this->url, 'jobs' => $jobs));
     }
 
+    public function get_jobs()
+    {
+        $response = \App\Libary\REST\Job::getLog();
+
+        return $response;
+    }
+
 
 
 

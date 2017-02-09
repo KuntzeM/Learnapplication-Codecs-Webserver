@@ -110,4 +110,22 @@ class Job
          * TODO: delete job
          */
     }
+
+    static public function getLog()
+    {
+        self::init();
+
+        $client = new Client();
+        try {
+
+            $response = $client->get(self::$url . '/jobs/get', [
+                'headers' => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
+            return $response->getBody();
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
+    }
 }

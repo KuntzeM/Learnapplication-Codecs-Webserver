@@ -71,39 +71,16 @@ class StorageNodeJS extends Controller
         try {
             $m = Media::where('origin_file', '=', $name)
                 ->where('media_type', '=', $media_type)->first();
-
-        } catch (\Exception $e) {
-            return redirect('/admin/media')->withErrors('Datei nicht vorhanden!', 'error');
-        }
-
-        if ($m->media_codec_config != null) {
-            foreach ($m->media_codec_config as $config) {
-                try {
-                    dd($m->media_codec_config);
-                    FileNodeJS::deleteFile($media_type, $config->file_path);
-                    $config->delete();
-                } catch (\Exception $e) {
-
-                }
-            }
-        }
-
-
-        try {
-
-            FileNodeJS::deleteFile($media_type, $name);
-        } catch (\Exception $e) {
-
-        }
-
-        try {
             $m->delete();
             return redirect('/admin/media')->withErrors('Datei wurde gelöscht!', 'success');
         } catch (\Exception $e) {
-            return redirect('/admin/media')->withErrors('Datei konnte nicht gelöscht werden!', 'error');
+            return redirect('/admin/media')->withErrors('Datei konnte nicht gelöscht werden! ' . $e->getMessage(), 'error');
         }
 
 
     }
 
 }
+
+
+

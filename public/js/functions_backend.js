@@ -29,11 +29,12 @@ function checkMediaServerStatus(url, element){
 
 function getTranscodingProcesses(token, element) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         data: {
             '_token': token,
         },
-        url: 'admin/ajax/getTranscodingProcesses',
+        url: 'admin/jobs/get',
+        dataType: 'json',
         error: function (data) {
             var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                 '<strong>Error!</strong> cannot reach the media server</div> ';
@@ -42,13 +43,25 @@ function getTranscodingProcesses(token, element) {
         success: function (data) {
             $('.job').addClass('remove');
             $.each(data.jobs, function (index, value) {
-                if ($('#job_' + value.id).length) {
-                    $('#job_' + value.id + ' .progress-bar').text(parseInt(value.process) + '%');
-                    $('#job_' + value.id + ' .progress-bar').attr('aria-valuenow', parseInt(value.process));
-                    $('#job_' + value.id + ' .progress-bar').css('width', parseInt(value.process) + '%');
+                console.log(($('#job_' + value.output).length));
+                if ($('#job_' + value.output.replace('.', '_')).length < 1) {
+                    $('<tr class="job" id="job_' + value.output.replace('.', '_') + '">' +
+                        '<td></td>' +
+                        '<td>' + value.name + '</td>' +
+                        '<td>' + value.media_type + '</td>' +
+                        '<td>' + value.codec + '</td>' +
+                        '<td>' + value.bitrate + '</td>' +
+                        '<td class="process">' +
+                        '<div class="progress">' +
+                        '<div class="progress-bar" role="progressbar" aria-valuenow="' + value.progress + '"  aria-valuemin="0" aria-valuemax="100" style="width: ' + value.progress + '%;">' + value.progress + '</div>' +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>').appendTo($('.table tbody'));
                 }
-
-                $('#job_' + value.id).removeClass('remove');
+                $('#job_' + value.output.replace('.', '_') + ' .progress-bar').text(parseInt(value.progress) + '%');
+                $('#job_' + value.output.replace('.', '_') + ' .progress-bar').attr('aria-valuenow', parseInt(value.progress));
+                $('#job_' + value.output.replace('.', '_') + ' .progress-bar').css('width', parseInt(value.progress) + '%');
+                $('#job_' + value.output.replace('.', '_')).removeClass('remove');
             });
             $('.job.remove .progress-bar').text('100%');
             $('.job.remove .progress-bar').attr('aria-valuenow', 100);

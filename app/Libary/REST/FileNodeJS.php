@@ -90,7 +90,11 @@ class FileNodeJS
             'x-access-token' => self::$token
         ];
         try {
-            $response = $client->delete(self::$url . '/media/delete/' . $media_type . '/' . $name, $header);
+            $client->delete(self::$url . '/media/delete/' . $media_type . '/' . $name, [
+                headers => [
+                    'x-access-token' => self::$token
+                ]
+            ]);
         } catch (\Exception $e) {
             throw new \Exception($e);
         }

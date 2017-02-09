@@ -26,7 +26,7 @@ class AjaxController extends Controller
             $output = DB::table('media_codec_configs')
                 ->leftJoin('codec_configs', 'codec_configs.codec_config_id', '=', 'media_codec_configs.codec_config_id')
                 ->leftJoin('codecs', 'codecs.codec_id', '=', 'codec_configs.codec_id')
-                ->select('media_codec_configs.media_codec_config_id', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
+                ->select('media_codec_configs.media_codec_config_id', 'codecs.media_type as media_type', 'media_codec_configs.file_path as file ', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
                 ->where('media_codec_configs.media_id', '=', $request->media_id)->get();
 
             return response()->json(array('media' => $output), 200);
@@ -123,10 +123,20 @@ class AjaxController extends Controller
 
         try {
             if (!in_array($request->type, ['compare', 'full'])) {
-                throw new ModelNotFoundException('wrong documentation type!');
+                throw new ModelNotFoundException('Falscher Dokument-Type: ' . $request->type);
             }
 
-            $mediaConfig = MediaCodecConfig::findOrFail($request->media_codec_config_id);
+            $split_name = explode('/', $request->name);
+            if (count($split_name) != 2) {
+                throw new ModelNotFoundException('Argument Name ist falsch: ' . $request->name);
+            }
+
+            $mediaConfig = MediaCodecConfig::leftJoin('codec_configs', function ($join) {
+                $join->on('media_codec_configs.codec_config_id', '=', 'codec_configs.codec_config_id');
+            })->leftJoin('codecs', function ($join) {
+                $join->on('codecs.codec_id', '=', 'codec_configs.codec_id');
+            })->where('codecs.media_type', $split_name[0])
+                ->where('media_codec_configs.file_path', $split_name[1])->first();
 
 
             return response()->json(array('message' => 'success',
@@ -135,7 +145,9 @@ class AjaxController extends Controller
                 'size' => $mediaConfig->size,
                 'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
         } catch (ModelNotFoundException $e) {
-            return response()->sendHeaders(404);//json(array('message' => $e->getMessage()));
+            return response()->json([
+                'message' => 'DOkumentation konnte nicht geladen werden: ' . $e->getMessage(),
+            ], 404);//json(array('message' => $e->getMessage()));
         }
 
     }

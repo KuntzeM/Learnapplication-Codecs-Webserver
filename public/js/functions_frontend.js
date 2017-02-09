@@ -53,7 +53,7 @@ function selectMediaFile(element, token, url) {
                     $('select[name=media_file_2_select]').append(group);
                 }
 
-                var element = '<option value="' + obj[i].media_codec_config_id + '">'+currentLine + ' ' + obj[i].codec_config_name+'</option>';
+                var element = '<option value="' + obj[i].media_type + '/' + obj[i].file + '">' + currentLine + ' ' + obj[i].codec_config_name + '</option>';
                 $('select[name=media_file_1_select] optgroup#' + currentLine.replace('.', '')).append(element);
                 $('select[name=media_file_2_select] optgroup#' + currentLine.replace('.', '')).append(element);
 
@@ -80,7 +80,7 @@ $(function(){
 
             $('#media_file_1 source').remove();
             $('<source />').appendTo('#media_file_1');
-            $('#media_file_1 source').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_1 source').attr('src', url + '/getMedia/' + $(this).val());
             $('#media_file_1')[0].load();
 
             if ($('#media_file_2').get(0).paused == false) {
@@ -95,7 +95,7 @@ $(function(){
             $('#video-controls *').attr('disabled', false);
 
         } else {
-            $('#media_file_1').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_1').attr('src', url + '/getMedia/' + $(this).val());
         }
         $('#informations').show();
 
@@ -103,7 +103,7 @@ $(function(){
             url: '/ajax/get_codec_documentation',
             type: 'get',
             data: {
-                media_codec_config_id:  $(this).val(),
+                name: $(this).val(),
                 type: 'compare'
             },
             cache: false,
@@ -126,7 +126,7 @@ $(function(){
         if ($('#media_file_2').is('video')) {
             $('#media_file_2 source').remove();
             $('<source />').appendTo('#media_file_2');
-            $('#media_file_2 source').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_2 source').attr('src', url + '/getMedia/' + $(this).val());
             $('#media_file_2')[0].load();
 
             if ($('#media_file_1').get(0).paused == false) {
@@ -138,14 +138,14 @@ $(function(){
             };
 
         } else {
-            $('#media_file_2').attr('src', url + '/public/media_codec/' + $(this).val());
+            $('#media_file_2').attr('src', url + '/getMedia/' + $(this).val());
         }
 
         $.ajax({
             url: '/ajax/get_codec_documentation',
             type: 'get',
             data: {
-                media_codec_config_id: $(this).val(),
+                name: $(this).val(),
                 type: 'compare'
             },
             cache: false,
@@ -154,7 +154,7 @@ $(function(){
             },
             success: function (data) {
 
-                $('#media_file_2_documentation').html(data['documentation'])
+                $('#media_file_2_documentation').html(data['documentation']);
                 $('.information_2 .codec').html(data['codec']);
                 $('.information_2 .bitrate').html(data['config']);
                 $('.information_2 .filesize').html(Math.round(100 * parseFloat(data['size']) / 1024 / 1024) / 100 + ' MB');

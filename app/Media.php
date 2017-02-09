@@ -2,20 +2,13 @@
 
 namespace App;
 
+use App\Libary\REST\FileNodeJS;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Media extends Model
 {
     protected $table = 'media';
     protected $primaryKey = 'media_id';
-
-
-    public function media_codec_configs()
-    {
-        return $this->hasMany('App\MediaCodecConfig', 'media_id');
-    }
-
 
     public function getTranscodedFiles()
     {
@@ -72,12 +65,37 @@ class Media extends Model
         return $output;
     }
 
-    public function getUrl($resize_width = null){
+    public function getUrl($resize_width = null)
+    {
         $size = '';
-        if($resize_width != null){
+        if ($resize_width != null) {
             //$size = '?size=' . intval($resize_width);
         }
 
         return url(join(DIRECTORY_SEPARATOR, ['getMedia', $this->media_type, $this->origin_file])) . $size;
+    }
+
+    public function photos()
+    {
+        return $this->has_many('Photo');
+    }
+
+    public function delete()
+    {
+        // delete all related photos
+        $this->media_codec_configs()->delete();
+
+        try {
+            FileNodeJS::deleteFile($this->media_type, $this->origin_file);
+        } catch (\Exception $e) {
+
+        }
+
+        return parent::delete();
+    }
+
+    public function media_codec_configs()
+    {
+        return $this->hasMany('App\MediaCodecConfig', 'media_id');
     }
 }

@@ -52,6 +52,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/admin/log/deleteLog', 'Backend\LogController@deleteLog');
 });
 
+/**
+ * JOB API
+ */
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/jobs/get', 'Backend\AdminController@get_jobs');
+});
 
 /*
  * Backend Authentifications

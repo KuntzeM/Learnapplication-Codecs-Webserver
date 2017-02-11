@@ -69,7 +69,7 @@ class Media extends Model
     {
         $size = '';
         if ($resize_width != null) {
-            //$size = '?size=' . intval($resize_width);
+            $size = '?size=' . intval($resize_width);
         }
 
         return url(join(DIRECTORY_SEPARATOR, ['getMedia', $this->media_type, $this->origin_file])) . $size;

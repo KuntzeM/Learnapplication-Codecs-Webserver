@@ -15,7 +15,7 @@ class FileNodeJS
     static private $url;
     static private $token;
 
-    static public function getFile($media_type, $name)
+    static public function getFile($media_type, $name, $size)
     {
         /**
          * TODO: resize image
@@ -28,10 +28,11 @@ class FileNodeJS
         try {
             $response = $client->get(self::$url . '/media/get/' . $media_type . '/' . $name, [
                 'headers' => [
-                    'x-access-token' => self::$token
+                    'x-access-token' => self::$token,
+                    'resize' => $size
                 ]
             ]);
-            return ['file' => $response->getBody(), 'statuscode' => $response->getStatusCode(), 'mime' => $response->getHeader('Content-Type')];
+            return ['file' => $response->getBody(), 'statuscode' => $response->getStatusCode(), 'mime' => $response->getHeader('Content-Type'), 'size' => $response->getHeader('size')];
         } catch (\Exception $e) {
             throw new \Exception($e);
         }

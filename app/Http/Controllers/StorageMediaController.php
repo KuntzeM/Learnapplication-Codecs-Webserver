@@ -4,18 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Libary\REST\FileNodeJS;
 use App\Media;
+use App\MediaCodecConfig;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 
 class StorageMediaController extends Controller
 {
-    public function getMedia($media_type, $name)
+    public function getMedia($media_type, $name, Request $request)
     {
         try {
-            $file = FileNodeJS::getFile($media_type, $name);
+            if (isset($request->size)) {
+                $size = intval($request->size);
+            } else {
+                $size = null;
+            }
+            $file = FileNodeJS::getFile($media_type, $name, $size);
             $response = Response::make($file['file'], $file['statuscode']);
             $response->header('Content-Type', $file['mime']);
+
+            try {
+                $mmc = MediaCodecConfig::where('file_path', $name)->firstOrFail();
+                $mmc->size = $file['size'][0];
+                $mmc->save();
+            } catch (ModelNotFoundException $ex) {
+
+            }
             return $response;
         } catch (\Exception $e) {
             return response()->json([

@@ -11,7 +11,7 @@
 |
 */
 
-/*
+/**
  *  Login
  */
 Route::group(['middleware' => ['web']], function () {
@@ -19,7 +19,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('/login', ['as' => 'login', 'uses' => 'Auth\AuthController@handleLogin']);
 
 });
-/*
+/**
  * Frontend
  */
 Route::group(['middleware' => ['web']], function () {
@@ -113,6 +113,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::post('/ajax/get_media_config', 'Backend\AjaxController@getMediaConfigs');
     Route::get('/ajax/get_codec_documentation', 'Backend\AjaxController@getCodecDocumentation');
+    Route::get('/ajax/get_file_size', 'Backend\AjaxController@getFileSize');
 
 });
 

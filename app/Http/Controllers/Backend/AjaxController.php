@@ -136,4 +136,25 @@ class AjaxController extends Controller
         }
 
     }
+
+    public function getFileSize(Request $request)
+    {
+
+        try {
+            $split_name = explode('/', $request->name);
+            if (count($split_name) != 2) {
+                throw new ModelNotFoundException('Argument Name ist falsch: ' . $request->name);
+            }
+
+            $mediaConfig = MediaCodecConfig::where('file_path', $split_name[1])->first();
+
+            return response()->json(array('message' => 'success',
+                'size' => $mediaConfig->size));
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Dateigröße konnte nicht geladen werden: ' . $e->getMessage(),
+            ], 404);//json(array('message' => $e->getMessage()));
+        }
+
+    }
 }

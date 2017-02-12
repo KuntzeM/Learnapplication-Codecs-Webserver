@@ -32,7 +32,7 @@
 
     @if($new)
         {!! Form::open(['url' => '/postMedia', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
-        {!! Form::text('token', $token, array('class' => 'form-control hidden')) !!}
+
     @else
         {!! Form::open(['action' => ['Backend\MediaController@update_media', $media->media_id], 'method' => 'post'])  !!}
     @endif

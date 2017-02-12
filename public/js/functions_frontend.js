@@ -9,6 +9,18 @@ function skipVideoFromSlider(videoTag) {
     $(videoTag).get(0).currentTime = time;
 }
 
+function getFilesize(name, num) {
+    $.ajax({
+        url: '/ajax/get_file_size',
+        type: 'get',
+        data: {
+            name: name
+        },
+        success: function (data) {
+            $('.information_' + num + ' .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
+        }
+    });
+}
 function selectMediaFile(element, token, url) {
 
     $('input[type=text].open_grid').val($(element).attr('data-name'));
@@ -95,15 +107,15 @@ $(function(){
             $('#video-controls *').attr('disabled', false);
 
         } else {
-            $('#media_file_1').attr('src', url + '/getMedia/' + $(this).val());
+            $('#media_file_1').attr('src', url + '/getMedia/' + $(this).val() + '?size=1920');
         }
         $('#informations').show();
-
+        var s = this;
         $.ajax({
             url: '/ajax/get_codec_documentation',
             type: 'get',
             data: {
-                name: $(this).val(),
+                name: $(s).val(),
                 type: 'compare'
             },
             cache: false,
@@ -115,7 +127,13 @@ $(function(){
                 $('#media_file_1_documentation').html(data['documentation'])
                 $('.information_1 .codec').html(data['codec']);
                 $('.information_1 .bitrate').html(data['config']);
-                $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
+                console.log(data);
+                if (data['size'] > 0) {
+                    $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
+                } else {
+                    setTimeout(getFilesize($(s).val(), 1), 3000);
+                }
+
 
             }
         });
@@ -138,14 +156,14 @@ $(function(){
             };
 
         } else {
-            $('#media_file_2').attr('src', url + '/getMedia/' + $(this).val());
+            $('#media_file_2').attr('src', url + '/getMedia/' + $(this).val() + '?size=1920');
         }
-
+        var s = this;
         $.ajax({
             url: '/ajax/get_codec_documentation',
             type: 'get',
             data: {
-                name: $(this).val(),
+                name: $(s).val(),
                 type: 'compare'
             },
             cache: false,
@@ -157,7 +175,11 @@ $(function(){
                 $('#media_file_2_documentation').html(data['documentation']);
                 $('.information_2 .codec').html(data['codec']);
                 $('.information_2 .bitrate').html(data['config']);
-                $('.information_2 .filesize').html(Math.round(100 * parseFloat(data['size']) / 1024 / 1024) / 100 + ' MB');
+                if (data['size'] > 0) {
+                    $('.information_2 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
+                } else {
+                    setTimeout(getFilesize($(s).val(), 2), 3000);
+                }
 
             }
         });

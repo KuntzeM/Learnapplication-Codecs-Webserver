@@ -35,7 +35,7 @@ class ConfigurationsController extends Controller
             'email' => 'required|email',
             'password' => 'min:5|confirmed',
             'password_confirmation' => 'same:password',
-            'media_server' => 'required|active_url',
+            'media_server' => 'required',
             'api_key' => 'required',
             'api_expire' => 'required'
         ]);

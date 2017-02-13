@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Libary\callREST;
 use App\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,9 +44,9 @@ class MediaController extends Controller
         $media = new Media();
         $config = ConfigData::getInstance();
 
-        $rest = new callREST();
-        return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'token' => $rest->getToken(), 'url' => $config->media_server]);
+        return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'url' => $config->media_server]);
     }
+
 
     public function update_media(Request $request, $id)
     {
@@ -69,6 +68,7 @@ class MediaController extends Controller
         return redirect('/admin/media')->withErrors('media with id ' . $media->media_id . ' is updated', 'success');
     }
 
+    /*
     public function delete_media($id)
     {
         $media = Media::findOrFail($id);
@@ -88,5 +88,5 @@ class MediaController extends Controller
             return redirect('/admin/media')->withErrors($media->name . ' cannot delete!', 'error');
         }
 
-    }
+    }*/
 }

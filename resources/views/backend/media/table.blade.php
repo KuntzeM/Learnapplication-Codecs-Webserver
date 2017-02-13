@@ -63,7 +63,7 @@
                         <button type="button" class="btn btn-default"><span
                                     class="glyphicon glyphicon-pencil"></span></button>
                     </a>
-                    {!! Form::open(['action' => ['Backend\MediaController@delete_media', $m->media_id],
+                    {!! Form::open(['action' => ['StorageMediaController@deleteMedia', $m->media_type, $m->origin_file],
                                         'method' => 'delete'])  !!}
                     @include('backend.modal_delete', ['modal_id'=>'delete_' . $m->media_id,
                     'title'=>'Are you sure you want to delete this media file?',

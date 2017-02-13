@@ -24,7 +24,7 @@
         }
     </style>
     <script>
-        var url = "{!! $url !!}";
+        var url = "{!! URL::to('/') !!}";
     </script>
 </head>
 <body>

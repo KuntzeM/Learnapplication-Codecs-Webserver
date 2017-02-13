@@ -3,6 +3,7 @@
 namespace App;
 
 
+use App\Libary\REST\FileNodeJS;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -12,6 +13,7 @@ class MediaCodecConfig extends Model
     protected $table = 'media_codec_configs';
     protected $primaryKey = 'media_codec_config_id';
     protected $codec_config;
+
     /**
      * MediaCodecConfig constructor.
      */
@@ -50,6 +52,17 @@ class MediaCodecConfig extends Model
     public function media()
     {
         return $this->belongsTo('App\Media', 'media_id');
+    }
+
+    public function delete()
+    {
+        try {
+            FileNodeJS::deleteFile($this->media->media_type, $this->file_path);
+        } catch (\Exception $e) {
+
+        }
+
+        return parent::delete();
     }
 
 

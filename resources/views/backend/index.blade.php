@@ -13,12 +13,8 @@
     <h3 class="item_details">Transcoding Queue</h3>
     <div class="panel panel-default">
 
-        @if (count($jobs) == 0)
-            <div class="panel-body">
-                No transcoding processes in queue!
-            </div>
-        @else
-            <div class="panel-heading">
+
+        <div class="panel-heading">
                     <button type="button" id="start_transcoding" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span>Start Transcoding
                     </button>
 
@@ -27,7 +23,6 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th class="number">#</th>
                         <th class="name">Media File</th>
                         <th class="name">Media Type</th>
                         <th class="date">Codec</th>
@@ -37,28 +32,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($jobs as $job)
-                            <tr class="job" id="job_{{$job->id}}">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $job->getMedia()->name }}</td>
-                                <td>{{ $job->getMedia()->media_type }}</td>
-                                <td>{{ $job->getCodecConfiguration()->codec->name  }}</td>
-                                <td>{{ $job->getCodecConfiguration()->name }}</td>
-                            <!--     <td>{{ $job->attempts }}</td> -->
-                                <td class="process">
-                                    <div class="progress">
-                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ $job->process }}"
-                                             aria-valuemin="0" aria-valuemax="100" style="width: {{ $job->process }}%;">
-                                            {{ $job->process }}%
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+
                     </tbody>
                 </table>
             </div>
-        @endif
+
     </div>
     <script>
 
@@ -83,7 +61,7 @@
         });
 
         $(function () {
-            setInterval("getTranscodingProcesses(\'<?php echo csrf_token() ?>\', \'dasdfasd\')", 500);
+            setInterval("getTranscodingProcesses(\'<?php echo csrf_token() ?>\')", 500);
         });
 
     </script>

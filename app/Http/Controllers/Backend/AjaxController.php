@@ -6,7 +6,7 @@ use App\CodecConfigs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Job;
-use App\Libary\callREST;
+use App\Libary\REST\Log;
 use App\Media;
 use App\MediaCodecConfig;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -16,17 +16,13 @@ use Illuminate\Support\Facades\DB;
 
 class AjaxController extends Controller
 {
-    public function __construct()
-    {
-        #$this->middleware('auth');
-    }
 
     public function getMediaConfigs(Request $request){
         try {
             $output = DB::table('media_codec_configs')
                 ->leftJoin('codec_configs', 'codec_configs.codec_config_id', '=', 'media_codec_configs.codec_config_id')
                 ->leftJoin('codecs', 'codecs.codec_id', '=', 'codec_configs.codec_id')
-                ->select('media_codec_configs.media_codec_config_id', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
+                ->select('media_codec_configs.media_codec_config_id', 'codecs.media_type as media_type', 'media_codec_configs.file_path as file ', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
                 ->where('media_codec_configs.media_id', '=', $request->media_id)->get();
 
             return response()->json(array('media' => $output), 200);
@@ -36,75 +32,60 @@ class AjaxController extends Controller
 
     }
 
-    public function activateCodecConfig(Request $request)
+    public function getStatus(Request $request)
     {
+        $request = Log::getStatus();
 
-        try {
-            $codec_config = CodecConfigs::findOrFail($request->codec_config_id);
-            if ($codec_config->active) {
-                $codec_config->active = false;
-                $active_msg = 'deactivated';
-            } else {
-                $codec_config->active = true;
-                $active_msg = 'activated';
-            }
-            $codec_config->save();
-            $status = 200;
-        } catch (ModelNotFoundException $e) {
-            $status = 404;
-        }
-
-
-        return response()->json(array('name' => $codec_config->name, 'active_msg' => $active_msg), $status);
+        return $request;
     }
 
     public function processTranscoding(Request $request)
     {
+        if ($request->codec_config_id != null) {
 
-        try {
-            $codec_config = CodecConfigs::findOrFail($request->codec_config_id);
-            $media = Media::findOrFail($request->media_id);
+            try {
+                $package = \App\Libary\REST\Jobs::createJobPackage($request->media_id, $request->codec_config_id);
+                \App\Libary\REST\Jobs::postJob($package);
 
-            $job = new Job();
-            $job->media_id = $request->media_id;
-            $job->codec_config_id = $request->codec_config_id;
+                return response()->json(array('message' => 'success'), 200);
+            } catch (\Exception $e) {
+                return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
+            }
 
-            $job->save();
 
-            $status = 200;
-        } catch (ModelNotFoundException $e) {
+        } else {
             try{
                 $media = Media::findOrFail($request->media_id);
                 $codec_configs = CodecConfigs::all();
-
+                $packages = array();
                 foreach ($codec_configs as $codec_config){
+
                     if($codec_config->codec->media_type == $media->media_type){
-                        $job = new Job();
-                        $job->media_id = $request->media_id;
-                        $job->codec_config_id = $codec_config->codec_config_id;
-                        $job->save();
+                        $package = \App\Libary\REST\Jobs::createJobPackage($media->media_id, $codec_config->codec_config_id);
+                        array_push($packages, $package);
                     }
 
                 }
-                $status = 200;
-            }catch(ModelNotFoundException $e2){
-                $status = 404;
+                \App\Libary\REST\Jobs::postJob($packages);
+                //$this->startTranscoding($request);
+                return response()->json(array('message' => 'success'), 200);
+            } catch (ModelNotFoundException $e) {
+                return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
             }
         }
-
-        $rest = new callREST();
-        $rest->postStartTranscoding();
-
-        return response()->json(array('message' => 'success'), $status);
     }
+
 
     public function startTranscoding(Request $request)
     {
 
-        $rest = new callREST();
-        $status = $rest->postStartTranscoding();
+        try {
+            $response = \App\Libary\REST\Jobs::postStartTranscoding();
+            return response()->json(array('message' => $response->getContents()), 200);
+        } catch (\Exception $e) {
+            return response()->json(array('message' => $e->getMessage()), 404);
+        }
 
-        //return response()->json(array('message' => 'success'), $status);
     }
 
     public function getTranscodingProcesses(Request $request)
@@ -127,10 +108,20 @@ class AjaxController extends Controller
 
         try {
             if (!in_array($request->type, ['compare', 'full'])) {
-                throw new ModelNotFoundException('wrong documentation type!');
+                throw new ModelNotFoundException('Falscher Dokument-Type: ' . $request->type);
             }
 
-            $mediaConfig = MediaCodecConfig::findOrFail($request->media_codec_config_id);
+            $split_name = explode('/', $request->name);
+            if (count($split_name) != 2) {
+                throw new ModelNotFoundException('Argument Name ist falsch: ' . $request->name);
+            }
+
+            $mediaConfig = MediaCodecConfig::leftJoin('codec_configs', function ($join) {
+                $join->on('media_codec_configs.codec_config_id', '=', 'codec_configs.codec_config_id');
+            })->leftJoin('codecs', function ($join) {
+                $join->on('codecs.codec_id', '=', 'codec_configs.codec_id');
+            })->where('codecs.media_type', $split_name[0])
+                ->where('media_codec_configs.file_path', $split_name[1])->first();
 
 
             return response()->json(array('message' => 'success',
@@ -139,7 +130,30 @@ class AjaxController extends Controller
                 'size' => $mediaConfig->size,
                 'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
         } catch (ModelNotFoundException $e) {
-            return response()->sendHeaders(404);//json(array('message' => $e->getMessage()));
+            return response()->json([
+                'message' => 'DOkumentation konnte nicht geladen werden: ' . $e->getMessage(),
+            ], 404);//json(array('message' => $e->getMessage()));
+        }
+
+    }
+
+    public function getFileSize(Request $request)
+    {
+
+        try {
+            $split_name = explode('/', $request->name);
+            if (count($split_name) != 2) {
+                throw new ModelNotFoundException('Argument Name ist falsch: ' . $request->name);
+            }
+
+            $mediaConfig = MediaCodecConfig::where('file_path', $split_name[1])->first();
+
+            return response()->json(array('message' => 'success',
+                'size' => $mediaConfig->size));
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'message' => 'Dateigröße konnte nicht geladen werden: ' . $e->getMessage(),
+            ], 404);//json(array('message' => $e->getMessage()));
         }
 
     }

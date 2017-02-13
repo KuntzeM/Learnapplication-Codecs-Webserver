@@ -31,8 +31,8 @@
     <h3 class="item_details">{!! $title !!}</h3>
 
     @if($new)
-        {!! Form::open(['url' => $url . '/auth/media', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
-        {!! Form::text('token', $token, array('class' => 'form-control hidden')) !!}
+        {!! Form::open(['url' => '/postMedia', 'method' => 'post', 'enctype'=>"multipart/form-data"])  !!}
+
     @else
         {!! Form::open(['action' => ['Backend\MediaController@update_media', $media->media_id], 'method' => 'post'])  !!}
     @endif

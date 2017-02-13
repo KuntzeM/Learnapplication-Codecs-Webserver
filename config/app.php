@@ -181,7 +181,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         'HieuLe\Active\ActiveServiceProvider',
         Bestmomo\Filemanager\FilemanagerServiceProvider::class,
-        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 
@@ -238,7 +237,6 @@ return [
         'Active' => 'HieuLe\Active\Facades\Active',
         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
         'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
-        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];

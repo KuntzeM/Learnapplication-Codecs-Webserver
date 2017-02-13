@@ -7,8 +7,6 @@ use App\Codecs;
 use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Job;
-use App\Libary\callREST;
 use App\Media;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -173,20 +171,20 @@ class CodecsController extends Controller
         $codec_config->ffmpeg_parameters = $request->ffmpeg_parameters;
         $codec_config->ffmpeg_bitrate = $request->ffmpeg_bitrate;
         $codec_config->save();
-
+        $packages = array();
         if ($request->start_transcoding) {
             $media = Media::where('media_type', $codec_config->codec->media_type);
             foreach ($media->cursor() as $item) {
-
-                $job = new Job();
-                $job->media_id = $item->media_id;
-                $job->codec_config_id = $codec_config->codec_config_id;
-
-                $job->save();
-
+                $package = \App\Libary\REST\Jobs::createJobPackage($item->media_id, $codec_config->codec_config_id);
+                array_push($packages, $package);
             };
-            $rest = new callREST();
-            $rest->postStartTranscoding();
+            try {
+                \App\Libary\REST\Jobs::postJob($package);
+                $response = \App\Libary\REST\Jobs::postStartTranscoding();
+            } catch (\Exception $e) {
+                return redirect('/admin/codecs')->withErrors('Jobs konnten nicht angelegt werden!', 'warning');
+            }
+
         }
 
         return redirect('/admin/codecs')->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is updated', 'success');
@@ -215,20 +213,22 @@ class CodecsController extends Controller
         $codec_config->codec_id = $request->codec_id;
         $codec_config->active = false;
         $codec_config->save();
-
+        $packages = array();
         if ($request->start_transcoding) {
             $media = Media::where('media_type', $codec_config->codec->media_type);
             foreach ($media->cursor() as $item) {
-
-                $job = new Job();
-                $job->media_id = $item->media_id;
-                $job->codec_config_id = $codec_config->codec_config_id;
-
-                $job->save();
-
+                $package = \App\Libary\REST\Jobs::createJobPackage($item->media_id, $codec_config->codec_config_id);
+                array_push($packages, $package);
             };
-            $rest = new callREST();
-            $rest->postStartTranscoding();
+            try {
+                \App\Libary\REST\Jobs::postJob($package);
+                $response = \App\Libary\REST\Jobs::postStartTranscoding();
+            } catch (\Exception $e) {
+                return redirect('/admin/codecs')->withErrors('Jobs konnten nicht angelegt werden!', 'warning');
+            }
+
+
+
         }
 
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is created', 'success');

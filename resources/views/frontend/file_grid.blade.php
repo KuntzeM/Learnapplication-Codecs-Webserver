@@ -14,7 +14,7 @@
         <div class="row">
             @foreach($files as $file)
                 @if(count($file['media_codec_configs'])>0)
-                    <div class="col-xs-6 col-md-2">
+                    <div class="col-md-4">
                         <a class="thumbnail select_media" data-id="{!! $file->media_id !!}">
                             @if($file->media_type=='image')
                                 <img src="{!! $file->getUrl('300') !!}">

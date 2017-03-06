@@ -17,17 +17,16 @@
                 'advlist codesample autolink lists link image charmap print preview hr anchor autolink',
                 'searchreplace wordcount visualblocks visualchars code fullscreen',
                 'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons paste textcolor colorpicker textpattern imagetools codesample autosave'
+                'emoticons paste textcolor colorpicker textpattern imagetools codesample autosave, template'
             ],
             toolbar1: 'preview | undo redo |  styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | table bullist numlist outdent indent | link image media codesample emoticons',
             toolbar2: '',
             autosave_interval: "30s",
             image_advtab: false,
-            /*templates: [
-             { title: 'Test template 1', content: 'Test 1' },
-             { title: 'Test template 2', content: 'Test 2' }
+            templates: [
+                {title: 'Vergleichsseite', url: '{!! asset('templates/compare_template.html') !!}'}
              ],
-             content_css: [
+            /*content_css: [
              '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
              '//www.tinymce.com/css/codepen.min.css'
              ],*/

@@ -33,7 +33,7 @@
                                                    step="0.1"/><a class="tooltip_icon glyphicon glyphicon-zoom-in"
                                                                   data-toggle="tooltip" data-placement="top"
                                                                   title="Drücke +"></a>
-                    <span class="zoom-factor">1x</span>
+                    <span class="zoom-factor">1.0x</span>
                 </div>
             </div>
 

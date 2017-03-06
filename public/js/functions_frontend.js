@@ -174,7 +174,7 @@ $(function(){
                 console.log(data.message);
             },
             success: function (data) {
-
+                console.log(data);
                 $('#media_file_2_documentation').html(data['documentation']);
                 $('.information_2 .codec').html(data['codec']);
                 $('.information_2 .bitrate').html(data['config']);
@@ -230,43 +230,51 @@ $(function(){
         $('#zoom .zoom-factor').text(parseFloat($(this).val()).toFixed(1) + 'x');
     });
 
+    /**
+     * Key-Handler for zoom and movement functions
+     */
     $(document).keypress(function (e) {
-        console.log(e.which);
-        switch (e.which) {
-            case 97: // left
+
+        if (e.keyCode != 0) {
+            var key = e.keyCode;
+        } else {
+            var key = e.which;
+        }
+        switch (key) {
+            case 37: // left
                 if (parseFloat($('#media_files div #media_file_1').css('left')) >= -((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - 365)) {
                     $('#media_files div *').css('left', '-=5%');
                 }
                 break;
 
-            case 119: // up
+            case 38: // up
                 if (parseFloat($('#media_files div #media_file_1').css('top')) >= -((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
                     $('#media_files div *').css('top', '-=5%');
                 }
                 break;
 
-            case 100: // right
+            case 39: // right
                 if (parseFloat($('#media_files div #media_file_1').css('left')) <= ((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - 365)) {
                     $('#media_files div *').css('left', '+=5%');
                 }
                 break;
 
-            case 115: // down
+            case 40: // down
                 if (parseFloat($('#media_files div #media_file_1').css('top')) <= ((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
                     $('#media_files div *').css('top', '+=5%');
                 }
                 break;
-            case 43:
+            case 43: // zoom in
                 $('#zoom-bar').val(parseFloat($('#zoom-bar').val()) + 0.1);
                 $('#zoom-bar').trigger('change');
                 break;
 
-            case 45:
+            case 45: // zoom out
                 $('#zoom-bar').val(parseFloat($('#zoom-bar').val()) - 0.1);
                 $('#zoom-bar').trigger('change');
                 break;
             default:
-                return; // exit this handler for other keys
+                return;
         }
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });

@@ -12,11 +12,13 @@
 {!!Html::script('js/splitview/hammer.min.js')!!}
 {!!Html::script('js/splitview/jquery.images-compare.js')!!}
 {!!Html::script('js/functions_frontend.js')!!}
+{!!Html::script('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML', array('async'))!!}
+
 <!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Learning Applikation</title>
+    <title>Lernanwendung</title>
 
     <style>
         body {
@@ -25,6 +27,16 @@
     </style>
     <script>
         var url = "{!! URL::to('/') !!}";
+    </script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            jax: ["input/TeX"],
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            CommonHTML: {
+                scale: 120
+             }
+        });
     </script>
 </head>
 <body>

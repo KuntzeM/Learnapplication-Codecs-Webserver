@@ -13,7 +13,8 @@
         <a href="#" class="tooltip_icon second" data-toggle="tooltip" data-placement="top"
            title="2. Wählen ein Kodierungsverfahren für die linke Seite aus!"><img width="32" alt="2" src="img/2.gif"/></a>
         <a href="#" class="tooltip_icon fourth" data-toggle="tooltip" data-placement="top"
-           title="4. Wähle eine Vergleichsmethode aus!"><img width="32" alt="4" src="img/4.gif"/></a>
+           title="4. Wähle eine Vergleichsmethode aus! Über den Slider (alternativ + und -) kann gezoomt werden. Mit den Tasten W, A, S, D kann das Bild/Video verschoben werden."><img
+                    width="32" alt="4" src="img/4.gif"/></a>
         <div id="codec_selection">
             <select name='media_file_1_select' class='form-control codec_select' disabled></select>
             <div id="mode_group">
@@ -23,6 +24,15 @@
                         class="btn btn-default"><img src="img/splitview.gif"/></button>
                 <button disabled title="Overview" alt="Overview" id="button_overview" data-mode="overview"
                         class="btn  btn-default"><img src="img/overview.gif"/></button>
+                <div id="zoom">
+                    <a class="tooltip_icon glyphicon glyphicon-zoom-out" data-toggle="tooltip" data-placement="top"
+                       title="Drücke -"></a><input disabled type="range" id="zoom-bar" value="1" min="1" max="4"
+                                                   step="0.1"/><a class="tooltip_icon glyphicon glyphicon-zoom-in"
+                                                                  data-toggle="tooltip" data-placement="top"
+                                                                  title="Drücke +"></a>
+                    <span class="zoom-factor">1.0x</span>
+                </div>
+
             </div>
 
             {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select', 'disabled')) !!}
@@ -56,10 +66,10 @@
         </div>
     </div>
     <div id="media_files" class="dualview">
-        <div class="media_file_1">
+        <div class="media_file_1 stage">
             <img src="" id="media_file_1" />
         </div>
-        <div class="media_file_2">
+        <div class="media_file_2 stage">
             <img src="" id="media_file_2" />
         </div>
     </div>

@@ -20,6 +20,7 @@ h3 {
     padding-bottom: 75px !important;
     background-color: #f8f8f8;
     border: 1px solid #e7e7e7;
+    height: 200px;
 }
 
 .container-fluid {
@@ -95,6 +96,26 @@ h3 {
 
 }
 
+#zoom {
+    float: right;
+    padding-top: 15px;
+    margin-right: 20px;
+    margin-left: -140px;
+}
+
+#zoom-bar {
+    display: inline;
+    width: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#zoom .zoom-factor {
+    width: 20px;
+    padding-left: 10px;
+    font-size: 13pt;
+}
+
 select {
     height: 40px;
 }
@@ -108,6 +129,8 @@ select {
 
 #media_files div * {
     margin-top: 10px;
+    top: 0%;
+    left: 0%;
 }
 
 #media_files div #media_file_1 {
@@ -118,27 +141,78 @@ select {
     z-index: 1;
 }
 
-#media_files.dualview div img{
-    position: relative;
-    float: left;
-    width: 50%;
+#media_files .stage {
+    overflow: hidden;
 }
 
+#media_files div * {
+    position: relative;
+    transform: scale(1);
+}
+
+/* dualview  */
+#media_files.dualview div.media_file_1 {
+    float: left;
+}
+
+#media_files.dualview div.media_file_2 {
+    float: right;
+}
+
+#media_files.dualview div * {
+
+    width: 720px;
+}
+
+/*
 #media_files.dualview div video {
     position: relative;
     float: left;
     width: 50%;
+}*/
+
+media_files.dualview .stage {
+    width: 723px;
 }
-#media_files.splitview div img{
+
+/* splitview */
+#media_files.splitview div * {
 
 
 }
+
+#media_files.splitview .stage {
+    width: 1445px !important;
+}
+
+/* overview */
+#media_files.overview .stage {
+    width: 1445px !important;
+}
+
+#media_files.overview .stage * {
+    width: 1445px !important;
+}
+
+#media_files.overview div.stage {
+    position: absolute;
+
+}
+
+#media_files.overview div #media_file_1:hover {
+    opacity: 0;
+}
+
+
 #grid{
     width: 100%;
     background-color: #eee;
     padding-left: 5px;
     border: 1px solid #bbb;
     box-shadow: 1px 1px 1px #ddd;
+    z-index: 200;
+    width: 1245px;
+    position: absolute;
 }
 .thumbnail{
     margin-top: 10px;
@@ -152,15 +226,7 @@ select {
     margin-top: 5px;
 }
 
-#media_files.overview div * {
-    width: 80%;
-    position: absolute;
 
-}
-
-#media_files.overview div #media_file_1:hover {
-    opacity: 0;
-}
 
 .codecs_side {
     width: 200px;
@@ -182,11 +248,11 @@ select {
 }
 
 #informations .information_1 {
-    left: 3%;
+    left: 5px;
 }
 
 #informations .information_2 {
-    right: 3%;
+    right: 5px;
 }
 
 #informations div p {
@@ -257,6 +323,9 @@ select {
     z-index: 100;
 }
 
+.tooltip_icon:hover {
+    text-decoration: none;
+}
 .tooltip_icon img {
     width: 32px;
 }
@@ -279,8 +348,12 @@ select {
 
 .tooltip_icon.fourth {
     top: 35px;
-    left: calc(50% - 150px);
+    left: calc(50% - 210px);
     float: none;
+}
+
+.images-compare-left-arrow, .images-compare-right-arrow {
+    display: none;
 }
 
 

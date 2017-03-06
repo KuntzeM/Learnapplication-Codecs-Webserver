@@ -242,7 +242,7 @@ $(function(){
         }
         switch (key) {
             case 37: // left
-                if (parseFloat($('#media_files div #media_file_1').css('left')) >= -((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - 365)) {
+                if (parseFloat($('#media_files div #media_file_1').css('left')) >= -((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
                     $('#media_files div *').css('left', '-=5%');
                 }
                 break;
@@ -254,7 +254,7 @@ $(function(){
                 break;
 
             case 39: // right
-                if (parseFloat($('#media_files div #media_file_1').css('left')) <= ((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - 365)) {
+                if (parseFloat($('#media_files div #media_file_1').css('left')) <= ((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
                     $('#media_files div *').css('left', '+=5%');
                 }
                 break;

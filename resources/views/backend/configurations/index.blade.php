@@ -13,6 +13,14 @@
 
     <h3 class="item_details">{!! $title !!}</h3>
 
+    <div class="form-group">
+        <a href="configurations/welcome">
+            <button class="btn btn-info">Startseite ändern</button>
+        </a>
+        <a href="configurations/impressum">
+            <button class="btn btn-info">Impressum ändern</button>
+        </a>
+    </div>
 
     {!! Form::open(['action' => ['Backend\ConfigurationsController@update'], 'method' => 'post'])  !!}
 

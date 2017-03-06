@@ -6,9 +6,11 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\ConfigData;
+use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\ConfigData;
+
 class AboutController extends Controller
 {
     public function __construct()
@@ -21,6 +23,11 @@ class AboutController extends Controller
 
     public function index()
     {
-        return view('frontend.about', ['url'=>$this->url]);
+        try {
+            $html = Configuration::where('name', 'impressum')->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $html = '';
+        }
+        return view('frontend.about', ['url' => $this->url, 'html' => $html->value]);
     }
 }

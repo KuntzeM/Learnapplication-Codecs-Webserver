@@ -8,7 +8,7 @@
 @stop
 
 @section('content')
-    Home
+    {!! $html !!}
 
 
 @stop

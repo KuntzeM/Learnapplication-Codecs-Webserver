@@ -1,6 +1,6 @@
 <div class="page-header">
     <h1>Lernanwendung
-        <small>Vergleich verschiedene Bild- und Videokodierungsverfahren</small>
+        <small>Gegenüberstellung verschiedener Bild- und Videoformate</small>
     </h1>
 </div>
 <nav class="navbar navbar-default">

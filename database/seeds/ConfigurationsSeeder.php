@@ -23,5 +23,13 @@ class ConfigurationsSeeder extends Seeder
             'name' => 'api_expire',
             'value' => '60'
         ]);
+        DB::table('configurations')->insert([
+            'name' => 'impressum',
+            'value' => ''
+        ]);
+        DB::table('configurations')->insert([
+            'name' => 'welcome',
+            'value' => ''
+        ]);
     }
 }

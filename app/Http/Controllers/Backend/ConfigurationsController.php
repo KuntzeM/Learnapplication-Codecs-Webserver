@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\ConfigData;
+use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -58,5 +59,30 @@ class ConfigurationsController extends Controller
         $configData->update();
 
         return redirect('/admin/configurations')->withErrors('configurations are updated', 'success');
+    }
+
+    public function get_site($type)
+    {
+        try {
+            $site = Configuration::where('name', $type)->firstOrFail();
+            return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => Null, 'type' => Null, 'documentation' => $site->value, 'site' => $type]);
+
+        } catch (ModelNotFoundException $e) {
+            return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' konnte nicht gefunden werden!', 'error');
+        }
+
+    }
+
+    public function update_site(Request $request, $type)
+    {
+        $site = Configuration::where('name', $type)->firstOrFail();
+
+
+        $site->value = $request->documentation;
+        $site->save();
+
+        return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' wurde gespeichert', 'success');
+
+
     }
 }

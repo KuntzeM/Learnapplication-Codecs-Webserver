@@ -60,13 +60,17 @@
     </script>
 
 
+    @if($codec != Null)
+        <h3 class="item_details">Dokumentation {{ ($type == 'compare')? 'Vergleich' : 'Übersicht' }}
+            : {!! $codec->name !!} </h3>
+        {!! Form::open(['action' => ['Backend\CodecsController@update_documentation', $codec->codec_id], 'method' => 'post'])  !!}
+        <input type="hidden" value="{{$type}}" name="type"/>
+    @else
+        <h3 class="item_details">{{ ($site == 'impressum')? 'Impressum-Seite' : 'Startseite' }} </h3>
+        {!! Form::open(['action' => ['Backend\ConfigurationsController@update_site', $site], 'method' => 'post'])  !!}
+        <input type="hidden" value="{{$site}}" name="site"/>
+    @endif
 
-    <h3 class="item_details">Dokumentation {{ ($type == 'compare')? 'Vergleich' : 'Übersicht' }}
-        : {!! $codec->name !!} </h3>
-
-
-    {!! Form::open(['action' => ['Backend\CodecsController@update_documentation', $codec->codec_id], 'method' => 'post'])  !!}
-    <input type="hidden" value="{{$type}}" name="type"/>
     <div class="form-group">
         <div>
             <textarea name="documentation"
@@ -80,15 +84,19 @@
             </div>
         @endif
     </div>
-    <a class="item_details" title="back without save" href="/admin/codecs">
+    @if($codec != Null)
+        <a class="item_details" title="back without save" href="/admin/codecs">
+            @else
+                <a class="item_details" title="back without save" href="/admin/configurations">
+                    @endif
         <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> Back without Save
         </button>
     </a>
-    <button type="submit" data-toggle="modal" class="btn btn-default">
+
+
+                <button type="submit" data-toggle="modal" class="btn btn-default">
         <span class="glyphicon glyphicon-save"></span> Save
     </button>
-
-
 
     {!! Form::close() !!}
 @stop

@@ -26,10 +26,9 @@
             templates: [
                 {title: 'Vergleichsseite', url: '{!! asset('templates/compare_template.html') !!}'}
              ],
-            /*content_css: [
-             '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-             '//www.tinymce.com/css/codepen.min.css'
-             ],*/
+            content_css: [
+                '{{ asset('css/editor_tinymce.css') }}',
+            ],
             file_browser_callback: function (field_name, url, type, win) {
 
                 // from http://andylangton.co.uk/blog/development/get-viewport-size-width-and-height-javascript

@@ -2,6 +2,7 @@
 {!!Html::style('css/font-awesome.css') !!}
 {!!Html::style('css/bootstrap.min.css')!!}
 {!!Html::style('css/frontend.css')!!}
+{!!Html::style('css/editor_tinymce.css')!!}
 <!--{!!Html::style('css/splitview/cocoen.min.css')!!}-->
 {!!Html::style('css/splitview/images-compare.css')!!}
 
@@ -12,7 +13,8 @@
 {!!Html::script('js/splitview/hammer.min.js')!!}
 {!!Html::script('js/splitview/jquery.images-compare.js')!!}
 {!!Html::script('js/functions_frontend.js')!!}
-{!!Html::script('https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML', array('async'))!!}
+{!!Html::script('js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML', array('async'))!!}
+
 
 <!DOCTYPE html>
 <html lang='en'>

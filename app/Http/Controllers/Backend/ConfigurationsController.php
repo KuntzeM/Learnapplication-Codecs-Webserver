@@ -6,6 +6,7 @@ use App\ConfigData;
 use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use View;
@@ -63,19 +64,36 @@ class ConfigurationsController extends Controller
 
     public function get_site($type)
     {
+
         try {
             $site = Configuration::where('name', $type)->firstOrFail();
-            return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => Null, 'type' => Null, 'documentation' => $site->value, 'site' => $type]);
-
         } catch (ModelNotFoundException $e) {
-            return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' konnte nicht gefunden werden!', 'error');
+
+            $site = new Configuration();
+            if ($type == 'impressum' or $type == 'welcome') {
+                $site->name = $type;
+            } else {
+                return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' existiert nicht', 'error');
+            }
+            $site->save();
         }
+        return View::make('backend.codecs.documentation', ['url' => $this->url, 'codec' => Null, 'type' => Null, 'documentation' => $site->value, 'site' => $type]);
+
 
     }
 
     public function update_site(Request $request, $type)
     {
-        $site = Configuration::where('name', $type)->firstOrFail();
+        try {
+            $site = Configuration::where('name', $type)->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $site = new Configuration();
+            if ($type == 'impressum' or $type == 'welcome') {
+                $site->name = $type;
+            } else {
+                return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' existiert nicht', 'error');
+            }
+        }
 
 
         $site->value = $request->documentation;

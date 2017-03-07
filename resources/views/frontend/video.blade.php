@@ -95,8 +95,8 @@
     </div>
 
     <article id="documentations">
-        <div id="media_file_1_documentation"></div>
-        <div id="media_file_2_documentation"></div>
+        <div class="mce-content-body " id="media_file_1_documentation"></div>
+        <div class="mce-content-body " id="media_file_2_documentation"></div>
     </article>
 
 

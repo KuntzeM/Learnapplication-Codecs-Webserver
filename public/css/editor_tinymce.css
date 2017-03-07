@@ -1,0 +1,47 @@
+.mce-content-body * {
+    line-height: 1.5;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.mce-content-body p {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.mce-content-body h1 {
+    font-size: 30pt;
+    margin-bottom: 10px;
+}
+
+.mce-content-body h2 {
+    font-size: 26pt;
+    margin-bottom: 10px;
+}
+
+.mce-content-body h3 {
+    font-size: 22pt;
+    margin-bottom: 5px;
+}
+
+.mce-content-body h4 {
+    font-size: 18pt;
+    margin-bottom: 5px;
+}
+
+.mce-content-body table {
+    width: 100%;
+    border: 1px solid #999;
+
+}
+
+.mce-content-body table tr {
+    height: 40px;
+    border-bottom: 1px solid #999;
+}
+
+.mce-content-body table tr td {
+    padding: 10px;
+    border-right: 1px solid #999;
+}

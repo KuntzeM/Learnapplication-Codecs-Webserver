@@ -43,13 +43,12 @@ function selectMediaFile(element, token, url) {
         success: function(data){
 
             obj = data['media']; //JSON.parse(data['media']);
-            console.log(obj);
             function sortfunction(a, b) {
                 return (a.codec_name < b.codec_name ? -1 : (a.codec_name > b.codec_name ? 1 : 0));
             }
 
             obj.sort(sortfunction);
-            console.log(obj);
+
             var currentLine = ' ';
             $('select[name=media_file_1_select] optgroup').remove();
             $('select[name=media_file_2_select] optgroup').remove();
@@ -174,7 +173,6 @@ $(function(){
                 console.log(data.message);
             },
             success: function (data) {
-                console.log(data);
                 $('#media_file_2_documentation').html(data['documentation']);
                 $('.information_2 .codec').html(data['codec']);
                 $('.information_2 .bitrate').html(data['config']);
@@ -218,7 +216,7 @@ $(function(){
             $('#media_files div').removeClass('images-compare-after');
             $('#media_files div').removeAttr('style');
             $('#media_files div').removeAttr('ratio');
-
+            $('#media_files.overview').css('height', $('.media_file_1').css('height'));
         }
 
     });
@@ -240,28 +238,29 @@ $(function(){
         } else {
             var key = e.which;
         }
+
         switch (key) {
             case 37: // left
                 if (parseFloat($('#media_files div #media_file_1').css('left')) >= -((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
-                    $('#media_files div *').css('left', '-=5%');
+                    $('#media_files div *').css('left', '-=5%', 'important');
                 }
                 break;
 
             case 38: // up
                 if (parseFloat($('#media_files div #media_file_1').css('top')) >= -((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
-                    $('#media_files div *').css('top', '-=5%');
+                    $('#media_files div *').css('top', '-=5%', 'important');
                 }
                 break;
 
             case 39: // right
                 if (parseFloat($('#media_files div #media_file_1').css('left')) <= ((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
-                    $('#media_files div *').css('left', '+=5%');
+                    $('#media_files div *').css('left', '+=5%', 'important');
                 }
                 break;
 
             case 40: // down
                 if (parseFloat($('#media_files div #media_file_1').css('top')) <= ((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
-                    $('#media_files div *').css('top', '+=5%');
+                    $('#media_files div *').css('top', '+=5%', 'important');
                 }
                 break;
             case 43: // zoom in

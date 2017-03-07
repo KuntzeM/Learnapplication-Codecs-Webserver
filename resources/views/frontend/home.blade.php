@@ -8,7 +8,9 @@
 @stop
 
 @section('content')
-    {!! $html !!}
+    <div class="mce-content-body ">
+        {!! $html !!}
+    </div>
 
 
 @stop

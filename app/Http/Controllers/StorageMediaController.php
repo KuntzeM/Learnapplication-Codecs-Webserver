@@ -78,6 +78,13 @@ class StorageMediaController extends Controller
 
     public function getFileMetaData()
     {
+        $lockfile = 'metadata.lock';
+
+        if (!file_exists($lockfile)) {
+            $f = fopen($lockfile, "w");
+            fclose($f);
+        }
+
         $media_config = MediaCodecConfig::where('size', 0)
             ->orWhere('psnr', '0')
             ->orWhere('ssim', '0')->get();
@@ -89,6 +96,10 @@ class StorageMediaController extends Controller
             $mc->ssim = $metadata['ssim'];
             $mc->size = $metadata['size'];
             $mc->save();
+        }
+
+        if (file_exists($lockfile)) {
+            unlink($lockfile);
         }
 
     }

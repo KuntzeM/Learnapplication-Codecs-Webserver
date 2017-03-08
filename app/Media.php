@@ -56,6 +56,9 @@ class Media extends Model
                 'codec_name' => $codec_config->codec_name,
                 'codec_config_name' => $codec_config->cc_name,
                 'media_codec_config_id' => $media_codec_config_id,
+                'size' => $media_codec_config[0]->size,
+                'psnr' => $media_codec_config[0]->psnr,
+                'ssim' => $media_codec_config[0]->ssim,
                 'status' => $status
             ];
 

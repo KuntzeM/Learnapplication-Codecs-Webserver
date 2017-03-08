@@ -55,7 +55,15 @@
         $(".alert:not(.permanent)").fadeTo(10000, 500).slideUp(500, function () {
             $(this).slideUp(500);
         });
+        $(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/metadata',
+                success: function (data) {
 
+                }
+            });
+        });
     </script>
 </body>
 </html>

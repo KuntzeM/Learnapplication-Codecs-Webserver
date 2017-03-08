@@ -10,7 +10,6 @@ use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Job;
-use App\Libary\REST\FileNodeJS;
 use View;
 
 
@@ -22,7 +21,7 @@ class AdminController extends Controller
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
 
-        FileNodeJS::poolMetadata();
+
     }
 
     public function get_index()

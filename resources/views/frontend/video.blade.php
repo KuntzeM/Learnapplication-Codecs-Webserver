@@ -54,24 +54,36 @@
     <div id="informations" style="display: none">
         <div class="information_1">
             <p>
-                <label>codec:</label><span class="codec"></span>
+                <label>Codec:</label><span class="codec"></span>
             </p>
             <p>
-                <label>bitrate:</label><span class="bitrate"></span>
+                <label>Qualität:</label><span class="bitrate"></span>
             </p>
             <p>
-                <label>file size:</label><span class="filesize"></span>
+                <label>Dateigröße:</label><span class="filesize"></span>
+            </p>
+            <p>
+                <label>PSNR:</label><span class="psnr"></span> dB
+            </p>
+            <p>
+                <label>SSIM:</label><span class="ssim"></span>
             </p>
         </div>
         <div class="information information_2">
             <p>
-                <label>codec:</label><span class="codec"></span>
+                <label>Codec:</label><span class="codec"></span>
             </p>
             <p>
-                <label>bitrate:</label><span class="bitrate"></span>
+                <label>Qualität:</label><span class="bitrate"></span>
             </p>
             <p>
-                <label>file size:</label><span class="filesize"></span>
+                <label>Dateigröße:</label><span class="filesize"></span>
+            </p>
+            <p>
+                <label>PSNR:</label><span class="psnr"></span> dB
+            </p>
+            <p>
+                <label>SSIM:</label><span class="ssim"></span>
             </p>
         </div>
     </div>

@@ -129,6 +129,8 @@ class AjaxController extends Controller
                 'codec' => $mediaConfig->getCodecConfig()->codec->name,
                 'config' => $mediaConfig->getCodecConfig()->name,
                 'size' => $mediaConfig->size,
+                'psnr' => $mediaConfig->psnr,
+                'ssim' => $mediaConfig->ssim,
                 'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
         } catch (ModelNotFoundException $e) {
             return response()->json([

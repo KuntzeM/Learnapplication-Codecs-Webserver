@@ -128,9 +128,7 @@ class FileNodeJS
     static public function poolMetadata()
     {
         $client = new Client();
-        $request = new \GuzzleHttp\Psr7\Request('GET', URL::to('/admin/metadata'));
-        $client->sendAsync($request)->then(function ($response) {
+        $promise = $client->getAsync(URL::to('/admin/metadata'));
 
-        });
     }
 }

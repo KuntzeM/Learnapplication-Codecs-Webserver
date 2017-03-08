@@ -130,11 +130,9 @@ $(function(){
                 $('.information_1 .codec').html(data['codec']);
                 $('.information_1 .bitrate').html(data['config']);
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                if (data['size'] > 0) {
-                    $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
-                } else {
-                    setTimeout(getFilesize($(s).val(), 1), 3000);
-                }
+                $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
+                $('.information_1 .psnr').html(data['psnr']);
+                $('.information_1 .ssim').html(data['ssim']);
 
 
             }
@@ -177,11 +175,11 @@ $(function(){
                 $('.information_2 .codec').html(data['codec']);
                 $('.information_2 .bitrate').html(data['config']);
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                if (data['size'] > 0) {
-                    $('.information_2 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
-                } else {
-                    setTimeout(getFilesize($(s).val(), 2), 3000);
-                }
+
+                $('.information_2 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
+                $('.information_2 .psnr').html(data['psnr']);
+                $('.information_2 .ssim').html(data['ssim']);
+
 
             }
         });
@@ -287,6 +285,7 @@ $(function(){
         $(".information_1").addClass('select');
         $(".information_2").removeClass('select');
     });
+
 
 });
 

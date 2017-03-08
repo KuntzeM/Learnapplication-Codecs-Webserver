@@ -87,12 +87,21 @@
                         <tr class="codec_config media_{{ $m->media_id }}_config" style="display: none">
                             <td></td>
                             <td></td>
-                            <td colspan="3">{!! $config['codec_name'] . ' - ' . $config['codec_config_name']!!}</td>
+                            <td>{!! $config['codec_name'] . ' - ' . $config['codec_config_name']!!}</td>
                             <td>
-
-
+                                SSIM: {{$config['ssim']}}
                             </td>
-
+                            <td>
+                                PSNR: {{$config['psnr']}} dB
+                            </td>
+                            <td>
+                                Größe:
+                                @if ($m->media_type == "image")
+                                    {{ round(intval($config['size'])/1024.0)}} KB
+                                @else
+                                    {{ round(1000.0*intval($config['size'])/1048576.0) / 1000 }} MB
+                                @endif
+                            </td>
                             <td class="options">
                                 @include('backend.modal_delete', ['modal_id'=>'transcode_' . $config['codec_config_id'] . '_' . $m->media_id,
                                 'title'=>'File is transcoded or is in queue!',

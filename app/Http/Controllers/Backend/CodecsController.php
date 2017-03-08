@@ -174,12 +174,16 @@ class CodecsController extends Controller
         $packages = array();
         if ($request->start_transcoding) {
             $media = Media::where('media_type', $codec_config->codec->media_type);
+
             foreach ($media->cursor() as $item) {
+
                 $package = \App\Libary\REST\Jobs::createJobPackage($item->media_id, $codec_config->codec_config_id);
                 array_push($packages, $package);
             };
+
             try {
-                \App\Libary\REST\Jobs::postJob($package);
+
+                \App\Libary\REST\Jobs::postJob($packages);
                 $response = \App\Libary\REST\Jobs::postStartTranscoding();
             } catch (\Exception $e) {
                 return redirect('/admin/codecs')->withErrors('Jobs konnten nicht angelegt werden!', 'warning');
@@ -221,7 +225,7 @@ class CodecsController extends Controller
                 array_push($packages, $package);
             };
             try {
-                \App\Libary\REST\Jobs::postJob($package);
+                \App\Libary\REST\Jobs::postJob($packages);
                 $response = \App\Libary\REST\Jobs::postStartTranscoding();
             } catch (\Exception $e) {
                 return redirect('/admin/codecs')->withErrors('Jobs konnten nicht angelegt werden!', 'warning');

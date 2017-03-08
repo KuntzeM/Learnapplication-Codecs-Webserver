@@ -32,11 +32,14 @@
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-            jax: ["input/TeX", "output/HTML-CSS"],
+            jax: ["input/TeX", "output/SVG"],
             tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
             TeX: { equationNumbers: { autoNumber: "AMS" } },
             CommonHTML: {
                 scale: 120
+             },
+             "HTML-CSS": {
+                scale: 150
              }
         });
     </script>

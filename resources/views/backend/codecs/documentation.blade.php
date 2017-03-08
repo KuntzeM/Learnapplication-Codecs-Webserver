@@ -26,6 +26,10 @@
             templates: [
                 {title: 'Vergleichsseite', url: '{!! asset('templates/compare_template.html') !!}'}
              ],
+            table_class_list: [
+                {title: 'None', value: ''},
+                {title: 'no Border', value: 'noborder'}
+            ],
             content_css: [
                 '{{ asset('css/editor_tinymce.css') }}',
             ],

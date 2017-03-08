@@ -31,12 +31,12 @@
         </div>
     </aside>
     <article class="codec_documentation">
-        <h2>{{$titel}}</h2>
     @if($content != null)
-        {!! $content  !!}
+            <div class="mce-content-body ">
+                {!! $content  !!}
+            </div>
     @else
-        <!--  Hier kann irgend ein Text stehen!  -->
-
+            <h2>$\longleftarrow$ Bitte wähle ein Kodierungsverfahren aus!</h2>
         @endif
 
     </article>

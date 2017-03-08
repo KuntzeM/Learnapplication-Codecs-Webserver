@@ -278,6 +278,16 @@ $(function(){
         e.preventDefault(); // prevent the default action (scroll / move caret)
     });
 
+    $(".overview > .media_file_1").hover(function () {
+        console.log('1');
+        $(".information_2").addClass('select');
+        $(".information_1").removeClass('select');
+    }, function () {
+        console.log('2');
+        $(".information_1").addClass('select');
+        $(".information_2").removeClass('select');
+    });
+
 });
 
 

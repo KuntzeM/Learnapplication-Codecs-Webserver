@@ -91,7 +91,6 @@ class Jobs
         $client = new Client();
         try {
 
-
             $client->post(self::$url . '/jobs/post', [
                 'form_params' => $package,
                 'headers' => [

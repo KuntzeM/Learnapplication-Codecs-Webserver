@@ -23,6 +23,7 @@ class AjaxController extends Controller
                 ->leftJoin('codec_configs', 'codec_configs.codec_config_id', '=', 'media_codec_configs.codec_config_id')
                 ->leftJoin('codecs', 'codecs.codec_id', '=', 'codec_configs.codec_id')
                 ->select('media_codec_configs.media_codec_config_id', 'codecs.media_type as media_type', 'media_codec_configs.file_path as file ', 'codec_configs.name as codec_config_name', 'codecs.name as codec_name')
+                ->orderBy('codec_configs.name as codec_config_name', 'DESC')
                 ->where('media_codec_configs.media_id', '=', $request->media_id)->get();
 
             return response()->json(array('media' => $output), 200);

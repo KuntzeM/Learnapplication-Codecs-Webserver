@@ -247,6 +247,13 @@ media_files.dualview .stage {
     position: absolute;
     z-index: 10;
     top: 500px;
+    width: 9%;
+    padding: 5px;
+}
+
+#informations div.select {
+    border: 2px solid red;
+    background-color: #eee;
 }
 
 #informations .information_1 {

@@ -31,6 +31,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/codecs/{id}', ['as' => 'codecs', 'uses' => 'Frontend\CodecsController@index']);
 });
 
+Route::get('/admin/metadata', ['as' => 'metadata', 'uses' => 'StorageMediaController@getFileMetaData']);
+
 /**
  * MEDIA API
  */

@@ -17,10 +17,6 @@ class FileNodeJS
 
     static public function getFile($media_type, $name, $size)
     {
-        /**
-         * TODO: resize image
-         */
-
         self::init();
 
         $client = new Client();
@@ -101,5 +97,30 @@ class FileNodeJS
     static public function putFile(Media $m, $name)
     {
         self::init();
+    }
+
+    static public function getMetadata($media_type1, $name1, $media_type2, $name2)
+    {
+        /**
+         * TODO: resize image
+         */
+
+        self::init();
+
+        $client = new Client();
+
+        try {
+            $response = $client->get(self::$url . '/media/get/metrics/' . $media_type1 . '/' . $name1 . '/' . $media_type2 . '/' . $name2, [
+                'headers' => [
+                    'x-access-token' => self::$token,
+                ]
+            ]);
+
+            $output = \GuzzleHttp\json_decode($response->getBody());
+
+            return ['ssim' => $output->SSIM, 'psnr' => $output->PSNR, 'size' => $output->size];
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
     }
 }

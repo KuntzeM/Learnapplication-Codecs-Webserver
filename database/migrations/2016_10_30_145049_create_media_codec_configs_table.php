@@ -22,6 +22,8 @@ class CreateMediaCodecConfigsTable extends Migration
             $table->foreign('media_id')->references('media_id')->on('media');
             $table->string('file_path');
             $table->unsignedBigInteger('size')->default(0);
+            $table->float('psnr')->default(0);
+            $table->float('ssim')->default(0);
             $table->timestamps();
         });
     }

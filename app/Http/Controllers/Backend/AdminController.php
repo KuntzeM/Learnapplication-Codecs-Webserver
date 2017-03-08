@@ -21,6 +21,14 @@ class AdminController extends Controller
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
 
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, URL::to('/admin/metadata'));
+        curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
+
+        curl_exec($ch);
+        curl_close($ch);
 
     }
 

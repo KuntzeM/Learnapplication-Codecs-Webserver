@@ -76,6 +76,23 @@ class StorageMediaController extends Controller
         }
     }
 
+    public function getFileMetaData()
+    {
+        $media_config = MediaCodecConfig::where('size', 0)
+            ->orWhere('psnr', '0')
+            ->orWhere('ssim', '0')->get();
+
+        foreach ($media_config as $mc) {
+
+            $metadata = FileNodeJS::getMetadata($mc->media->media_type, $mc->media->origin_file, $mc->media->media_type, $mc->file_path);
+            $mc->psnr = $metadata['psnr'];
+            $mc->ssim = $metadata['ssim'];
+            $mc->size = $metadata['size'];
+            $mc->save();
+        }
+
+    }
+
 }
 
 

@@ -32,7 +32,7 @@
     </script>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-            jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
             tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]},
             TeX: { equationNumbers: { autoNumber: "AMS" } },
             CommonHTML: {

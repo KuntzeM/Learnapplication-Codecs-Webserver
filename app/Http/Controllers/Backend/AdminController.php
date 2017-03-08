@@ -10,8 +10,9 @@ use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Job;
-use App\Libary\FileNodeJS;
+use App\Libary\REST\FileNodeJS;
 use View;
+
 
 class AdminController extends Controller
 {
@@ -21,19 +22,12 @@ class AdminController extends Controller
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
 
-        $ch = curl_init();
-
-        curl_setopt($ch, CURLOPT_URL, URL::to('/admin/metadata'));
-        curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT_MS, 1);
-
-        curl_exec($ch);
-        curl_close($ch);
-
+        FileNodeJS::poolMetadata();
     }
 
     public function get_index()
     {
+
         $jobs = Job::all();
         return View::make('backend.index', array('url'=> $this->url, 'jobs' => $jobs));
     }

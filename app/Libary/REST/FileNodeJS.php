@@ -7,6 +7,7 @@ namespace App\Libary\REST;
 use App\ConfigData;
 use App\Media;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\URL;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
@@ -122,5 +123,14 @@ class FileNodeJS
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
+    }
+
+    static public function poolMetadata()
+    {
+        $client = new Client();
+        $request = new \GuzzleHttp\Psr7\Request('GET', URL::to('/admin/metadata'));
+        $client->sendAsync($request)->then(function ($response) {
+
+        });
     }
 }

@@ -1,0 +1,37 @@
+<h1>Impressum</h1>
+<p>Diese Lernanwendung wurde im Laufe eines Medienprojektes der TU Ilmenau entwickelt.</p>
+<p>&nbsp;</p>
+<table class="noborder" style="width: 1416px;">
+<tbody>
+<tr>
+<td style="width: 244px;">&nbsp;Thema:</td>
+<td style="width: 1120px;">&nbsp;Lernanwendung: Gegen&uuml;berstellung verschiedener Bild- und Videoformate</td>
+</tr>
+<tr>
+<td style="width: 244px;">verantwortlicher Professor:</td>
+<td style="width: 1120px;">&nbsp;Prof. Karlheinz Brandenburg</td>
+</tr>
+<tr>
+<td style="width: 244px;">wiss. Betreuer:</td>
+<td style="width: 1120px;">&nbsp;Dipl.-Inf. Thomas K&ouml;llmer</td>
+</tr>
+<tr>
+<td style="width: 244px;">Bearbeitet durch:</td>
+<td style="width: 1120px;">&nbsp;Julia Peter &amp; Mathias Kuntze</td>
+</tr>
+<tr>
+<td style="width: 244px;">&nbsp;Fachgebiet:</td>
+<td style="width: 1120px;">elektronische Medientechnik</td>
+</tr>
+<tr>
+<td style="width: 244px;">&nbsp;</td>
+<td style="width: 1120px;">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<article>
+<h3>The MIT License (MIT)</h3>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &ldquo;Software&rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</article>

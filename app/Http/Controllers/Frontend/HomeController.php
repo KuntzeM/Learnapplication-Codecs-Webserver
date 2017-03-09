@@ -11,6 +11,7 @@ use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Libary\Placeholder;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,7 @@ class HomeController extends Controller
     {
         try {
             $html = Configuration::where('name', 'welcome')->firstOrFail();
+            $html->value = Placeholder::changePlaceholder($html->value);
         } catch (ModelNotFoundException $e) {
             $html = '';
         }

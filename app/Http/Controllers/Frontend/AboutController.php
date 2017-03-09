@@ -10,7 +10,7 @@ use App\ConfigData;
 use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use App\Libary\Placeholder;
 class AboutController extends Controller
 {
     public function __construct()
@@ -25,6 +25,7 @@ class AboutController extends Controller
     {
         try {
             $html = Configuration::where('name', 'impressum')->firstOrFail();
+            $html->value = Placeholder::changePlaceholder($html->value);
         } catch (ModelNotFoundException $e) {
             $html = '';
         }

@@ -6,6 +6,7 @@ use App\CodecConfigs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Job;
+use App\Libary\Placeholder;
 use App\Libary\REST\Log;
 use App\Media;
 use App\MediaCodecConfig;
@@ -68,7 +69,7 @@ class AjaxController extends Controller
 
                 }
                 \App\Libary\REST\Jobs::postJob($packages);
-                //$this->startTranscoding($request);
+
                 return response()->json(array('message' => 'success'), 200);
             } catch (ModelNotFoundException $e) {
                 return response()->json(array('message' => $e->getMessage() . 'Job konnte nicht angelegt werden! media_id: ' . $request->media_id . ' codec_config_id: ' . $request->codec_config_id), 404);
@@ -131,7 +132,7 @@ class AjaxController extends Controller
                 'size' => $mediaConfig->size,
                 'psnr' => $mediaConfig->psnr,
                 'ssim' => $mediaConfig->ssim,
-                'documentation' => $mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type}));
+                'documentation' => Placeholder::changePlaceholder($mediaConfig->getCodecConfig()->codec->{'documentation_' . $request->type})));
         } catch (ModelNotFoundException $e) {
             return response()->json([
                 'message' => 'DOkumentation konnte nicht geladen werden: ' . $e->getMessage(),

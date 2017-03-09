@@ -67,3 +67,10 @@
     font-size: 18px;
     line-height: 2;
 }
+.mce-content-body ol, ul{
+    padding-left: 60px !important;
+}
+
+.mce-content-body * li{
+    padding-bottom: 10px;
+}

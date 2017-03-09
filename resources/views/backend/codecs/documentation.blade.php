@@ -17,9 +17,9 @@
                 'advlist codesample autolink lists link image charmap print preview hr anchor autolink',
                 'searchreplace wordcount visualblocks visualchars code fullscreen',
                 'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons paste textcolor colorpicker textpattern imagetools codesample autosave, template, toc'
+                'emoticons paste textcolor colorpicker textpattern imagetools codesample autosave, template, toc, placeholder'
             ],
-            toolbar1: 'preview | undo redo |  styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | table bullist numlist outdent indent | link image media codesample emoticons | toc',
+            toolbar1: 'placeholder preview | undo redo |  styleselect | bold italic | forecolor backcolor | alignleft aligncenter alignright alignjustify | table bullist numlist outdent indent | link image media codesample emoticons | toc',
             toolbar2: '',
             autosave_interval: "30s",
             image_advtab: false,
@@ -29,6 +29,10 @@
             table_class_list: [
                 {title: 'None', value: ''},
                 {title: 'no Border', value: 'noborder'}
+            ],
+            placeholder_tokens: [
+                { token: "image_codecs", title: "verwendete Bildkodierungsverfahren einfügen"},
+                { token: "video_codecs", title: "verwendete Videokodierungsverfahren einfügen"}
             ],
             content_css: [
                 '{{ asset('css/editor_tinymce.css') }}',

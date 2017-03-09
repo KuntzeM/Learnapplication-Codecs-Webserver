@@ -7,6 +7,7 @@ use App\ConfigData;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Libary\Placeholder;
 
 class CodecsController extends Controller
 {
@@ -25,7 +26,8 @@ class CodecsController extends Controller
 
         try {
             $codec = Codecs::findorFail($id);
-            $content = $codec->documentation_full;
+            $content = Placeholder::changePlaceholder($codec->documentation_full);
+
             $titel = $codec->name;
         } catch (ModelNotFoundException $e) {
 

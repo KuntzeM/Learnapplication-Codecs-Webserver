@@ -19,7 +19,7 @@ h3 {
     padding: 0 50px !important;
     background-color: #f8f8f8;
     border: 1px solid #e7e7e7;
-    height: 170px;
+    height: 190px;
     margin-bottom: 10px !important;
 }
 
@@ -97,15 +97,13 @@ h3 {
 }
 
 #zoom {
-    float: right;
-    padding-top: 15px;
-    margin-right: 20px;
-    margin-left: -140px;
+    padding-top: 10px;
+    padding-left: 10px;
 }
 
 #zoom-bar {
     display: inline;
-    width: 50%;
+    width: 60%;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -365,4 +363,12 @@ media_files.dualview .stage {
     display: none;
 }
 
+#top_arrow{
+    position: fixed;
+    left: 5%;
+    bottom: 2%;
+}
+#top_arrow i{
+    font-size: 36px;
+}
 

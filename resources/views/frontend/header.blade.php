@@ -1,4 +1,4 @@
-<div class="page-header">
+<div id="top" class="page-header">
     <h1>Lernanwendung
         <small>Gegenüberstellung verschiedener Bild- und Videoformate</small>
     </h1>

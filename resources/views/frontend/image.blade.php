@@ -26,7 +26,7 @@
                         class="btn  btn-default"><img src="img/overview.gif"/></button>
                 <div id="zoom">
                     <a class="tooltip_icon glyphicon glyphicon-zoom-out" data-toggle="tooltip" data-placement="top"
-                       title="Drücke -"></a><input disabled type="range" id="zoom-bar" value="1" min="1" max="4"
+                       title="Drücke -"></a><input disabled type="range" id="zoom-bar" value="1" min="1" max="8"
                                                    step="0.1"/><a class="tooltip_icon glyphicon glyphicon-zoom-in"
                                                                   data-toggle="tooltip" data-placement="top"
                                                                   title="Drücke +"></a>

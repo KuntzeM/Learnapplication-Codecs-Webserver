@@ -2,6 +2,7 @@
     line-height: 1.5;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
+    padding: 0px 10px;
 }
 
 .mce-content-body p {
@@ -56,4 +57,13 @@
 
 .mce-content-body table.noborder tr td {
     border: none;
+}
+
+.mce-content-body .mce-toc ul{
+    list-style: none;
+
+}
+.mce-content-body .mce-toc ul li a{
+    font-size: 18px;
+    line-height: 2;
 }

@@ -6,6 +6,8 @@
 {!!Html::script('js/bootstrap.min.js')!!}
 {!!Html::script('js/jquery.ui.widget.js')!!}
 {!!Html::script('js/tinymce/tinymce.min.js')!!}
+{!!Html::script('js/tinymce/jquery.tinymce.min.js')!!}
+<!--{!!Html::script('//cloud.tinymce.com/stable/tinymce.min.js')!!}-->
 {!!Html::script('js/footable.min.js')!!}
 {!!Html::script('js/functions_backend.js')!!}
 <!DOCTYPE html>

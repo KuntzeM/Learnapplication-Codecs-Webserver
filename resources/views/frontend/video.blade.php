@@ -57,10 +57,10 @@
                 <label>Codec:</label><span class="codec"></span>
             </p>
             <p>
-                <label>Qualität:</label><span class="bitrate"></span>
+                <label>Config:</label><span class="bitrate"></span>
             </p>
             <p>
-                <label>Dateigröße:</label><span class="filesize"></span>
+                <label>Größe:</label><span class="filesize"></span>
             </p>
             <p>
                 <label>PSNR:</label><span class="psnr"></span> dB
@@ -74,10 +74,10 @@
                 <label>Codec:</label><span class="codec"></span>
             </p>
             <p>
-                <label>Qualität:</label><span class="bitrate"></span>
+                <label>Config:</label><span class="bitrate"></span>
             </p>
             <p>
-                <label>Dateigröße:</label><span class="filesize"></span>
+                <label>Größe:</label><span class="filesize"></span>
             </p>
             <p>
                 <label>PSNR:</label><span class="psnr"></span> dB

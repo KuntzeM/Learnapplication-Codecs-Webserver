@@ -26,8 +26,15 @@ class Media extends Model
                 ->where('media_id', $this->media_id)
                 ->get();
             $media_codec_config_id = 0;
+            $psnr = 0;
+            $ssim = 0;
+            $size = 0;
+
             if (count($media_codec_config) > 0) {
                 $media_codec_config_id = $media_codec_config[0]->media_codec_config_id;
+                $psnr = $media_codec_config[0]->psnr;
+                $ssim = $media_codec_config[0]->ssim;
+                $size = $media_codec_config[0]->size;
             }
 
             /*
@@ -56,9 +63,9 @@ class Media extends Model
                 'codec_name' => $codec_config->codec_name,
                 'codec_config_name' => $codec_config->cc_name,
                 'media_codec_config_id' => $media_codec_config_id,
-                'size' => $media_codec_config[0]->size,
-                'psnr' => $media_codec_config[0]->psnr,
-                'ssim' => $media_codec_config[0]->ssim,
+                'size' => $size,
+                'psnr' => $psnr,
+                'ssim' => $ssim,
                 'status' => $status
             ];
 

@@ -295,7 +295,7 @@ media_files.dualview .stage {
 }
 
 #video-controls #current_time {
-    width: 250px;
+    width: 15%;
     padding: 0 40px;
     display: inline-block;
 }

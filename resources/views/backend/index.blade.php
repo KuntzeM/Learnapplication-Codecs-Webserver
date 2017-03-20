@@ -39,7 +39,7 @@
 
     </div>
     <script>
-        var flag = false;
+
         $('#start_transcoding').click(function () {
             flag = true;
             $.ajax({
@@ -49,16 +49,18 @@
                     '_token': '<?php echo csrf_token() ?>',
                 },
                 error: function (data) {
-                    if (flag) {
-                        var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
+
+                    var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                             '<strong>Error!</strong> cannot reach the media server</div> ';
                         $('.alert_box').append(code);
-                    }
+
+
                 },
                 success: function (data) {
                     var code = '<div class="ajax_alert alert alert-success"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                             '<strong>Success!</strong> transcoding process is started</div> ';
                     $('.alert_box').append(code);
+
                 }
             });
         });

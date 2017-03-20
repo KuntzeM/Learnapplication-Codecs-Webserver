@@ -22,7 +22,6 @@ class CreateCodecConfigurationsTable extends Migration
             $table->string('name');
             $table->string('ffmpeg_bitrate');
             $table->string('ffmpeg_parameters');
-            $table->boolean('active');
             $table->timestamps();
         });
     }

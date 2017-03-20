@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\CodecConfigs;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Job;
 use App\Libary\Placeholder;
 use App\Libary\REST\Log;
 use App\Media;
@@ -90,21 +89,22 @@ class AjaxController extends Controller
 
     }
 
-    public function getTranscodingProcesses(Request $request)
-    {
+    /*
+        public function getTranscodingProcesses(Request $request)
+        {
 
-        $jobs = Job::all();
-        $output = array();
-        foreach ($jobs as $job) {
-            $tmp = array('id' => $job->id, 'name' => $job->getMedia()->name, 'media_type' => $job->getMedia()->media_type, 'codec' => $job->getCodecConfiguration()->codec->name,
-                'codec_config' => $job->getCodecConfiguration()->name, 'process' => $job->process);
-            $output[] = $tmp;
+            $jobs = Job::all();
+            $output = array();
+            foreach ($jobs as $job) {
+                $tmp = array('id' => $job->id, 'name' => $job->getMedia()->name, 'media_type' => $job->getMedia()->media_type, 'codec' => $job->getCodecConfiguration()->codec->name,
+                    'codec_config' => $job->getCodecConfiguration()->name, 'process' => $job->process);
+                $output[] = $tmp;
+            }
+
+            return response()->json(array('message' => 'success', 'jobs' => $output), 200);
+
         }
-
-        return response()->json(array('message' => 'success', 'jobs' => $output), 200);
-
-    }
-
+    */
     public function getCodecDocumentation(Request $request)
     {
 

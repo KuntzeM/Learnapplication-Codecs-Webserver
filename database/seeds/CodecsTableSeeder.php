@@ -27,7 +27,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 1,
             'ffmpeg_bitrate' => '2000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -36,7 +36,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 1,
             'ffmpeg_bitrate' => '1000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -45,7 +45,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 1,
             'ffmpeg_bitrate' => '500',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -54,7 +54,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 1,
             'ffmpeg_bitrate' => '250',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -76,7 +76,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 2,
             'ffmpeg_bitrate' => '2000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -85,7 +85,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 2,
             'ffmpeg_bitrate' => '1000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -94,7 +94,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 2,
             'ffmpeg_bitrate' => '500',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -103,7 +103,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 2,
             'ffmpeg_bitrate' => '250',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -126,7 +126,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 3,
             'ffmpeg_bitrate' => '2000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -135,7 +135,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 3,
             'ffmpeg_bitrate' => '1000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -144,7 +144,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 3,
             'ffmpeg_bitrate' => '500',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -153,7 +153,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 3,
             'ffmpeg_bitrate' => '250',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -176,7 +176,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 4,
             'ffmpeg_bitrate' => '2000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -185,7 +185,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 4,
             'ffmpeg_bitrate' => '1000',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -194,7 +194,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 4,
             'ffmpeg_bitrate' => '500',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -203,7 +203,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 4,
             'ffmpeg_bitrate' => '250',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -222,11 +222,20 @@ class CodecsTableSeeder extends Seeder
             'updated_at' => new DateTime()
         ]);
         DB::table('codec_configs')->insert([
+            'name' => '100%',
+            'codec_id' => 5,
+            'ffmpeg_bitrate' => '100',
+            'ffmpeg_parameters' => '',
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
             'name' => '75%',
             'codec_id' => 5,
             'ffmpeg_bitrate' => '75',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -235,7 +244,25 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 5,
             'ffmpeg_bitrate' => '50',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
+            'name' => '40%',
+            'codec_id' => 5,
+            'ffmpeg_bitrate' => '40',
+            'ffmpeg_parameters' => '',
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
+            'name' => '30%',
+            'codec_id' => 5,
+            'ffmpeg_bitrate' => '30',
+            'ffmpeg_parameters' => '',
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -244,7 +271,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 5,
             'ffmpeg_bitrate' => '25',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -253,7 +280,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 5,
             'ffmpeg_bitrate' => '10',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -276,7 +303,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 6,
             'ffmpeg_bitrate' => '9',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -296,11 +323,20 @@ class CodecsTableSeeder extends Seeder
             'convert' => true
         ]);
         DB::table('codec_configs')->insert([
+            'name' => '100%',
+            'codec_id' => 7,
+            'ffmpeg_bitrate' => '100',
+            'ffmpeg_parameters' => '',
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
             'name' => '75%',
             'codec_id' => 7,
             'ffmpeg_bitrate' => '75',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -309,7 +345,25 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 7,
             'ffmpeg_bitrate' => '50',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
+            'name' => '40%',
+            'codec_id' => 7,
+            'ffmpeg_bitrate' => '40',
+            'ffmpeg_parameters' => '',
+
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime()
+        ]);
+        DB::table('codec_configs')->insert([
+            'name' => '30%',
+            'codec_id' => 7,
+            'ffmpeg_bitrate' => '30',
+            'ffmpeg_parameters' => '',
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);
@@ -318,7 +372,7 @@ class CodecsTableSeeder extends Seeder
             'codec_id' => 7,
             'ffmpeg_bitrate' => '25',
             'ffmpeg_parameters' => '',
-            'active' => true,
+
             'created_at' => new DateTime(),
             'updated_at' => new DateTime()
         ]);

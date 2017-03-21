@@ -44,9 +44,9 @@ function getTranscodingProcesses(token) {
         url: 'admin/jobs/get',
         dataType: 'json',
         error: function (data) {
-            var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
+            /* var code = '<div class="ajax_alert alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> ' +
                 '<strong>Error!</strong> cannot reach the media server</div> ';
-            $('.alert_box').append(code);
+             $('.alert_box').append(code);*/
         },
         success: function (data) {
 

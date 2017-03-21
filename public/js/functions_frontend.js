@@ -9,18 +9,6 @@ function skipVideoFromSlider(videoTag) {
     $(videoTag).get(0).currentTime = time;
 }
 
-function getFilesize(name, num) {
-    $.ajax({
-        url: '/ajax/get_file_size',
-        type: 'get',
-        data: {
-            name: name
-        },
-        success: function (data) {
-            $('.information_' + num + ' .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024 / 1024) / 1000 + ' MB');
-        }
-    });
-}
 function selectMediaFile(element, token, url) {
 
     $('input[type=text].open_grid').val($(element).attr('data-name'));
@@ -130,7 +118,9 @@ $(function(){
                 $('.information_1 .codec').html(data['codec']);
                 $('.information_1 .bitrate').html(data['config']);
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-                $('.information_1 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
+                var size = (Math.round(1000 * parseFloat(data['size']) / 1024) / 1000).toFixed(2).replace('.', ',');
+
+                $('.information_1 .filesize').html(size + ' KB');
                 $('.information_1 .psnr').html(data['psnr']);
                 $('.information_1 .ssim').html(data['ssim']);
 
@@ -176,7 +166,9 @@ $(function(){
                 $('.information_2 .bitrate').html(data['config']);
                 MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
 
-                $('.information_2 .filesize').html(Math.round(1000 * parseFloat(data['size']) / 1024) / 1000 + ' KB');
+                var size = (Math.round(1000 * parseFloat(data['size']) / 1024) / 1000).toFixed(2).replace('.', ',');
+
+                $('.information_2 .filesize').html(size + ' KB');
                 $('.information_2 .psnr').html(data['psnr']);
                 $('.information_2 .ssim').html(data['ssim']);
 

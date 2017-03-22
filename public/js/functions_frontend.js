@@ -176,13 +176,13 @@ $(function(){
             }
         });
     });
-    $('#mode_group button:not(.zoom)').click(function () {
+    $('#mode_group button:not(.no_mode_group)').click(function () {
         $(this).removeClass('btn-default');
-        $(this).siblings(':not(.zoom)').removeClass('btn-success');
+        $(this).siblings(':not(.no_mode_group)').removeClass('btn-success');
         $(this).addClass('btn-success');
         $('#media_files').removeClass();
         $(this).attr('disabled', true);
-        $(this).siblings(':not(.zoom)').attr('disabled', false);
+        $(this).siblings(':not(.no_mode_group)').attr('disabled', false);
 
 
         $('#media_files').addClass($(this).attr('data-mode'));
@@ -228,39 +228,42 @@ $(function(){
         } else {
             var key = e.which;
         }
-
+        console.log(key);
         switch (key) {
-            case 37: // left
+            case 39: // left
                 if (parseFloat($('#media_files div #media_file_1').css('left')) >= -((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
                     $('#media_files div *').css('left', '-=5%', 'important');
                 }
                 break;
 
-            case 38: // up
+            case 40: // up
                 if (parseFloat($('#media_files div #media_file_1').css('top')) >= -((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
                     $('#media_files div *').css('top', '-=5%', 'important');
                 }
                 break;
 
-            case 39: // right
+            case 37: // right
                 if (parseFloat($('#media_files div #media_file_1').css('left')) <= ((parseFloat($('#media_files div #media_file_1').css('width')) / 2) - parseFloat($('.media_file_1').css('width')) / 2)) {
                     $('#media_files div *').css('left', '+=5%', 'important');
                 }
                 break;
 
-            case 40: // down
+            case 38: // down
                 if (parseFloat($('#media_files div #media_file_1').css('top')) <= ((parseFloat($('#media_files div #media_file_1').css('height')) / 2) - parseFloat($('.media_file_1').css('height')) / 2)) {
                     $('#media_files div *').css('top', '+=5%', 'important');
                 }
                 break;
-            case 43: // zoom in
+            case 43: // zoom in with +
                 $('#zoom-bar').val(parseFloat($('#zoom-bar').val()) + 0.1);
                 $('#zoom-bar').trigger('change');
                 break;
 
-            case 45: // zoom out
+            case 45: // zoom out with -
                 $('#zoom-bar').val(parseFloat($('#zoom-bar').val()) - 0.1);
                 $('#zoom-bar').trigger('change');
+                break;
+            case 102: // toogle full screen with f
+                $('#button_fullscreen').trigger('click');
                 break;
             default:
                 return;
@@ -278,7 +281,18 @@ $(function(){
         $(".information_2").removeClass('select');
     });
 
+    $('#button_fullscreen').click(function () {
+        if ($('.row').hasClass('fullscreen')) {
+            $(this).removeClass('btn-success');
+            $('.row').removeClass('fullscreen');
+            $(this).addClass('btn-default');
+        } else {
+            $(this).removeClass('btn-default');
+            $('.row').addClass('fullscreen');
+            $(this).addClass('btn-success');
 
+        }
+    });
 });
 
 

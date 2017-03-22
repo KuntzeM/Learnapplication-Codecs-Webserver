@@ -24,7 +24,11 @@
                         class="btn btn-default"><img src="img/splitview.gif"/></button>
                 <button disabled title="Overview" alt="Overview" id="button_overview" data-mode="overview"
                         class="btn  btn-default"><img src="img/overview.gif"/></button>
-                <div id="zoom">
+
+                <button title="Vollbild" alt="Vollbild" id="button_fullscreen"
+                        class="btn btn-default no_mode_group">Vollbild (F)
+                </button>
+                <div id="zoom" class="no_mode_group">
                     <a class="tooltip_icon glyphicon glyphicon-zoom-out" data-toggle="tooltip" data-placement="top"
                        title="Drücke -"></a><input disabled type="range" id="zoom-bar" value="1" min="1" max="8"
                                                    step="0.1"/><a class="tooltip_icon glyphicon glyphicon-zoom-in"
@@ -42,7 +46,7 @@
                                                                                      src="img/3.gif"/></a>
     </div>
     <div id="informations" style="display: none">
-        <div class="information_1">
+        <div class="information information_1">
             <p>
                 <label>Codec:</label><span class="codec"></span>
             </p>

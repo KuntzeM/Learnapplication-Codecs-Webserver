@@ -27,6 +27,9 @@
                 <button disabled title="Overview" alt="Overview" id="button_overview" data-mode="overview"
                         class="btn  btn-default">
                     <img src="img/overview.gif"/></button>
+                <button title="Vollbild" alt="Vollbild" id="button_fullscreen"
+                        class="btn btn-default no_mode_group">Vollbild (F)
+                </button>
                 <div id="zoom">
                     <a class="tooltip_icon glyphicon glyphicon-zoom-out" data-toggle="tooltip" data-placement="top"
                        title="Drücke -"></a><input disabled type="range" id="zoom-bar" value="1" min="1" max="8"

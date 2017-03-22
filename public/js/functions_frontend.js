@@ -265,6 +265,9 @@ $(function(){
             case 102: // toogle full screen with f
                 $('#button_fullscreen').trigger('click');
                 break;
+            case 32: // toogle play and pause in videos
+                $('#play-pause').trigger('click');
+                break;
             default:
                 return;
         }

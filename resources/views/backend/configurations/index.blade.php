@@ -15,10 +15,10 @@
 
     <div class="form-group">
         <a href="configurations/welcome">
-            <button class="btn btn-info">Startseite ändern</button>
+            <button class="btn btn-info">Change Welcome Page</button>
         </a>
         <a href="configurations/impressum">
-            <button class="btn btn-info">Impressum ändern</button>
+            <button class="btn btn-info">Change Impressumg</button>
         </a>
     </div>
 
@@ -74,7 +74,7 @@
 
     <div class="form-group">
         <label for="media_server">Media Server IP:</label>
-        <p class="help-block">for example: 127.0.0.1:3000</p>
+        <p class="help-block">for example: http://127.0.0.1:3000</p>
         <div>
             {!! Form::text('media_server', $config->media_server, array('class' => 'form-control ' . ((count($errors->get('media_server'))) ?  'alert-danger' : ''))) !!}
         </div>

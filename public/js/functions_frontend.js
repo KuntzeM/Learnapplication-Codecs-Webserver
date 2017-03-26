@@ -1,15 +1,9 @@
 /**
- * Created by mathias on 13.11.16.
+ * @description ruft die verfügbaren Kodierungsverfahren der ausgewählten Media-Datei und erzeugt die beiden Select-Felder
+ * @param element: ausgewählte Media-Datei
+ * @param token: string für Authetifikation; von Laravel erzeugt
  */
-
-function skipVideoFromSlider(videoTag) {
-
-    var time = $(videoTag).get(0).duration * ($('#seek-bar').val() / 100.0);
-    // Update the video time
-    $(videoTag).get(0).currentTime = time;
-}
-
-function selectMediaFile(element, token, url) {
+function selectMediaFile(element, token) {
 
     $('input[type=text].open_grid').val($(element).attr('data-name'));
 
@@ -75,11 +69,116 @@ function selectMediaFile(element, token, url) {
 
 }
 
+/////////////////////////////////////////////////////////////////////////
+////////   VIDEO CONTROL ////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+var globalVideoDuration = 0;
+
+function syncVideos(fromSecond) {
+    fromSecond = typeof fromSecond !== 'undefined' ? fromSecond : false;
+
+    var fromTag = fromSecond ? '#media_file_2' : '#media_file_1';
+    var toTag = fromSecond ? '#media_file_1' : '#media_file_2';
+
+    time = $(fromTag).get(0).currentTime;
+    b_time = $(toTag).get(0).currentTime;
+    if (Math.abs(time - b_time) > 0.2) {
+        $(toTag).get(0).currentTime = time;
+    }
+    //console.log($('#media_file_1').get(0).currentTime);
+    //console.log($('#media_file_2').get(0).currentTime);
+    // $(toTag).get(0).currentTime = $(fromTag).get(0).currentTime;
+
+}
+
+
+$(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen wurde
+
+    $('#play-pause').click(function () {
+        if ($('#media_file_1').get(0).paused == true) {
+            $('#media_file_1').get(0).play();
+            $('#media_file_2').get(0).play();
+            $(this).removeClass('glyphicon-play');
+            $(this).removeClass('btn-success');
+            $(this).addClass('glyphicon-pause');
+            $(this).addClass('btn-warning');
+
+        } else {
+            $('#media_file_1').get(0).pause();
+            $('#media_file_2').get(0).pause();
+            $(this).removeClass('glyphicon-pause');
+            $(this).removeClass('btn-warning');
+            $(this).addClass('glyphicon-play');
+            $(this).addClass('btn-success');
+        }
+
+    });
+    $('#seek-bar').change(function () {
+        // Calculate the new time
+        var time = globalVideoDuration * ($('#seek-bar').val() / 100.0);
+        // Update the video time
+        $('#media_file_1').get(0).currentTime = time;
+        $('#media_file_2').get(0).currentTime = time;
+
+    });
+
+    $('#media_file_1').get(0).addEventListener("timeupdate", function () {
+        // Calculate the slider value
+        $('#current_time').text(Math.round($('#media_file_1').get(0).currentTime * 100) / 100 + ' s / ' + Math.round(globalVideoDuration * 100) / 100 + ' s');
+        // Update the slider value
+        var value = (100 / globalVideoDuration) * ($('#media_file_1').get(0).currentTime);
+        $('#seek-bar').val(value);
+
+    });
+
+    $('#media_file_1').get(0).addEventListener("canplaythrough", function () {
+        if ($('#media_file_1').get(0).duration != Infinity) {
+            globalVideoDuration = $('#media_file_1').get(0).duration;
+        }
+        syncVideos(true);
+        if (this.readyState === 4) {
+            $('.second').html('<img width="32" alt="2" src="img/2.gif"/>');
+        } else {
+
+        }
+
+    });
+    $('#media_file_2').get(0).addEventListener("canplaythrough", function () {
+        console.log('test');
+        if (this.readyState === 4) {
+            $('.third').html('<img width="32" alt="3" src="img/3.gif"/>');
+        } else {
+            $('.third').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
+        }
+    });
+
+    $('#media_file_1').get(0).addEventListener("canplay", function () {
+
+
+    });
+    setInterval(function () {
+        syncVideos();
+    }, 10);
+});
+
+
+/////////////////////////////////////////////////////////////////////////
+////////   VIDEO CONTROL END ////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
 $(function(){
+
+
     $('[data-toggle="tooltip"]').tooltip();
     $('select[name=media_file_1_select]').change(function(){
         if ($('#media_file_1').is('video')) {
-
+            $('.second').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
             $('#media_file_1 source').remove();
             $('<source />').appendTo('#media_file_1');
             $('#media_file_1 source').attr('src', url + '/getMedia/' + $(this).val());
@@ -91,7 +190,7 @@ $(function(){
 
 
             $('#media_file_1').onloadeddata = function () {
-                skipVideoFromSlider('#media_file_1');
+                syncVideos(true)
             };
 
             $('#video-controls *').attr('disabled', false);
@@ -132,6 +231,7 @@ $(function(){
     });
     $('select[name=media_file_2_select]').change(function(){
         if ($('#media_file_2').is('video')) {
+            $('.third').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
             $('#media_file_2 source').remove();
             $('<source />').appendTo('#media_file_2');
             $('#media_file_2 source').attr('src', url + '/getMedia/' + $(this).val());
@@ -142,7 +242,7 @@ $(function(){
             }
 
             $('#media_file_2').onloadeddata = function () {
-                skipVideoFromSlider('#media_file_2');
+                syncVideos()
             };
 
         } else {

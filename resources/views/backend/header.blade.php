@@ -17,7 +17,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="{{ Route::is('admin') ? 'active' : '' }}"><a href="/admin">Dashboard</a></li>
+                <li class="{{ Route::is('admin') ? 'active' : '' }}"><a href="/admin">Transcoding Overview</a></li>
                 <li class="{{ Route::is('configurations') ? 'active' : '' }}"><a href="/admin/configurations">Configurations</a>
                 </li>
                 <li class="{{ (Route::is('codecs') || Route::is('codec')) ? 'active' : '' }}"><a href="/admin/codecs">Codecs</a>

@@ -12,7 +12,9 @@
 <!--{!!Html::script('js/splitview/cocoen.min.js')!!}-->
 {!!Html::script('js/splitview/hammer.min.js')!!}
 {!!Html::script('js/splitview/jquery.images-compare.js')!!}
+
 {!!Html::script('js/functions_frontend.js')!!}
+
 {!!Html::script('js/MathJax/MathJax.js?config=TeX-MML-AM_CHTML', array('async'))!!}
 
 

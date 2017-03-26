@@ -25,8 +25,8 @@
 
 <body>
     <div class="page-header">
-        <h1>Admin Bereich
-            <small>für Lernanwendung</small>
+        <h1>Admin Area
+            <small>for Learning Application</small>
         </h1>
     </div>
     @section('nav')

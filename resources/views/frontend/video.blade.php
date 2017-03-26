@@ -42,9 +42,10 @@
 
             {!! Form::select('media_file_2_select', array(), null, array('class' => 'form-control codec_select', 'disabled')) !!}
         </div>
-        <a href="#" class="tooltip_icon third" data-toggle="tooltip" data-placement="top"
+        <a href="#" class="tooltip_icon third " data-toggle="tooltip" data-placement="top"
            title="3. Wähle das zweite Kodierungsverfahren zum vergleichen aus!"><img width="32" alt="3"
                                                                                      src="img/3.gif"/></a>
+
     </div>
     <!-- Video Controls -->
     <div id="video-controls">
@@ -118,54 +119,14 @@
     <script>
         $(function () {
             $('.open_grid').click(function () {
-                $('#grid').toggle();
+                $('#grid').toggle("fast");
             });
 
             $('.select_media').click(function () {
-                selectMediaFile($(this).children('button')[0], '{!! csrf_token() !!}', "{!! $url !!}");
+                selectMediaFile($(this).children('button')[0], '{!! csrf_token() !!}');
             });
 
-            $('#play-pause').click(function () {
-                if ($('#media_file_1').get(0).paused == true) {
-                    $('#media_file_1').get(0).play();
-                    $('#media_file_2').get(0).play();
-                    $(this).removeClass('glyphicon-play');
-                    $(this).removeClass('btn-success');
-                    $(this).addClass('glyphicon-pause');
-                    $(this).addClass('btn-warning');
-                } else {
-                    $('#media_file_1').get(0).pause();
-                    $('#media_file_2').get(0).pause();
-                    $(this).removeClass('glyphicon-pause');
-                    $(this).removeClass('btn-warning');
-                    $(this).addClass('glyphicon-play');
-                    $(this).addClass('btn-success');
-                }
 
-            });
-            $('#seek-bar').change(function () {
-                // Calculate the new time
-                skipVideoFromSlider('#media_file_1');
-                skipVideoFromSlider('#media_file_2');
-            });
-
-            $('#media_file_1').get(0).addEventListener("timeupdate", function () {
-                // Calculate the slider value
-                var value = (100 / $('#media_file_1').get(0).duration) * ($('#media_file_1').get(0).currentTime);
-
-                $('#current_time').text(Math.round($('#media_file_1').get(0).currentTime * 100) / 100 + ' s / ' + Math.round($('#media_file_1').get(0).duration * 100) / 100 + ' s');
-                // Update the slider value
-                $('#seek-bar').val(value);
-            });
-            $('#media_file_1').get(0).addEventListener("ended", function () {
-                //$('#play-pause').text('play');
-            });
-            $('#media_file_1').get(0).addEventListener("loadeddata", function () {
-                skipVideoFromSlider('#media_file_1');
-            });
-            $('#media_file_2').get(0).addEventListener("loadeddata", function () {
-                skipVideoFromSlider('#media_file_2');
-            });
 
         });
 

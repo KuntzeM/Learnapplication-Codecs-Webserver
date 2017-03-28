@@ -51,7 +51,8 @@
                 @endforeach
             </div>
         @endif
-
+    </div>
+    <div class="form-group">
         <label for="media_type">Media Type:</label>
         <div id="media_type">
             @if(!$new)
@@ -82,7 +83,16 @@
             </span>
         </div>
     @endif
-    <div id="thumbnail">
+    @if($new)
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                 style="width: 0%;">
+                0
+            </div>
+        </div>
+    @endif
+
+    <div  class="form-group" id="thumbnail">
         @if(!$new)
             @if ($media->media_type == "image")
                 <img width="300" src="{!! $media->getUrl('300') !!}">
@@ -102,20 +112,11 @@
         <button id="send" disabled="disabled" type="button" data-toggle="modal" class="btn btn-default">
             <span class="glyphicon glyphicon-save"></span> Save
         </button>
-        <div class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
-                 style="width: 0%;">
-                0
-            </div>
-        </div>
     @else
         <button id="send" type="submit" class="btn btn-default">
             <span class="glyphicon glyphicon-save"></span> Save
         </button>
     @endif
-    <div id="thumbnail">
-
-    </div>
 
 
     {!! Form::close() !!}

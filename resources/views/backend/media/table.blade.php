@@ -20,8 +20,8 @@
                 <th>thumbnail</th>
                 <th class="name">name</th>
                 <th class="date">last change</th>
-                <th class="date">origin file path on media server</th>
-                <th class="options">options</th>
+                <th class="date"></th>
+                <th class="options short"></th>
             </tr>
             </thead>
             <tbody>
@@ -34,23 +34,23 @@
                                               class="clickable_icon fa fa-chevron-right"
                                               title="show configurations"></span></td>
                 <td>{{ $loop->iteration }}</td>
-                    <td class="thumbnail">
-                        @if ($name == "Image")
-                            <img width="300" src="{!! $m->getUrl('300') !!}">
+                <td class="preview">
+                    @if ($name == "Image")
+                        <img width="300" src="{!! $m->getUrl('300') !!}">
 
-                        @else
-                            <video width="300" controls>
-                                <source src="{!! $m->getUrl('300') !!}">
-                            </video>
-                        @endif
-                    </td>
+                    @else
+                        <video width="300" controls>
+                            <source src="{!! $m->getUrl('300') !!}">
+                        </video>
+                    @endif
+                </td>
                 <td>{{ $m->name }}</td>
                 <td>{{ $m->created_at }}</td>
-                    <td><input type="text" readonly value="{{ $m->origin_file }}"/></td>
+                    <td></td>
                 <td class="options">
                     @include('backend.modal_delete', ['modal_id'=>'transcode_' . $m->media_id,
                                 'title'=>'File is transcoded or is in queue!',
-                                'body'=>'<p>Would you like to transcode the file again?</p>',
+                                'body'=>'<p>Would you like to transcode this file?</p>',
                                 'button'=>'Ok',
                                 'attr' => 'class="process_transcoding btn btn-success" data-media-id="' . $m->media_id .'" data-toggle="modal" data-target="#transcode_' . $m->media_id . '"'])
                     <button type="button"

@@ -132,9 +132,6 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
     });
 
     $('#media_file_1').get(0).addEventListener("canplaythrough", function () {
-        if ($('#media_file_1').get(0).duration != Infinity) {
-            globalVideoDuration = $('#media_file_1').get(0).duration;
-        }
         syncVideos(true);
         if (this.readyState === 4) {
             $('.second').html('<img width="32" alt="2" src="img/2.gif"/>');
@@ -144,7 +141,7 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
 
     });
     $('#media_file_2').get(0).addEventListener("canplaythrough", function () {
-        console.log('test');
+
         if (this.readyState === 4) {
             $('.third').html('<img width="32" alt="3" src="img/3.gif"/>');
         } else {
@@ -191,7 +188,20 @@ $(function(){
 
             $('#media_file_1').onloadeddata = function () {
                 syncVideos(true)
+
             };
+
+            ajaxSizeRequest = $.ajax({
+                type: 'HEAD',
+                async: true,
+                url:url + '/getMedia/' + $(this).val(),
+
+                success: function(){
+                    if(ajaxSizeRequest.getResponseHeader('duration') != null){
+                        globalVideoDuration = ajaxSizeRequest.getResponseHeader('duration');
+                    }
+                }
+            });
 
             $('#video-controls *').attr('disabled', false);
 

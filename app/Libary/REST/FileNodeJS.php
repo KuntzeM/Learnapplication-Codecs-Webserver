@@ -29,7 +29,12 @@ class FileNodeJS
                     'resize' => $size
                 ]
             ]);
-            return ['file' => $response->getBody(), 'statuscode' => $response->getStatusCode(), 'mime' => $response->getHeader('Content-Type'), 'size' => $response->getHeader('size')];
+            if($response->hasHeader('duration')){
+                $duration = $response->getHeader('duration')[0];
+            }else{
+                $duration = 1;
+            }
+            return ['file' => $response->getBody(), 'statuscode' => $response->getStatusCode(), 'mime' => $response->getHeader('Content-Type'), 'size' => $response->getHeader('size'), 'duration' => $duration];
         } catch (\Exception $e) {
             throw new \Exception($e);
         }

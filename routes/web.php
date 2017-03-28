@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/admin/metadata', ['as' => 'metadata', 'uses' => 'StorageMediaController@getFileMetaData']);
 
+
 /**
  * MEDIA API
  */

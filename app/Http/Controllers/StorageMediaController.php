@@ -20,9 +20,12 @@ class StorageMediaController extends Controller
             } else {
                 $size = null;
             }
+
             $file = FileNodeJS::getFile($media_type, $name, $size);
+
             $response = Response::make($file['file'], $file['statuscode']);
-            $response->header('Content-Type', $file['mime']);
+
+            $response->header('Content-Type', $file['mime'])->header('duration', $file['duration']);
 
             try {
                 $mmc = MediaCodecConfig::where('file_path', $name)->firstOrFail();

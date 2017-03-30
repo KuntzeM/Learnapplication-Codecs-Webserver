@@ -23,7 +23,7 @@
                         class="btn btn-success">
                     <img src="img/dualview.gif"/></button>
                 <!--<button title="Splitview" alt="Splitview" id="button_splitview" data-mode="splitview"
-                        class="btn btn-default"><img src="img/splitview.gif"/></button> -->
+                        class="btn btn-default"><img src="img/splitview.gif"/></button>-->
                 <button disabled title="Overview" alt="Overview" id="button_overview" data-mode="overview"
                         class="btn  btn-default">
                     <img src="img/overview.gif"/></button>

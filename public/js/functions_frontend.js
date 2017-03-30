@@ -94,6 +94,7 @@ function syncVideos(fromSecond) {
 
 $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen wurde
 
+
     $('#play-pause').click(function () {
         if ($('#media_file_1').get(0).paused == true) {
             $('#media_file_1').get(0).play();
@@ -162,8 +163,47 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
 /////////////////////////////////////////////////////////////////////////
 ////////   VIDEO CONTROL END ////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
+var videoContainer = null,
+    videoClipper = null,
+    clippedVideo = null;
+function trackLocation(e) {
+    if(videoContainer != undefined){
 
+        var rect = videoContainer.getBoundingClientRect(),
+            position = ((e.pageX - rect.left) / videoContainer.offsetWidth)*100;
 
+        if (position <= 100) {
+            //videoClipper.style.cssText = "width: " + position+"% !important";
+            $(videoClipper).css("cssText", "width: " + position+"% !important;");
+            console.log(((100/position)*100)-parseInt($("#media_file_2").css('left')));
+            $(clippedVideo).css("cssText", "width: " + ((100/position)*100)+"% !important; " +
+                "z-index:100; " +
+                "transform: scale("+$('#zoom-bar').val()+"); " +
+                "left:" + $("#media_file_2").css('left') + ";" +
+                "top:" + $("#media_file_2").css('top') + ";");
+            //clippedVideo.style.cssText = "width: " + ((100/position)*100)+"% !important";
+            //clippedVideo.style.zIndex = 1000;
+        }
+    }
+
+}
+
+function addSplitviewEvents(){
+    videoContainer = $('#media_files.splitview').get(0);
+
+    // deaktiviert!!
+    if(false && videoContainer != undefined) {
+        console.log('add');
+        videoContainer.removeEventListener("mousemove", trackLocation);
+        videoContainer.removeEventListener("touchstart", trackLocation);
+        videoContainer.removeEventListener("touchmove", trackLocation);
+        videoClipper = $(".media_file_1").get(0);
+        clippedVideo = (videoClipper.getElementsByTagName("video")[0]||videoClipper.getElementsByTagName("img")[0]);
+        videoContainer.addEventListener("mousemove", trackLocation, false);
+        videoContainer.addEventListener("touchstart", trackLocation, false);
+        videoContainer.addEventListener("touchmove", trackLocation, false);
+    }
+}
 
 
 
@@ -187,8 +227,7 @@ $(function(){
 
 
             $('#media_file_1').onloadeddata = function () {
-                syncVideos(true)
-
+                syncVideos(true);
             };
 
             ajaxSizeRequest = $.ajax({
@@ -204,7 +243,7 @@ $(function(){
             });
 
             $('#video-controls *').attr('disabled', false);
-
+            addSplitviewEvents();
         } else {
             $('#media_file_1').attr('src', url + '/getMedia/' + $(this).val() + '?size=1920');
         }
@@ -307,6 +346,7 @@ $(function(){
                 animationEasing: "linear",
                 precision: 2
             });
+            //addSplitviewEvents();
         }else{
             $('#media_files').unbind().removeData();
             $('#media_files').removeAttr('style');

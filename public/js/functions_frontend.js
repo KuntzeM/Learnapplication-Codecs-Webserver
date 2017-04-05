@@ -82,12 +82,20 @@ function syncVideos(fromSecond) {
 
     time = $(fromTag).get(0).currentTime;
     b_time = $(toTag).get(0).currentTime;
+    //console.log('sync')
     if (Math.abs(time - b_time) > 0.2) {
         $(toTag).get(0).currentTime = time;
+       // console.log('sync2')
     }
     //console.log($('#media_file_1').get(0).currentTime);
     //console.log($('#media_file_2').get(0).currentTime);
     // $(toTag).get(0).currentTime = $(fromTag).get(0).currentTime;
+
+}
+function resetVideos() {
+    //$('#media_file_1').get(0).currentTime = 0;
+    //$('#media_file_2').get(0).currentTime = 0;
+    //$('#seek-bar').val(value);
 
 }
 
@@ -133,9 +141,11 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
     });
 
     $('#media_file_1').get(0).addEventListener("canplaythrough", function () {
-        syncVideos(true);
+
         if (this.readyState === 4) {
             $('.second').html('<img width="32" alt="2" src="img/2.gif"/>');
+            resetVideos();
+            syncVideos(true)
         } else {
 
         }
@@ -145,18 +155,17 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
 
         if (this.readyState === 4) {
             $('.third').html('<img width="32" alt="3" src="img/3.gif"/>');
+            resetVideos();
+            syncVideos()
         } else {
             $('.third').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
         }
     });
 
-    $('#media_file_1').get(0).addEventListener("canplay", function () {
 
-
-    });
-    setInterval(function () {
-        syncVideos();
-    }, 10);
+  //  setInterval(function () {
+  //      syncVideos();
+   // }, 1000);
 });
 
 

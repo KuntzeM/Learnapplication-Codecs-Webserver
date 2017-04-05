@@ -124,6 +124,7 @@
 
             $('.select_media').click(function () {
                 selectMediaFile($(this).children('button')[0], '{!! csrf_token() !!}');
+
             });
 
 

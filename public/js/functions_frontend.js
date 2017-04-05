@@ -8,7 +8,7 @@ function selectMediaFile(element, token) {
     $('input[type=text].open_grid').val($(element).attr('data-name'));
 
     $('#grid').toggle();
-
+    initPopcorn();
 
     $.ajax({
         url: '/ajax/get_media_config',
@@ -72,37 +72,70 @@ function selectMediaFile(element, token) {
 /////////////////////////////////////////////////////////////////////////
 ////////   VIDEO CONTROL ////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////
-var globalVideoDuration = 0;
 
-function syncVideos(fromSecond) {
-    fromSecond = typeof fromSecond !== 'undefined' ? fromSecond : false;
+var videos = {
+    a: null,
+    b: null,
+};
+var scrub = null,
+    loadCount = null,
+    events = null;
+function initPopcorn() {
+// iterate both media sources
 
-    var fromTag = fromSecond ? '#media_file_2' : '#media_file_1';
-    var toTag = fromSecond ? '#media_file_1' : '#media_file_2';
+    videos = {
+            a: Popcorn("#media_file_1"),
+            b: Popcorn("#media_file_2"),
+    };
+    scrub = $("#seek-bar");
+    loadCount = 0;
+    events = "play pause timeupdate seeking".split(/\s+/g);
 
-    time = $(fromTag).get(0).currentTime;
-    b_time = $(toTag).get(0).currentTime;
-    //console.log('sync')
-    if (Math.abs(time - b_time) > 0.2) {
-        $(toTag).get(0).currentTime = time;
-       // console.log('sync2')
-    }
-    //console.log($('#media_file_1').get(0).currentTime);
-    //console.log($('#media_file_2').get(0).currentTime);
-    // $(toTag).get(0).currentTime = $(fromTag).get(0).currentTime;
+    Popcorn.forEach(videos, function (media, type) {
 
-}
-function resetVideos() {
-    //$('#media_file_1').get(0).currentTime = 0;
-    //$('#media_file_2').get(0).currentTime = 0;
-    //$('#seek-bar').val(value);
+        media.on("canplayall", function () {
 
-}
+            // trigger a custom "sync" event
+            this.emit("sync");
 
+            // set the max value of the "scrubber"
+            scrub.attr("max", this.duration());
 
-$(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen wurde
+            // Listen for the custom sync event...
+        }).on("sync", function () {
 
+            // Once both items are loaded, sync events
+            if (++loadCount == 2) {
 
+                // Iterate all events and trigger them on the video B
+                // whenever they occur on the video A
+                events.forEach(function (event) {
+
+                    videos.a.on(event, function () {
+
+                        // Avoid overkill events, trigger timeupdate manually
+                        if (event === "timeupdate") {
+
+                            videos.b.emit("timeupdate");
+
+                            // update scrubber
+                            scrub.val(videos.a.currentTime());
+                            $('#current_time').text(Math.round(videos.a.currentTime()*100)/100.0 + ' s / ' + Math.round(videos.a.duration()*100)/100.0 + ' s');
+                            return;
+                        }
+
+                    });
+                });
+            }
+        });
+    });
+
+    scrub.bind("change", function () {
+        var val = this.value;
+        videos.a.currentTime(val);
+        videos.b.currentTime(val);
+
+    });
     $('#play-pause').click(function () {
         if ($('#media_file_1').get(0).paused == true) {
             $('#media_file_1').get(0).play();
@@ -122,30 +155,25 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
         }
 
     });
-    $('#seek-bar').change(function () {
-        // Calculate the new time
-        var time = globalVideoDuration * ($('#seek-bar').val() / 100.0);
-        // Update the video time
-        $('#media_file_1').get(0).currentTime = time;
-        $('#media_file_2').get(0).currentTime = time;
+}
 
-    });
+function sync() {
+    if (videos.b.media.readyState === 4) {
+        videos.b.currentTime(
+            videos.a.currentTime()
+        );
+    }
+    requestAnimationFrame(sync);
+}
 
-    $('#media_file_1').get(0).addEventListener("timeupdate", function () {
-        // Calculate the slider value
-        $('#current_time').text(Math.round($('#media_file_1').get(0).currentTime * 100) / 100 + ' s / ' + Math.round(globalVideoDuration * 100) / 100 + ' s');
-        // Update the slider value
-        var value = (100 / globalVideoDuration) * ($('#media_file_1').get(0).currentTime);
-        $('#seek-bar').val(value);
 
-    });
+
+$(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen wurde
 
     $('#media_file_1').get(0).addEventListener("canplaythrough", function () {
 
         if (this.readyState === 4) {
             $('.second').html('<img width="32" alt="2" src="img/2.gif"/>');
-            resetVideos();
-            syncVideos(true)
         } else {
 
         }
@@ -155,17 +183,12 @@ $(function () { // wird erst ausgeführt nachdem die HTML Struktur (DOM) geladen
 
         if (this.readyState === 4) {
             $('.third').html('<img width="32" alt="3" src="img/3.gif"/>');
-            resetVideos();
-            syncVideos()
+
         } else {
             $('.third').html('<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>');
         }
     });
 
-
-  //  setInterval(function () {
-  //      syncVideos();
-   // }, 1000);
 });
 
 
@@ -236,7 +259,7 @@ $(function(){
 
 
             $('#media_file_1').onloadeddata = function () {
-                syncVideos(true);
+                //syncVideos(true);
             };
 
             ajaxSizeRequest = $.ajax({
@@ -253,6 +276,8 @@ $(function(){
 
             $('#video-controls *').attr('disabled', false);
             addSplitviewEvents();
+            sync();
+
         } else {
             $('#media_file_1').attr('src', url + '/getMedia/' + $(this).val() + '?size=1920');
         }
@@ -299,9 +324,7 @@ $(function(){
                 $('#media_file_2').get(0).play();
             }
 
-            $('#media_file_2').onloadeddata = function () {
-                syncVideos()
-            };
+            sync();
 
         } else {
             $('#media_file_2').attr('src', url + '/getMedia/' + $(this).val() + '?size=1920');

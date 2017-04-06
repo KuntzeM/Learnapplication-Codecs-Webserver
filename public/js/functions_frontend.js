@@ -80,12 +80,32 @@ var videos = {
 var scrub = null,
     loadCount = null,
     events = null;
+
+var animationID = null;
+
+function sync() {
+
+    if (videos.b.media.readyState === 4) {
+        videos.b.currentTime(
+            videos.a.currentTime()
+        );
+        if(animationID != null){
+            clearInterval(animationID);
+            animationID = null;
+        }
+    }else{
+
+        if(animationID == null){
+            animationID = setInterval(sync, 100);
+        }
+    }
+}
 function initPopcorn() {
 // iterate both media sources
 
     videos = {
             a: Popcorn("#media_file_1"),
-            b: Popcorn("#media_file_2"),
+            b: Popcorn("#media_file_2")
     };
     scrub = $("#seek-bar");
     loadCount = 0;
@@ -97,38 +117,20 @@ function initPopcorn() {
 
             // trigger a custom "sync" event
             this.emit("sync");
-
+            //sync();
             // set the max value of the "scrubber"
             scrub.attr("max", this.duration());
 
             // Listen for the custom sync event...
-        }).on("sync", function () {
-
-            // Once both items are loaded, sync events
-            if (++loadCount == 2) {
-
-                // Iterate all events and trigger them on the video B
-                // whenever they occur on the video A
-                events.forEach(function (event) {
-
-                    videos.a.on(event, function () {
-
-                        // Avoid overkill events, trigger timeupdate manually
-                        if (event === "timeupdate") {
-
-                            videos.b.emit("timeupdate");
-
-                            // update scrubber
-                            scrub.val(videos.a.currentTime());
-                            $('#current_time').text(Math.round(videos.a.currentTime()*100)/100.0 + ' s / ' + Math.round(videos.a.duration()*100)/100.0 + ' s');
-                            return;
-                        }
-
-                    });
-                });
-            }
-        });
+        })
     });
+    videos.a.on("timeupdate", function () {
+
+            scrub.val(videos.a.currentTime());
+            $('#current_time').text(Math.round(videos.a.currentTime()*100)/100.0 + ' s / ' + Math.round(parseFloat(scrub.attr("max"))*100.0)/100.0 + ' s');
+
+    });
+
 
     scrub.bind("change", function () {
         var val = this.value;
@@ -157,14 +159,6 @@ function initPopcorn() {
     });
 }
 
-function sync() {
-    if (videos.b.media.readyState === 4) {
-        videos.b.currentTime(
-            videos.a.currentTime()
-        );
-    }
-    requestAnimationFrame(sync);
-}
 
 
 

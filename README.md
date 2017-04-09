@@ -13,7 +13,7 @@ Sollte bei der Installation etwas nicht funktionieren z.B. ein Fehler bei der In
 ### Benötigte Software
 * Apache-Webserver und MYSQL-Server
 ```
-sudo apt-get install apache2 php5 mysql-server php5-mysql libapache2-mod-php5 phpmyadmin
+sudo apt-get install apache2 php7.0 mysql-server php7.0-mysql libapache2-mod-php7.0 phpmyadmin
 sudo a2enmod rewrite
 sudo service apache2 restart
 ```

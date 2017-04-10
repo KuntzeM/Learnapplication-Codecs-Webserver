@@ -28,6 +28,7 @@ sudo service apache2 restart
 `git clone https://github.com/KuntzeM/Medienprojekt-WebServer.git`
 
 2 Rechte ändern
+
 `sudo chown :www-data -R Medienprojekt-Webserver`
 
 3 leere MySQL Datenbank anlegen

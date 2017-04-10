@@ -27,9 +27,12 @@ sudo service apache2 restart
 
 `git clone https://github.com/KuntzeM/Medienprojekt-WebServer.git`
 
-2 leere MySQL Datenbank anlegen
+2 Rechte ändern
+`sudo chown :www-data -R Medienprojekt-Webserver`
 
-3 Einstellungen in .env ändern
+3 leere MySQL Datenbank anlegen
+
+4Einstellungen in .env ändern
 
 
 ```
@@ -45,12 +48,12 @@ DB_PASSWORD=database_password
 ...
 ``` 
 
-4 fehlende Abhängigkeiten per Konsole installieren
+5fehlende Abhängigkeiten per Konsole installieren
 ```
 php composer.phar update
 ```
 
-5 Datenbank-Tabellen anlegen
+6 atenbank-Tabellen anlegen
 
 ```
 php artisan migrate:install
@@ -58,7 +61,7 @@ php artisan migrate:refresh --seed
 ```
 _(--seed: Argument erstellt Datenbankeinträge u.a. Konfigurationseinstellungen)_
 
-6 Web-Applikation müsste nun funktionieren
+7Web-Applikation müsste nun funktionieren
 z.B.
 
 http://medienprojekt.dev für Frontend
@@ -69,7 +72,7 @@ default user: admin
 
 default password: admin
 
-7 Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-MediaServer
+8 Media-Server installieren > https://github.com/KuntzeM/Medienprojekt-MediaServer
 
 
 ### Abhängigkeiten

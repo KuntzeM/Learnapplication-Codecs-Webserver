@@ -1,9 +1,21 @@
 <?php
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 
 namespace App\Libary;
-
+/**
+ * Class Placeholder
+ * @package App\Libary
+ */
 class Placeholder
 {
+    /**
+     * ersetzt Platzhalter Strings in HTML-Code mit einem Inhalt
+     * @param $html
+     * @return string
+     */
     public static function changePlaceholder($html){
 
         $vcodecs = \App\Codecs::where('media_type', 'video')->get();

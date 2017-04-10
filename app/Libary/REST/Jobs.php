@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mathias
- * Date: 06.02.17
- * Time: 22:23
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
  */
 
 namespace App\Libary\REST;
@@ -18,12 +16,30 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
-
+/**
+ * Class Jobs
+ * singleton class
+ * fordert bzw legt Kodierungsprozesse beim Mediaserver an
+ * @package App\Libary\REST
+ */
 class Jobs
 {
+    /**
+     * URL zum Mediaserver
+     * @var string
+     */
     static private $url;
+    /**
+     * Authentifikations-Token
+     * @var string
+     */
     static private $token;
 
+    /**
+     * fordert alle Jobs vom Mediaserver an
+     * @return \Psr\Http\Message\StreamInterface / JSON-Objekt
+     * @throws \Exception
+     */
     static public function getJobs()
     {
         self::init();
@@ -41,6 +57,9 @@ class Jobs
         }
     }
 
+    /**
+     * Erzeugt einen Token und initialisiert ein Singleton-Objekt
+     */
     static private function init()
     {
         $configData = ConfigData::getInstance();
@@ -51,6 +70,19 @@ class Jobs
         self::$token = $token;
     }
 
+    /**
+     * Legt einen Auftrag für eine Kodierung und einer Datei an.
+     * @param $media_id int ID der Media-Datei
+     * @param $codec_config_id int ID der Kodierungskonfiguration
+     * @return array
+     *  'media_type' string (video | image)
+     *  'name' string Dateiname
+     *  'codec' string FFMpeg Parameter Kodierungsverfahren,
+     *  'bitrate' int Bitrate oder Qualitätsparameter
+     *  'optional' string optionaler Kodierungsparameter
+     *  'convert' boolean doppelte Kodierung zu lesbaren Kodierung (H.264 bzw. PNG)
+     *  'output' string Speicherpfad
+     */
     static public function createJobPackage($media_id, $codec_config_id)
     {
         try {
@@ -84,6 +116,11 @@ class Jobs
 
     }
 
+    /**
+     * Sendet kombinierte array von createJobPackage() (mehrere Kodierungsaufträge) an den Mediaserver
+     * @param $package array multiarray mit mehreren array von createJobPackage(...)
+     * @throws \Exception
+     */
     static public function postJob($package)
     {
         self::init();
@@ -102,7 +139,11 @@ class Jobs
         }
     }
 
-
+    /**
+     * gibt dem Mediaserver den Befehl den Kodierungsprozess zu starten
+     * @return \Psr\Http\Message\StreamInterface JSON-Objekt
+     * @throws \Exception
+     */
     static public function postStartTranscoding()
     {
         self::init();

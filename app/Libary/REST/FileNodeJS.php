@@ -1,21 +1,49 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 
 namespace App\Libary\REST;
 
 
 use App\ConfigData;
-use App\Media;
 use GuzzleHttp\Client;
-use Illuminate\Support\Facades\URL;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
+/**
+ * Class FileNodeJS
+ * singleton class
+ * fordert Bilder und Videos an bzw versendet sie an den Mediaserver
+ * @package App\Libary\REST
+ */
 class FileNodeJS
 {
+    /**
+     * URL zum Mediaserver
+     * @var string
+     */
     static private $url;
+    /**
+     * Authentifikations-Token
+     * @var string
+     */
     static private $token;
 
+    /**
+     * forder Video oder Bild an
+     * @param $media_type string (image | video)
+     * @param $name string
+     * @param $size int / anzufordernde Dateigröße des Bildes -> ressourcen schonen
+     * @return array gibt Datei und Metainformationen zurück
+     *  'file' Datei
+     *  'statuscode' HTTP-Code, 200 wenn erfolgreich
+     *  'mime' Multimediatype z.B. video/webm
+     *  'size' Dateigröße
+     *  'duration' Videolänge
+     * @throws \Exception Fehler, falls nicht angefordert werden kann
+     */
     static public function getFile($media_type, $name, $size)
     {
         self::init();
@@ -40,6 +68,9 @@ class FileNodeJS
         }
     }
 
+    /**
+     * Erzeugt einen Token und initialisiert ein Singleton-Objekt
+     */
     static private function init()
     {
         $configData = ConfigData::getInstance();
@@ -50,6 +81,13 @@ class FileNodeJS
         self::$token = $token;
     }
 
+    /**
+     * sendet ein Bild oder Video an den Mediaserver
+     * @param $file binary
+     * @param $name string / zu speichender Dateiname
+     * @param $media_type string (image | video)
+     * @return int HTTP-Statuscode 200 -> erfolgreich / 404 -> fehlgeschlagen
+     */
     static public function postFile($file, $name, $media_type)
     {
         self::init();
@@ -83,6 +121,12 @@ class FileNodeJS
 
     }
 
+    /**
+     * Löscht Datei vom Mediaserver
+     * @param $media_type string (image | video)
+     * @param $name string eindeutige Dateiname
+     * @throws \Exception Fehler falls nicht erfolgreich
+     */
     static public function deleteFile($media_type, $name)
     {
         self::init();
@@ -100,17 +144,20 @@ class FileNodeJS
         }
     }
 
-    static public function putFile(Media $m, $name)
-    {
-        self::init();
-    }
-
+    /**
+     * fordert PSNR und SSIM vom Mediaserver an
+     * @param $media_type1 string (image | video)
+     * @param $name1 string eindeutiger Name der original Datei
+     * @param $media_type2 string (image | video)
+     * @param $name2 string eindeutiger Name der zu vergleichenden Datei
+     * @return array
+     *  'psnr'
+     *  'ssim'
+     *  'size'  Dateigröße
+     * @throws \Exception
+     */
     static public function getMetadata($media_type1, $name1, $media_type2, $name2)
     {
-        /**
-         * TODO: resize image
-         */
-
         self::init();
 
         $client = new Client();
@@ -128,12 +175,5 @@ class FileNodeJS
         } catch (\Exception $e) {
             throw new \Exception($e);
         }
-    }
-
-    static public function poolMetadata()
-    {
-        $client = new Client();
-        $promise = $client->getAsync(URL::to('/admin/metadata'));
-
     }
 }

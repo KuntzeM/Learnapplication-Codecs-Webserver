@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App\Http\Controllers\Backend;
 
 use App\CodecConfigs;
@@ -13,10 +16,19 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
+/**
+ * Controller um AJAX Anfragen zu bedienen
+ * Class AjaxController
+ * @package App\Http\Controllers\Backend
+ */
 class AjaxController extends Controller
 {
-
+    /**
+     * fordert Informationen über die kodierten Versionen einer Media-Datei an
+     * @param Request $request
+     *  $request->media_id ID einer Media-Datei
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getMediaConfigs(Request $request){
         try {
             $output = DB::table('media_codec_configs')
@@ -30,9 +42,13 @@ class AjaxController extends Controller
         } catch (ModelNotFoundException $e) {
             return response()->json(array('message' => 'error', 404));
         }
-
     }
 
+    /**
+     * fordert den Status vom Mediaserver an
+     * @param Request $request
+     * @return Request|\Psr\Http\Message\StreamInterface JSON-Objekt
+     */
     public function getStatus(Request $request)
     {
         $request = Log::getStatus();
@@ -40,6 +56,11 @@ class AjaxController extends Controller
         return $request;
     }
 
+    /**
+     * sendet Kodierungsaufträge an den Mediaserver
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function processTranscoding(Request $request)
     {
         if ($request->codec_config_id != null) {
@@ -76,7 +97,11 @@ class AjaxController extends Controller
         }
     }
 
-
+    /**
+     * sendet zum Mediaserver den Befehl zum starten der Kodierungsprozesse
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function startTranscoding(Request $request)
     {
 
@@ -89,22 +114,14 @@ class AjaxController extends Controller
 
     }
 
-    /*
-        public function getTranscodingProcesses(Request $request)
-        {
-
-            $jobs = Job::all();
-            $output = array();
-            foreach ($jobs as $job) {
-                $tmp = array('id' => $job->id, 'name' => $job->getMedia()->name, 'media_type' => $job->getMedia()->media_type, 'codec' => $job->getCodecConfiguration()->codec->name,
-                    'codec_config' => $job->getCodecConfiguration()->name, 'process' => $job->process);
-                $output[] = $tmp;
-            }
-
-            return response()->json(array('message' => 'success', 'jobs' => $output), 200);
-
-        }
-    */
+    /**
+     * gibt die Dokumention eines Kodierungsverfahrens wieder
+     * @param Request $request
+     *  $request->type
+     *      'full' für große Übersicht
+     *      'compare' für Vergleich
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getCodecDocumentation(Request $request)
     {
 
@@ -141,15 +158,18 @@ class AjaxController extends Controller
 
     }
 
+    /**
+     * gibt die Dateigröße zurück
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function getFileSize(Request $request)
     {
-
         try {
             $split_name = explode('/', $request->name);
             if (count($split_name) != 2) {
                 throw new ModelNotFoundException('Argument Name ist falsch: ' . $request->name);
             }
-
             $mediaConfig = MediaCodecConfig::where('file_path', $split_name[1])->first();
 
             return response()->json(array('message' => 'success',
@@ -159,6 +179,5 @@ class AjaxController extends Controller
                 'message' => 'Dateigröße konnte nicht geladen werden: ' . $e->getMessage(),
             ], 404);//json(array('message' => $e->getMessage()));
         }
-
     }
 }

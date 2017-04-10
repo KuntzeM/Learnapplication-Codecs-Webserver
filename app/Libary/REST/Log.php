@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 
 namespace App\Libary\REST;
 
@@ -9,11 +12,30 @@ use GuzzleHttp\Client;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Facades\JWTFactory;
 
+/**
+ * Class Log
+ * singleton class
+ * forder Log an und fragt den Mediaserver nach seinem Status
+ * @package App\Libary\REST
+ */
 class Log
 {
+    /**
+     * URL zum Mediaserver
+     * @var string
+     */
     static private $url;
+    /**
+     * Authentifikations-Token
+     * @var string
+     */
     static private $token;
 
+    /**
+     * fordert den Log an
+     * @return \Psr\Http\Message\StreamInterface JSON-Objekt
+     * @throws \Exception
+     */
     static public function getLog()
     {
         self::init();
@@ -31,6 +53,9 @@ class Log
         }
     }
 
+    /**
+     * Erzeugt einen Token und initialisiert ein Singleton-Objekt
+     */
     static private function init()
     {
         $configData = ConfigData::getInstance();
@@ -41,6 +66,10 @@ class Log
         self::$token = $token;
     }
 
+    /**
+     * löscht den Log des Mediaservers
+     * @throws \Exception
+     */
     static public function deleteLog()
     {
         self::init();
@@ -58,6 +87,11 @@ class Log
         }
     }
 
+    /**
+     * überprüft ob der Mediaserver erreichbar ist und ob ein Kodierungsprozess läuft
+     * @return \Psr\Http\Message\StreamInterface JSON-Objekt
+     * @throws \Exception
+     */
     static public function getStatus()
     {
         self::init();

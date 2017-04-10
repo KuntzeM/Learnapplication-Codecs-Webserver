@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright (c) 2016. by Julia Peter & Mathias Kuntze
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
  * media project TU Ilmenau
  */
 
@@ -11,6 +11,7 @@ use App\Configuration;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Libary\Placeholder;
+
 class AboutController extends Controller
 {
     public function __construct()

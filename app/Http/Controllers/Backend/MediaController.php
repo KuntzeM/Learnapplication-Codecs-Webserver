@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use View;
 
+/**
+ * Class MediaController
+ * @package App\Http\Controllers\Backend
+ */
 class MediaController extends Controller
 {
-
+    /**
+     * MediaController constructor.
+     */
     public function __construct()
     {
         $config = ConfigData::getInstance();

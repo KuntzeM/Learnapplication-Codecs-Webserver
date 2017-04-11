@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 use View;
 use Yajra\Datatables\Datatables;
 
-
+/**
+ * Class LogController
+ * @package App\Http\Controllers\Backend
+ */
 class LogController extends Controller
 {
+    /**
+     * LogController constructor.
+     */
     public function __construct()
     {
         $config = ConfigData::getInstance();
@@ -19,11 +25,19 @@ class LogController extends Controller
 
     }
 
+    /**
+     * fordert viewer für Log-Übersicht an
+     * @return mixed
+     */
     public function get_index()
     {
         return View::make('backend.log.index', ['url' => $this->url]);
     }
 
+    /**
+     * AJAX Aufruf, fordert neue Logs vom Mediaserver an
+     * @return array|\Psr\Http\Message\StreamInterface
+     */
     public function reload_index()
     {
         try {
@@ -34,6 +48,11 @@ class LogController extends Controller
 
     }
 
+    /**
+     * sendet dem Mediaserver den Befehl zum löschen des Logs
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteLog(Request $request)
     {
         try {

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App\Http\Controllers\Backend;
 
 use App\CodecConfigs;
@@ -14,15 +17,25 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use View;
 
+/**
+ * Class CodecsController
+ * @package App\Http\Controllers\Backend
+ */
 class CodecsController extends Controller
 {
-
+    /**
+     * CodecsController constructor.
+     */
     public function __construct()
     {
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
     }
 
+    /**
+     * liefert Viewer für die Übersichtsseite der Kodierungsverfahren
+     * @return mixed
+     */
     public function get_index()
     {
         $video_codecs = Codecs::where('media_type', 'video')->get();
@@ -30,11 +43,11 @@ class CodecsController extends Controller
         return View::make('backend.codecs.index', ['url'=> $this->url, 'video_codecs' => $video_codecs, 'image_codecs' => $image_codecs]);
     }
 
-    public function get_singleCodec($id)
-    {
-
-    }
-
+    /**
+     * löscht ein Kodierungsverfahren und alle dazugehörigen Konfigurationen
+     * @param $id int ID Kodierungsverfahren
+     * @return $this Weiterleitung
+     */
     public function delete_codec($id)
     {
         $codec = Codecs::findOrFail($id);
@@ -48,6 +61,11 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withErrors($codec->name . ' and ' . count($codec->codec_configs) . ' Configurations are deleted!', 'success');
     }
 
+    /**
+     * löscht Kodierungskonfiguration
+     * @param $id int ID Kodierungskonfiguration
+     * @return $this Weiterleitung
+     */
     public function delete_codec_config($id)
     {
         try {
@@ -64,6 +82,11 @@ class CodecsController extends Controller
         }
     }
 
+    /**
+     * Zeigt Einzelansicht Kodierungsverfahren an. Ist ID = null, so wird eine leere Seite zum anlegen eines Verfahrens angezeigt
+     * @param null $id int ID Kodierungsverfahren
+     * @return mixed
+     */
     public function get_codec($id = null)
     {
         try {
@@ -79,6 +102,12 @@ class CodecsController extends Controller
         return View::make('backend.codecs.codec', ['url' => $this->url, 'codec' => $codec, 'title' => $title, 'new' => $new]);
     }
 
+    /**
+     * zeigt Einzelansicht einer Kodierungskonfiguration an. Ist $id = null so wird eine leere Seite zum anlegen einer neuen Konfiguration angezeigt
+     * @param null $id int ID Kodierungskonfiguration
+     * @param null $codec_id ID Kodierungsverfahren
+     * @return mixed
+     */
     public function get_codec_config($id = null, $codec_id = null)
     {
 
@@ -96,6 +125,12 @@ class CodecsController extends Controller
         return View::make('backend.codecs.codec_config', ['url' => $this->url, 'codec_config' => $codec_config, 'title' => $title, 'new' => $new]);
     }
 
+    /**
+     * ändert Kodierungsverfahren
+     * @param Request $request Formulardaten
+     * @param $id int ID Kodierungsverfahren
+     * @return $this
+     */
     public function update_codec(Request $request, $id)
     {
         $codec = Codecs::findOrFail($id);
@@ -121,6 +156,11 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withErrors('codec ' . $codec->name . ' is updated', 'success');
     }
 
+    /**
+     * legt neues Kodierungsverfahren an
+     * @param Request $request Post-Anfrage
+     * @return $this
+     */
     public function new_codec(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -149,6 +189,12 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec->name . ' is created', 'success');
     }
 
+    /**
+     * ändert Kodierungskonfiguration
+     * @param Request $request POST-Anfrage
+     * @param $id ID Kodierungskonfiguration
+     * @return $this
+     */
     public function update_codec_config(Request $request, $id)
     {
 
@@ -194,6 +240,11 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is updated', 'success');
     }
 
+    /**
+     * neue Kodierungskonfiguration anlegen
+     * @param Request $request POST-Anfrage
+     * @return $this
+     */
     public function new_codec_config(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -238,6 +289,12 @@ class CodecsController extends Controller
         return redirect('/admin/codecs')->withInput()->withErrors('codec ' . $codec_config->codec->name . ' configuration ' . $codec_config->name . ' is created', 'success');
     }
 
+    /**
+     * forderte Seite zum ändern der Dokumentation an
+     * @param $type string (compare | full) Art der Dokumentation
+     * @param $id int ID Kodierungsverfahren
+     * @return $this
+     */
     public function get_documentation($type, $id)
     {
         try {
@@ -251,6 +308,12 @@ class CodecsController extends Controller
 
     }
 
+    /**
+     * speichert Dokumentation
+     * @param Request $request
+     * @param $id  int ID Kodierungsverfahren
+     * @return $this
+     */
     public function update_documentation(Request $request, $id)
     {
         $codec = Codecs::findOrFail($id);
@@ -266,12 +329,9 @@ class CodecsController extends Controller
                 ->withErrors($validator);
         }
 
-
         $codec->{'documentation_' . $request->type} = $request->documentation;
         $codec->save();
 
         return redirect('/admin/codecs')->withErrors('Dokumenation von Codec ' . $codec->name . ' wurde gespeichert', 'success');
-
-
     }
 }

@@ -11,8 +11,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use View;
 
+/**
+ * Class ConfigurationsController
+ * @package App\Http\Controllers\Backend
+ */
 class ConfigurationsController extends Controller
 {
+    /**
+     * ConfigurationsController constructor.
+     */
     public function __construct()
     {
         $config = ConfigData::getInstance();
@@ -20,18 +27,24 @@ class ConfigurationsController extends Controller
 
     }
 
+    /**
+     * fordert Viewer für Konfigurationsseite an
+     * @return mixed
+     */
     public function get_index()
     {
-
         $config = ConfigData::getInstance();
 
         return View::make('backend.configurations.index', ['url'=> $this->url, 'title' => 'Configurations', 'config' => $config]);
     }
 
+    /**
+     * speichert Konfigurationen
+     * @param Request $request
+     * @return $this
+     */
     public function update(Request $request)
     {
-
-
         $validator = Validator::make($request->all(), [
             'username' => 'required|min:3',
             'email' => 'required|email',
@@ -62,6 +75,11 @@ class ConfigurationsController extends Controller
         return redirect('/admin/configurations')->withErrors('configurations are updated', 'success');
     }
 
+    /**
+     * fordert Seite tum ändern der Startseite und Impressum an
+     * @param $type string (welcome | impressum)
+     * @return $this
+     */
     public function get_site($type)
     {
 
@@ -82,6 +100,12 @@ class ConfigurationsController extends Controller
 
     }
 
+    /**
+     * speichert Startseite und Impressum
+     * @param Request $request
+     * @param $type string (welcome | impressum)
+     * @return $this
+     */
     public function update_site(Request $request, $type)
     {
         try {
@@ -95,12 +119,9 @@ class ConfigurationsController extends Controller
             }
         }
 
-
         $site->value = $request->documentation;
         $site->save();
 
         return redirect('/admin/configurations')->withErrors('Seite ' . $type . ' wurde gespeichert', 'success');
-
-
     }
 }

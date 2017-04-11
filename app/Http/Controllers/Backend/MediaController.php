@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App\Http\Controllers\Backend;
 
 use App\ConfigData;
@@ -25,6 +28,10 @@ class MediaController extends Controller
         $this->url = $config->media_server;
     }
 
+    /**
+     * forder Übersicht über Bilder und Videos an
+     * @return mixed
+     */
     public function get_index()
     {
 
@@ -34,6 +41,11 @@ class MediaController extends Controller
         return View::make('backend.media.index', ['url'=> $this->url, 'video_media' => $video_media, 'image_media' => $image_media]);
     }
 
+    /**
+     * Einzelansicht Bild/Video bzw neue Datei hochladen
+     * @param $id int ID Media-Datei
+     * @return $this
+     */
     public function get_media($id)
     {
         try {
@@ -45,6 +57,10 @@ class MediaController extends Controller
         }
     }
 
+    /**
+     * neues Video bzw Bild hochladen
+     * @return mixed
+     */
     public function upload_media()
     {
         $media = new Media();
@@ -53,7 +69,12 @@ class MediaController extends Controller
         return View::make('backend.media.media', ['media' => $media, 'new' => true, 'title' => 'New Media', 'url' => $config->media_server]);
     }
 
-
+    /**
+     * speichert Media-Datei in Datenbank
+     * @param Request $request
+     * @param $id int ID Mediadatei
+     * @return $this
+     */
     public function update_media(Request $request, $id)
     {
         $media = Media::findOrFail($id);
@@ -74,25 +95,4 @@ class MediaController extends Controller
         return redirect('/admin/media')->withErrors('media with id ' . $media->media_id . ' is updated', 'success');
     }
 
-    /*
-    public function delete_media($id)
-    {
-        $media = Media::findOrFail($id);
-
-        $rest = new callREST();
-        $response = $rest->deleteMedia($id);
-
-        if ($response->getStatusCode() == 200 AND $response->getReasonPhrase() == 'OK') {
-            foreach ($media->media_codec_configs as $mcc) {
-                $mcc->delete();
-            }
-            $media->delete();
-
-            return redirect('/admin/media')->withErrors($media->name . ' is deleted!', 'success');
-
-        } else {
-            return redirect('/admin/media')->withErrors($media->name . ' cannot delete!', 'error');
-        }
-
-    }*/
 }

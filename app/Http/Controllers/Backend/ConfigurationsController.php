@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App\Http\Controllers\Backend;
 
 use App\ConfigData;

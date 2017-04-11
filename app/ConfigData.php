@@ -1,28 +1,52 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Mathias
- * Date: 18.10.2016
- * Time: 17:13
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
  */
-
 namespace App;
 
 use Illuminate\Support\Facades\Hash;
 use LRedis;
 
+/**
+ * Class ConfigData
+ * singleton Klasse als Wrapper des Models Configuration
+ * @package App
+ */
 class ConfigData
 {
+    /**
+     * @var ConfigData
+     */
     private static $instance;
-
+    /**
+     * @var string
+     */
     public $username;
+    /**
+     * @var string
+     */
     public $email;
+    /**
+     * @var string
+     */
     public $password;
+    /**
+     * @var string
+     */
     public $media_server;
+    /**
+     * @var string
+     */
     public $api_key;
+    /**
+     * @var int
+     */
     public $api_expire;
 
-
+    /**
+     * @return ConfigData
+     */
     public static function getInstance()
     {
         if (static::$instance === null) {
@@ -31,6 +55,9 @@ class ConfigData
         return static::$instance;
     }
 
+    /**
+     * ConfigData constructor.
+     */
     public function __construct()
     {
         $user = User::find(1)->first();
@@ -49,6 +76,9 @@ class ConfigData
         $this->api_expire = intval($config->value);
     }
 
+    /**
+     * speichert Konfigurationen in Datenbank
+     */
     public function update()
     {
         $user = User::find(1)->first();
@@ -60,7 +90,6 @@ class ConfigData
 
             $user->password = Hash::make($this->password);
         }
-
 
         $user->save();
 
@@ -76,6 +105,4 @@ class ConfigData
         $config->value = intval($this->api_expire);
         $config->save();
     }
-
-
 }

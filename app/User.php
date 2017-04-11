@@ -1,12 +1,19 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 
-
+/**
+ * Class User
+ * Model für Datenbanktabelle: User
+ * @package App
+ */
 class User extends Authenticatable
 {
     use Notifiable;
@@ -29,14 +36,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function accessMediasAll()
-    {
-        return Auth::check();
-        // return true for access to all medias
-    }
-
-    public function accessMediasFolder()
-    {
-        return Auth::check();// return true for access to one folder
-    }
 }

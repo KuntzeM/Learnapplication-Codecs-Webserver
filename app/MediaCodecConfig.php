@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App;
 
 
@@ -7,11 +10,28 @@ use App\Libary\REST\FileNodeJS;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+/**
+ * Class MediaCodecConfig
+ * Model für Datenbanktabelle: MediaCodecConfig
+ * @package App
+ */
 class MediaCodecConfig extends Model
 {
+    /**
+     * @var string
+     */
     public $codec_config_name;
+    /**
+     * @var string
+     */
     protected $table = 'media_codec_configs';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'media_codec_config_id';
+    /**
+     * @var CodecConfigs
+     */
     protected $codec_config;
 
     /**
@@ -21,12 +41,13 @@ class MediaCodecConfig extends Model
     {
         /* override your model constructor */
         parent::__construct($attributes);
-
-
     }
 
+    /**
+     * fordert Kodierungsinformationen zu dieser kodierten Version an
+     * @return array|null
+     */
     public function getMediaCodecInfos(){
-
         try{
             $output = array();
             $codec_config = CodecConfigs::findOrFail($this->codec_config_id);
@@ -38,22 +59,30 @@ class MediaCodecConfig extends Model
         }catch(ModelNotFoundException $ex){
             return null;
         }
-
-
     }
 
+    /**
+     * Beziehung zu Model CodecConfigs
+     * @return CodecConfigs
+     */
     public function getCodecConfig()
     {
-
         return CodecConfigs::where('codec_config_id', $this->codec_config_id)->first();
     }
 
-
+    /**
+     * Beziehung zu Model Media
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function media()
     {
         return $this->belongsTo('App\Media', 'media_id');
     }
 
+    /**
+     * löscht die Kodierungsversion
+     * @return bool|null
+     */
     public function delete()
     {
         try {
@@ -61,9 +90,6 @@ class MediaCodecConfig extends Model
         } catch (\Exception $e) {
 
         }
-
         return parent::delete();
     }
-
-
 }

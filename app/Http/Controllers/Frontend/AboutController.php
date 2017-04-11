@@ -3,7 +3,6 @@
  * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
  * media project TU Ilmenau
  */
-
 namespace App\Http\Controllers\Frontend;
 
 use App\ConfigData;
@@ -12,8 +11,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Libary\Placeholder;
 
+/**
+ * Class AboutController
+ * @package App\Http\Controllers\Frontend
+ */
 class AboutController extends Controller
 {
+    /**
+     * AboutController constructor.
+     */
     public function __construct()
     {
         $config = ConfigData::getInstance();
@@ -22,6 +28,10 @@ class AboutController extends Controller
 
     }
 
+    /**
+     * zeig Impressum an
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         try {

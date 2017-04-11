@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App\Http\Controllers;
 
 use App\Libary\REST\FileNodeJS;
@@ -9,9 +12,20 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-
+/**
+ * Class StorageMediaController
+ * nutzt API zum Mediaserver um Bild bzw Video Ressourcen zu anzufordern
+ * @package App\Http\Controllers
+ */
 class StorageMediaController extends Controller
 {
+    /**
+     * gibt das binäre Bild oder Video zurück
+     * @param $media_type string (image | video)
+     * @param $name string eindeutiger Name der Datei
+     * @param Request $request
+     * @return mixed
+     */
     public function getMedia($media_type, $name, Request $request)
     {
         try {
@@ -43,7 +57,11 @@ class StorageMediaController extends Controller
 
     }
 
-
+    /**
+     * sendet dem Mediaserver das Bild bzw. Video
+     * @param Request $request
+     * @return mixed
+     */
     public function postMedia(Request $request)
     {
         $file = $request->file;
@@ -63,12 +81,16 @@ class StorageMediaController extends Controller
 
         $statuscode = FileNodeJS::postFile($file, $media->origin_file, $media_type);
         return Response::json('', $statuscode);
-
     }
 
+    /**
+     * löscht eine Media-Datei vom Mediaserver
+     * @param $media_type string (image | video)
+     * @param $name string eindeutiger Dateiname
+     * @return $this
+     */
     public function deleteMedia($media_type, $name)
     {
-
         try {
             $m = Media::where('origin_file', '=', $name)
                 ->where('media_type', '=', $media_type)->first();
@@ -79,6 +101,9 @@ class StorageMediaController extends Controller
         }
     }
 
+    /**
+     * fordert PSNR, SSIM und Dateigröße vom Mediaserver an.
+     */
     public function getFileMetaData()
     {
         $lockfile = 'metadata.lock';
@@ -104,9 +129,7 @@ class StorageMediaController extends Controller
         if (file_exists($lockfile)) {
             unlink($lockfile);
         }
-
     }
-
 }
 
 

@@ -1,15 +1,33 @@
 <?php
-
+/**
+ * Copyright (c) 2016-2017. by Julia Peter & Mathias Kuntze
+ * media project TU Ilmenau
+ */
 namespace App;
 
 use App\Libary\REST\FileNodeJS;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Media
+ * Model für Datenbanktabelle: Media
+ * @package App
+ */
 class Media extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'media';
+    /**
+     * @var string
+     */
     protected $primaryKey = 'media_id';
 
+    /**
+     * gibt alle kodierten Versionen und Informationen des Bildes bzw. Videos zurück
+     * @return array
+     */
     public function getTranscodedFiles()
     {
         $output = array();
@@ -46,19 +64,10 @@ class Media extends Model
 
             if ($media_codec_config_id == 0) {
 
-                /*$job = Job::where('media_id', $this->media_id)->where('codec_config_id', $codec_config['codec_config_id'])->first();
-
-                if ($job) {
-                    $status = 0;
-                } else {
-                    $status = -1;
-                }
-                */
                 $status = 0;
             } else {
                 $status = 1;
             }
-
 
             $tmp = [
                 'codec_config_id' => $codec_config['codec_config_id'],
@@ -77,6 +86,11 @@ class Media extends Model
         return $output;
     }
 
+    /**
+     * gibt die URL zur Datei zurück
+     * @param null $resize_width int Bildgröße
+     * @return string
+     */
     public function getUrl($resize_width = null)
     {
         $size = '';
@@ -87,11 +101,10 @@ class Media extends Model
         return url(join(DIRECTORY_SEPARATOR, ['getMedia', $this->media_type, $this->origin_file])) . $size;
     }
 
-    public function photos()
-    {
-        return $this->has_many('Photo');
-    }
-
+    /**
+     * fordert beim Mediaserver an die Datei und alle ihrer Versionen zu löschen
+     * @return bool|null
+     */
     public function delete()
     {
         // delete all related photos
@@ -102,10 +115,13 @@ class Media extends Model
         } catch (\Exception $e) {
 
         }
-
         return parent::delete();
     }
 
+    /**
+     * Beziehung zu Model MediaCodecConfig
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function media_codec_configs()
     {
         return $this->hasMany('App\MediaCodecConfig', 'media_id');

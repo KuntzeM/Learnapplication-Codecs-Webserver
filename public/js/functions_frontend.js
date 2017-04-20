@@ -135,7 +135,8 @@ function initPopcorn() {
     scrub.bind("change", function () {
         var val = this.value;
         videos.a.currentTime(val);
-        videos.b.currentTime(val);
+        //videos.b.currentTime(val);
+        sync()
 
     });
     $('#play-pause').click(function () {

@@ -475,7 +475,9 @@
 
                             /* HTML data attributes */
                             var o = $this.data(pluginPfx).opt,
-                                htmlDataAxis = $this.data("mcs-axis"), htmlDataSbPos = $this.data("mcs-scrollbar-position"), htmlDataTheme = $this.data("mcs-theme");
+                                htmlDataAxis = $this.data("mcs-axis"),
+                                htmlDataSbPos = $this.data("mcs-scrollbar-position"),
+                                htmlDataTheme = $this.data("mcs-theme");
                             if (htmlDataAxis) {
                                 o.axis = htmlDataAxis;
                             }
@@ -673,7 +675,8 @@
                                     onComplete: true
                                 },
                                 methodOptions = $.extend(true, {}, methodDefaults, options),
-                                to = functions._arr.call(this, val), dur = methodOptions.scrollInertia > 0 && methodOptions.scrollInertia < 17 ? 17 : methodOptions.scrollInertia;
+                                to = functions._arr.call(this, val),
+                                dur = methodOptions.scrollInertia > 0 && methodOptions.scrollInertia < 17 ? 17 : methodOptions.scrollInertia;
 
                             /* translate yx values to actual scroll-to positions */
                             to[0] = functions._to.call(this, to[0], "y");
@@ -1046,7 +1049,8 @@
 
                 /* toggles scrolling classes */
                 _onDragClasses: function (el, action, xpnd) {
-                    var expandClass = xpnd ? "mCSB_dragger_onDrag_expanded" : "", classes = ["mCSB_dragger_onDrag", "mCSB_scrollTools_onDrag"],
+                    var expandClass = xpnd ? "mCSB_dragger_onDrag_expanded" : "",
+                        classes = ["mCSB_dragger_onDrag", "mCSB_scrollTools_onDrag"],
                         scrollbar = el.closest(".mCSB_scrollTools");
                     if (action === "active") {
                         el.toggleClass(classes[0] + " " + expandClass);
@@ -1280,7 +1284,8 @@
                         /* enable scrollbar dragging over iframes by disabling their events */
                         functions._stop($this);
                         draggable = $(this);
-                        var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top, x = functions._coordinates(e)[1] - offset.left,
+                        var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top,
+                            x = functions._coordinates(e)[1] - offset.left,
                             h = draggable.height() + offset.top, w = draggable.width() + offset.left;
                         if (y < h && y > 0 && x < w && x > 0) {
                             dragY = y;
@@ -1290,12 +1295,14 @@
                     }).bind("touchmove." + namespace, function (e) {
                         e.stopImmediatePropagation();
                         e.preventDefault();
-                        var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top, x = functions._coordinates(e)[1] - offset.left;
+                        var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top,
+                            x = functions._coordinates(e)[1] - offset.left;
                         _drag(dragY, dragX, y, x);
                     });
                     $(document).bind("mousemove." + namespace + " pointermove." + namespace + " MSPointerMove." + namespace, function (e) {
                         if (draggable) {
-                            var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top, x = functions._coordinates(e)[1] - offset.left;
+                            var offset = draggable.offset(), y = functions._coordinates(e)[0] - offset.top,
+                                x = functions._coordinates(e)[1] - offset.left;
                             if (dragY === y) {
                                 return;
                             }
@@ -1350,7 +1357,8 @@
                         mCustomScrollBox = $("#mCSB_" + d.idx),
                         mCSB_container = $("#mCSB_" + d.idx + "_container"),
                         mCSB_dragger = [$("#mCSB_" + d.idx + "_dragger_vertical"), $("#mCSB_" + d.idx + "_dragger_horizontal")],
-                        dragY, dragX, touchStartY, touchStartX, touchMoveY = [], touchMoveX = [], startTime, runningTime, endTime, distance, speed, amount,
+                        dragY, dragX, touchStartY, touchStartX, touchMoveY = [], touchMoveX = [], startTime,
+                        runningTime, endTime, distance, speed, amount,
                         durA = 0, durB, overwrite = o.axis === "yx" ? "none" : "all", touchIntent = [];
                     mCSB_container.bind("touchstart." + namespace + " pointerdown." + namespace + " MSPointerDown." + namespace, function (e) {
                         if (!functions._pointerTouch(e) || touchActive || functions._coordinates(e)[2]) {
@@ -1366,7 +1374,8 @@
                         }
                         e.stopImmediatePropagation();
                         runningTime = functions._getTime();
-                        var offset = mCustomScrollBox.offset(), y = functions._coordinates(e)[0] - offset.top, x = functions._coordinates(e)[1] - offset.left,
+                        var offset = mCustomScrollBox.offset(), y = functions._coordinates(e)[0] - offset.top,
+                            x = functions._coordinates(e)[1] - offset.left,
                             easing = "mcsLinearOut";
                         touchMoveY.push(y);
                         touchMoveX.push(x);
@@ -1411,7 +1420,8 @@
                         }
                         e.stopImmediatePropagation();
                         endTime = functions._getTime();
-                        var offset = mCustomScrollBox.offset(), y = functions._coordinates(e)[0] - offset.top, x = functions._coordinates(e)[1] - offset.left;
+                        var offset = mCustomScrollBox.offset(), y = functions._coordinates(e)[0] - offset.top,
+                            x = functions._coordinates(e)[1] - offset.left;
                         if ((endTime - runningTime) > 30) {
                             return;
                         }
@@ -1765,9 +1775,11 @@
                                         functions._stop($this);
                                         var keyboardDir = code === 34 ? -1 : 1;
                                         if (o.axis === "x" || (o.axis === "yx" && d.overflowed[1] && !d.overflowed[0])) {
-                                            var dir = "x", to = Math.abs(mCSB_container[0].offsetLeft) - (keyboardDir * (wrapper.width() * 0.9));
+                                            var dir = "x",
+                                                to = Math.abs(mCSB_container[0].offsetLeft) - (keyboardDir * (wrapper.width() * 0.9));
                                         } else {
-                                            var dir = "y", to = Math.abs(mCSB_container[0].offsetTop) - (keyboardDir * (wrapper.height() * 0.9));
+                                            var dir = "y",
+                                                to = Math.abs(mCSB_container[0].offsetTop) - (keyboardDir * (wrapper.height() * 0.9));
                                         }
                                         functions._scrollTo($this, to.toString(), {
                                             dir: dir,
@@ -1783,9 +1795,11 @@
                                         }
                                         if (e.type === "keyup") {
                                             if (o.axis === "x" || (o.axis === "yx" && d.overflowed[1] && !d.overflowed[0])) {
-                                                var dir = "x", to = code === 35 ? Math.abs(wrapper.width() - mCSB_container.outerWidth(false)) : 0;
+                                                var dir = "x",
+                                                    to = code === 35 ? Math.abs(wrapper.width() - mCSB_container.outerWidth(false)) : 0;
                                             } else {
-                                                var dir = "y", to = code === 35 ? Math.abs(wrapper.height() - mCSB_container.outerHeight(false)) : 0;
+                                                var dir = "y",
+                                                    to = code === 35 ? Math.abs(wrapper.height() - mCSB_container.outerHeight(false)) : 0;
                                             }
                                             functions._scrollTo($this, to.toString(), {
                                                 dir: dir,
@@ -1993,7 +2007,8 @@
                             ]
                         },
                         oldSelSize = sizesSum(), newSelSize,
-                        os = [mCSB_container.outerHeight(false), mCSB_container.outerWidth(false), wrapper.height(), wrapper.width(), scrollbarSize()[0], scrollbarSize()[1]], ns,
+                        os = [mCSB_container.outerHeight(false), mCSB_container.outerWidth(false), wrapper.height(), wrapper.width(), scrollbarSize()[0], scrollbarSize()[1]],
+                        ns,
                         oldImgsLen = imgSum(), newImgsLen;
                     upd();
                     function upd() {
@@ -2324,7 +2339,8 @@
                             }, onUpdate = callbacks.onUpdate || function () {
                             }, onComplete = callbacks.onComplete || function () {
                             },
-                        startTime = functions._getTime(), _delay, progress = 0, from = el.offsetTop, elStyle = el.style, _request, tobj = el._malihuTween[prop];
+                        startTime = functions._getTime(), _delay, progress = 0, from = el.offsetTop, elStyle = el.style,
+                        _request, tobj = el._malihuTween[prop];
                     if (prop === "left") {
                         from = el.offsetLeft;
                     }
@@ -2370,9 +2386,9 @@
                         _delay = 1000 / 60;
                         tobj.time = progress + _delay;
                         _request = (!window.requestAnimationFrame) ? function (f) {
-                                _tween();
-                                return setTimeout(f, 0.01);
-                            } : window.requestAnimationFrame;
+                            _tween();
+                            return setTimeout(f, 0.01);
+                        } : window.requestAnimationFrame;
                         tobj.id = _request(_step);
                     }
 

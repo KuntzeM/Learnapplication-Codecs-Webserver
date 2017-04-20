@@ -708,7 +708,8 @@
                         mark = buffer[(size + pointer) % size];
                         // skip marks that are the same as current position
                         if (mark &&
-                            (newCur = mark.find()) && !cursorEqual(oldCur, newCur)) {
+                            (newCur = mark.find()) &&
+                            !cursorEqual(oldCur, newCur)) {
                             break;
                         }
                     } while (pointer < head && pointer > tail);
@@ -886,7 +887,8 @@
                     return;
                 }
                 // Enter visual mode when the mouse selects text.
-                if (!vim.visualMode && !cursorEqual(cm.getCursor('head'), cm.getCursor('anchor'))) {
+                if (!vim.visualMode &&
+                    !cursorEqual(cm.getCursor('head'), cm.getCursor('anchor'))) {
                     vim.visualMode = true;
                     vim.visualLine = false;
                     CodeMirror.signal(cm, "vim-mode-change", {mode: "visual"});
@@ -1614,9 +1616,9 @@
                     if (mark) {
                         var pos = mark.find();
                         return motionArgs.linewise ? {
-                                line: pos.line,
-                                ch: findFirstNonWhiteSpaceCharacter(cm.getLine(pos.line))
-                            } : pos;
+                            line: pos.line,
+                            ch: findFirstNonWhiteSpaceCharacter(cm.getLine(pos.line))
+                        } : pos;
                     }
                     return null;
                 },

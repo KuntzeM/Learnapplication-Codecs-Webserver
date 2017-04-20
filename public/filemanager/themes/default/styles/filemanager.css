@@ -11,6 +11,7 @@
     -ms-box-sizing: content-box;
 }
 
+
 body {
     padding: 10px;
     background-color: #F4F1ED;
@@ -20,7 +21,6 @@ body {
 video, audio {
     margin: 3em;
 }
-
 #uploader {
     display: block;
     text-align: right;
@@ -97,13 +97,11 @@ video, audio {
 #fileinfo #main-title {
     margin: 10px auto;
 }
-
 #fileinfo h1 {
     font-size: 20px;
     display: inline-block;
     color: #8fabc6;
 }
-
 #fileinfo > h1 {
     margin-top: 3em
 }
@@ -198,7 +196,6 @@ button.edition {
 button.em {
     background: #CCDBFF; /*#ADDBC3;*/
 }
-
 button.em:hover {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #C3D2F7), color-stop(1, #CCDBFF));
     background: -moz-linear-gradient(center top, #C3D2F7 5%, #CCDBFF 100%);
@@ -207,6 +204,7 @@ button.em:hover {
 }
 
 /** Input file Replacement */
+
 
 input, button {
     vertical-align: text-top;
@@ -267,6 +265,7 @@ input, button {
     }
 }
 
+
 button#browse {
     margin-left: 0;
     -webkit-border-top-left-radius: 0px;
@@ -278,7 +277,6 @@ button#browse {
     min-height: 16px;
     min-width: 40px;
 }
-
 button#browse span {
     margin: 0;
     padding: 0;
@@ -287,7 +285,6 @@ button#browse span {
     color: #666;
     text-shadow: none;
 }
-
 /** Input file Replacement - end */
 
 #search, #search div, #folder-info {
@@ -308,7 +305,7 @@ button#browse span {
     padding: 0.1em 0.3em;
     line-height: 1.7em;
     width: 200px;
-
+	
 }
 
 #search span.q-inactive {
@@ -549,7 +546,6 @@ span#copied {
     font-weight: normal;
     vertical-align: middle;
 }
-
 /*a#edit-file , a#copy-button {border: 1px solid #ccc;}*/
 /* div.jqi button { background-image: url(../images/circular/yes.png); } */
 
@@ -627,7 +623,6 @@ button.ON {
 #list {
     margin-left: 0;
 }
-
 #progressbar {
     background: transparent url(../images/ajax-loader.gif) no-repeat 0 0;
     display: inline-table;
@@ -665,19 +660,16 @@ html[data-useragent*='MSIE 10.0'] #uploader button,
 html[data-useragent*='MSIE 11.0'] #uploader button {
     vertical-align: top;
 }
-
 html[data-useragent*='MSIE 10.0'] #file-input-container,
 html[data-useragent*='MSIE 11.0'] #file-input-container {
     width: 220px;
     height: 32px;
     overflow: hidden;
 }
-
 html[data-useragent*='MSIE 10.0'] #filepath,
 html[data-useragent*='MSIE 11.0'] #filepath {
     height: 22px;
 }
-
 html[data-useragent*='MSIE 10.0'] #newfile,
 html[data-useragent*='MSIE 11.0'] #newfile {
     height: 23px;

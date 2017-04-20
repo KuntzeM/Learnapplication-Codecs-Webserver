@@ -1646,6 +1646,7 @@ PDFJS.build = '997096f';
     }
 
 
+
 //#if (FIREFOX || MOZCENTRAL)
 //
 //Components.utils.import('resource://gre/modules/Services.jsm');
@@ -2448,6 +2449,7 @@ PDFJS.build = '997096f';
     })();
 
 
+
 // The maximum number of bytes fetched per range request
     var RANGE_CHUNK_SIZE = 65536;
 
@@ -2983,7 +2985,8 @@ PDFJS.build = '997096f';
                     if (this.acroForm) {
                         this.xfa = this.acroForm.get('XFA');
                         var fields = this.acroForm.get('Fields');
-                        if ((!fields || !isArray(fields) || fields.length === 0) && !this.xfa) {
+                        if ((!fields || !isArray(fields) || fields.length === 0) &&
+                            !this.xfa) {
                             // no fields and no XFA -- not a form (?)
                             this.acroForm = null;
                         }
@@ -4010,7 +4013,8 @@ PDFJS.build = '997096f';
                         }
 
                         // Validate entry obj
-                        if (!isInt(entry.offset) || !isInt(entry.gen) || !(entry.free || entry.uncompressed)) {
+                        if (!isInt(entry.offset) || !isInt(entry.gen) ||
+                            !(entry.free || entry.uncompressed)) {
                             error('Invalid entry in XRef subsection: ' + first + ', ' + count);
                         }
 
@@ -4082,7 +4086,8 @@ PDFJS.build = '997096f';
                     if (!isInt(first) || !isInt(n)) {
                         error('Invalid XRef range fields: ' + first + ', ' + n);
                     }
-                    if (!isInt(typeFieldWidth) || !isInt(offsetFieldWidth) || !isInt(generationFieldWidth)) {
+                    if (!isInt(typeFieldWidth) || !isInt(offsetFieldWidth) ||
+                        !isInt(generationFieldWidth)) {
                         error('Invalid XRef entry fields length: ' + first + ', ' + n);
                     }
                     for (i = streamState.entryNum; i < n; ++i) {
@@ -4286,7 +4291,9 @@ PDFJS.build = '997096f';
                             }
                         } else if (isInt(obj)) {
                             // Parse in-stream XRef
-                            if (!isInt(parser.getObj()) || !isCmd(parser.getObj(), 'obj') || !isStream(obj = parser.getObj())) {
+                            if (!isInt(parser.getObj()) ||
+                                !isCmd(parser.getObj(), 'obj') ||
+                                !isStream(obj = parser.getObj())) {
                                 error('Invalid XRef stream');
                             }
                             dict = this.processXRefStream(obj);
@@ -4383,7 +4390,9 @@ PDFJS.build = '997096f';
                 var obj1 = parser.getObj();
                 var obj2 = parser.getObj();
                 var obj3 = parser.getObj();
-                if (!isInt(obj1) || parseInt(obj1, 10) !== num || !isInt(obj2) || parseInt(obj2, 10) !== gen || !isCmd(obj3)) {
+                if (!isInt(obj1) || parseInt(obj1, 10) !== num ||
+                    !isInt(obj2) || parseInt(obj2, 10) !== gen ||
+                    !isCmd(obj3)) {
                     error('bad XRef entry');
                 }
                 if (!isCmd(obj3, 'obj')) {
@@ -5084,7 +5093,8 @@ PDFJS.build = '997096f';
                 var data = this.data;
                 return !!(!this.isInvisible() &&
                 data &&
-                (!data.annotationFlags || !(data.annotationFlags & 0x22)) &&  // Hidden or NoView
+                (!data.annotationFlags ||
+                !(data.annotationFlags & 0x22)) &&  // Hidden or NoView
                 data.rect);                          // rectangle is necessary
             },
 
@@ -7209,7 +7219,8 @@ PDFJS.build = '997096f';
 
             var r =
                 (c * (-4.387332384609988 * c + 54.48615194189176 * m +
-                18.82290502165302 * y + 212.25662451639585 * k + -285.2331026137004) +
+                18.82290502165302 * y + 212.25662451639585 * k +
+                -285.2331026137004) +
                 m * (1.7149763477362134 * m - 5.6096736904047315 * y +
                 -17.873870861415444 * k - 5.497006427196366) +
                 y * (-2.5217340131683033 * y - 21.248923337353073 * k +
@@ -7217,17 +7228,20 @@ PDFJS.build = '997096f';
                 k * (-21.86122147463605 * k - 189.48180835922747) + 255) | 0;
             var g =
                 (c * (8.841041422036149 * c + 60.118027045597366 * m +
-                6.871425592049007 * y + 31.159100130055922 * k + -79.2970844816548) +
+                6.871425592049007 * y + 31.159100130055922 * k +
+                -79.2970844816548) +
                 m * (-15.310361306967817 * m + 17.575251261109482 * y +
                 131.35250912493976 * k - 190.9453302588951) +
                 y * (4.444339102852739 * y + 9.8632861493405 * k - 24.86741582555878) +
                 k * (-20.737325471181034 * k - 187.80453709719578) + 255) | 0;
             var b =
                 (c * (0.8842522430003296 * c + 8.078677503112928 * m +
-                30.89978309703729 * y - 0.23883238689178934 * k + -14.183576799673286) +
+                30.89978309703729 * y - 0.23883238689178934 * k +
+                -14.183576799673286) +
                 m * (10.49593273432072 * m + 63.02378494754052 * y +
                 50.606957656360734 * k - 112.23884253719248) +
-                y * (0.03296041114873217 * y + 115.60384449646641 * k + -193.58209356861505) +
+                y * (0.03296041114873217 * y + 115.60384449646641 * k +
+                -193.58209356861505) +
                 k * (-22.33816807309886 * k - 180.12613974708367) + 255) | 0;
 
             dest[destOffset] = r > 255 ? 255 : r < 0 ? 0 : r;
@@ -18384,7 +18398,8 @@ PDFJS.build = '997096f';
                     var cmapEncodingId = cmapTable.encodingId;
                     var cmapMappings = cmapTable.mappings;
                     var cmapMappingsLength = cmapMappings.length;
-                    var hasEncoding = properties.differences.length || !!properties.baseEncodingName;
+                    var hasEncoding = properties.differences.length ||
+                        !!properties.baseEncodingName;
 
                     // The spec seems to imply that if the font is symbolic the encoding
                     // should be ignored, this doesn't appear to work for 'preistabelle.pdf'
@@ -18776,7 +18791,8 @@ PDFJS.build = '997096f';
                 // descendant CIDFont uses the Adobe-GB1, Adobe-CNS1, Adobe-Japan1, or
                 // Adobe-Korea1 character collection:
                 if (properties.composite && (
-                    (properties.cMap.builtInCMap && !(properties.cMap instanceof IdentityCMap)) ||
+                    (properties.cMap.builtInCMap &&
+                    !(properties.cMap instanceof IdentityCMap)) ||
                     (properties.cidSystemInfo.registry === 'Adobe' &&
                     (properties.cidSystemInfo.ordering === 'GB1' ||
                     properties.cidSystemInfo.ordering === 'CNS1' ||
@@ -18904,7 +18920,8 @@ PDFJS.build = '997096f';
                 var fontChar = String.fromCharCode(fontCharCode);
 
                 var glyph = this.glyphCache[charcode];
-                if (!glyph || !glyph.matchesForCache(fontChar, unicode, accent, width, vmetric,
+                if (!glyph ||
+                    !glyph.matchesForCache(fontChar, unicode, accent, width, vmetric,
                         operatorListId)) {
                     glyph = new Glyph(fontChar, unicode, accent, width, vmetric,
                         operatorListId);
@@ -26876,7 +26893,7 @@ PDFJS.build = '997096f';
 
             var length = w2 * h2 * components;
             var temp = dest ? dest : (bpc <= 8 ? new Uint8Array(length) :
-                    (bpc <= 16 ? new Uint16Array(length) : new Uint32Array(length)));
+                (bpc <= 16 ? new Uint16Array(length) : new Uint32Array(length)));
             var xRatio = w1 / w2;
             var yRatio = h1 / h2;
             var i, j, py, newIndex = 0, oldIndex;
@@ -27197,7 +27214,8 @@ PDFJS.build = '997096f';
                     var kind;
                     if (this.colorSpace.name === 'DeviceGray' && bpc === 1) {
                         kind = ImageKind.GRAYSCALE_1BPP;
-                    } else if (this.colorSpace.name === 'DeviceRGB' && bpc === 8 && !this.needsDecode) {
+                    } else if (this.colorSpace.name === 'DeviceRGB' && bpc === 8 &&
+                        !this.needsDecode) {
                         kind = ImageKind.RGB_24BPP;
                     }
                     if (kind && !this.smask && !this.mask &&
@@ -37287,7 +37305,8 @@ PDFJS.build = '997096f';
                                 // clear processed flag first
                                 processingFlags[index] &= processedInverseMask;
 
-                                if (coefficentsMagnitude[index] || !neighborsSignificance[index]) {
+                                if (coefficentsMagnitude[index] ||
+                                    !neighborsSignificance[index]) {
                                     continue;
                                 }
 
@@ -38551,7 +38570,8 @@ PDFJS.build = '997096f';
                         textRegion.huffmanRefinementDH = (textRegionHuffmanFlags >> 8) & 3;
                         textRegion.huffmanRefinementDX = (textRegionHuffmanFlags >> 10) & 3;
                         textRegion.huffmanRefinementDY = (textRegionHuffmanFlags >> 12) & 3;
-                        textRegion.huffmanRefinementSizeSelector = !!(textRegionHuffmanFlags & 14);
+                        textRegion.huffmanRefinementSizeSelector =
+                            !!(textRegionHuffmanFlags & 14);
                     }
                     if (textRegion.refinement && !textRegion.refinementTemplate) {
                         at = [];

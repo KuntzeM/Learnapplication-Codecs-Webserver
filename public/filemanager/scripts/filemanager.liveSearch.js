@@ -95,6 +95,7 @@ String.prototype.score = function (abbreviation, offset) {
 }
 
 
+
 // Live search function taken from John Resig
 // http://ejohn.org/blog/jquery-livesearch/
 jQuery.fn.liveUpdate = function (list) {

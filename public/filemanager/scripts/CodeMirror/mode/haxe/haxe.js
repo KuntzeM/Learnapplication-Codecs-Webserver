@@ -19,10 +19,8 @@
             }
 
             var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c");
-            var operator = kw("operator"), atom = {type: "atom", style: "atom"}, attribute = {
-                type: "attribute",
-                style: "attribute"
-            };
+            var operator = kw("operator"), atom = {type: "atom", style: "atom"},
+                attribute = {type: "attribute", style: "attribute"};
             var type = kw("typedef");
             return {
                 "if": A,

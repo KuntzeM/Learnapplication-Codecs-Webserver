@@ -33,7 +33,7 @@
  * @url http://de77.com
  *
  * @package Internal/Mappers
- */
+	 */
 class WideImage_vendor_de77_TGA
 {
     static function rle_decode($data, $datalen)
@@ -179,5 +179,5 @@ class WideImage_vendor_de77_TGA
     static function bit5($x)
     {
         return ($x & 32) >> 5;
-    }
+	}
 }

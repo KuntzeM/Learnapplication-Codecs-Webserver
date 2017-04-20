@@ -882,6 +882,7 @@ class Dropzone extends Em
     return null
 
   createThumbnail: (file, callback) ->
+
     fileReader = new FileReader
 
     fileReader.onload = =>
@@ -1123,6 +1124,7 @@ class Dropzone extends Em
     @processQueue() if @options.autoProcessQueue
 
 
+
 Dropzone.version = "3.10.2"
 
 
@@ -1180,6 +1182,7 @@ Dropzone.discover = ->
     new Dropzone dropzone unless Dropzone.optionsForElement(dropzone) == false
 
 
+
 # Since the whole Drag'n'Drop API is pretty new, some browsers implement it,
 # but not correctly.
 # So I created a blacklist of userAgents. Yes, yes. Browser sniffing, I know.
@@ -1234,6 +1237,7 @@ Dropzone.elementInside = (element, container) ->
   return yes if element == container # Coffeescript doesn't support do/while loops
   return yes while element = element.parentNode when element == container
   return no
+
 
 
 Dropzone.getElement = (el, name) ->

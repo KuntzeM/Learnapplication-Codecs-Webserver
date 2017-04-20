@@ -142,7 +142,7 @@ function BrowserRuntime() {
         g = new Uint8Array(new ArrayBuffer(g));
         h ? (g[0] = 239, g[1] = 187, g[2] = 191, s = 3) : s = 0;
         for (h = 0; h < d; h += 1)e = a.charCodeAt(h), 128 > e ? (g[s] = e, s += 1) : 2048 > e ? (g[s] = 192 | e >>> 6, g[s + 1] = 128 | e & 63, s += 2) : 55040 >= e || 57344 <= e ? (g[s] = 224 | e >>> 12 & 15, g[s + 1] = 128 | e >>> 6 & 63, g[s + 2] = 128 | e & 63, s += 3) : (h += 1, e = (e - 55296 << 10 | a.charCodeAt(h) - 56320) + 65536,
-                        g[s] = 240 | e >>> 18 & 7, g[s + 1] = 128 | e >>> 12 & 63, g[s + 2] = 128 | e >>> 6 & 63, g[s + 3] = 128 | e & 63, s += 4);
+            g[s] = 240 | e >>> 18 & 7, g[s + 1] = 128 | e >>> 12 & 63, g[s + 2] = 128 | e >>> 6 & 63, g[s + 3] = 128 | e & 63, s += 4);
         return g
     }
 
@@ -276,7 +276,7 @@ function BrowserRuntime() {
         h.overrideMimeType && h.overrideMimeType("text/xml");
         h.onreadystatechange = function () {
             4 === h.readyState && (0 !== h.status || h.responseText ? 200 === h.status || 0 === h.status ? a(null, h.responseXML) : a(h.responseText, null) : a("File " +
-                    c + " is empty.", null))
+                c + " is empty.", null))
         };
         try {
             h.send(null)
@@ -320,7 +320,8 @@ function BrowserRuntime() {
         return window
     };
     this.requestAnimationFrame = function (a) {
-        var c = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame, h = 0;
+        var c = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame,
+            h = 0;
         if (c) c.bind(window), h = c(a); else return setTimeout(a, 15);
         return h
     };
@@ -482,7 +483,7 @@ function RhinoRuntime() {
         k && (a = k + "/" + a);
         var g = new l.java.io.File(a), h = "binary" === c ? "latin1" : c;
         g.isFile() ? ((a = readFile(a, h)) && "binary" === c && (a = f.byteArrayFromString(a, "binary")), b(null, a)) : b(a + " is not a file.",
-                null)
+            null)
     };
     this.writeFile = function (a, c, b) {
         k && (a = k + "/" + a);
@@ -504,7 +505,7 @@ function RhinoRuntime() {
         var d = "binary";
         (new l.java.io.File(h)).isFile() ? ("binary" === d && (d = "latin1"), h = readFile(h, d)) : h = null;
         h ? g(null, this.byteArrayFromString(h.substring(c,
-                c + b), "binary")) : g("Cannot read " + a, null)
+            c + b), "binary")) : g("Cannot read " + a, null)
     };
     this.readFileSync = function (a, c) {
         if (!c)return "";
@@ -756,7 +757,8 @@ function makeBase64() {
 
     function n(d) {
         d = b(d);
-        for (var e = "", m = 0; m < d.length;)e += String.fromCharCode.apply(String, d.subarray(m, m + 45E3)), m += 45E3;
+        for (var e = "",
+                 m = 0; m < d.length;)e += String.fromCharCode.apply(String, d.subarray(m, m + 45E3)), m += 45E3;
         return e
     }
 
@@ -801,16 +803,16 @@ function makeBase64() {
         return e
     }("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"), x, t, y = runtime.getWindow(), v, r;
     y && y.btoa ? (v = y.btoa, x = function (d) {
-            return v(s(d))
-        }) : (v = k, x = function (e) {
-            return l(d(e))
-        });
+        return v(s(d))
+    }) : (v = k, x = function (e) {
+        return l(d(e))
+    });
     y && y.atob ? (r = y.atob, t = function (d) {
-            d = r(d);
-            return g(d, 0, d.length)
-        }) : (r = q, t = function (d) {
-            return n(a(d))
-        });
+        d = r(d);
+        return g(d, 0, d.length)
+    }) : (r = q, t = function (d) {
+        return n(a(d))
+    });
     core.Base64 = function () {
         this.convertByteArrayToBase64 = this.convertUTF8ArrayToBase64 =
             l;
@@ -944,7 +946,8 @@ core.CSSUnits = function () {
     var a;
     core.DomUtilsImpl = function () {
         function a(d, e) {
-            for (var c = 0, b; d.parentNode !== e;)runtime.assert(null !== d.parentNode, "parent is null"), d = d.parentNode;
+            for (var c = 0,
+                     b; d.parentNode !== e;)runtime.assert(null !== d.parentNode, "parent is null"), d = d.parentNode;
             for (b = e.firstChild; b !==
             d;)c += 1, b = b.nextSibling;
             return c
@@ -1112,13 +1115,13 @@ core.CSSUnits = function () {
             var a =
                 d.ownerDocument, c = f(), b = a.body;
             if ((!1 === c.unscaledRangeClientRects || c.rangeBCRIgnoresElementBCR) && d.nodeType === Node.ELEMENT_NODE)return d = d.getBoundingClientRect(), c.elementBCRIgnoresBodyScroll ? {
-                    left: d.left + b.scrollLeft,
-                    right: d.right + b.scrollLeft,
-                    top: d.top + b.scrollTop,
-                    bottom: d.bottom + b.scrollTop,
-                    width: d.width,
-                    height: d.height
-                } : d;
+                left: d.left + b.scrollLeft,
+                right: d.right + b.scrollLeft,
+                top: d.top + b.scrollTop,
+                bottom: d.bottom + b.scrollTop,
+                width: d.width,
+                height: d.height
+            } : d;
             var h;
             e ? h = e : e = h = a.createRange();
             c = h;
@@ -1177,13 +1180,15 @@ core.Cursor = function (f, l) {
             runtime.assert(Boolean(c), "putCursorIntoTextNode: container without parent");
             runtime.assert(0 <= a && a <= e.length, "putCursorIntoTextNode: offset is out of bounds");
             0 === a ? c.insertBefore(d, e) : (a !== e.length && e.splitText(a), c.insertBefore(d,
-                    e.nextSibling))
+                e.nextSibling))
         } else e.nodeType === Node.ELEMENT_NODE && e.insertBefore(d, e.childNodes.item(a));
         p.push(d.previousSibling);
         p.push(d.nextSibling)
     }
 
-    var b = f.createElementNS("urn:webodf:names:cursor", "cursor"), k = f.createElementNS("urn:webodf:names:cursor", "anchor"), q, p = [], n = f.createRange(), g, h = core.DomUtils;
+    var b = f.createElementNS("urn:webodf:names:cursor", "cursor"),
+        k = f.createElementNS("urn:webodf:names:cursor", "anchor"), q, p = [], n = f.createRange(), g,
+        h = core.DomUtils;
     this.getNode = function () {
         return b
     };
@@ -1192,7 +1197,7 @@ core.Cursor = function (f, l) {
     };
     this.getSelectedRange = function () {
         g ? (n.setStartBefore(b), n.collapse(!0)) : (n.setStartAfter(q ? k : b), n.setEndBefore(q ?
-                b : k));
+            b : k));
         return n
     };
     this.setSelectedRange = function (d, e) {
@@ -1440,7 +1445,8 @@ core.PositionIterator = function (f, l, a, c) {
         return a
     }
 
-    var g = this, h, d, e, s = Node.TEXT_NODE, m = Node.ELEMENT_NODE, x = NodeFilter.FILTER_ACCEPT, t = NodeFilter.FILTER_REJECT;
+    var g = this, h, d, e, s = Node.TEXT_NODE, m = Node.ELEMENT_NODE, x = NodeFilter.FILTER_ACCEPT,
+        t = NodeFilter.FILTER_REJECT;
     this.nextPosition = function () {
         var e = h.currentNode, a = e.nodeType;
         if (e === f)return !1;
@@ -1475,7 +1481,8 @@ core.PositionIterator = function (f, l, a, c) {
     };
     this.unfilteredDomOffset = function () {
         if (h.currentNode.nodeType === s)return d;
-        for (var e = 0, a = h.currentNode, a = 1 === d ? a.lastChild : a.previousSibling; a;)e += 1, a = a.previousSibling;
+        for (var e = 0, a = h.currentNode,
+                 a = 1 === d ? a.lastChild : a.previousSibling; a;)e += 1, a = a.previousSibling;
         return e
     };
     this.getPreviousSibling = function () {
@@ -1499,7 +1506,7 @@ core.PositionIterator = function (f, l, a, c) {
         runtime.assert(Boolean(e), "PositionIterator.setUnfilteredPosition called without container");
         h.currentNode = e;
         e.nodeType === s ? (d = a, runtime.assert(a <= e.length,
-                "Error in setPosition: " + a + " > " + e.length), runtime.assert(0 <= a, "Error in setPosition: " + a + " < 0"), a === e.length && (h.nextSibling() ? d = 0 : h.parentNode() ? d = 1 : runtime.assert(!1, "Error in setUnfilteredPosition: position not valid."))) : a < e.childNodes.length ? (h.currentNode = e.childNodes.item(a), d = 0) : d = 1;
+            "Error in setPosition: " + a + " > " + e.length), runtime.assert(0 <= a, "Error in setPosition: " + a + " < 0"), a === e.length && (h.nextSibling() ? d = 0 : h.parentNode() ? d = 1 : runtime.assert(!1, "Error in setUnfilteredPosition: position not valid."))) : a < e.childNodes.length ? (h.currentNode = e.childNodes.item(a), d = 0) : d = 1;
         return n()
     };
     this.moveToEnd = function () {
@@ -1570,7 +1577,8 @@ core.PositionFilterChain = function () {
                     }
 
                     var f = a("./zlib/inflate.js"), p = a("./utils/common"),
-                        n = a("./utils/strings"), g = a("./zlib/constants"), h = a("./zlib/messages"), d = a("./zlib/zstream"), e = a("./zlib/gzheader"), s = function (a) {
+                        n = a("./utils/strings"), g = a("./zlib/constants"), h = a("./zlib/messages"),
+                        d = a("./zlib/zstream"), e = a("./zlib/gzheader"), s = function (a) {
                             var c = this.options = p.assign({chunkSize: 16384, windowBits: 0, to: ""}, a || {});
                             c.raw && 0 <= c.windowBits && 16 > c.windowBits && (c.windowBits = -c.windowBits, 0 === c.windowBits && (c.windowBits = -15));
                             !(0 <= c.windowBits && 16 > c.windowBits) || a && a.windowBits || (c.windowBits += 32);
@@ -1669,7 +1677,7 @@ core.PositionFilterChain = function () {
                     };
                     b.setTyped = function (a) {
                         a ? (b.Buf8 = Uint8Array, b.Buf16 = Uint16Array, b.Buf32 = Int32Array,
-                                b.assign(b, k)) : (b.Buf8 = Array, b.Buf16 = Array, b.Buf32 = Array, b.assign(b, f))
+                            b.assign(b, k)) : (b.Buf8 = Array, b.Buf16 = Array, b.Buf32 = Array, b.assign(b, f))
                     };
                     b.setTyped(a)
                 }, {}],
@@ -1693,14 +1701,14 @@ core.PositionFilterChain = function () {
                     }
                     var d = new f.Buf8(256);
                     for (a = 0; 256 > a; a++)d[a] = 252 <= a ? 6 : 248 <=
-                        a ? 5 : 240 <= a ? 4 : 224 <= a ? 3 : 192 <= a ? 2 : 1;
+                    a ? 5 : 240 <= a ? 4 : 224 <= a ? 3 : 192 <= a ? 2 : 1;
                     d[254] = d[254] = 1;
                     b.string2buf = function (d) {
                         var a, c, b, h, k, g = d.length, p = 0;
                         for (h = 0; h < g; h++)c = d.charCodeAt(h), 55296 === (c & 64512) && h + 1 < g && (b = d.charCodeAt(h + 1), 56320 === (b & 64512) && (c = 65536 + (c - 55296 << 10) + (b - 56320), h++)), p += 128 > c ? 1 : 2048 > c ? 2 : 65536 > c ? 3 : 4;
                         a = new f.Buf8(p);
                         for (h = k = 0; k < p; h++)c = d.charCodeAt(h), 55296 === (c & 64512) && h + 1 < g && (b = d.charCodeAt(h + 1), 56320 === (b & 64512) && (c = 65536 + (c - 55296 << 10) + (b - 56320), h++)), 128 > c ? a[k++] = c : (2048 > c ? a[k++] = 192 | c >>> 6 : (65536 > c ? a[k++] = 224 | c >>> 12 : (a[k++] =
-                                        240 | c >>> 18, a[k++] = 128 | c >>> 12 & 63), a[k++] = 128 | c >>> 6 & 63), a[k++] = 128 | c & 63);
+                            240 | c >>> 18, a[k++] = 128 | c >>> 12 & 63), a[k++] = 128 | c >>> 6 & 63), a[k++] = 128 | c & 63);
                         return a
                     };
                     b.buf2binstring = function (d) {
@@ -1715,7 +1723,7 @@ core.PositionFilterChain = function () {
                         for (b = h = 0; b < p;)if (g = a[b++], 128 > g) q[h++] = g; else if (f = d[g], 4 < f) q[h++] = 65533, b += f - 1; else {
                             for (g &= 2 === f ? 31 : 3 === f ? 15 : 7; 1 < f && b < p;)g = g << 6 | a[b++] & 63, f--;
                             1 < f ? q[h++] = 65533 : 65536 > g ? q[h++] = g : (g -= 65536, q[h++] =
-                                        55296 | g >> 10 & 1023, q[h++] = 56320 | g & 1023)
+                                55296 | g >> 10 & 1023, q[h++] = 56320 | g & 1023)
                         }
                         return k(q, h)
                     };
@@ -1783,7 +1791,8 @@ core.PositionFilterChain = function () {
                     }();
                     c.exports = function (a, c, b, g) {
                         b = g + b;
-                        for (a ^= -1; g < b; g++)a = a >>> 8 ^ k[(a ^ c[g]) & 255];
+                        for (a ^=
+                                 -1; g < b; g++)a = a >>> 8 ^ k[(a ^ c[g]) & 255];
                         return a ^ -1
                     }
                 }, {}],
@@ -1979,7 +1988,8 @@ core.PositionFilterChain = function () {
 
                     function g(d, a) {
                         var e, c;
-                        if (!d || !d.state)return y;
+                        if (!d ||
+                            !d.state)return y;
                         c = d.state;
                         0 > a ? (e = 0, a = -a) : (e = (a >> 4) + 1, 48 > a && (a &= 15));
                         if (a && (8 > a || 15 < a))return y;
@@ -2000,7 +2010,8 @@ core.PositionFilterChain = function () {
                         return e
                     }
 
-                    var d = a("../utils/common"), e = a("./adler32"), s = a("./crc32"), m = a("./inffast"), x = a("./inftrees"), t = 0, y = -2, v = 1, r = 852, w = 592, u = !0, A, F;
+                    var d = a("../utils/common"), e = a("./adler32"), s = a("./crc32"), m = a("./inffast"),
+                        x = a("./inftrees"), t = 0, y = -2, v = 1, r = 852, w = 592, u = !0, A, F;
                     b.inflateReset = n;
                     b.inflateReset2 = g;
                     b.inflateResetKeep = p;
@@ -2012,7 +2023,8 @@ core.PositionFilterChain = function () {
                     b.inflate = function (a, c) {
                         var b, h, f, g, z, p, q, n, r, w, T, D, O, Z;
                         D = 0;
-                        var C, V, $, ca, U, W = new d.Buf8(4), P = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
+                        var C, V, $, ca, U, W = new d.Buf8(4),
+                            P = [16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15];
                         if (!a || !a.state || !a.output || !a.input && 0 !== a.avail_in)return y;
                         b = a.state;
                         12 === b.mode && (b.mode = 13);
@@ -2696,10 +2708,16 @@ core.PositionFilterChain = function () {
                 }, {"../utils/common": 2, "./adler32": 4, "./crc32": 6, "./inffast": 8, "./inftrees": 10}],
                 10: [function (a,
                                c, b) {
-                    var k = a("../utils/common"), f = [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 0, 0], p = [16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 16, 72, 78], n = [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 0, 0], g = [16, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 64, 64];
+                    var k = a("../utils/common"),
+                        f = [3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 15, 17, 19, 23, 27, 31, 35, 43, 51, 59, 67, 83, 99, 115, 131, 163, 195, 227, 258, 0, 0],
+                        p = [16, 16, 16, 16, 16, 16, 16, 16, 17, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 19, 20, 20, 20, 20, 21, 21, 21, 21, 16, 72, 78],
+                        n = [1, 2, 3, 4, 5, 7, 9, 13, 17, 25, 33, 49, 65, 97, 129, 193, 257, 385, 513, 769, 1025, 1537, 2049, 3073, 4097, 6145, 8193, 12289, 16385, 24577, 0, 0],
+                        g = [16, 16, 16, 16, 17, 17, 18, 18, 19, 19, 20, 20, 21, 21, 22, 22, 23, 23, 24, 24, 25, 25, 26, 26, 27, 27, 28, 28, 29, 29, 64, 64];
                     c.exports = function (a, d, b, c, m, x, t, y) {
                         for (var v = y.bits, r = 0, w =
-                            0, u = 0, A = 0, F = 0, B = 0, E = 0, H = 0, I = 0, Q = 0, N, z, Y = null, R = 0, J, G = new k.Buf16(16), B = new k.Buf16(16), ba = null, T = 0, D, O, Z, r = 0; 15 >= r; r++)G[r] = 0;
+                                0, u = 0, A = 0, F = 0, B = 0, E = 0, H = 0, I = 0, Q = 0, N, z, Y = null, R = 0, J,
+                                 G = new k.Buf16(16), B = new k.Buf16(16), ba = null, T = 0, D, O, Z,
+                                 r = 0; 15 >= r; r++)G[r] = 0;
                         for (w = 0; w < c; w++)G[d[b + w]]++;
                         F = v;
                         for (A = 15; 1 <= A && 0 === G[A]; A--);
@@ -2925,11 +2943,12 @@ core.Zip = function (f, l) {
 
     function c(a) {
         var d = [0, 1996959894, 3993919788, 2567524794, 124634137, 1886057615, 3915621685, 2657392035, 249268274, 2044508324, 3772115230, 2547177864, 162941995, 2125561021, 3887607047, 2428444049, 498536548, 1789927666, 4089016648, 2227061214, 450548861, 1843258603, 4107580753, 2211677639, 325883990, 1684777152, 4251122042, 2321926636, 335633487, 1661365465, 4195302755, 2366115317, 997073096, 1281953886, 3579855332, 2724688242, 1006888145,
-            1258607687, 3524101629, 2768942443, 901097722, 1119000684, 3686517206, 2898065728, 853044451, 1172266101, 3705015759, 2882616665, 651767980, 1373503546, 3369554304, 3218104598, 565507253, 1454621731, 3485111705, 3099436303, 671266974, 1594198024, 3322730930, 2970347812, 795835527, 1483230225, 3244367275, 3060149565, 1994146192, 31158534, 2563907772, 4023717930, 1907459465, 112637215, 2680153253, 3904427059, 2013776290, 251722036, 2517215374, 3775830040, 2137656763, 141376813, 2439277719, 3865271297, 1802195444, 476864866, 2238001368, 4066508878,
-            1812370925, 453092731, 2181625025, 4111451223, 1706088902, 314042704, 2344532202, 4240017532, 1658658271, 366619977, 2362670323, 4224994405, 1303535960, 984961486, 2747007092, 3569037538, 1256170817, 1037604311, 2765210733, 3554079995, 1131014506, 879679996, 2909243462, 3663771856, 1141124467, 855842277, 2852801631, 3708648649, 1342533948, 654459306, 3188396048, 3373015174, 1466479909, 544179635, 3110523913, 3462522015, 1591671054, 702138776, 2966460450, 3352799412, 1504918807, 783551873, 3082640443, 3233442989, 3988292384, 2596254646, 62317068,
-            1957810842, 3939845945, 2647816111, 81470997, 1943803523, 3814918930, 2489596804, 225274430, 2053790376, 3826175755, 2466906013, 167816743, 2097651377, 4027552580, 2265490386, 503444072, 1762050814, 4150417245, 2154129355, 426522225, 1852507879, 4275313526, 2312317920, 282753626, 1742555852, 4189708143, 2394877945, 397917763, 1622183637, 3604390888, 2714866558, 953729732, 1340076626, 3518719985, 2797360999, 1068828381, 1219638859, 3624741850, 2936675148, 906185462, 1090812512, 3747672003, 2825379669, 829329135, 1181335161, 3412177804, 3160834842,
-            628085408, 1382605366, 3423369109, 3138078467, 570562233, 1426400815, 3317316542, 2998733608, 733239954, 1555261956, 3268935591, 3050360625, 752459403, 1541320221, 2607071920, 3965973030, 1969922972, 40735498, 2617837225, 3943577151, 1913087877, 83908371, 2512341634, 3803740692, 2075208622, 213261112, 2463272603, 3855990285, 2094854071, 198958881, 2262029012, 4057260610, 1759359992, 534414190, 2176718541, 4139329115, 1873836001, 414664567, 2282248934, 4279200368, 1711684554, 285281116, 2405801727, 4167216745, 1634467795, 376229701, 2685067896,
-            3608007406, 1308918612, 956543938, 2808555105, 3495958263, 1231636301, 1047427035, 2932959818, 3654703836, 1088359270, 936918E3, 2847714899, 3736837829, 1202900863, 817233897, 3183342108, 3401237130, 1404277552, 615818150, 3134207493, 3453421203, 1423857449, 601450431, 3009837614, 3294710456, 1567103746, 711928724, 3020668471, 3272380065, 1510334235, 755167117], b, e, c = a.length, h = 0, h = 0;
+                1258607687, 3524101629, 2768942443, 901097722, 1119000684, 3686517206, 2898065728, 853044451, 1172266101, 3705015759, 2882616665, 651767980, 1373503546, 3369554304, 3218104598, 565507253, 1454621731, 3485111705, 3099436303, 671266974, 1594198024, 3322730930, 2970347812, 795835527, 1483230225, 3244367275, 3060149565, 1994146192, 31158534, 2563907772, 4023717930, 1907459465, 112637215, 2680153253, 3904427059, 2013776290, 251722036, 2517215374, 3775830040, 2137656763, 141376813, 2439277719, 3865271297, 1802195444, 476864866, 2238001368, 4066508878,
+                1812370925, 453092731, 2181625025, 4111451223, 1706088902, 314042704, 2344532202, 4240017532, 1658658271, 366619977, 2362670323, 4224994405, 1303535960, 984961486, 2747007092, 3569037538, 1256170817, 1037604311, 2765210733, 3554079995, 1131014506, 879679996, 2909243462, 3663771856, 1141124467, 855842277, 2852801631, 3708648649, 1342533948, 654459306, 3188396048, 3373015174, 1466479909, 544179635, 3110523913, 3462522015, 1591671054, 702138776, 2966460450, 3352799412, 1504918807, 783551873, 3082640443, 3233442989, 3988292384, 2596254646, 62317068,
+                1957810842, 3939845945, 2647816111, 81470997, 1943803523, 3814918930, 2489596804, 225274430, 2053790376, 3826175755, 2466906013, 167816743, 2097651377, 4027552580, 2265490386, 503444072, 1762050814, 4150417245, 2154129355, 426522225, 1852507879, 4275313526, 2312317920, 282753626, 1742555852, 4189708143, 2394877945, 397917763, 1622183637, 3604390888, 2714866558, 953729732, 1340076626, 3518719985, 2797360999, 1068828381, 1219638859, 3624741850, 2936675148, 906185462, 1090812512, 3747672003, 2825379669, 829329135, 1181335161, 3412177804, 3160834842,
+                628085408, 1382605366, 3423369109, 3138078467, 570562233, 1426400815, 3317316542, 2998733608, 733239954, 1555261956, 3268935591, 3050360625, 752459403, 1541320221, 2607071920, 3965973030, 1969922972, 40735498, 2617837225, 3943577151, 1913087877, 83908371, 2512341634, 3803740692, 2075208622, 213261112, 2463272603, 3855990285, 2094854071, 198958881, 2262029012, 4057260610, 1759359992, 534414190, 2176718541, 4139329115, 1873836001, 414664567, 2282248934, 4279200368, 1711684554, 285281116, 2405801727, 4167216745, 1634467795, 376229701, 2685067896,
+                3608007406, 1308918612, 956543938, 2808555105, 3495958263, 1231636301, 1047427035, 2932959818, 3654703836, 1088359270, 936918E3, 2847714899, 3736837829, 1202900863, 817233897, 3183342108, 3401237130, 1404277552, 615818150, 3134207493, 3453421203, 1423857449, 601450431, 3009837614, 3294710456, 1567103746, 711928724, 3020668471, 3272380065, 1510334235, 755167117],
+            b, e, c = a.length, h = 0, h = 0;
         b = -1;
         for (e = 0; e < c; e += 1)h = (b ^ a[e]) & 255, h = d[h], b = b >>> 8 ^ h;
         return b ^ -1
@@ -2983,7 +3002,7 @@ core.Zip = function (f, l) {
         };
         this.error = null;
         e && (c = e.readUInt32LE(), 33639248 !== c ? this.error = "Central directory entry has wrong signature at position " + (e.pos - 4).toString() + ' for file "' + d + '": ' + e.data.length.toString() : (e.pos += 6, g = e.readUInt16LE(), this.date = b(e.readUInt32LE()), e.readUInt32LE(), s = e.readUInt32LE(), f = e.readUInt32LE(), h = e.readUInt16LE(), m = e.readUInt16LE(), c = e.readUInt16LE(), e.pos += 8, k = e.readUInt32LE(), this.filename = runtime.byteArrayToString(e.data.subarray(e.pos, e.pos + h), "utf8"), this.data =
-                null, e.pos += h + m + c))
+            null, e.pos += h + m + c))
     }
 
     function p(d, b) {
@@ -2991,21 +3010,21 @@ core.Zip = function (f, l) {
             var e = new core.ByteArray(d), c;
             c = e.readUInt32LE();
             101010256 !== c ? b("Central directory signature is wrong: " + c.toString(), r) : (c = e.readUInt16LE(), 0 !== c ? b("Zip files with non-zero disk numbers are not supported.", r) : (c = e.readUInt16LE(), 0 !== c ? b("Zip files with non-zero disk numbers are not supported.", r) : (c = e.readUInt16LE(), y = e.readUInt16LE(), c !== y ? b("Number of entries is inconsistent.", r) : (c = e.readUInt32LE(),
-                                e = e.readUInt16LE(), e = t - 22 - c, a(e, t - e, function (a, d) {
-                                if (a || null === d) b(a, r); else a:{
-                                    var e = new core.ByteArray(d), c, h;
-                                    m = [];
-                                    for (c = 0; c < y; c += 1) {
-                                        h = new q(f, e);
-                                        if (h.error) {
-                                            b(h.error, r);
-                                            break a
-                                        }
-                                        m[m.length] = h
-                                    }
-                                    b(null, r)
-                                }
-                            })))))
+                e = e.readUInt16LE(), e = t - 22 - c, a(e, t - e, function (a, d) {
+                if (a || null === d) b(a, r); else a:{
+                    var e = new core.ByteArray(d), c, h;
+                    m = [];
+                    for (c = 0; c < y; c += 1) {
+                        h = new q(f, e);
+                        if (h.error) {
+                            b(h.error, r);
+                            break a
+                        }
+                        m[m.length] = h
+                    }
+                    b(null, r)
+                }
+            })))))
         }
     }
 
@@ -3053,8 +3072,8 @@ core.Zip = function (f, l) {
         if (a === m.length) b(null); else {
             var e = m[a];
             null !== e.data ? d(a + 1, b) : e.load(function (e) {
-                    e ? b(e) : d(a + 1, b)
-                })
+                e ? b(e) : d(a + 1, b)
+            })
         }
     }
 
@@ -3145,11 +3164,12 @@ core.Zip = function (f, l) {
     };
     t = -1;
     null === l ? m = [] : runtime.readFile(f, "binary", function (d, b) {
-            "string" === typeof b && (d = "file was read as a string. Should be Uint8Array.");
-            d || !b || 0 === b.length ? l("File '" + f + "' cannot be read. Err: " + (d || "[none]"), r) : (x = b, t = x.length, a(t - 22, 22, function (a, d) {
-                    a || null === d ? l(a, r) : p(d, l)
-                }))
-        })
+        "string" ===
+        typeof b && (d = "file was read as a string. Should be Uint8Array.");
+        d || !b || 0 === b.length ? l("File '" + f + "' cannot be read. Err: " + (d || "[none]"), r) : (x = b, t = x.length, a(t - 22, 22, function (a, d) {
+            a || null === d ? l(a, r) : p(d, l)
+        }))
+    })
 };
 core.SimpleClientRect = null;
 gui.CommonConstraints = {EDIT: {ANNOTATIONS: {ONLY_DELETE_OWN: "onlyDeleteOwn"}, REVIEW_MODE: "reviewMode"}};
@@ -3253,12 +3273,13 @@ odf.Namespaces.lookupNamespaceURI.lookupNamespaceURI = odf.Namespaces.lookupName
 (function () {
     odf.OdfSchemaImpl = function () {
         var f = [["config:config-item", "uncategorized"], ["form:item", "object"], ["form:option", "uncategorized"], ["math:math", "field"], ["meta:user-defined", "uncategorized"], ["number:currency-symbol", "uncategorized"], ["number:embedded-text", "uncategorized"], ["number:text", "uncategorized"], ["presentation:date-time-decl", "uncategorized"], ["presentation:footer-decl", "uncategorized"], ["presentation:header-decl", "uncategorized"], ["svg:desc", "text"], ["svg:title", "text"], ["table:desc",
-            "uncategorized"], ["table:title", "uncategorized"], ["text:a", "text"], ["text:author-initials", "field"], ["text:author-name", "field"], ["text:bibliography-mark", "field"], ["text:bookmark-ref", "field"], ["text:chapter", "field"], ["text:character-count", "field"], ["text:conditional-text", "field"], ["text:creation-date", "field"], ["text:creation-time", "field"], ["text:creator", "field"], ["text:database-display", "field"], ["text:database-name", "field"], ["text:database-row-number", "field"], ["text:date", "field"], ["text:dde-connection",
-            "field"], ["text:description", "field"], ["text:editing-cycles", "field"], ["text:editing-duration", "field"], ["text:execute-macro", "uncategorized"], ["text:expression", "uncategorized"], ["text:file-name", "field"], ["text:h", "text"], ["text:hidden-paragraph", "text"], ["text:hidden-text", "text"], ["text:image-count", "field"], ["text:index-entry-span", "uncategorized"], ["text:index-title-template", "uncategorized"], ["text:initial-creator", "field"], ["text:keywords", "field"], ["text:linenumbering-separator", "style"],
-            ["text:measure", "uncategorized"], ["text:meta", "uncategorized"], ["text:meta-field", "uncategorized"], ["text:modification-date", "field"], ["text:modification-time", "field"], ["text:note-citation", "field"], ["text:note-continuation-notice-backward", "style"], ["text:note-continuation-notice-forward", "style"], ["text:note-ref", "field"], ["text:object-count", "field"], ["text:p", "text"], ["text:page-continuation", "uncategorized"], ["text:page-count", "field"], ["text:page-number", "field"], ["text:page-variable-get",
-                "field"], ["text:page-variable-set", "field"], ["text:paragraph-count", "field"], ["text:placeholder", "field"], ["text:print-date", "field"], ["text:print-time", "field"], ["text:printed-by", "field"], ["text:reference-ref", "field"], ["text:ruby-base", "text"], ["text:ruby-text", "text"], ["text:script", "text"], ["text:sender-city", "field"], ["text:sender-company", "field"], ["text:sender-country", "field"], ["text:sender-email", "field"], ["text:sender-fax", "field"], ["text:sender-firstname", "field"], ["text:sender-initials",
-                "field"], ["text:sender-lastname", "field"], ["text:sender-phone-private", "field"], ["text:sender-phone-work", "field"], ["text:sender-position", "field"], ["text:sender-postal-code", "field"], ["text:sender-state-or-province", "field"], ["text:sender-street", "field"], ["text:sender-title", "field"], ["text:sequence", "uncategorized"], ["text:sequence-ref", "uncategorized"], ["text:sheet-name", "uncategorized"], ["text:span", "text"], ["text:subject", "field"], ["text:table-count", "field"], ["text:table-formula", "deprecated"],
-            ["text:template-name", "uncategorized"], ["text:text-input", "field"], ["text:time", "field"], ["text:title", "field"], ["text:user-defined", "field"], ["text:user-field-get", "field"], ["text:user-field-input", "field"], ["text:variable-get", "field"], ["text:variable-input", "field"], ["text:variable-set", "field"], ["text:word-count", "field"], ["xforms:model", "uncategorized"]], l = {};
+                "uncategorized"], ["table:title", "uncategorized"], ["text:a", "text"], ["text:author-initials", "field"], ["text:author-name", "field"], ["text:bibliography-mark", "field"], ["text:bookmark-ref", "field"], ["text:chapter", "field"], ["text:character-count", "field"], ["text:conditional-text", "field"], ["text:creation-date", "field"], ["text:creation-time", "field"], ["text:creator", "field"], ["text:database-display", "field"], ["text:database-name", "field"], ["text:database-row-number", "field"], ["text:date", "field"], ["text:dde-connection",
+                "field"], ["text:description", "field"], ["text:editing-cycles", "field"], ["text:editing-duration", "field"], ["text:execute-macro", "uncategorized"], ["text:expression", "uncategorized"], ["text:file-name", "field"], ["text:h", "text"], ["text:hidden-paragraph", "text"], ["text:hidden-text", "text"], ["text:image-count", "field"], ["text:index-entry-span", "uncategorized"], ["text:index-title-template", "uncategorized"], ["text:initial-creator", "field"], ["text:keywords", "field"], ["text:linenumbering-separator", "style"],
+                ["text:measure", "uncategorized"], ["text:meta", "uncategorized"], ["text:meta-field", "uncategorized"], ["text:modification-date", "field"], ["text:modification-time", "field"], ["text:note-citation", "field"], ["text:note-continuation-notice-backward", "style"], ["text:note-continuation-notice-forward", "style"], ["text:note-ref", "field"], ["text:object-count", "field"], ["text:p", "text"], ["text:page-continuation", "uncategorized"], ["text:page-count", "field"], ["text:page-number", "field"], ["text:page-variable-get",
+                    "field"], ["text:page-variable-set", "field"], ["text:paragraph-count", "field"], ["text:placeholder", "field"], ["text:print-date", "field"], ["text:print-time", "field"], ["text:printed-by", "field"], ["text:reference-ref", "field"], ["text:ruby-base", "text"], ["text:ruby-text", "text"], ["text:script", "text"], ["text:sender-city", "field"], ["text:sender-company", "field"], ["text:sender-country", "field"], ["text:sender-email", "field"], ["text:sender-fax", "field"], ["text:sender-firstname", "field"], ["text:sender-initials",
+                    "field"], ["text:sender-lastname", "field"], ["text:sender-phone-private", "field"], ["text:sender-phone-work", "field"], ["text:sender-position", "field"], ["text:sender-postal-code", "field"], ["text:sender-state-or-province", "field"], ["text:sender-street", "field"], ["text:sender-title", "field"], ["text:sequence", "uncategorized"], ["text:sequence-ref", "uncategorized"], ["text:sheet-name", "uncategorized"], ["text:span", "text"], ["text:subject", "field"], ["text:table-count", "field"], ["text:table-formula", "deprecated"],
+                ["text:template-name", "uncategorized"], ["text:text-input", "field"], ["text:time", "field"], ["text:title", "field"], ["text:user-defined", "field"], ["text:user-field-get", "field"], ["text:user-field-input", "field"], ["text:variable-get", "field"], ["text:variable-input", "field"], ["text:variable-set", "field"], ["text:word-count", "field"], ["xforms:model", "uncategorized"]],
+            l = {};
         this.isTextContainer = function (a, c) {
             return "text" === l[a + ":" + c]
         };
@@ -3506,8 +3527,10 @@ odf.OdfUtilsImpl = function () {
         return b
     }
 
-    var Y = odf.Namespaces.textns, R = odf.Namespaces.drawns, J = odf.Namespaces.xlinkns, G = core.DomUtils, ba = [odf.Namespaces.dbns, odf.Namespaces.dcns, odf.Namespaces.dr3dns, odf.Namespaces.drawns,
-        odf.Namespaces.chartns, odf.Namespaces.formns, odf.Namespaces.numberns, odf.Namespaces.officens, odf.Namespaces.presentationns, odf.Namespaces.stylens, odf.Namespaces.svgns, odf.Namespaces.tablens, odf.Namespaces.textns], T = odf.OdfSchema;
+    var Y = odf.Namespaces.textns, R = odf.Namespaces.drawns, J = odf.Namespaces.xlinkns, G = core.DomUtils,
+        ba = [odf.Namespaces.dbns, odf.Namespaces.dcns, odf.Namespaces.dr3dns, odf.Namespaces.drawns,
+            odf.Namespaces.chartns, odf.Namespaces.formns, odf.Namespaces.numberns, odf.Namespaces.officens, odf.Namespaces.presentationns, odf.Namespaces.stylens, odf.Namespaces.svgns, odf.Namespaces.tablens, odf.Namespaces.textns],
+        T = odf.OdfSchema;
     this.isImage = f;
     this.isCharacterFrame = l;
     this.isInlineRoot = a;
@@ -3648,7 +3671,8 @@ odf.OdfUtilsImpl = function () {
 };
 odf.OdfUtils = new odf.OdfUtilsImpl;
 gui.OdfTextBodyNodeFilter = function () {
-    var f = odf.OdfUtils, l = Node.TEXT_NODE, a = NodeFilter.FILTER_REJECT, c = NodeFilter.FILTER_ACCEPT, b = odf.Namespaces.textns;
+    var f = odf.OdfUtils, l = Node.TEXT_NODE, a = NodeFilter.FILTER_REJECT, c = NodeFilter.FILTER_ACCEPT,
+        b = odf.Namespaces.textns;
     this.acceptNode = function (k) {
         if (k.nodeType === l) {
             if (!f.isGroupingElement(k.parentNode))return a
@@ -3678,7 +3702,8 @@ function createXPathSingleton() {
 
     function l(a) {
         for (var d = [], b = 0, c = a.length, m; b < c;) {
-            var k = a, p = c, n = d, q = "", l = [], w = k.indexOf("[", b), u = k.indexOf("/", b), A = k.indexOf("=", b);
+            var k = a, p = c, n = d, q = "", l = [], w = k.indexOf("[", b), u = k.indexOf("/", b),
+                A = k.indexOf("=", b);
             f(u, w, A) ? (q = k.substring(b, u), b = u + 1) : f(w, u, A) ? (q = k.substring(b, w), b = g(k, w, l)) : f(A, u, w) ? (q = k.substring(b, A), b = A) : (q = k.substring(b, p), b = p);
             n.push({location: q, predicates: l});
             if (b < c && "=" === a[b]) {
@@ -3767,19 +3792,20 @@ function createXPathSingleton() {
         var c = new a, m = n(c,
             d, e), g = d.value;
         return void 0 === g ? new k(b, function (a) {
-                c.setNode(a);
-                m.reset();
-                return null !== m.next()
-            }) : new k(b, function (a) {
-                c.setNode(a);
-                m.reset();
-                return (a = m.next()) ? a.nodeValue === g : !1
-            })
+            c.setNode(a);
+            m.reset();
+            return null !== m.next()
+        }) : new k(b, function (a) {
+            c.setNode(a);
+            m.reset();
+            return (a = m.next()) ? a.nodeValue === g : !1
+        })
     }
 
     var n, g;
     g = function (a, d, b) {
-        for (var c = d, m = a.length, g = 0; c < m;)"]" === a[c] ? (g -= 1, 0 >= g && b.push(l(a.substring(d, c)))) : "[" === a[c] && (0 >= g && (d = c + 1), g += 1), c += 1;
+        for (var c = d, m = a.length,
+                 g = 0; c < m;)"]" === a[c] ? (g -= 1, 0 >= g && b.push(l(a.substring(d, c)))) : "[" === a[c] && (0 >= g && (d = c + 1), g += 1), c += 1;
         return c
     };
     n = function (a, d, e) {
@@ -3911,449 +3937,452 @@ odf.StyleInfo = function () {
         for (c = a && a.firstElementChild; c;)m = c, e.forEach(d), h(m, b), c = c.nextElementSibling
     }
 
-    var d = odf.Namespaces.chartns, e = odf.Namespaces.dbns, s = odf.Namespaces.dr3dns, m = odf.Namespaces.drawns, x = odf.Namespaces.formns, t = odf.Namespaces.numberns, y = odf.Namespaces.officens, v = odf.Namespaces.presentationns, r = odf.Namespaces.stylens, w = odf.Namespaces.tablens, u = odf.Namespaces.textns, A = {
-        "urn:oasis:names:tc:opendocument:xmlns:chart:1.0": "chart:",
-        "urn:oasis:names:tc:opendocument:xmlns:database:1.0": "db:",
-        "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0": "dr3d:",
-        "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0": "draw:",
-        "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0": "fo:",
-        "urn:oasis:names:tc:opendocument:xmlns:form:1.0": "form:",
-        "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0": "number:",
-        "urn:oasis:names:tc:opendocument:xmlns:office:1.0": "office:",
-        "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0": "presentation:",
-        "urn:oasis:names:tc:opendocument:xmlns:style:1.0": "style:",
-        "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0": "svg:",
-        "urn:oasis:names:tc:opendocument:xmlns:table:1.0": "table:",
-        "urn:oasis:names:tc:opendocument:xmlns:text:1.0": "chart:",
-        "http://www.w3.org/XML/1998/namespace": "xml:"
-    }, F = {
-        text: [{ens: r, en: "tab-stop", ans: r, a: "leader-text-style"}, {
-            ens: r,
-            en: "drop-cap",
-            ans: r,
-            a: "style-name"
-        }, {ens: u, en: "notes-configuration", ans: u, a: "citation-body-style-name"}, {
-            ens: u,
-            en: "notes-configuration",
-            ans: u,
-            a: "citation-style-name"
-        }, {ens: u, en: "a", ans: u, a: "style-name"}, {ens: u, en: "alphabetical-index", ans: u, a: "style-name"}, {
-            ens: u, en: "linenumbering-configuration",
-            ans: u, a: "style-name"
-        }, {ens: u, en: "list-level-style-number", ans: u, a: "style-name"}, {
-            ens: u,
-            en: "ruby-text",
-            ans: u,
-            a: "style-name"
-        }, {ens: u, en: "span", ans: u, a: "style-name"}, {ens: u, en: "a", ans: u, a: "visited-style-name"}, {
-            ens: r,
-            en: "text-properties",
-            ans: r,
-            a: "text-line-through-text-style"
-        }, {ens: u, en: "alphabetical-index-source", ans: u, a: "main-entry-style-name"}, {
-            ens: u,
-            en: "index-entry-bibliography",
-            ans: u,
-            a: "style-name"
-        }, {ens: u, en: "index-entry-chapter", ans: u, a: "style-name"}, {
-            ens: u,
-            en: "index-entry-link-end",
-            ans: u,
-            a: "style-name"
-        },
-            {ens: u, en: "index-entry-link-start", ans: u, a: "style-name"}, {
+    var d = odf.Namespaces.chartns, e = odf.Namespaces.dbns, s = odf.Namespaces.dr3dns, m = odf.Namespaces.drawns,
+        x = odf.Namespaces.formns, t = odf.Namespaces.numberns, y = odf.Namespaces.officens,
+        v = odf.Namespaces.presentationns, r = odf.Namespaces.stylens, w = odf.Namespaces.tablens,
+        u = odf.Namespaces.textns, A = {
+            "urn:oasis:names:tc:opendocument:xmlns:chart:1.0": "chart:",
+            "urn:oasis:names:tc:opendocument:xmlns:database:1.0": "db:",
+            "urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0": "dr3d:",
+            "urn:oasis:names:tc:opendocument:xmlns:drawing:1.0": "draw:",
+            "urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0": "fo:",
+            "urn:oasis:names:tc:opendocument:xmlns:form:1.0": "form:",
+            "urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0": "number:",
+            "urn:oasis:names:tc:opendocument:xmlns:office:1.0": "office:",
+            "urn:oasis:names:tc:opendocument:xmlns:presentation:1.0": "presentation:",
+            "urn:oasis:names:tc:opendocument:xmlns:style:1.0": "style:",
+            "urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0": "svg:",
+            "urn:oasis:names:tc:opendocument:xmlns:table:1.0": "table:",
+            "urn:oasis:names:tc:opendocument:xmlns:text:1.0": "chart:",
+            "http://www.w3.org/XML/1998/namespace": "xml:"
+        }, F = {
+            text: [{ens: r, en: "tab-stop", ans: r, a: "leader-text-style"}, {
+                ens: r,
+                en: "drop-cap",
+                ans: r,
+                a: "style-name"
+            }, {ens: u, en: "notes-configuration", ans: u, a: "citation-body-style-name"}, {
                 ens: u,
-                en: "index-entry-page-number",
+                en: "notes-configuration",
+                ans: u,
+                a: "citation-style-name"
+            }, {ens: u, en: "a", ans: u, a: "style-name"}, {ens: u, en: "alphabetical-index", ans: u, a: "style-name"}, {
+                ens: u, en: "linenumbering-configuration",
+                ans: u, a: "style-name"
+            }, {ens: u, en: "list-level-style-number", ans: u, a: "style-name"}, {
+                ens: u,
+                en: "ruby-text",
                 ans: u,
                 a: "style-name"
-            }, {ens: u, en: "index-entry-span", ans: u, a: "style-name"}, {
+            }, {ens: u, en: "span", ans: u, a: "style-name"}, {ens: u, en: "a", ans: u, a: "visited-style-name"}, {
+                ens: r,
+                en: "text-properties",
+                ans: r,
+                a: "text-line-through-text-style"
+            }, {ens: u, en: "alphabetical-index-source", ans: u, a: "main-entry-style-name"}, {
                 ens: u,
-                en: "index-entry-tab-stop",
+                en: "index-entry-bibliography",
                 ans: u,
                 a: "style-name"
-            }, {ens: u, en: "index-entry-text", ans: u, a: "style-name"}, {
+            }, {ens: u, en: "index-entry-chapter", ans: u, a: "style-name"}, {
                 ens: u,
-                en: "index-title-template",
+                en: "index-entry-link-end",
                 ans: u,
                 a: "style-name"
-            }, {ens: u, en: "list-level-style-bullet", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "outline-level-style",
-                ans: u,
-                a: "style-name"
-            }],
-        paragraph: [{ens: m, en: "caption", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "circle", ans: m, a: "text-style-name"
-        }, {ens: m, en: "connector", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "control",
-            ans: m,
-            a: "text-style-name"
-        }, {ens: m, en: "custom-shape", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "ellipse",
-            ans: m,
-            a: "text-style-name"
-        }, {ens: m, en: "frame", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "line",
-            ans: m,
-            a: "text-style-name"
-        }, {ens: m, en: "measure", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "path",
-            ans: m,
-            a: "text-style-name"
-        }, {ens: m, en: "polygon", ans: m, a: "text-style-name"}, {
-            ens: m,
-            en: "polyline",
-            ans: m,
-            a: "text-style-name"
-        },
-            {ens: m, en: "rect", ans: m, a: "text-style-name"}, {
+            },
+                {ens: u, en: "index-entry-link-start", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "index-entry-page-number",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "index-entry-span", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "index-entry-tab-stop",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "index-entry-text", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "index-title-template",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "list-level-style-bullet", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "outline-level-style",
+                    ans: u,
+                    a: "style-name"
+                }],
+            paragraph: [{ens: m, en: "caption", ans: m, a: "text-style-name"}, {
                 ens: m,
-                en: "regular-polygon",
+                en: "circle", ans: m, a: "text-style-name"
+            }, {ens: m, en: "connector", ans: m, a: "text-style-name"}, {
+                ens: m,
+                en: "control",
                 ans: m,
                 a: "text-style-name"
-            }, {ens: y, en: "annotation", ans: m, a: "text-style-name"}, {
-                ens: x,
-                en: "column",
-                ans: x,
+            }, {ens: m, en: "custom-shape", ans: m, a: "text-style-name"}, {
+                ens: m,
+                en: "ellipse",
+                ans: m,
                 a: "text-style-name"
-            }, {ens: r, en: "style", ans: r, a: "next-style-name"}, {
-                ens: w,
-                en: "body",
-                ans: w,
-                a: "paragraph-style-name"
-            }, {ens: w, en: "even-columns", ans: w, a: "paragraph-style-name"}, {
-                ens: w,
-                en: "even-rows",
-                ans: w,
-                a: "paragraph-style-name"
-            }, {ens: w, en: "first-column", ans: w, a: "paragraph-style-name"}, {
-                ens: w,
-                en: "first-row",
-                ans: w,
-                a: "paragraph-style-name"
-            },
-            {ens: w, en: "last-column", ans: w, a: "paragraph-style-name"}, {
-                ens: w,
-                en: "last-row",
-                ans: w,
-                a: "paragraph-style-name"
-            }, {ens: w, en: "odd-columns", ans: w, a: "paragraph-style-name"}, {
-                ens: w,
-                en: "odd-rows",
-                ans: w,
-                a: "paragraph-style-name"
-            }, {ens: u, en: "notes-configuration", ans: u, a: "default-style-name"}, {
-                ens: u,
-                en: "alphabetical-index-entry-template",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "bibliography-entry-template", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "h",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "illustration-index-entry-template", ans: u, a: "style-name"},
-            {ens: u, en: "index-source-style", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "object-index-entry-template",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "p", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "table-index-entry-template",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "table-of-content-entry-template", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "table-index-entry-template",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "user-index-entry-template", ans: u, a: "style-name"}, {
-                ens: r,
-                en: "page-layout-properties",
-                ans: r,
-                a: "register-truth-ref-style-name"
-            }],
-        chart: [{
-            ens: d, en: "axis", ans: d,
-            a: "style-name"
-        }, {ens: d, en: "chart", ans: d, a: "style-name"}, {ens: d, en: "data-label", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "data-point",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "equation", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "error-indicator",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "floor", ans: d, a: "style-name"}, {ens: d, en: "footer", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "grid",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "legend", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "mean-value",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "plot-area", ans: d, a: "style-name"}, {
-            ens: d, en: "regression-curve",
-            ans: d, a: "style-name"
-        }, {ens: d, en: "series", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "stock-gain-marker",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "stock-loss-marker", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "stock-range-line",
-            ans: d,
-            a: "style-name"
-        }, {ens: d, en: "subtitle", ans: d, a: "style-name"}, {ens: d, en: "title", ans: d, a: "style-name"}, {
-            ens: d,
-            en: "wall",
-            ans: d,
-            a: "style-name"
-        }],
-        section: [{ens: u, en: "alphabetical-index", ans: u, a: "style-name"}, {
-            ens: u,
-            en: "bibliography",
-            ans: u,
-            a: "style-name"
-        }, {ens: u, en: "illustration-index", ans: u, a: "style-name"},
-            {ens: u, en: "index-title", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "object-index",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "section", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "table-of-content",
-                ans: u,
-                a: "style-name"
-            }, {ens: u, en: "table-index", ans: u, a: "style-name"}, {
-                ens: u,
-                en: "user-index",
-                ans: u,
-                a: "style-name"
-            }],
-        ruby: [{ens: u, en: "ruby", ans: u, a: "style-name"}],
-        table: [{ens: e, en: "query", ans: e, a: "style-name"}, {
-            ens: e,
-            en: "table-representation",
-            ans: e,
-            a: "style-name"
-        }, {ens: w, en: "background", ans: w, a: "style-name"}, {ens: w, en: "table", ans: w, a: "style-name"}],
-        "table-column": [{ens: e, en: "column", ans: e, a: "style-name"}, {
-            ens: w,
-            en: "table-column",
-            ans: w,
-            a: "style-name"
-        }],
-        "table-row": [{ens: e, en: "query", ans: e, a: "default-row-style-name"}, {
-            ens: e,
-            en: "table-representation",
-            ans: e,
-            a: "default-row-style-name"
-        }, {ens: w, en: "table-row", ans: w, a: "style-name"}],
-        "table-cell": [{ens: e, en: "column", ans: e, a: "default-cell-style-name"}, {
-            ens: w,
-            en: "table-column",
-            ans: w,
-            a: "default-cell-style-name"
-        }, {ens: w, en: "table-row", ans: w, a: "default-cell-style-name"}, {
-            ens: w,
-            en: "body",
-            ans: w,
-            a: "style-name"
-        },
-            {ens: w, en: "covered-table-cell", ans: w, a: "style-name"}, {
-                ens: w,
-                en: "even-columns",
-                ans: w,
-                a: "style-name"
-            }, {ens: w, en: "covered-table-cell", ans: w, a: "style-name"}, {
-                ens: w,
-                en: "even-columns",
-                ans: w,
-                a: "style-name"
-            }, {ens: w, en: "even-rows", ans: w, a: "style-name"}, {
-                ens: w,
-                en: "first-column",
-                ans: w,
-                a: "style-name"
-            }, {ens: w, en: "first-row", ans: w, a: "style-name"}, {
-                ens: w,
-                en: "last-column",
-                ans: w,
-                a: "style-name"
-            }, {ens: w, en: "last-row", ans: w, a: "style-name"}, {
-                ens: w,
-                en: "odd-columns",
-                ans: w,
-                a: "style-name"
-            }, {ens: w, en: "odd-rows", ans: w, a: "style-name"},
-            {ens: w, en: "table-cell", ans: w, a: "style-name"}],
-        graphic: [{ens: s, en: "cube", ans: m, a: "style-name"}, {
-            ens: s,
-            en: "extrude",
-            ans: m,
-            a: "style-name"
-        }, {ens: s, en: "rotate", ans: m, a: "style-name"}, {ens: s, en: "scene", ans: m, a: "style-name"}, {
-            ens: s,
-            en: "sphere",
-            ans: m,
-            a: "style-name"
-        }, {ens: m, en: "caption", ans: m, a: "style-name"}, {ens: m, en: "circle", ans: m, a: "style-name"}, {
-            ens: m,
-            en: "connector",
-            ans: m,
-            a: "style-name"
-        }, {ens: m, en: "control", ans: m, a: "style-name"}, {
-            ens: m,
-            en: "custom-shape",
-            ans: m,
-            a: "style-name"
-        }, {ens: m, en: "ellipse", ans: m, a: "style-name"},
-            {ens: m, en: "frame", ans: m, a: "style-name"}, {ens: m, en: "g", ans: m, a: "style-name"}, {
+            }, {ens: m, en: "frame", ans: m, a: "text-style-name"}, {
                 ens: m,
                 en: "line",
                 ans: m,
-                a: "style-name"
-            }, {ens: m, en: "measure", ans: m, a: "style-name"}, {
+                a: "text-style-name"
+            }, {ens: m, en: "measure", ans: m, a: "text-style-name"}, {
                 ens: m,
-                en: "page-thumbnail",
+                en: "path",
                 ans: m,
-                a: "style-name"
-            }, {ens: m, en: "path", ans: m, a: "style-name"}, {ens: m, en: "polygon", ans: m, a: "style-name"}, {
+                a: "text-style-name"
+            }, {ens: m, en: "polygon", ans: m, a: "text-style-name"}, {
                 ens: m,
                 en: "polyline",
                 ans: m,
+                a: "text-style-name"
+            },
+                {ens: m, en: "rect", ans: m, a: "text-style-name"}, {
+                    ens: m,
+                    en: "regular-polygon",
+                    ans: m,
+                    a: "text-style-name"
+                }, {ens: y, en: "annotation", ans: m, a: "text-style-name"}, {
+                    ens: x,
+                    en: "column",
+                    ans: x,
+                    a: "text-style-name"
+                }, {ens: r, en: "style", ans: r, a: "next-style-name"}, {
+                    ens: w,
+                    en: "body",
+                    ans: w,
+                    a: "paragraph-style-name"
+                }, {ens: w, en: "even-columns", ans: w, a: "paragraph-style-name"}, {
+                    ens: w,
+                    en: "even-rows",
+                    ans: w,
+                    a: "paragraph-style-name"
+                }, {ens: w, en: "first-column", ans: w, a: "paragraph-style-name"}, {
+                    ens: w,
+                    en: "first-row",
+                    ans: w,
+                    a: "paragraph-style-name"
+                },
+                {ens: w, en: "last-column", ans: w, a: "paragraph-style-name"}, {
+                    ens: w,
+                    en: "last-row",
+                    ans: w,
+                    a: "paragraph-style-name"
+                }, {ens: w, en: "odd-columns", ans: w, a: "paragraph-style-name"}, {
+                    ens: w,
+                    en: "odd-rows",
+                    ans: w,
+                    a: "paragraph-style-name"
+                }, {ens: u, en: "notes-configuration", ans: u, a: "default-style-name"}, {
+                    ens: u,
+                    en: "alphabetical-index-entry-template",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "bibliography-entry-template", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "h",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "illustration-index-entry-template", ans: u, a: "style-name"},
+                {ens: u, en: "index-source-style", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "object-index-entry-template",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "p", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "table-index-entry-template",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "table-of-content-entry-template", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "table-index-entry-template",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "user-index-entry-template", ans: u, a: "style-name"}, {
+                    ens: r,
+                    en: "page-layout-properties",
+                    ans: r,
+                    a: "register-truth-ref-style-name"
+                }],
+            chart: [{
+                ens: d, en: "axis", ans: d,
                 a: "style-name"
-            }, {ens: m, en: "rect", ans: m, a: "style-name"}, {
-                ens: m,
-                en: "regular-polygon",
+            }, {ens: d, en: "chart", ans: d, a: "style-name"}, {ens: d, en: "data-label", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "data-point",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "equation", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "error-indicator",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "floor", ans: d, a: "style-name"}, {ens: d, en: "footer", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "grid",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "legend", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "mean-value",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "plot-area", ans: d, a: "style-name"}, {
+                ens: d, en: "regression-curve",
+                ans: d, a: "style-name"
+            }, {ens: d, en: "series", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "stock-gain-marker",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "stock-loss-marker", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "stock-range-line",
+                ans: d,
+                a: "style-name"
+            }, {ens: d, en: "subtitle", ans: d, a: "style-name"}, {ens: d, en: "title", ans: d, a: "style-name"}, {
+                ens: d,
+                en: "wall",
+                ans: d,
+                a: "style-name"
+            }],
+            section: [{ens: u, en: "alphabetical-index", ans: u, a: "style-name"}, {
+                ens: u,
+                en: "bibliography",
+                ans: u,
+                a: "style-name"
+            }, {ens: u, en: "illustration-index", ans: u, a: "style-name"},
+                {ens: u, en: "index-title", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "object-index",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "section", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "table-of-content",
+                    ans: u,
+                    a: "style-name"
+                }, {ens: u, en: "table-index", ans: u, a: "style-name"}, {
+                    ens: u,
+                    en: "user-index",
+                    ans: u,
+                    a: "style-name"
+                }],
+            ruby: [{ens: u, en: "ruby", ans: u, a: "style-name"}],
+            table: [{ens: e, en: "query", ans: e, a: "style-name"}, {
+                ens: e,
+                en: "table-representation",
+                ans: e,
+                a: "style-name"
+            }, {ens: w, en: "background", ans: w, a: "style-name"}, {ens: w, en: "table", ans: w, a: "style-name"}],
+            "table-column": [{ens: e, en: "column", ans: e, a: "style-name"}, {
+                ens: w,
+                en: "table-column",
+                ans: w,
+                a: "style-name"
+            }],
+            "table-row": [{ens: e, en: "query", ans: e, a: "default-row-style-name"}, {
+                ens: e,
+                en: "table-representation",
+                ans: e,
+                a: "default-row-style-name"
+            }, {ens: w, en: "table-row", ans: w, a: "style-name"}],
+            "table-cell": [{ens: e, en: "column", ans: e, a: "default-cell-style-name"}, {
+                ens: w,
+                en: "table-column",
+                ans: w,
+                a: "default-cell-style-name"
+            }, {ens: w, en: "table-row", ans: w, a: "default-cell-style-name"}, {
+                ens: w,
+                en: "body",
+                ans: w,
+                a: "style-name"
+            },
+                {ens: w, en: "covered-table-cell", ans: w, a: "style-name"}, {
+                    ens: w,
+                    en: "even-columns",
+                    ans: w,
+                    a: "style-name"
+                }, {ens: w, en: "covered-table-cell", ans: w, a: "style-name"}, {
+                    ens: w,
+                    en: "even-columns",
+                    ans: w,
+                    a: "style-name"
+                }, {ens: w, en: "even-rows", ans: w, a: "style-name"}, {
+                    ens: w,
+                    en: "first-column",
+                    ans: w,
+                    a: "style-name"
+                }, {ens: w, en: "first-row", ans: w, a: "style-name"}, {
+                    ens: w,
+                    en: "last-column",
+                    ans: w,
+                    a: "style-name"
+                }, {ens: w, en: "last-row", ans: w, a: "style-name"}, {
+                    ens: w,
+                    en: "odd-columns",
+                    ans: w,
+                    a: "style-name"
+                }, {ens: w, en: "odd-rows", ans: w, a: "style-name"},
+                {ens: w, en: "table-cell", ans: w, a: "style-name"}],
+            graphic: [{ens: s, en: "cube", ans: m, a: "style-name"}, {
+                ens: s,
+                en: "extrude",
                 ans: m,
                 a: "style-name"
-            }, {ens: y, en: "annotation", ans: m, a: "style-name"}],
-        presentation: [{
-            ens: s, en: "cube", ans: v,
-            a: "style-name"
-        }, {ens: s, en: "extrude", ans: v, a: "style-name"}, {ens: s, en: "rotate", ans: v, a: "style-name"}, {
-            ens: s,
-            en: "scene",
-            ans: v,
-            a: "style-name"
-        }, {ens: s, en: "sphere", ans: v, a: "style-name"}, {ens: m, en: "caption", ans: v, a: "style-name"}, {
-            ens: m,
-            en: "circle",
-            ans: v,
-            a: "style-name"
-        }, {ens: m, en: "connector", ans: v, a: "style-name"}, {
-            ens: m,
-            en: "control",
-            ans: v,
-            a: "style-name"
-        }, {ens: m, en: "custom-shape", ans: v, a: "style-name"}, {
-            ens: m,
-            en: "ellipse",
-            ans: v,
-            a: "style-name"
-        }, {ens: m, en: "frame", ans: v, a: "style-name"}, {ens: m, en: "g", ans: v, a: "style-name"},
-            {ens: m, en: "line", ans: v, a: "style-name"}, {ens: m, en: "measure", ans: v, a: "style-name"}, {
+            }, {ens: s, en: "rotate", ans: m, a: "style-name"}, {ens: s, en: "scene", ans: m, a: "style-name"}, {
+                ens: s,
+                en: "sphere",
+                ans: m,
+                a: "style-name"
+            }, {ens: m, en: "caption", ans: m, a: "style-name"}, {ens: m, en: "circle", ans: m, a: "style-name"}, {
                 ens: m,
-                en: "page-thumbnail",
+                en: "connector",
+                ans: m,
+                a: "style-name"
+            }, {ens: m, en: "control", ans: m, a: "style-name"}, {
+                ens: m,
+                en: "custom-shape",
+                ans: m,
+                a: "style-name"
+            }, {ens: m, en: "ellipse", ans: m, a: "style-name"},
+                {ens: m, en: "frame", ans: m, a: "style-name"}, {ens: m, en: "g", ans: m, a: "style-name"}, {
+                    ens: m,
+                    en: "line",
+                    ans: m,
+                    a: "style-name"
+                }, {ens: m, en: "measure", ans: m, a: "style-name"}, {
+                    ens: m,
+                    en: "page-thumbnail",
+                    ans: m,
+                    a: "style-name"
+                }, {ens: m, en: "path", ans: m, a: "style-name"}, {ens: m, en: "polygon", ans: m, a: "style-name"}, {
+                    ens: m,
+                    en: "polyline",
+                    ans: m,
+                    a: "style-name"
+                }, {ens: m, en: "rect", ans: m, a: "style-name"}, {
+                    ens: m,
+                    en: "regular-polygon",
+                    ans: m,
+                    a: "style-name"
+                }, {ens: y, en: "annotation", ans: m, a: "style-name"}],
+            presentation: [{
+                ens: s, en: "cube", ans: v,
+                a: "style-name"
+            }, {ens: s, en: "extrude", ans: v, a: "style-name"}, {ens: s, en: "rotate", ans: v, a: "style-name"}, {
+                ens: s,
+                en: "scene",
                 ans: v,
                 a: "style-name"
-            }, {ens: m, en: "path", ans: v, a: "style-name"}, {ens: m, en: "polygon", ans: v, a: "style-name"}, {
+            }, {ens: s, en: "sphere", ans: v, a: "style-name"}, {ens: m, en: "caption", ans: v, a: "style-name"}, {
                 ens: m,
-                en: "polyline",
+                en: "circle",
                 ans: v,
                 a: "style-name"
-            }, {ens: m, en: "rect", ans: v, a: "style-name"}, {
+            }, {ens: m, en: "connector", ans: v, a: "style-name"}, {
                 ens: m,
-                en: "regular-polygon",
+                en: "control",
                 ans: v,
                 a: "style-name"
-            }, {ens: y, en: "annotation", ans: v, a: "style-name"}],
-        "drawing-page": [{ens: m, en: "page", ans: m, a: "style-name"}, {
-            ens: v,
-            en: "notes",
-            ans: m,
-            a: "style-name"
-        }, {
-            ens: r, en: "handout-master",
-            ans: m, a: "style-name"
-        }, {ens: r, en: "master-page", ans: m, a: "style-name"}],
-        "list-style": [{ens: u, en: "list", ans: u, a: "style-name"}, {
-            ens: u,
-            en: "numbered-paragraph",
-            ans: u,
-            a: "style-name"
-        }, {ens: u, en: "list-item", ans: u, a: "style-override"}, {ens: r, en: "style", ans: r, a: "list-style-name"}],
-        data: [{ens: r, en: "style", ans: r, a: "data-style-name"}, {
-            ens: r,
-            en: "style",
-            ans: r,
-            a: "percentage-data-style-name"
-        }, {ens: v, en: "date-time-decl", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "creation-date",
-            ans: r,
-            a: "data-style-name"
-        }, {
-            ens: u, en: "creation-time",
-            ans: r, a: "data-style-name"
-        }, {ens: u, en: "database-display", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "date",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "editing-duration", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "expression",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "meta-field", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "modification-date",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "modification-time", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "print-date",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "print-time", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "table-formula", ans: r, a: "data-style-name"
-        }, {ens: u, en: "time", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "user-defined",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "user-field-get", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "user-field-input",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "variable-get", ans: r, a: "data-style-name"}, {
-            ens: u,
-            en: "variable-input",
-            ans: r,
-            a: "data-style-name"
-        }, {ens: u, en: "variable-set", ans: r, a: "data-style-name"}],
-        "page-layout": [{ens: v, en: "notes", ans: r, a: "page-layout-name"}, {
-            ens: r, en: "handout-master", ans: r,
-            a: "page-layout-name"
-        }, {ens: r, en: "master-page", ans: r, a: "page-layout-name"}]
-    }, B, E = xmldom.XPath;
+            }, {ens: m, en: "custom-shape", ans: v, a: "style-name"}, {
+                ens: m,
+                en: "ellipse",
+                ans: v,
+                a: "style-name"
+            }, {ens: m, en: "frame", ans: v, a: "style-name"}, {ens: m, en: "g", ans: v, a: "style-name"},
+                {ens: m, en: "line", ans: v, a: "style-name"}, {ens: m, en: "measure", ans: v, a: "style-name"}, {
+                    ens: m,
+                    en: "page-thumbnail",
+                    ans: v,
+                    a: "style-name"
+                }, {ens: m, en: "path", ans: v, a: "style-name"}, {ens: m, en: "polygon", ans: v, a: "style-name"}, {
+                    ens: m,
+                    en: "polyline",
+                    ans: v,
+                    a: "style-name"
+                }, {ens: m, en: "rect", ans: v, a: "style-name"}, {
+                    ens: m,
+                    en: "regular-polygon",
+                    ans: v,
+                    a: "style-name"
+                }, {ens: y, en: "annotation", ans: v, a: "style-name"}],
+            "drawing-page": [{ens: m, en: "page", ans: m, a: "style-name"}, {
+                ens: v,
+                en: "notes",
+                ans: m,
+                a: "style-name"
+            }, {
+                ens: r, en: "handout-master",
+                ans: m, a: "style-name"
+            }, {ens: r, en: "master-page", ans: m, a: "style-name"}],
+            "list-style": [{ens: u, en: "list", ans: u, a: "style-name"}, {
+                ens: u,
+                en: "numbered-paragraph",
+                ans: u,
+                a: "style-name"
+            }, {ens: u, en: "list-item", ans: u, a: "style-override"}, {ens: r, en: "style", ans: r, a: "list-style-name"}],
+            data: [{ens: r, en: "style", ans: r, a: "data-style-name"}, {
+                ens: r,
+                en: "style",
+                ans: r,
+                a: "percentage-data-style-name"
+            }, {ens: v, en: "date-time-decl", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "creation-date",
+                ans: r,
+                a: "data-style-name"
+            }, {
+                ens: u, en: "creation-time",
+                ans: r, a: "data-style-name"
+            }, {ens: u, en: "database-display", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "date",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "editing-duration", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "expression",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "meta-field", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "modification-date",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "modification-time", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "print-date",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "print-time", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "table-formula", ans: r, a: "data-style-name"
+            }, {ens: u, en: "time", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "user-defined",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "user-field-get", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "user-field-input",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "variable-get", ans: r, a: "data-style-name"}, {
+                ens: u,
+                en: "variable-input",
+                ans: r,
+                a: "data-style-name"
+            }, {ens: u, en: "variable-set", ans: r, a: "data-style-name"}],
+            "page-layout": [{ens: v, en: "notes", ans: r, a: "page-layout-name"}, {
+                ens: r, en: "handout-master", ans: r,
+                a: "page-layout-name"
+            }, {ens: r, en: "master-page", ans: r, a: "page-layout-name"}]
+        }, B, E = xmldom.XPath;
     this.collectUsedFontFaces = g;
     this.changeFontFaceNames = h;
     this.UsedStyleList = function (a, b) {
@@ -4544,7 +4573,8 @@ xmldom.LSSerializer = function () {
         }
     }
 
-    var b = new odf.StyleInfo, k = core.DomUtils, q = odf.Namespaces.stylens, p = "meta settings scripts font-face-decls styles automatic-styles master-styles body".split(" "),
+    var b = new odf.StyleInfo, k = core.DomUtils, q = odf.Namespaces.stylens,
+        p = "meta settings scripts font-face-decls styles automatic-styles master-styles body".split(" "),
         n = Date.now() + "_webodf_", g = new core.Base64;
     odf.ODFElement = function () {
     };
@@ -4589,14 +4619,15 @@ xmldom.LSSerializer = function () {
     };
     odf.OdfContainer = function d(e, f) {
         function m(a) {
-            for (var b = a.firstChild, d; b;)d = b.nextSibling, b.nodeType === Node.ELEMENT_NODE ? m(b) : b.nodeType === Node.PROCESSING_INSTRUCTION_NODE && a.removeChild(b), b = d
+            for (var b = a.firstChild,
+                     d; b;)d = b.nextSibling, b.nodeType === Node.ELEMENT_NODE ? m(b) : b.nodeType === Node.PROCESSING_INSTRUCTION_NODE && a.removeChild(b), b = d
         }
 
         function p(a) {
             var b = {}, d, e, c = a.ownerDocument.createNodeIterator(a, NodeFilter.SHOW_ELEMENT, null, !1);
             for (a = c.nextNode(); a;)"urn:oasis:names:tc:opendocument:xmlns:office:1.0" === a.namespaceURI && ("annotation" ===
             a.localName ? (d = a.getAttributeNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "name")) && (b.hasOwnProperty(d) ? runtime.log("Warning: annotation name used more than once with <office:annotation/>: '" + d + "'") : b[d] = a) : "annotation-end" === a.localName && ((d = a.getAttributeNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "name")) ? b.hasOwnProperty(d) ? (e = b[d], e.annotationEndElement ? runtime.log("Warning: annotation name used more than once with <office:annotation-end/>: '" + d + "'") : e.annotationEndElement =
-                                a) : runtime.log("Warning: annotation end without an annotation start, name: '" + d + "'") : runtime.log("Warning: annotation end without a name found"))), a = c.nextNode()
+                    a) : runtime.log("Warning: annotation end without an annotation start, name: '" + d + "'") : runtime.log("Warning: annotation end without a name found"))), a = c.nextNode()
         }
 
         function t(a, b) {
@@ -4604,7 +4635,8 @@ xmldom.LSSerializer = function () {
         }
 
         function y(a, b) {
-            for (var d = U.rootElement.meta, d = d && d.firstChild; d && (d.namespaceURI !== a || d.localName !== b);)d = d.nextSibling;
+            for (var d = U.rootElement.meta,
+                     d = d && d.firstChild; d && (d.namespaceURI !== a || d.localName !== b);)d = d.nextSibling;
             for (d = d && d.firstChild; d && d.nodeType !== Node.TEXT_NODE;)d = d.nextSibling;
             return d ?
                 d.data : null
@@ -4667,8 +4699,8 @@ xmldom.LSSerializer = function () {
         function B(a) {
             var e = u(a), m = U.rootElement, g;
             e && "document-styles" === e.localName && "urn:oasis:names:tc:opendocument:xmlns:office:1.0" === e.namespaceURI ? (m.fontFaceDecls = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "font-face-decls"), c(m, m.fontFaceDecls), g = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "styles"), m.styles = g || a.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0",
-                        "styles"), c(m, m.styles), g = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "automatic-styles"), m.automaticStyles = g || a.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "automatic-styles"), t(m.automaticStyles, "document-styles"), c(m, m.automaticStyles), e = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "master-styles"), m.masterStyles = e || a.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "master-styles"), c(m, m.masterStyles),
-                    b.prefixStyleNames(m.automaticStyles, n, m.masterStyles)) : A(d.INVALID)
+                    "styles"), c(m, m.styles), g = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "automatic-styles"), m.automaticStyles = g || a.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "automatic-styles"), t(m.automaticStyles, "document-styles"), c(m, m.automaticStyles), e = k.getDirectChild(e, "urn:oasis:names:tc:opendocument:xmlns:office:1.0", "master-styles"), m.masterStyles = e || a.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", "master-styles"), c(m, m.masterStyles),
+                b.prefixStyleNames(m.automaticStyles, n, m.masterStyles)) : A(d.INVALID)
         }
 
         function E(a) {
@@ -4688,7 +4720,8 @@ xmldom.LSSerializer = function () {
                                 "name"), m.hasOwnProperty(s)) {
                             if (!g.isEqualNode(m[s])) {
                                 n = s;
-                                for (var r = m, Q = l, x = 0, Y = void 0, Y = n = n.replace(/\d+$/, ""); r.hasOwnProperty(Y) || Q.hasOwnProperty(Y);)x += 1, Y = n + x;
+                                for (var r = m, Q = l, x = 0, Y = void 0,
+                                         Y = n = n.replace(/\d+$/, ""); r.hasOwnProperty(Y) || Q.hasOwnProperty(Y);)x += 1, Y = n + x;
                                 n = Y;
                                 g.setAttributeNS(q, "style:name", n);
                                 f.appendChild(g);
@@ -4766,10 +4799,10 @@ xmldom.LSSerializer = function () {
         function R(a) {
             var b = a.shift();
             b ? W.loadAsDOM(b.path, function (e, c) {
-                    c && (z(c), Y(c.documentElement));
-                    b.handler(c);
-                    U.state === d.INVALID ? e ? runtime.log("ERROR: Unable to load " + b.path + " - " + e) : runtime.log("ERROR: Unable to load " + b.path) : (e && runtime.log("DEBUG: Unable to load " + b.path + " - " + e), R(a))
-                }) : (p(U.rootElement), A(d.DONE))
+                c && (z(c), Y(c.documentElement));
+                b.handler(c);
+                U.state === d.INVALID ? e ? runtime.log("ERROR: Unable to load " + b.path + " - " + e) : runtime.log("ERROR: Unable to load " + b.path) : (e && runtime.log("DEBUG: Unable to load " + b.path + " - " + e), R(a))
+            }) : (p(U.rootElement), A(d.DONE))
         }
 
         function J(a) {
@@ -4797,7 +4830,8 @@ xmldom.LSSerializer = function () {
         }
 
         function T() {
-            var a = runtime.parseXML('<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"></manifest:manifest>'), b = a.documentElement, d = new xmldom.LSSerializer, e;
+            var a = runtime.parseXML('<manifest:manifest xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" manifest:version="1.2"></manifest:manifest>'),
+                b = a.documentElement, d = new xmldom.LSSerializer, e;
             for (e in P)P.hasOwnProperty(e) && b.appendChild(ba(e, P[e]));
             d.filter = new odf.OdfNodeFilter;
             return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n' + d.writeToString(a, odf.Namespaces.namespaceMap)
@@ -4860,7 +4894,8 @@ xmldom.LSSerializer = function () {
             }
 
             var c = new core.Zip("", null), m = "application/vnd.oasis.opendocument." +
-                a + (!0 === b ? "-template" : ""), g = runtime.byteArrayFromString(m, "utf8"), f = U.rootElement, k = document.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", a);
+                    a + (!0 === b ? "-template" : ""), g = runtime.byteArrayFromString(m, "utf8"), f = U.rootElement,
+                k = document.createElementNS("urn:oasis:names:tc:opendocument:xmlns:office:1.0", a);
             c.save("mimetype", g, !1, new Date);
             e("meta");
             e("settings");
@@ -4976,18 +5011,15 @@ xmldom.LSSerializer = function () {
             localName: odf.ODFDocumentElement.localName
         });
         e === odf.OdfContainer.DocumentType.TEXT ? W = V("text") : e === odf.OdfContainer.DocumentType.TEXT_TEMPLATE ? W = V("text", !0) : e === odf.OdfContainer.DocumentType.PRESENTATION ? W = V("presentation") : e === odf.OdfContainer.DocumentType.PRESENTATION_TEMPLATE ? W = V("presentation", !0) : e === odf.OdfContainer.DocumentType.SPREADSHEET ? W = V("spreadsheet") :
-                            e === odf.OdfContainer.DocumentType.SPREADSHEET_TEMPLATE ? W = V("spreadsheet", !0) : (S = e, W = new core.Zip(S, function (a, b) {
-                                    W = b;
-                                    a ? Z(S, function (b) {
-                                            a && (W.error = a + "\n" + b, A(d.INVALID))
-                                        }) : R([{path: "styles.xml", handler: B}, {
-                                            path: "content.xml",
-                                            handler: E
-                                        }, {path: "meta.xml", handler: H}, {
-                                            path: "settings.xml",
-                                            handler: I
-                                        }, {path: "META-INF/manifest.xml", handler: Q}])
-                                }))
+            e === odf.OdfContainer.DocumentType.SPREADSHEET_TEMPLATE ? W = V("spreadsheet", !0) : (S = e, W = new core.Zip(S, function (a, b) {
+                W = b;
+                a ? Z(S, function (b) {
+                    a && (W.error = a + "\n" + b, A(d.INVALID))
+                }) : R([{path: "styles.xml", handler: B}, {path: "content.xml", handler: E}, {
+                    path: "meta.xml",
+                    handler: H
+                }, {path: "settings.xml", handler: I}, {path: "META-INF/manifest.xml", handler: Q}])
+            }))
     };
     odf.OdfContainer.EMPTY = 0;
     odf.OdfContainer.LOADING = 1;
@@ -5053,14 +5085,17 @@ gui.AnnotationViewManager = function (f, l, a, c) {
         var b;
         for (b = 0; b < g.length; b += 1) {
             var d = g[b], e = d.parentNode,
-                c = e.nextElementSibling, h = c.nextElementSibling, k = e.parentNode, p = 0, p = g[g.indexOf(d) - 1], s = void 0, d = f.getZoomLevel();
+                c = e.nextElementSibling, h = c.nextElementSibling, k = e.parentNode, p = 0, p = g[g.indexOf(d) - 1],
+                s = void 0, d = f.getZoomLevel();
             e.style.left = (a.getBoundingClientRect().left - k.getBoundingClientRect().left) / d + "px";
             e.style.width = a.getBoundingClientRect().width / d + "px";
             c.style.width = parseFloat(e.style.left) - 30 + "px";
             p ? (s = p.parentNode.getBoundingClientRect(), 20 >= (k.getBoundingClientRect().top - s.bottom) / d ? e.style.top = Math.abs(k.getBoundingClientRect().top - s.bottom) / d + 20 + "px" : e.style.top = "0px") : e.style.top = "0px";
             h.style.left =
                 c.getBoundingClientRect().width / d + "px";
-            var c = h.style, k = h.getBoundingClientRect().left / d, p = h.getBoundingClientRect().top / d, s = e.getBoundingClientRect().left / d, n = e.getBoundingClientRect().top / d, q = 0, l = 0, q = s - k, q = q * q, l = n - p, l = l * l, k = Math.sqrt(q + l);
+            var c = h.style, k = h.getBoundingClientRect().left / d, p = h.getBoundingClientRect().top / d,
+                s = e.getBoundingClientRect().left / d, n = e.getBoundingClientRect().top / d, q = 0, l = 0, q = s - k,
+                q = q * q, l = n - p, l = l * l, k = Math.sqrt(q + l);
             c.width = k + "px";
             p = Math.asin((e.getBoundingClientRect().top - h.getBoundingClientRect().top) / (d * parseFloat(h.style.width)));
             h.style.transform = "rotate(" + p + "rad)";
@@ -5099,7 +5134,8 @@ gui.AnnotationViewManager = function (f, l, a, c) {
     this.addAnnotations = function (a) {
         0 !== a.length && (k(!0), a.forEach(function (a) {
             g.push(a);
-            var e = h.createElement("div"), m = h.createElement("div"), f = h.createElement("div"), k = h.createElement("div"), p;
+            var e = h.createElement("div"), m = h.createElement("div"), f = h.createElement("div"),
+                k = h.createElement("div"), p;
             e.className = "annotationWrapper";
             e.setAttribute("creator", d.getAnnotationCreator(a));
             a.parentNode.insertBefore(e, a);
@@ -5151,17 +5187,17 @@ gui.SingleScrollViewport = function (f) {
             h += 1
         }
         g ? k.getPartData(a[g].href, function (d, h) {
-                if (d) runtime.log(d); else if (h) {
-                    var m = "@font-face { font-family: " + (a[g].family || g) + "; src: url(data:application/x-font-ttf;charset=binary;base64," + c.convertUTF8ArrayToBase64(h) + ') format("truetype"); }';
-                    try {
-                        p.insertRule(m, p.cssRules.length)
-                    } catch (l) {
-                        runtime.log("Problem inserting rule in CSS: " + runtime.toJson(l) + "\nRule: " + m)
-                    }
-                } else runtime.log("missing font data for " +
-                    a[g].href);
-                f(a, k, q + 1, p, n)
-            }) : n && n()
+            if (d) runtime.log(d); else if (h) {
+                var m = "@font-face { font-family: " + (a[g].family || g) + "; src: url(data:application/x-font-ttf;charset=binary;base64," + c.convertUTF8ArrayToBase64(h) + ') format("truetype"); }';
+                try {
+                    p.insertRule(m, p.cssRules.length)
+                } catch (l) {
+                    runtime.log("Problem inserting rule in CSS: " + runtime.toJson(l) + "\nRule: " + m)
+                }
+            } else runtime.log("missing font data for " +
+                a[g].href);
+            f(a, k, q + 1, p, n)
+        }) : n && n()
     }
 
     var l = xmldom.XPath, a = odf.OdfUtils, c = new core.Base64;
@@ -5224,7 +5260,8 @@ odf.Formatting = function () {
     }
 
     function k(e, h) {
-        for (var g = d.rootElement.styles, k, p = {}, s = e.getAttributeNS(m, "family"), n = e; n;)k = b(n), p = w.mergeObjects(k, p), n = (k = n.getAttributeNS(m, "parent-style-name")) ? c(k, s, [g]) : null;
+        for (var g = d.rootElement.styles, k, p = {}, s = e.getAttributeNS(m, "family"),
+                 n = e; n;)k = b(n), p = w.mergeObjects(k, p), n = (k = n.getAttributeNS(m, "parent-style-name")) ? c(k, s, [g]) : null;
         if (n = a(s)) k = b(n), p = w.mergeObjects(k, p);
         !1 !== h && (k = f(s), p = w.mergeObjects(k, p));
         return p
@@ -5240,7 +5277,8 @@ odf.Formatting = function () {
             })
         }
 
-        for (var m = a.nodeType === Node.TEXT_NODE ? a.parentNode : a, h, g = [], f = "", k = !1; m && !v.isInlineRoot(m) && m.parentNode !== d.rootElement;)!k && v.isGroupingElement(m) && (k = !0), (h = e.determineStylesForNode(m)) && g.push(h), m = m.parentNode;
+        for (var m = a.nodeType === Node.TEXT_NODE ? a.parentNode : a, h, g = [], f = "",
+                 k = !1; m && !v.isInlineRoot(m) && m.parentNode !== d.rootElement;)!k && v.isGroupingElement(m) && (k = !0), (h = e.determineStylesForNode(m)) && g.push(h), m = m.parentNode;
         k && (g.forEach(c), b && (b[f] = g));
         return k ? g : void 0
     }
@@ -5251,7 +5289,7 @@ odf.Formatting = function () {
             Object.keys(a).forEach(function (e) {
                 var h = Object.keys(a[e])[0], g = {name: h, family: e, displayName: void 0, isCommonStyle: !1}, f;
                 (f = c(h, e)) ? (e = k(f),
-                        b.styleProperties = w.mergeObjects(e, b.styleProperties), g.displayName = f.getAttributeNS(m, "display-name") || void 0, g.isCommonStyle = f.parentNode === d.rootElement.styles) : runtime.log("No style element found for '" + h + "' of family '" + e + "'");
+                    b.styleProperties = w.mergeObjects(e, b.styleProperties), g.displayName = f.getAttributeNS(m, "display-name") || void 0, g.isCommonStyle = f.parentNode === d.rootElement.styles) : runtime.log("No style element found for '" + h + "' of family '" + e + "'");
                 b.orderedStyles.push(g)
             })
         });
@@ -5284,7 +5322,9 @@ odf.Formatting = function () {
         return d
     }
 
-    var d, e = new odf.StyleInfo, s = odf.Namespaces.svgns, m = odf.Namespaces.stylens, x = odf.Namespaces.textns, t = odf.Namespaces.numberns, y = odf.Namespaces.fons, v = odf.OdfUtils, r = core.DomUtils, w = new core.Utils, u = new core.CSSUnits, A = {paragraph: {"style:paragraph-properties": {"fo:text-align": "left"}}};
+    var d, e = new odf.StyleInfo, s = odf.Namespaces.svgns, m = odf.Namespaces.stylens, x = odf.Namespaces.textns,
+        t = odf.Namespaces.numberns, y = odf.Namespaces.fons, v = odf.OdfUtils, r = core.DomUtils, w = new core.Utils,
+        u = new core.CSSUnits, A = {paragraph: {"style:paragraph-properties": {"fo:text-align": "left"}}};
     this.getSystemDefaultStyleAttributes =
         f;
     this.setOdfContainer = function (a) {
@@ -5292,7 +5332,8 @@ odf.Formatting = function () {
     };
     this.getFontMap = l;
     this.getAvailableParagraphStyles = function () {
-        for (var a = d.rootElement.styles, b, e, c = [], a = a && a.firstElementChild; a;)"style" === a.localName && a.namespaceURI === m && (b = a.getAttributeNS(m, "family"), "paragraph" === b && (b = a.getAttributeNS(m, "name"), e = a.getAttributeNS(m, "display-name") || b, b && e && c.push({
+        for (var a = d.rootElement.styles, b, e, c = [],
+                 a = a && a.firstElementChild; a;)"style" === a.localName && a.namespaceURI === m && (b = a.getAttributeNS(m, "family"), "paragraph" === b && (b = a.getAttributeNS(m, "name"), e = a.getAttributeNS(m, "display-name") || b, b && e && c.push({
             name: b,
             displayName: e
         }))), a = a.nextElementSibling;
@@ -5337,7 +5378,8 @@ odf.Formatting = function () {
             return a
         };
     this.getDefaultTabStopDistance = function () {
-        for (var b = a("paragraph"), b = b && b.firstElementChild, d; b;)b.namespaceURI === m && "paragraph-properties" === b.localName && (d = b.getAttributeNS(m, "tab-stop-distance")), b = b.nextElementSibling;
+        for (var b = a("paragraph"), b = b && b.firstElementChild,
+                 d; b;)b.namespaceURI === m && "paragraph-properties" === b.localName && (d = b.getAttributeNS(m, "tab-stop-distance")), b = b.nextElementSibling;
         d || (d = "1.25cm");
         return v.parseNonNegativeLength(d)
     };
@@ -5358,8 +5400,8 @@ odf.Formatting = function () {
         }
         e || (e = r.getDirectChild(d.rootElement.styles, m, "default-page-layout"));
         (e = r.getDirectChild(e, m, "page-layout-properties")) ? ("landscape" === e.getAttributeNS(m, "print-orientation") ? (f = "29.7cm", k = "21.001cm") : (f = "21.001cm", k = "29.7cm"), f = h(e.getAttributeNS(y, "page-width"), f), k = h(e.getAttributeNS(y, "page-height"), k), p = h(e.getAttributeNS(y, "margin")), void 0 ===
-            p ? (p = h(e.getAttributeNS(y, "margin-left"), "2cm"), n = h(e.getAttributeNS(y, "margin-right"), "2cm"), s = h(e.getAttributeNS(y, "margin-top"), "2cm"), q = h(e.getAttributeNS(y, "margin-bottom"), "2cm")) : p = n = s = q = p, l = h(e.getAttributeNS(y, "padding")), void 0 === l ? (l = h(e.getAttributeNS(y, "padding-left"), "0cm"), x = h(e.getAttributeNS(y, "padding-right"), "0cm"), t = h(e.getAttributeNS(y, "padding-top"), "0cm"), e = h(e.getAttributeNS(y, "padding-bottom"), "0cm")) : l = x = t = e = l) : (f = h("21.001cm"), k = h("29.7cm"), p = n = s = q = p = h("2cm"), l = x = t = e = l =
-                h("0cm"));
+        p ? (p = h(e.getAttributeNS(y, "margin-left"), "2cm"), n = h(e.getAttributeNS(y, "margin-right"), "2cm"), s = h(e.getAttributeNS(y, "margin-top"), "2cm"), q = h(e.getAttributeNS(y, "margin-bottom"), "2cm")) : p = n = s = q = p, l = h(e.getAttributeNS(y, "padding")), void 0 === l ? (l = h(e.getAttributeNS(y, "padding-left"), "0cm"), x = h(e.getAttributeNS(y, "padding-right"), "0cm"), t = h(e.getAttributeNS(y, "padding-top"), "0cm"), e = h(e.getAttributeNS(y, "padding-bottom"), "0cm")) : l = x = t = e = l) : (f = h("21.001cm"), k = h("29.7cm"), p = n = s = q = p = h("2cm"), l = x = t = e = l =
+            h("0cm"));
         return {width: f - p - n - l - x, height: k - s - q - t - e}
     }
 };
@@ -5455,7 +5497,8 @@ odf.Formatting = function () {
 
     function a(a) {
         function b(e, c, h, p) {
-            var q = c.namespaceURI === k && "list" === c.localName, l = c.namespaceURI === k && "list-item" === c.localName;
+            var q = c.namespaceURI === k && "list" === c.localName,
+                l = c.namespaceURI === k && "list-item" === c.localName;
             if (q || l) {
                 if (q) {
                     var q = h += 1, r, w, u;
@@ -5498,13 +5541,8 @@ odf.Formatting = function () {
         }
     }
 
-    var c = odf.Namespaces.fons, b = odf.Namespaces.stylens, k = odf.Namespaces.textns, q = odf.Namespaces.xmlns, p = {
-        1: "decimal",
-        a: "lower-latin",
-        A: "upper-latin",
-        i: "lower-roman",
-        I: "upper-roman"
-    };
+    var c = odf.Namespaces.fons, b = odf.Namespaces.stylens, k = odf.Namespaces.textns, q = odf.Namespaces.xmlns,
+        p = {1: "decimal", a: "lower-latin", A: "upper-latin", i: "lower-roman", I: "upper-roman"};
     odf.ListStyleToCss = function () {
         function n(a) {
             var b = s.parseLength(a);
@@ -5532,10 +5570,12 @@ odf.Formatting = function () {
                 (u = f.getAttributeNS(q, "id")) && (F[u] = f);
                 u = c[A].element.firstElementChild;
                 for (var E = void 0, H = {}; u;) {
-                    var E = (E = u.getAttributeNS(k, "level")) && parseInt(E, 10), I = H, Q = u, N = "", z = void 0, Y = void 0, R = z = void 0;
+                    var E = (E = u.getAttributeNS(k, "level")) && parseInt(E, 10), I = H, Q = u, N = "", z = void 0,
+                        Y = void 0, R = z = void 0;
                     if ("list-level-style-number" === Q.localName) {
                         var J = Q, N = J.getAttributeNS(b, "num-format"),
-                            z = J.getAttributeNS(b, "num-suffix") || "", Y = J.getAttributeNS(b, "num-prefix") || "", G = "", ba = J.getAttributeNS(k, "level"), J = J.getAttributeNS(k, "display-levels");
+                            z = J.getAttributeNS(b, "num-suffix") || "", Y = J.getAttributeNS(b, "num-prefix") || "",
+                            G = "", ba = J.getAttributeNS(k, "level"), J = J.getAttributeNS(k, "display-levels");
                         Y && (G += '"' + g(Y) + '"\n');
                         if (p.hasOwnProperty(N))for (ba = ba ? parseInt(ba, 10) : 1, J = J ? parseInt(J, 10) : 1; 0 < J;)G += " counter(" + (ba - J + 1) + "webodf-listLevel," + p[N] + ")", 1 < J && (G += '"."'), J -= 1; else G = N ? G + (' "' + N + '"') : G + ' ""';
                         N = "content:" + G + ' "' + g(z) + '"'
@@ -5559,8 +5599,12 @@ odf.Formatting = function () {
                 p = g[d];
                 for (var e = p.element.firstElementChild; e;) {
                     if (e.namespaceURI === k) {
-                        for (var h = a, s = e, q = 'text|list[text|style-name="' + d + '"]', l = s.getAttributeNS(k, "level"), x = void 0, t = void 0, I = t = void 0, Q = void 0, N = void 0, z = x = void 0, Y = void 0, R = void 0, J = void 0, Q = void 0, I = (t = s.getElementsByTagNameNS(b, "list-level-properties")[0]) && t.getAttributeNS(k, "list-level-position-and-space-mode"),
-                                 Q = t && t.getElementsByTagNameNS(b, "list-level-label-alignment")[0], x = l = l && parseInt(l, 10); 1 < x;)q += " > text|list-item > text|list", x -= 1;
+                        for (var h = a, s = e, q = 'text|list[text|style-name="' + d + '"]',
+                                 l = s.getAttributeNS(k, "level"), x = void 0, t = void 0, I = t = void 0, Q = void 0,
+                                 N = void 0, z = x = void 0, Y = void 0, R = void 0, J = void 0, Q = void 0,
+                                 I = (t = s.getElementsByTagNameNS(b, "list-level-properties")[0]) && t.getAttributeNS(k, "list-level-position-and-space-mode"),
+                                 Q = t && t.getElementsByTagNameNS(b, "list-level-label-alignment")[0],
+                                 x = l = l && parseInt(l, 10); 1 < x;)q += " > text|list-item > text|list", x -= 1;
                         x = t && t.getAttributeNS(c, "text-align") || "left";
                         switch (x) {
                             case "end":
@@ -5570,7 +5614,7 @@ odf.Formatting = function () {
                                 x = "left"
                         }
                         "label-alignment" === I ? (N = Q && Q.getAttributeNS(c, "margin-left") || "0px", R = Q && Q.getAttributeNS(c, "text-indent") || "0px", J = Q && Q.getAttributeNS(k, "label-followed-by"), Q = n(N)) : (N = t && t.getAttributeNS(k, "space-before") || "0px", z = t && t.getAttributeNS(k, "min-label-width") || "0px",
-                                Y = t && t.getAttributeNS(k, "min-label-distance") || "0px", Q = n(N) + n(z));
+                            Y = t && t.getAttributeNS(k, "min-label-distance") || "0px", Q = n(N) + n(z));
                         t = q + " > text|list-item";
                         t += "{";
                         t += "margin-left: " + Q + "px;";
@@ -5586,7 +5630,7 @@ odf.Formatting = function () {
                         t += "text-align: " + x + ";";
                         t += "display: inline-block;";
                         "label-alignment" === I ? (t += "margin-left: " + R + ";", "listtab" === J && (t += "padding-right: 0.2cm;")) : (t += "min-width: " + z + ";", t += "margin-left: " + (0 === parseFloat(z) ? "" :
-                                    "-") + z + ";", t += "padding-right: " + Y + ";");
+                                "-") + z + ";", t += "padding-right: " + Y + ";");
                         t += "}";
                         f(h, t)
                     }
@@ -5613,9 +5657,9 @@ odf.StyleParseUtils = function () {
     function f(a) {
         var c, b;
         a = (a = /(-?[0-9]*[0-9][0-9]*(\.[0-9]*)?|0+\.[0-9]*[1-9][0-9]*|\.[0-9]*[1-9][0-9]*)((cm)|(mm)|(in)|(pt)|(pc)|(px))/.exec(a)) ? {
-                value: parseFloat(a[1]),
-                unit: a[3]
-            } : null;
+            value: parseFloat(a[1]),
+            unit: a[3]
+        } : null;
         b = a && a.unit;
         "px" === b ? c = a.value : "cm" === b ? c = 96 * (a.value / 2.54) : "mm" === b ? c = 96 * (a.value / 25.4) : "in" === b ? c = 96 * a.value : "pt" === b ? c = a.value / 0.75 : "pc" === b && (c = 16 * a.value);
         return c
@@ -5673,7 +5717,8 @@ odf.Style2CSS = function () {
                 m = g
             } else if (z.hasOwnProperty(c[1])) {
                 var g =
-                    a, f = c[0], k = c[1], p = R.parseLength(m), n = void 0, s = void 0, q = void 0, r = void 0, q = void 0;
+                        a, f = c[0], k = c[1], p = R.parseLength(m), n = void 0, s = void 0, q = void 0, r = void 0,
+                    q = void 0;
                 if (p && "%" === p.unit) {
                     n = p.value / 100;
                     s = l(g.parentNode);
@@ -5785,10 +5830,10 @@ odf.Style2CSS = function () {
             if (G = x.getDirectChild(N.element, h, "paragraph-properties")) P = G, G = "" + a(P, u), (aa = x.getDirectChild(P, h, "background-image")) && (L = aa.getAttributeNS(s, "href")) && (G = G + ("background-image: url('odfkit:" + L + "');") + a(aa, w)), (P = P.getAttributeNS(n, "line-height")) && "normal" !== P && (P = R.parseFoLineHeight(P), G = "%" !== P.unit ? G + ("line-height: " + P.value + P.unit + ";") : G + ("line-height: " + P.value / 100 + ";")), S += G;
             if (G = x.getDirectChild(N.element, h, "graphic-properties")) L =
                 G, G = "" + a(L, A), P = L.getAttributeNS(p, "opacity"), aa = L.getAttributeNS(p, "fill"), L = L.getAttributeNS(p, "fill-color"), "solid" === aa || "hatch" === aa ? L && "none" !== L ? (P = isNaN(parseFloat(P)) ? 1 : parseFloat(P) / 100, aa = L.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, c), (L = (aa = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(aa)) ? {
-                            r: parseInt(aa[1], 16),
-                            g: parseInt(aa[2], 16),
-                            b: parseInt(aa[3], 16)
-                        } : null) && (G += "background-color: rgba(" + L.r + "," + L.g + "," + L.b + "," + P + ");")) : G += "background: none;" : "none" === aa && (G += "background: none;"),
+                r: parseInt(aa[1], 16),
+                g: parseInt(aa[2], 16),
+                b: parseInt(aa[3], 16)
+            } : null) && (G += "background-color: rgba(" + L.r + "," + L.g + "," + L.b + "," + P + ");")) : G += "background: none;" : "none" === aa && (G += "background: none;"),
                 S += G;
             if (G = x.getDirectChild(N.element, h, "drawing-page-properties")) P = G, aa = "" + a(P, A), "true" === P.getAttributeNS(m, "background-visible") && (aa += "background: none;"), S += aa, k(b, z, G, N);
             if (G = x.getDirectChild(N.element, h, "table-cell-properties")) z = S, S = "" + a(G, F), S = z + S;
@@ -5801,7 +5846,9 @@ odf.Style2CSS = function () {
         for (var ga in N.derivedStyles)N.derivedStyles.hasOwnProperty(ga) && q(b, d, ga, N.derivedStyles[ga])
     }
 
-    var p = odf.Namespaces.drawns, n = odf.Namespaces.fons, g = odf.Namespaces.officens, h = odf.Namespaces.stylens, d = odf.Namespaces.svgns, e = odf.Namespaces.tablens, s = odf.Namespaces.xlinkns, m = odf.Namespaces.presentationns, x = core.DomUtils, t = new odf.StyleParseUtils,
+    var p = odf.Namespaces.drawns, n = odf.Namespaces.fons, g = odf.Namespaces.officens, h = odf.Namespaces.stylens,
+        d = odf.Namespaces.svgns, e = odf.Namespaces.tablens, s = odf.Namespaces.xlinkns,
+        m = odf.Namespaces.presentationns, x = core.DomUtils, t = new odf.StyleParseUtils,
         y = {
             graphic: "draw",
             "drawing-page": "draw",
@@ -5830,9 +5877,16 @@ odf.Style2CSS = function () {
             "table-row": ["table-row"],
             text: "a index-entry-chapter index-entry-link-end index-entry-link-start index-entry-page-number index-entry-span index-entry-tab-stop index-entry-text index-title-template linenumbering-configuration list-level-style-number list-level-style-bullet outline-level-style span".split(" "),
             list: ["list-item"]
-        }, r = [[n, "color", "color"], [n, "background-color", "background-color"], [n, "font-weight", "font-weight"], [n, "font-style", "font-style"]], w = [[h, "repeat", "background-repeat"]], u = [[n, "background-color", "background-color"], [n, "text-align", "text-align"], [n, "text-indent", "text-indent"], [n, "padding", "padding"], [n, "padding-left", "padding-left"], [n, "padding-right", "padding-right"], [n, "padding-top", "padding-top"], [n, "padding-bottom", "padding-bottom"], [n, "border-left", "border-left"], [n, "border-right",
-            "border-right"], [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"], [n, "margin", "margin"], [n, "margin-left", "margin-left"], [n, "margin-right", "margin-right"], [n, "margin-top", "margin-top"], [n, "margin-bottom", "margin-bottom"], [n, "border", "border"]], A = [[n, "background-color", "background-color"], [n, "min-height", "min-height"], [p, "stroke", "border"], [d, "stroke-color", "border-color"], [d, "stroke-width", "border-width"], [n, "border", "border"], [n, "border-left", "border-left"], [n, "border-right", "border-right"],
-            [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"]], F = [[n, "background-color", "background-color"], [n, "border-left", "border-left"], [n, "border-right", "border-right"], [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"], [n, "border", "border"]], B = [[h, "column-width", "width"]], E = [[h, "row-height", "height"], [n, "keep-together", null]], H = [[h, "width", "width"], [n, "margin-left", "margin-left"], [n, "margin-right", "margin-right"], [n, "margin-top", "margin-top"], [n, "margin-bottom", "margin-bottom"]],
+        },
+        r = [[n, "color", "color"], [n, "background-color", "background-color"], [n, "font-weight", "font-weight"], [n, "font-style", "font-style"]],
+        w = [[h, "repeat", "background-repeat"]],
+        u = [[n, "background-color", "background-color"], [n, "text-align", "text-align"], [n, "text-indent", "text-indent"], [n, "padding", "padding"], [n, "padding-left", "padding-left"], [n, "padding-right", "padding-right"], [n, "padding-top", "padding-top"], [n, "padding-bottom", "padding-bottom"], [n, "border-left", "border-left"], [n, "border-right",
+            "border-right"], [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"], [n, "margin", "margin"], [n, "margin-left", "margin-left"], [n, "margin-right", "margin-right"], [n, "margin-top", "margin-top"], [n, "margin-bottom", "margin-bottom"], [n, "border", "border"]],
+        A = [[n, "background-color", "background-color"], [n, "min-height", "min-height"], [p, "stroke", "border"], [d, "stroke-color", "border-color"], [d, "stroke-width", "border-width"], [n, "border", "border"], [n, "border-left", "border-left"], [n, "border-right", "border-right"],
+            [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"]],
+        F = [[n, "background-color", "background-color"], [n, "border-left", "border-left"], [n, "border-right", "border-right"], [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"], [n, "border", "border"]],
+        B = [[h, "column-width", "width"]], E = [[h, "row-height", "height"], [n, "keep-together", null]],
+        H = [[h, "width", "width"], [n, "margin-left", "margin-left"], [n, "margin-right", "margin-right"], [n, "margin-top", "margin-top"], [n, "margin-bottom", "margin-bottom"]],
         I = [[n, "background-color", "background-color"], [n, "padding", "padding"], [n, "padding-left", "padding-left"], [n, "padding-right", "padding-right"], [n, "padding-top", "padding-top"], [n, "padding-bottom", "padding-bottom"], [n, "border", "border"], [n, "border-left", "border-left"], [n, "border-right", "border-right"], [n, "border-top", "border-top"], [n, "border-bottom", "border-bottom"], [n, "margin", "margin"], [n, "margin-left", "margin-left"], [n, "margin-right", "margin-right"], [n, "margin-top", "margin-top"], [n, "margin-bottom", "margin-bottom"]],
         Q = [[n, "page-width", "width"], [n, "page-height", "height"]], N = {
             border: !0,
@@ -5841,13 +5895,8 @@ odf.Style2CSS = function () {
             "border-top": !0,
             "border-bottom": !0,
             "stroke-width": !0
-        }, z = {
-            margin: !0,
-            "margin-left": !0,
-            "margin-right": !0,
-            "margin-top": !0,
-            "margin-bottom": !0
-        }, Y = {}, R = odf.OdfUtils, J, G, ba, T = xmldom.XPath, D = new core.CSSUnits;
+        }, z = {margin: !0, "margin-left": !0, "margin-right": !0, "margin-top": !0, "margin-bottom": !0}, Y = {},
+        R = odf.OdfUtils, J, G, ba, T = xmldom.XPath, D = new core.CSSUnits;
     this.style2css = function (a, b, d, e, c) {
         function m(a, b) {
             g = "@namespace " + a + " url(" + b + ");";
@@ -5895,15 +5944,15 @@ odf.Style2CSS = function () {
 
         function a(a) {
             a ? l(-s.x, -s.y, t, !0) : (l(0,
-                    0, t, !0), l(0, 0, t, !1))
+                0, t, !0), l(0, 0, t, !1))
         }
 
         function c(a) {
             if (r && B) {
                 var b = r.style.overflow, d = r.classList.contains("webodf-customScrollbars");
                 a && d || !a && !d || (a ? (r.classList.add("webodf-customScrollbars"), r.style.overflow = "hidden", runtime.requestAnimationFrame(function () {
-                        r.style.overflow = b
-                    })) : r.classList.remove("webodf-customScrollbars"))
+                    r.style.overflow = b
+                })) : r.classList.remove("webodf-customScrollbars"))
             }
         }
 
@@ -5967,11 +6016,9 @@ odf.Style2CSS = function () {
                 n, !1), r.removeEventListener("touchmove", g, !1), r.removeEventListener("touchend", h, !1))
         }
 
-        var e, s, m, x, t, y, v = 4, r, w, u = new core.EventNotifier([gui.ZoomHelper.signalZoomChanged]), A = {
-            NONE: 0,
-            SCROLL: 1,
-            PINCH: 2
-        }, F = A.NONE, B = runtime.getWindow().hasOwnProperty("ontouchstart"), E = "";
+        var e, s, m, x, t, y, v = 4, r, w, u = new core.EventNotifier([gui.ZoomHelper.signalZoomChanged]),
+            A = {NONE: 0, SCROLL: 1, PINCH: 2}, F = A.NONE, B = runtime.getWindow().hasOwnProperty("ontouchstart"),
+            E = "";
         this.subscribe = function (a, b) {
             u.subscribe(a, b)
         };
@@ -6108,7 +6155,9 @@ ops.Canvas.prototype.getZoomHelper = function () {
 
     function p(a, b, d) {
         b.setAttributeNS("urn:webodf:names:helper", "styleid", a);
-        var e, c = b.getAttributeNS(F, "anchor-type"), m = b.getAttributeNS(u, "x"), h = b.getAttributeNS(u, "y"), g = b.getAttributeNS(u, "width"), f = b.getAttributeNS(u, "height"), k = b.getAttributeNS(v, "min-height"), p = b.getAttributeNS(v, "min-width");
+        var e, c = b.getAttributeNS(F, "anchor-type"), m = b.getAttributeNS(u, "x"), h = b.getAttributeNS(u, "y"),
+            g = b.getAttributeNS(u, "width"), f = b.getAttributeNS(u, "height"), k = b.getAttributeNS(v, "min-height"),
+            p = b.getAttributeNS(v, "min-width");
         if ("as-char" === c) e = "display: inline-block;";
         else if (c || m || h) e = "position: absolute;"; else if (g || f || k || p) e = "display: block;";
         m && (e += "left: " + m + ";");
@@ -6224,7 +6273,9 @@ ops.Canvas.prototype.getZoomHelper = function () {
         return d
     }
 
-    var y = odf.Namespaces.drawns, v = odf.Namespaces.fons, r = odf.Namespaces.officens, w = odf.Namespaces.stylens, u = odf.Namespaces.svgns, A = odf.Namespaces.tablens, F = odf.Namespaces.textns, B = odf.Namespaces.xlinkns, E = odf.Namespaces.presentationns, H = xmldom.XPath, I = core.DomUtils;
+    var y = odf.Namespaces.drawns, v = odf.Namespaces.fons, r = odf.Namespaces.officens, w = odf.Namespaces.stylens,
+        u = odf.Namespaces.svgns, A = odf.Namespaces.tablens, F = odf.Namespaces.textns, B = odf.Namespaces.xlinkns,
+        E = odf.Namespaces.presentationns, H = xmldom.XPath, I = core.DomUtils;
     odf.OdfCanvas = function (n, v) {
         function z(a,
                    b, d) {
@@ -6297,7 +6348,8 @@ ops.Canvas.prototype.getZoomHelper = function () {
                     u = l.firstElementChild;
                     for (N = 0; u;)"true" !== u.getAttributeNS(E, "placeholder") && (v = u.cloneNode(!0), x.appendChild(v)), u = u.nextElementSibling, N += 1;
                     u = v = N = void 0;
-                    for (var R = I.getElementsByTagNameNS(x, y, "frame"), N = 0; N < R.length; N += 1)v = R[N], (u = v.getAttributeNS(E, "class")) && !/^(date-time|footer|header|page-number)$/.test(u) && v.parentNode.removeChild(v);
+                    for (var R = I.getElementsByTagNameNS(x, y, "frame"),
+                             N = 0; N < R.length; N += 1)v = R[N], (u = v.getAttributeNS(E, "class")) && !/^(date-time|footer|header|page-number)$/.test(u) && v.parentNode.removeChild(v);
                     v = I.getElementsByTagNameNS(x, y, "*");
                     for (N = 0; N < v.length; N += 1)p(t + "_" + N, v[N], c);
                     g.appendChild(x);
@@ -6326,7 +6378,7 @@ ops.Canvas.prototype.getZoomHelper = function () {
 
         function G(a) {
             U ? (ca.parentNode || $.appendChild(ca), P && P.forgetAnnotations(), P = new gui.AnnotationViewManager(D, a.body, ca, W), a = I.getElementsByTagNameNS(a.body, r, "annotation"),
-                    P.addAnnotations(a), u()) : ca.parentNode && ($.removeChild(ca), P.forgetAnnotations(), u())
+                P.addAnnotations(a), u()) : ca.parentNode && ($.removeChild(ca), P.forgetAnnotations(), u())
         }
 
         function ba(d) {
@@ -6353,9 +6405,9 @@ ops.Canvas.prototype.getZoomHelper = function () {
             }
 
             Z.state === odf.OdfContainer.DONE ? e() : (runtime.log("WARNING: refreshOdf called but ODF was not DONE."),
-                    ha = runtime.setTimeout(function qa() {
-                        Z.state === odf.OdfContainer.DONE ? e() : (runtime.log("will be back later..."), ha = runtime.setTimeout(qa, 500))
-                    }, 100))
+                ha = runtime.setTimeout(function qa() {
+                    Z.state === odf.OdfContainer.DONE ? e() : (runtime.log("will be back later..."), ha = runtime.setTimeout(qa, 500))
+                }, 100))
         }
 
         function T(a) {
@@ -6372,7 +6424,9 @@ ops.Canvas.prototype.getZoomHelper = function () {
         runtime.assert(null !== n && void 0 !== n, "odf.OdfCanvas constructor needs DOM element");
         runtime.assert(null !== n.ownerDocument && void 0 !== n.ownerDocument,
             "odf.OdfCanvas constructor needs DOM");
-        var D = this, O = n.ownerDocument, Z, C = new odf.Formatting, V, $ = null, ca = null, U = !1, W = !1, P = null, aa, S, L, ea, ga, da = {}, ha, ma, la = !1, ia = !1, ja = new f, fa = new gui.ZoomHelper, pa = v || new gui.SingleScrollViewport(n.parentNode);
+        var D = this, O = n.ownerDocument, Z, C = new odf.Formatting, V, $ = null, ca = null, U = !1, W = !1, P = null,
+            aa, S, L, ea, ga, da = {}, ha, ma, la = !1, ia = !1, ja = new f, fa = new gui.ZoomHelper,
+            pa = v || new gui.SingleScrollViewport(n.parentNode);
         this.refreshCSS = function () {
             la = !0;
             ma.trigger()
@@ -6514,10 +6568,10 @@ odf.StepUtils = function () {
         runtime.assert(f.isStep(), "Step iterator must be on a step");
         l.nodeType === Node.TEXT_NODE && 0 < f.offset() ? a = f.offset() : (l = f.leftNode()) && l.nodeType === Node.TEXT_NODE && (a = l.length);
         l && (l.nodeType === Node.TEXT_NODE ? (runtime.assert(0 < a, "Empty text node found"), c = {
-                container: l,
-                startOffset: a - 1,
-                endOffset: a
-            }) : c = {container: l, startOffset: 0, endOffset: l.childNodes.length});
+            container: l,
+            startOffset: a - 1,
+            endOffset: a
+        }) : c = {container: l, startOffset: 0, endOffset: l.childNodes.length});
         return c
     }
 };
@@ -6711,12 +6765,14 @@ ops.OdtCursor.signalCursorUpdated = "cursorUpdated";
         }
 
         function e(a) {
-            for (var b, d = null; !d && a && a !== l;)(b = n(a)) && (d = x[b]) && d.node !== a && (runtime.log("Cloned node detected. Creating new bookmark"), d = null, a.removeAttributeNS(s, "nodeId")), a = a.parentNode;
+            for (var b,
+                     d = null; !d && a && a !== l;)(b = n(a)) && (d = x[b]) && d.node !== a && (runtime.log("Cloned node detected. Creating new bookmark"), d = null, a.removeAttributeNS(s, "nodeId")), a = a.parentNode;
             return d
         }
 
         var s =
-            "urn:webodf:names:steps", m = {}, x = {}, t = core.DomUtils, y, v, r = Node.DOCUMENT_POSITION_FOLLOWING, w = Node.DOCUMENT_POSITION_PRECEDING, u;
+                "urn:webodf:names:steps", m = {}, x = {}, t = core.DomUtils, y, v, r = Node.DOCUMENT_POSITION_FOLLOWING,
+            w = Node.DOCUMENT_POSITION_PRECEDING, u;
         this.updateBookmark = function (e, c) {
             var f, k = Math.ceil(e / a) * a, p, s, q;
             if (void 0 !== v && v < e) {
@@ -6764,7 +6820,7 @@ ops.OdtCursor.signalCursorUpdated = "cursorUpdated";
                 g(l);
             y = new k(a, 0, l);
             u = ops.StepsCache.ENABLE_CACHE_VERIFICATION ? p : function () {
-                }
+            }
         })()
     };
     ops.StepsCache.ENABLE_CACHE_VERIFICATION = !1;
@@ -6867,7 +6923,8 @@ ops.TextPositionFilter = function () {
         return a.scanLeftForAnyCharacter(c) ? q : k
     }
 
-    var a = odf.OdfUtils, c = Node.ELEMENT_NODE, b = Node.TEXT_NODE, k = core.PositionFilter.FilterResult.FILTER_ACCEPT, q = core.PositionFilter.FilterResult.FILTER_REJECT;
+    var a = odf.OdfUtils, c = Node.ELEMENT_NODE, b = Node.TEXT_NODE, k = core.PositionFilter.FilterResult.FILTER_ACCEPT,
+        q = core.PositionFilter.FilterResult.FILTER_REJECT;
     this.acceptPosition = function (f) {
         var n = f.container(), g = n.nodeType, h, d, e;
         if (g !== c && g !== b)return q;
@@ -6977,9 +7034,14 @@ ops.OdtDocument = function (f) {
         return (a = m.getParagraphElement(a)) && x.containsNode(d, a) ? a : d
     }
 
-    var e = this, s, m = odf.OdfUtils, x = core.DomUtils, t = {}, y = {}, v = new core.EventNotifier([ops.Document.signalMemberAdded, ops.Document.signalMemberUpdated,
-        ops.Document.signalMemberRemoved, ops.Document.signalCursorAdded, ops.Document.signalCursorRemoved, ops.Document.signalCursorMoved, ops.OdtDocument.signalParagraphChanged, ops.OdtDocument.signalParagraphStyleModified, ops.OdtDocument.signalCommonStyleCreated, ops.OdtDocument.signalCommonStyleDeleted, ops.OdtDocument.signalTableAdded, ops.OdtDocument.signalOperationStart, ops.OdtDocument.signalOperationEnd, ops.OdtDocument.signalProcessingBatchStart, ops.OdtDocument.signalProcessingBatchEnd, ops.OdtDocument.signalUndoStackChanged,
-        ops.OdtDocument.signalStepsInserted, ops.OdtDocument.signalStepsRemoved, ops.OdtDocument.signalMetadataUpdated, ops.OdtDocument.signalAnnotationAdded]), r = core.PositionFilter.FilterResult.FILTER_ACCEPT, w = core.PositionFilter.FilterResult.FILTER_REJECT, u = core.StepDirection.NEXT, A, F, B, E = !1, H = NodeFilter.SHOW_ALL, I = new gui.BlacklistNamespaceNodeFilter(["urn:webodf:names:cursor", "urn:webodf:names:editinfo"]), Q = new gui.OdfTextBodyNodeFilter, N = new core.NodeFilterChain([I, Q]);
+    var e = this, s, m = odf.OdfUtils, x = core.DomUtils, t = {}, y = {},
+        v = new core.EventNotifier([ops.Document.signalMemberAdded, ops.Document.signalMemberUpdated,
+            ops.Document.signalMemberRemoved, ops.Document.signalCursorAdded, ops.Document.signalCursorRemoved, ops.Document.signalCursorMoved, ops.OdtDocument.signalParagraphChanged, ops.OdtDocument.signalParagraphStyleModified, ops.OdtDocument.signalCommonStyleCreated, ops.OdtDocument.signalCommonStyleDeleted, ops.OdtDocument.signalTableAdded, ops.OdtDocument.signalOperationStart, ops.OdtDocument.signalOperationEnd, ops.OdtDocument.signalProcessingBatchStart, ops.OdtDocument.signalProcessingBatchEnd, ops.OdtDocument.signalUndoStackChanged,
+            ops.OdtDocument.signalStepsInserted, ops.OdtDocument.signalStepsRemoved, ops.OdtDocument.signalMetadataUpdated, ops.OdtDocument.signalAnnotationAdded]),
+        r = core.PositionFilter.FilterResult.FILTER_ACCEPT, w = core.PositionFilter.FilterResult.FILTER_REJECT,
+        u = core.StepDirection.NEXT, A, F, B, E = !1, H = NodeFilter.SHOW_ALL,
+        I = new gui.BlacklistNamespaceNodeFilter(["urn:webodf:names:cursor", "urn:webodf:names:editinfo"]),
+        Q = new gui.OdfTextBodyNodeFilter, N = new core.NodeFilterChain([I, Q]);
     this.createPositionIterator = l;
     this.getDocumentElement =
         function () {
@@ -7056,7 +7118,7 @@ ops.OdtDocument = function (f) {
     this.getTextNodeAtStep = function (a, b) {
         var d = p(a), m = d.container(), g, f = 0, h = null;
         m.nodeType === Node.TEXT_NODE ? (g = m,
-                f = d.unfilteredDomOffset(), 0 < g.length && (0 < f && (g = g.splitText(f)), g.parentNode.insertBefore(c().createTextNode(""), g), g = g.previousSibling, f = 0)) : (g = c().createTextNode(""), f = 0, m.insertBefore(g, d.rightNode()));
+            f = d.unfilteredDomOffset(), 0 < g.length && (0 < f && (g = g.splitText(f)), g.parentNode.insertBefore(c().createTextNode(""), g), g = g.previousSibling, f = 0)) : (g = c().createTextNode(""), f = 0, m.insertBefore(g, d.rightNode()));
         if (b) {
             if (t[b] && e.getCursorPosition(b) === a) {
                 for (h = t[b].getNode(); h.nextSibling && "cursor" === h.nextSibling.localName;)h.parentNode.insertBefore(h.nextSibling, h);
@@ -7078,7 +7140,7 @@ ops.OdtDocument = function (f) {
             h = q(k.startContainer, k.startOffset, [A, m], f);
             k.collapsed ? g = h : (f = d(k.endContainer, k.endOffset, g), g = q(k.endContainer, k.endOffset, [A, m], f));
             h.isStep() && g.isStep() ? h.container() !== g.container() || h.offset() !== g.offset() || k.collapsed && c.getAnchorNode() === c.getNode() || (p = !0, k.setStart(h.container(), h.offset()), k.collapse(!0)) : (p = !0, runtime.assert(h.roundToClosestStep(), "No walkable step found for cursor owned by " + a), k.setStart(h.container(), h.offset()), runtime.assert(g.roundToClosestStep(), "No walkable step found for cursor owned by " +
-                    a), k.setEnd(g.container(), g.offset()));
+                a), k.setEnd(g.container(), g.offset()));
             p && (c.setSelectedRange(k, c.hasForwardSelection()), e.emit(ops.Document.signalCursorMoved, c))
         })
     };
@@ -7290,7 +7352,8 @@ ops.OpAddStyle = function () {
     this.isEdit = !0;
     this.group = void 0;
     this.execute = function (f) {
-        var n = f.getOdfCanvas().odfContainer(), g = f.getFormatting(), h = f.getDOMDocument().createElementNS(q, "style:style");
+        var n = f.getOdfCanvas().odfContainer(), g = f.getFormatting(),
+            h = f.getDOMDocument().createElementNS(q, "style:style");
         if (!h)return !1;
         k && g.updateStyle(h, k);
         h.setAttributeNS(q, "style:family", c);
@@ -7332,7 +7395,8 @@ odf.ObjectNameGenerator = function (f, l) {
         return a
     }
 
-    var b = odf.Namespaces.stylens, k = odf.Namespaces.drawns, q = odf.Namespaces.xlinkns, p = (new core.Utils).hashString(l),
+    var b = odf.Namespaces.stylens, k = odf.Namespaces.drawns, q = odf.Namespaces.xlinkns,
+        p = (new core.Utils).hashString(l),
         n = null, g = null, h = null, d = {}, e = {};
     this.generateStyleName = function () {
         null === n && (n = new a("auto" + p + "_", function () {
@@ -7367,8 +7431,8 @@ odf.TextStyleApplicator = function (f, l, a) {
     function c(a) {
         function b(a, d) {
             return "object" === typeof a && "object" === typeof d ? Object.keys(a).every(function (c) {
-                    return b(a[c], d[c])
-                }) : a === d
+                return b(a[c], d[c])
+            }) : a === d
         }
 
         var d = {};
@@ -7483,7 +7547,8 @@ ops.OpApplyHyperlink = function () {
     this.isEdit = !0;
     this.group = void 0;
     this.execute = function (n) {
-        var g = n.getDOMDocument(), h = n.convertCursorToDomRange(c, b), d = q.splitBoundaries(h), e = [], s = p.getTextNodes(h, !1);
+        var g = n.getDOMDocument(), h = n.convertCursorToDomRange(c, b), d = q.splitBoundaries(h), e = [],
+            s = p.getTextNodes(h, !1);
         if (0 === s.length)return !1;
         s.forEach(function (a) {
             var b = p.getParagraphElement(a);
@@ -7512,7 +7577,8 @@ ops.OpApplyHyperlink = function () {
     }
 };
 ops.OpInsertImage = function () {
-    var f, l, a, c, b, k, q, p, n = odf.Namespaces.drawns, g = odf.Namespaces.svgns, h = odf.Namespaces.textns, d = odf.Namespaces.xlinkns, e = odf.OdfUtils;
+    var f, l, a, c, b, k, q, p, n = odf.Namespaces.drawns, g = odf.Namespaces.svgns, h = odf.Namespaces.textns,
+        d = odf.Namespaces.xlinkns, e = odf.OdfUtils;
     this.init = function (d) {
         f = d.memberid;
         l = d.timestamp;
@@ -7531,7 +7597,8 @@ ops.OpInsertImage = function () {
         t = x.textNode;
         y = e.getParagraphElement(t);
         var x = x.offset !== t.length ? t.splitText(x.offset) :
-            t.nextSibling, v = s.getDOMDocument(), r = v.createElementNS(n, "draw:image"), v = v.createElementNS(n, "draw:frame");
+                t.nextSibling, v = s.getDOMDocument(), r = v.createElementNS(n, "draw:image"),
+            v = v.createElementNS(n, "draw:frame");
         r.setAttributeNS(d, "xlink:href", c);
         r.setAttributeNS(d, "xlink:type", "simple");
         r.setAttributeNS(d, "xlink:show", "embed");
@@ -7608,7 +7675,10 @@ ops.OpInsertTable = function () {
     this.execute = function (d) {
         var e = d.getTextNodeAtStep(k), g = d.getRootNode();
         if (e) {
-            var m = d.getDOMDocument(), x = m.createElementNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:table"), t = m.createElementNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:table-column"), y, v, r, w;
+            var m = d.getDOMDocument(),
+                x = m.createElementNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:table"),
+                t = m.createElementNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:table-column"), y, v, r,
+                w;
             p && x.setAttributeNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:style-name", p);
             q && x.setAttributeNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0", "table:name", q);
             t.setAttributeNS("urn:oasis:names:tc:opendocument:xmlns:table:1.0",
@@ -7667,7 +7737,7 @@ ops.OpInsertText = function () {
             e = k.getParagraphElement(n);
             for (t = 0; t < b.length; t += 1)if ("\t" === b[t] || "\t" !== b[t] && k.isODFWhitespace(b[t]) &&
                 (0 === t || t === b.length - 1 || "\t" !== b[t - 1] && k.isODFWhitespace(b[t - 1]))) 0 === s ? (p.offset !== n.length && (h = n.splitText(p.offset)), 0 < t && n.appendData(b.substring(0, t))) : s < t && (s = b.substring(s, t), g.insertBefore(d.createTextNode(s), h)), s = t + 1, "\t" === b[t] ? (m = d.createElementNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "text:tab"), m.appendChild(d.createTextNode("\t"))) : (" " !== b[t] && runtime.log("WARN: InsertText operation contains non-tab, non-space whitespace character (character code " + b.charCodeAt(t) + ")"),
-                    m = d.createElementNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "text:s"), m.appendChild(d.createTextNode(" "))), g.insertBefore(m, h);
+                m = d.createElementNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "text:s"), m.appendChild(d.createTextNode(" "))), g.insertBefore(m, h);
             0 === s ? n.insertData(p.offset, b) : s < b.length && (p = b.substring(s), g.insertBefore(d.createTextNode(p), h));
             g = n.parentNode;
             h = n.nextSibling;
@@ -7833,7 +7903,8 @@ ops.OpRemoveAnnotation = function () {
             n.parentNode.insertBefore(a, n)
         }
 
-        for (var p = c.getIteratorAtPosition(a).container(), n; p.namespaceURI !== odf.Namespaces.officens || "annotation" !== p.localName;)p = p.parentNode;
+        for (var p = c.getIteratorAtPosition(a).container(),
+                 n; p.namespaceURI !== odf.Namespaces.officens || "annotation" !== p.localName;)p = p.parentNode;
         if (null === p)return !1;
         n = p;
         p = n.annotationEndElement;
@@ -8027,11 +8098,11 @@ ops.OpSetParagraphStyle = function () {
         var p, n;
         p = q.getIteratorAtPosition(c);
         return (n = k.getParagraphElement(p.container())) ? (runtime.assert(f(q, n, p), "SetParagraphStyle position should be the first position in the paragraph"),
-                b ? n.setAttributeNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "text:style-name", b) : n.removeAttributeNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "style-name"), q.getOdfCanvas().refreshSize(), q.emit(ops.OdtDocument.signalParagraphChanged, {
-                paragraphElement: n,
-                timeStamp: a,
-                memberId: l
-            }), q.getOdfCanvas().rerenderAnnotations(), !0) : !1
+            b ? n.setAttributeNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "text:style-name", b) : n.removeAttributeNS("urn:oasis:names:tc:opendocument:xmlns:text:1.0", "style-name"), q.getOdfCanvas().refreshSize(), q.emit(ops.OdtDocument.signalParagraphChanged, {
+            paragraphElement: n,
+            timeStamp: a,
+            memberId: l
+        }), q.getOdfCanvas().rerenderAnnotations(), !0) : !1
     };
     this.spec = function () {
         return {optype: "SetParagraphStyle", memberid: l, timestamp: a, position: c, styleName: b}
@@ -8242,7 +8313,8 @@ ops.OperationRouter.prototype.hasSessionHostConnection = function () {
 ops.OperationRouter.signalProcessingBatchStart = "router/batchstart";
 ops.OperationRouter.signalProcessingBatchEnd = "router/batchend";
 ops.TrivialOperationRouter = function () {
-    var f = new core.EventNotifier([ops.OperationRouter.signalProcessingBatchStart, ops.OperationRouter.signalProcessingBatchEnd]), l, a, c = 0;
+    var f = new core.EventNotifier([ops.OperationRouter.signalProcessingBatchStart, ops.OperationRouter.signalProcessingBatchEnd]),
+        l, a, c = 0;
     this.setOperationFactory = function (a) {
         l = a
     };
@@ -8341,7 +8413,8 @@ gui.AnnotationController = function (f, l, a) {
         b.getMemberId() === a && c()
     }
 
-    var p = f.getOdtDocument(), n = !1, g = new core.EventNotifier([gui.AnnotationController.annotatableChanged]), h = odf.OdfUtils, d = core.StepDirection.NEXT;
+    var p = f.getOdtDocument(), n = !1, g = new core.EventNotifier([gui.AnnotationController.annotatableChanged]),
+        h = odf.OdfUtils, d = core.StepDirection.NEXT;
     this.isAnnotatable = function () {
         return n
     };
@@ -8438,7 +8511,8 @@ gui.GuiStepUtils = function () {
         return g
     }
 
-    var l = odf.OdfUtils, a = new odf.StepUtils, c = core.DomUtils, b = core.StepDirection.NEXT, k = gui.StepInfo.VisualDirection.LEFT_TO_RIGHT, q = gui.StepInfo.VisualDirection.RIGHT_TO_LEFT;
+    var l = odf.OdfUtils, a = new odf.StepUtils, c = core.DomUtils, b = core.StepDirection.NEXT,
+        k = gui.StepInfo.VisualDirection.LEFT_TO_RIGHT, q = gui.StepInfo.VisualDirection.RIGHT_TO_LEFT;
     this.getContentRect = f;
     this.moveToFilteredStep = function (a, c, g) {
         function h(a, b) {
@@ -8528,11 +8602,9 @@ gui.Caret = function (f, l, a, c) {
         a()
     }
 
-    var g, h, d, e, s, m, x = f.getDocument().getCanvas(), t = core.DomUtils, y = new gui.GuiStepUtils, v, r, w, u = !1, A = !1, F = !1, B = {
-        isFocused: !1,
-        isShown: !0,
-        visibility: "hidden"
-    }, E = {isFocused: !B.isFocused, isShown: !B.isShown, visibility: "hidden"};
+    var g, h, d, e, s, m, x = f.getDocument().getCanvas(), t = core.DomUtils, y = new gui.GuiStepUtils, v, r, w, u = !1,
+        A = !1, F = !1, B = {isFocused: !1, isShown: !0, visibility: "hidden"},
+        E = {isFocused: !B.isFocused, isShown: !B.isShown, visibility: "hidden"};
     this.handleUpdate = function () {
         F = !0;
         r.trigger()
@@ -8554,7 +8626,8 @@ gui.Caret = function (f, l, a, c) {
         r.trigger()
     };
     this.hide = function () {
-        B.isShown = !1;
+        B.isShown =
+            !1;
         r.trigger()
     };
     this.setAvatarImageUrl = function (a) {
@@ -8597,7 +8670,8 @@ gui.Caret = function (f, l, a, c) {
         core.Async.destroyAll([r.destroy, w.destroy, d.destroy, n], a)
     };
     (function () {
-        var e = f.getDocument(), c = [e.createRootFilter(f.getMemberId()), e.getPositionFilter()], k = e.getDOMDocument();
+        var e = f.getDocument(), c = [e.createRootFilter(f.getMemberId()), e.getPositionFilter()],
+            k = e.getDOMDocument();
         m = k.createRange();
         s = k.createElement("span");
         s.className = "webodf-caretSizer";
@@ -8742,10 +8816,8 @@ gui.DirectFormattingController = function (f, l, a, c, b, k, q) {
     }
 
     function h() {
-        var b = J.getCursor(c), d = b && b.getSelectedRange(), e = [], e = [], f = !0, h = {
-            directTextStyling: !0,
-            directParagraphStyling: !0
-        };
+        var b = J.getCursor(c), d = b && b.getSelectedRange(), e = [], e = [], f = !0,
+            h = {directTextStyling: !0, directParagraphStyling: !0};
         d && (e = g(d), 0 === e.length && (e = [d.startContainer,
             d.endContainer], f = !1), e = J.getFormatting().getAppliedStyles(e));
         void 0 !== e[0] && Z && (e[0].styleProperties = G.mergeObjects(e[0].styleProperties, Z));
@@ -8806,12 +8878,12 @@ gui.DirectFormattingController = function (f, l, a, c, b, k, q) {
         if (n().directTextStyling) {
             var b = J.getCursorSelection(c), d = {"style:text-properties": a};
             0 !== b.length ? (a = new ops.OpApplyDirectStyling, a.init({
-                    memberid: c,
-                    position: b.position,
-                    length: b.length,
-                    setProperties: d
-                }), f.enqueue([a])) : (Z =
-                    G.mergeObjects(Z || {}, d), V.reset())
+                memberid: c,
+                position: b.position,
+                length: b.length,
+                setProperties: d
+            }), f.enqueue([a])) : (Z =
+                G.mergeObjects(Z || {}, d), V.reset())
         }
     }
 
@@ -8847,7 +8919,8 @@ gui.DirectFormattingController = function (f, l, a, c, b, k, q) {
             var d = J.getCursor(c).getSelectedRange(), d = ba.getParagraphElements(d),
                 e = J.getFormatting(), g = [], h = {}, m;
             d.forEach(function (d) {
-                var f = J.convertDomPointToCursorStep(d, 0, O), k = d.getAttributeNS(odf.Namespaces.textns, "style-name"), l;
+                var f = J.convertDomPointToCursorStep(d, 0, O),
+                    k = d.getAttributeNS(odf.Namespaces.textns, "style-name"), l;
                 d = k ? h.hasOwnProperty(k) ? h[k] : void 0 : m;
                 d || (d = b.generateStyleName(), k ? (h[k] = d, l = e.createDerivedStyleObject(k, "paragraph", {})) : (m = d, l = {}), l = a(l), k = new ops.OpAddStyle, k.init({
                     memberid: c,
@@ -8885,7 +8958,8 @@ gui.DirectFormattingController = function (f, l, a, c, b, k, q) {
 
     function N(a, b) {
         var d = g(a), d = 0 === d.length ? [a.startContainer] :
-            d, d = J.getFormatting().getAppliedStyles(d), e = 0 < d.length ? d[0].styleProperties : void 0, c = J.getFormatting().getAppliedStylesForElement(b).styleProperties;
+                d, d = J.getFormatting().getAppliedStyles(d), e = 0 < d.length ? d[0].styleProperties : void 0,
+            c = J.getFormatting().getAppliedStylesForElement(b).styleProperties;
         if (!e || "text" !== e["style:family"] || !e["style:text-properties"])return !1;
         if (!c || !c["style:text-properties"])return !0;
         e = e["style:text-properties"];
@@ -8902,8 +8976,10 @@ gui.DirectFormattingController = function (f, l, a, c, b, k, q) {
         return !1
     }
 
-    var R = this, J = f.getOdtDocument(), G = new core.Utils, ba = odf.OdfUtils, T = new core.EventNotifier([gui.DirectFormattingController.enabledChanged,
-        gui.DirectFormattingController.textStylingChanged, gui.DirectFormattingController.paragraphStylingChanged]), D = odf.Namespaces.textns, O = core.StepDirection.NEXT, Z = null, C, V;
+    var R = this, J = f.getOdtDocument(), G = new core.Utils, ba = odf.OdfUtils,
+        T = new core.EventNotifier([gui.DirectFormattingController.enabledChanged,
+            gui.DirectFormattingController.textStylingChanged, gui.DirectFormattingController.paragraphStylingChanged]),
+        D = odf.Namespaces.textns, O = core.StepDirection.NEXT, Z = null, C, V;
     this.enabledFeatures = n;
     this.formatTextSelection = v;
     this.createCursorStyleOp = function (a, b, d) {
@@ -9214,7 +9290,8 @@ gui.HyperlinkClickHandler = function (f, l, a) {
         }
     }
 
-    var p = gui.KeyboardHandler.Modifier, n = gui.KeyboardHandler.KeyCode, g = xmldom.XPath, h = odf.OdfUtils, d = runtime.getWindow(), e = p.None, s = [];
+    var p = gui.KeyboardHandler.Modifier, n = gui.KeyboardHandler.KeyCode, g = xmldom.XPath, h = odf.OdfUtils,
+        d = runtime.getWindow(), e = p.None, s = [];
     runtime.assert(null !==
         d, "Expected to be run in an environment which has a global window, like a browser.");
     this.handleClick = function (a) {
@@ -9230,7 +9307,7 @@ gui.HyperlinkClickHandler = function (f, l, a) {
                 b = null
             }
             b && (b = h.getHyperlinkTarget(b), "" !== b && ("#" === b[0] ? (b = b.substring(1), c = f(), k = g.getODFElementsWithXPath(c, "//text:bookmark-start[@text:name='" + b + "']", odf.Namespaces.lookupNamespaceURI), 0 === k.length &&
-                (k = g.getODFElementsWithXPath(c, "//text:bookmark[@text:name='" + b + "']", odf.Namespaces.lookupNamespaceURI)), 0 < k.length && k[0].scrollIntoView(!0)) : /^\s*(javascript|data):/.test(b) ? runtime.log("WARN:", "potentially malicious URL ignored") : d.open(b), a.preventDefault ? a.preventDefault() : a.returnValue = !1))
+            (k = g.getODFElementsWithXPath(c, "//text:bookmark[@text:name='" + b + "']", odf.Namespaces.lookupNamespaceURI)), 0 < k.length && k[0].scrollIntoView(!0)) : /^\s*(javascript|data):/.test(b) ? runtime.log("WARN:", "potentially malicious URL ignored") : d.open(b), a.preventDefault ? a.preventDefault() : a.returnValue = !1))
         }
     };
     this.setModifier = function (a) {
@@ -9342,24 +9419,24 @@ gui.EventManager = function (f) {
     function k(a, d, e) {
         var f = a.touches.length, g = a.touches[0], h = d.timer;
         "touchmove" === a.type || "touchend" === a.type ? h && c(h) : "touchstart" === a.type && (1 !== f ? runtime.clearTimeout(h) : h = b(function () {
-                    e({
-                        clientX: g.clientX, clientY: g.clientY,
-                        pageX: g.pageX, pageY: g.pageY, target: a.target || a.srcElement || null, detail: 1
-                    })
-                }, 400));
+                e({
+                    clientX: g.clientX, clientY: g.clientY,
+                    pageX: g.pageX, pageY: g.pageY, target: a.target || a.srcElement || null, detail: 1
+                })
+            }, 400));
         d.timer = h
     }
 
     function q(a, b, d) {
         var e = a.touches[0], c = a.target || a.srcElement || null, f = b.target;
         1 !== a.touches.length || "touchend" === a.type ? f = null : "touchstart" === a.type && "webodf-draggable" === c.getAttribute("class") ? f = c : "touchmove" === a.type && f && (a.preventDefault(), a.stopPropagation(), d({
-                    clientX: e.clientX,
-                    clientY: e.clientY,
-                    pageX: e.pageX,
-                    pageY: e.pageY,
-                    target: f,
-                    detail: 1
-                }));
+                clientX: e.clientX,
+                clientY: e.clientY,
+                pageX: e.pageX,
+                pageY: e.pageY,
+                target: f,
+                detail: 1
+            }));
         b.target = f
     }
 
@@ -9438,13 +9515,9 @@ gui.EventManager = function (f) {
         }))
     }
 
-    var r = runtime.getWindow(), w = {
-        beforecut: !0,
-        beforepaste: !0,
-        longpress: !0,
-        drag: !0,
-        dragstop: !0
-    }, u = {mousedown: !0, mouseup: !0, focus: !0}, A = {}, F = {}, B, E = f.getCanvas().getElement(), H = this, I = {};
+    var r = runtime.getWindow(), w = {beforecut: !0, beforepaste: !0, longpress: !0, drag: !0, dragstop: !0},
+        u = {mousedown: !0, mouseup: !0, focus: !0}, A = {}, F = {}, B, E = f.getCanvas().getElement(), H = this,
+        I = {};
     this.addFilter = function (a, b) {
         d(a, !0).filters.push(b)
     };
@@ -9533,7 +9606,8 @@ gui.HyperlinkController = function (f, l, a, c) {
         a.getMemberId() === c && b()
     }
 
-    var q = odf.OdfUtils, p = f.getOdtDocument(), n = new core.EventNotifier([gui.HyperlinkController.enabledChanged]), g = !1;
+    var q = odf.OdfUtils, p = f.getOdtDocument(), n = new core.EventNotifier([gui.HyperlinkController.enabledChanged]),
+        g = !1;
     this.isEnabled = function () {
         return g
     };
@@ -9560,7 +9634,8 @@ gui.HyperlinkController = function (f, l, a, c) {
     };
     this.removeHyperlinks = function () {
         if (g) {
-            var a = p.createPositionIterator(p.getRootNode()), b = p.getCursor(c).getSelectedRange(), e = q.getHyperlinkElements(b),
+            var a = p.createPositionIterator(p.getRootNode()), b = p.getCursor(c).getSelectedRange(),
+                e = q.getHyperlinkElements(b),
                 k = b.collapsed && 1 === e.length, m = p.getDOMDocument().createRange(), l = [], n, y;
             0 !== e.length && (e.forEach(function (a) {
                 m.selectNodeContents(a);
@@ -9616,11 +9691,9 @@ gui.ImageController = function (f, l, a, c, b) {
         a.getMemberId() === c && k()
     }
 
-    var p = {
-        "image/gif": ".gif",
-        "image/jpeg": ".jpg",
-        "image/png": ".png"
-    }, n = odf.Namespaces.textns, g = f.getOdtDocument(), h = odf.OdfUtils, d = g.getFormatting(), e = new core.EventNotifier([gui.HyperlinkController.enabledChanged]), s = !1;
+    var p = {"image/gif": ".gif", "image/jpeg": ".jpg", "image/png": ".png"}, n = odf.Namespaces.textns,
+        g = f.getOdtDocument(), h = odf.OdfUtils, d = g.getFormatting(),
+        e = new core.EventNotifier([gui.HyperlinkController.enabledChanged]), s = !1;
     this.isEnabled = function () {
         return s
     };
@@ -9647,7 +9720,8 @@ gui.ImageController = function (f, l, a, c, b) {
             }
             k = l.width + "px";
             l = l.height + "px";
-            var w = g.getOdfCanvas().odfContainer().rootElement.styles, q = a.toLowerCase(), r = p.hasOwnProperty(q) ? p[q] : null, u, q = [];
+            var w = g.getOdfCanvas().odfContainer().rootElement.styles, q = a.toLowerCase(),
+                r = p.hasOwnProperty(q) ? p[q] : null, u, q = [];
             runtime.assert(null !== r, "Image type is not supported: " + a);
             r = "Pictures/" + b.generateImageName() + r;
             u = new ops.OpSetBlob;
@@ -9729,7 +9803,9 @@ gui.ImageSelector = function (f) {
         return k
     }
 
-    var a = odf.Namespaces.svgns, c = "topLeft topRight bottomRight bottomLeft topMiddle rightMiddle bottomMiddle leftMiddle".split(" "), b = f.getElement().ownerDocument, k = !1;
+    var a = odf.Namespaces.svgns,
+        c = "topLeft topRight bottomRight bottomLeft topMiddle rightMiddle bottomMiddle leftMiddle".split(" "),
+        b = f.getElement().ownerDocument, k = !1;
     this.select = function (c) {
         var p, n, g = b.getElementById("imageSelector");
         g || (g = l());
@@ -9787,7 +9863,7 @@ gui.ImageSelector = function (f) {
     gui.InputMethodEditor = function (l, a) {
         function c(a) {
             e && (a ? e.getNode().setAttributeNS(d, "composing", "true") : (e.getNode().removeAttributeNS(d,
-                    "composing"), x.textContent = ""))
+                "composing"), x.textContent = ""))
         }
 
         function b() {
@@ -9826,7 +9902,9 @@ gui.ImageSelector = function (f) {
             x.textContent = s.value
         }
 
-        var d = "urn:webodf:names:cursor", e = null, s = a.getEventTrap(), m = s.ownerDocument, x, t, y = !1, v = "", r = new core.EventNotifier([gui.InputMethodEditor.signalCompositionStart, gui.InputMethodEditor.signalCompositionEnd]), w, u, A = [], F, B = !1;
+        var d = "urn:webodf:names:cursor", e = null, s = a.getEventTrap(), m = s.ownerDocument, x, t, y = !1, v = "",
+            r = new core.EventNotifier([gui.InputMethodEditor.signalCompositionStart, gui.InputMethodEditor.signalCompositionEnd]),
+            w, u, A = [], F, B = !1;
         this.subscribe = r.subscribe;
         this.unsubscribe = r.unsubscribe;
         this.registerCursor = function (b) {
@@ -9876,7 +9954,8 @@ gui.MetadataController = function (f, l) {
         return b
     }
 
-    var b = f.getOdtDocument(), k = new core.EventNotifier([gui.MetadataController.signalMetadataChanged]), q = ["dc:creator", "dc:date", "meta:editing-cycles", "meta:editing-duration", "meta:document-statistic"];
+    var b = f.getOdtDocument(), k = new core.EventNotifier([gui.MetadataController.signalMetadataChanged]),
+        q = ["dc:creator", "dc:date", "meta:editing-cycles", "meta:editing-duration", "meta:document-statistic"];
     this.setMetadata = function (a, b) {
         var g = {}, h = "", d;
         a && Object.keys(a).filter(c).forEach(function (b) {
@@ -9927,7 +10006,8 @@ gui.PasteController = function (f, l, a, c) {
     };
     this.paste = function (a) {
         if (p) {
-            var b = q.getCursorPosition(c), k = q.getCursor(c).getNode(), k = h.getParagraphElement(k), m = k.getAttributeNS(n, "style-name") || "", l = b, t = [], y = q.convertDomPointToCursorStep(k,
+            var b = q.getCursorPosition(c), k = q.getCursor(c).getNode(), k = h.getParagraphElement(k),
+                m = k.getAttributeNS(n, "style-name") || "", l = b, t = [], y = q.convertDomPointToCursorStep(k,
                 0, g);
             a.replace(/\r/g, "").split("\n").forEach(function (a) {
                 var b = new ops.OpInsertText, d = new ops.OpSplitParagraph;
@@ -9984,11 +10064,11 @@ gui.LineBoundaryScanner = function () {
         !c || b && !k || (f.token = a.token);
         if (k)return !0;
         l = (a = l) && c ? {
-                left: Math.min(a.left, c.left),
-                right: Math.max(a.right, c.right),
-                top: Math.min(a.top, c.top),
-                bottom: Math.min(a.bottom, c.bottom)
-            } : a || c;
+            left: Math.min(a.left, c.left),
+            right: Math.max(a.right, c.right),
+            top: Math.min(a.top, c.top),
+            bottom: Math.min(a.bottom, c.bottom)
+        } : a || c;
         return !1
     }
 };
@@ -10005,7 +10085,8 @@ gui.ParagraphBoundaryScanner = function () {
 };
 odf.WordBoundaryFilter = function (f, l) {
     function a(a, b, d) {
-        for (var e = null, c = f.getRootNode(), g; a !== c && null !== a && null === e;)g = 0 > b ? a.previousSibling : a.nextSibling, d(g) === NodeFilter.FILTER_ACCEPT && (e = g), a = a.parentNode;
+        for (var e = null, c = f.getRootNode(),
+                 g; a !== c && null !== a && null === e;)g = 0 > b ? a.previousSibling : a.nextSibling, d(g) === NodeFilter.FILTER_ACCEPT && (e = g), a = a.parentNode;
         return e
     }
 
@@ -10015,14 +10096,12 @@ odf.WordBoundaryFilter = function (f, l) {
     }
 
     var b = Node.TEXT_NODE, k = Node.ELEMENT_NODE,
-        q = odf.OdfUtils, p = /[!-#%-*,-\/:-;?-@\[-\]_{}\u00a1\u00ab\u00b7\u00bb\u00bf;\u00b7\u055a-\u055f\u0589-\u058a\u05be\u05c0\u05c3\u05c6\u05f3-\u05f4\u0609-\u060a\u060c-\u060d\u061b\u061e-\u061f\u066a-\u066d\u06d4\u0700-\u070d\u07f7-\u07f9\u0964-\u0965\u0970\u0df4\u0e4f\u0e5a-\u0e5b\u0f04-\u0f12\u0f3a-\u0f3d\u0f85\u0fd0-\u0fd4\u104a-\u104f\u10fb\u1361-\u1368\u166d-\u166e\u169b-\u169c\u16eb-\u16ed\u1735-\u1736\u17d4-\u17d6\u17d8-\u17da\u1800-\u180a\u1944-\u1945\u19de-\u19df\u1a1e-\u1a1f\u1b5a-\u1b60\u1c3b-\u1c3f\u1c7e-\u1c7f\u2000-\u206e\u207d-\u207e\u208d-\u208e\u3008-\u3009\u2768-\u2775\u27c5-\u27c6\u27e6-\u27ef\u2983-\u2998\u29d8-\u29db\u29fc-\u29fd\u2cf9-\u2cfc\u2cfe-\u2cff\u2e00-\u2e7e\u3000-\u303f\u30a0\u30fb\ua60d-\ua60f\ua673\ua67e\ua874-\ua877\ua8ce-\ua8cf\ua92e-\ua92f\ua95f\uaa5c-\uaa5f\ufd3e-\ufd3f\ufe10-\ufe19\ufe30-\ufe52\ufe54-\ufe61\ufe63\ufe68\ufe6a-\ufe6b\uff01-\uff03\uff05-\uff0a\uff0c-\uff0f\uff1a-\uff1b\uff1f-\uff20\uff3b-\uff3d\uff3f\uff5b\uff5d\uff5f-\uff65]|\ud800[\udd00-\udd01\udf9f\udfd0]|\ud802[\udd1f\udd3f\ude50-\ude58]|\ud809[\udc00-\udc7e]/,
-        n = /\s/, g = core.PositionFilter.FilterResult.FILTER_ACCEPT, h = core.PositionFilter.FilterResult.FILTER_REJECT, d = odf.WordBoundaryFilter.IncludeWhitespace.TRAILING, e = odf.WordBoundaryFilter.IncludeWhitespace.LEADING, s = {
-            NO_NEIGHBOUR: 0,
-            SPACE_CHAR: 1,
-            PUNCTUATION_CHAR: 2,
-            WORD_CHAR: 3,
-            OTHER: 4
-        };
+        q = odf.OdfUtils,
+        p = /[!-#%-*,-\/:-;?-@\[-\]_{}\u00a1\u00ab\u00b7\u00bb\u00bf;\u00b7\u055a-\u055f\u0589-\u058a\u05be\u05c0\u05c3\u05c6\u05f3-\u05f4\u0609-\u060a\u060c-\u060d\u061b\u061e-\u061f\u066a-\u066d\u06d4\u0700-\u070d\u07f7-\u07f9\u0964-\u0965\u0970\u0df4\u0e4f\u0e5a-\u0e5b\u0f04-\u0f12\u0f3a-\u0f3d\u0f85\u0fd0-\u0fd4\u104a-\u104f\u10fb\u1361-\u1368\u166d-\u166e\u169b-\u169c\u16eb-\u16ed\u1735-\u1736\u17d4-\u17d6\u17d8-\u17da\u1800-\u180a\u1944-\u1945\u19de-\u19df\u1a1e-\u1a1f\u1b5a-\u1b60\u1c3b-\u1c3f\u1c7e-\u1c7f\u2000-\u206e\u207d-\u207e\u208d-\u208e\u3008-\u3009\u2768-\u2775\u27c5-\u27c6\u27e6-\u27ef\u2983-\u2998\u29d8-\u29db\u29fc-\u29fd\u2cf9-\u2cfc\u2cfe-\u2cff\u2e00-\u2e7e\u3000-\u303f\u30a0\u30fb\ua60d-\ua60f\ua673\ua67e\ua874-\ua877\ua8ce-\ua8cf\ua92e-\ua92f\ua95f\uaa5c-\uaa5f\ufd3e-\ufd3f\ufe10-\ufe19\ufe30-\ufe52\ufe54-\ufe61\ufe63\ufe68\ufe6a-\ufe6b\uff01-\uff03\uff05-\uff0a\uff0c-\uff0f\uff1a-\uff1b\uff1f-\uff20\uff3b-\uff3d\uff3f\uff5b\uff5d\uff5f-\uff65]|\ud800[\udd00-\udd01\udf9f\udfd0]|\ud802[\udd1f\udd3f\ude50-\ude58]|\ud809[\udc00-\udc7e]/,
+        n = /\s/, g = core.PositionFilter.FilterResult.FILTER_ACCEPT,
+        h = core.PositionFilter.FilterResult.FILTER_REJECT, d = odf.WordBoundaryFilter.IncludeWhitespace.TRAILING,
+        e = odf.WordBoundaryFilter.IncludeWhitespace.LEADING,
+        s = {NO_NEIGHBOUR: 0, SPACE_CHAR: 1, PUNCTUATION_CHAR: 2, WORD_CHAR: 3, OTHER: 4};
     this.acceptPosition = function (b) {
         var f = b.container(), p = b.leftNode(), n = b.rightNode(), q = b.unfilteredDomOffset, r = function () {
             return b.unfilteredDomOffset() - 1
@@ -10060,11 +10139,11 @@ gui.SelectionController = function (f, l) {
 
     function k(a, b) {
         return b ? {
-                anchorNode: a.startContainer,
-                anchorOffset: a.startOffset,
-                focusNode: a.endContainer,
-                focusOffset: a.endOffset
-            } :
+            anchorNode: a.startContainer,
+            anchorOffset: a.startOffset,
+            focusNode: a.endContainer,
+            focusOffset: a.endOffset
+        } :
             {
                 anchorNode: a.endContainer,
                 anchorOffset: a.endOffset,
@@ -10133,7 +10212,8 @@ gui.SelectionController = function (f, l) {
     }
 
     function m(a, d) {
-        var e = t.getCursor(l), e = k(e.getSelectedRange(), e.hasForwardSelection()), e = b(e.focusNode, e.focusOffset, E);
+        var e = t.getCursor(l), e = k(e.getSelectedRange(), e.hasForwardSelection()),
+            e = b(e.focusNode, e.focusOffset, E);
         e.advanceStep(a) && p(e.container(), e.offset(), d)
     }
 
@@ -10147,16 +10227,20 @@ gui.SelectionController = function (f, l) {
     }
 
     var t = f.getOdtDocument(), y = core.DomUtils, v = odf.OdfUtils, r = t.getPositionFilter(),
-        w = new gui.GuiStepUtils, u = t.createRootFilter(l), A = null, F, B, E = odf.WordBoundaryFilter.IncludeWhitespace.TRAILING, H = odf.WordBoundaryFilter.IncludeWhitespace.LEADING, I = core.StepDirection.PREVIOUS, Q = core.StepDirection.NEXT;
+        w = new gui.GuiStepUtils, u = t.createRootFilter(l), A = null, F, B,
+        E = odf.WordBoundaryFilter.IncludeWhitespace.TRAILING, H = odf.WordBoundaryFilter.IncludeWhitespace.LEADING,
+        I = core.StepDirection.PREVIOUS, Q = core.StepDirection.NEXT;
     this.selectionToRange = function (a) {
-        var b = 0 <= y.comparePoints(a.anchorNode, a.anchorOffset, a.focusNode, a.focusOffset), d = a.focusNode.ownerDocument.createRange();
+        var b = 0 <= y.comparePoints(a.anchorNode, a.anchorOffset, a.focusNode, a.focusOffset),
+            d = a.focusNode.ownerDocument.createRange();
         b ? (d.setStart(a.anchorNode, a.anchorOffset), d.setEnd(a.focusNode, a.focusOffset)) : (d.setStart(a.focusNode, a.focusOffset), d.setEnd(a.anchorNode,
-                a.anchorOffset));
+            a.anchorOffset));
         return {range: d, hasForwardSelection: b}
     };
     this.rangeToSelection = k;
     this.selectImage = function (a) {
-        var b = t.getRootElement(a), d = t.createRootFilter(b), b = t.createStepIterator(a, 0, [d, t.getPositionFilter()], b), e;
+        var b = t.getRootElement(a), d = t.createRootFilter(b),
+            b = t.createStepIterator(a, 0, [d, t.getPositionFilter()], b), e;
         b.roundToPreviousStep() || runtime.assert(!1, "No walkable position before frame");
         d = b.container();
         e = b.offset();
@@ -10381,13 +10465,15 @@ gui.TextController = function (f, l, a, c, b, k) {
             m
     }
 
-    var e = f.getOdtDocument(), s = odf.OdfUtils, m = core.DomUtils, x = !1, t = odf.Namespaces.textns, y = core.StepDirection.NEXT;
+    var e = f.getOdtDocument(), s = odf.OdfUtils, m = core.DomUtils, x = !1, t = odf.Namespaces.textns,
+        y = core.StepDirection.NEXT;
     this.isEnabled = function () {
         return x
     };
     this.enqueueParagraphSplittingOps = function () {
         if (!x)return !1;
-        var a = e.getCursor(c), b = a.getSelectedRange(), d = h(e.getCursorSelection(c)), m = [], a = s.getParagraphElement(a.getNode()), l = a.getAttributeNS(t, "style-name") || "";
+        var a = e.getCursor(c), b = a.getSelectedRange(), d = h(e.getCursorSelection(c)), m = [],
+            a = s.getParagraphElement(a.getNode()), l = a.getAttributeNS(t, "style-name") || "";
         0 < d.length && (m = m.concat(g(b)));
         b = new ops.OpSplitParagraph;
         b.init({
@@ -10485,9 +10571,9 @@ gui.SessionControllerOptions = function () {
         function q(a, b) {
             var d = J.getDOMDocument(), e = null;
             d.caretRangeFromPoint ? (d = d.caretRangeFromPoint(a, b), e = {
-                    container: d.startContainer,
-                    offset: d.startOffset
-                }) : d.caretPositionFromPoint && (d = d.caretPositionFromPoint(a, b)) && d.offsetNode && (e = {
+                container: d.startContainer,
+                offset: d.startOffset
+            }) : d.caretPositionFromPoint && (d = d.caretPositionFromPoint(a, b)) && d.offsetNode && (e = {
                     container: d.offsetNode,
                     offset: d.offset
                 });
@@ -10557,11 +10643,12 @@ gui.SessionControllerOptions = function () {
         function r(b) {
             var d = k(b), e = J.getCursor(a);
             if (ca = null !== d && T.containsNode(J.getOdfCanvas().getElement(), d)) W = !1, d = J.getRootElement(d) || J.getRootNode(), P = J.createRootFilter(d), na = 0 === b.button ? b.detail : 0, e && b.shiftKey ? R.getSelection().collapse(e.getAnchorNode(), 0) : (b = R.getSelection(),
-                    d = e.getSelectedRange(), b.extend ? e.hasForwardSelection() ? (b.collapse(d.startContainer, d.startOffset), b.extend(d.endContainer, d.endOffset)) : (b.collapse(d.endContainer, d.endOffset), b.extend(d.startContainer, d.startOffset)) : (b.removeAllRanges(), b.addRange(d.cloneRange()))), 1 < na && v()
+                d = e.getSelectedRange(), b.extend ? e.hasForwardSelection() ? (b.collapse(d.startContainer, d.startOffset), b.extend(d.endContainer, d.endOffset)) : (b.collapse(d.endContainer, d.endOffset), b.extend(d.startContainer, d.startOffset)) : (b.removeAllRanges(), b.addRange(d.cloneRange()))), 1 < na && v()
         }
 
         function w(a) {
-            var b = J.getRootElement(a), d = J.createRootFilter(b), b = J.createStepIterator(a, 0, [d, J.getPositionFilter()], b);
+            var b = J.getRootElement(a), d = J.createRootFilter(b),
+                b = J.createStepIterator(a, 0, [d, J.getPositionFilter()], b);
             b.setPosition(a, a.childNodes.length);
             return b.roundToNextStep() ? {container: b.container(), offset: b.offset()} :
                 null
@@ -10570,11 +10657,11 @@ gui.SessionControllerOptions = function () {
         function u(a) {
             var b;
             b = (b = R.getSelection()) ? {
-                    anchorNode: b.anchorNode,
-                    anchorOffset: b.anchorOffset,
-                    focusNode: b.focusNode,
-                    focusOffset: b.focusOffset
-                } : null;
+                anchorNode: b.anchorNode,
+                anchorOffset: b.anchorOffset,
+                focusNode: b.focusNode,
+                focusOffset: b.focusOffset
+            } : null;
             var d = R.getSelection().isCollapsed, e, c;
             b.anchorNode || b.focusNode || !(e = q(a.clientX, a.clientY)) || (b.anchorNode = e.container, b.anchorOffset = e.offset, b.focusNode = b.anchorNode, b.focusOffset = b.anchorOffset);
             if (D.isImage(b.focusNode) && 0 === b.focusOffset && D.isCharacterFrame(b.focusNode.parentNode)) {
@@ -10600,9 +10687,9 @@ gui.SessionControllerOptions = function () {
             var b = k(a), d, e, f;
             ja.processRequests();
             ca && (D.isImage(b) && D.isCharacterFrame(b.parentNode) && R.getSelection().isCollapsed ? (X.selectImage(b.parentNode), L.focus()) : la.isSelectorElement(b) ? L.focus() : W ? (b = c.getSelectedRange(), e = b.collapsed, D.isImage(b.endContainer) && 0 === b.endOffset && D.isCharacterFrame(b.endContainer.parentNode) &&
-                        (f = b.endContainer.parentNode, f = w(f)) && (b.setEnd(f.container, f.offset), e && b.collapse(!1)), X.selectRange(b, c.hasForwardSelection(), 0 === a.button ? a.detail : 0), L.focus()) : ta ? u(a) : (d = T.cloneEvent(a), aa = runtime.setTimeout(function () {
-                                u(d)
-                            }, 0)), na = 0, W = ca = !1)
+            (f = b.endContainer.parentNode, f = w(f)) && (b.setEnd(f.container, f.offset), e && b.collapse(!1)), X.selectRange(b, c.hasForwardSelection(), 0 === a.button ? a.detail : 0), L.focus()) : ta ? u(a) : (d = T.cloneEvent(a), aa = runtime.setTimeout(function () {
+                u(d)
+            }, 0)), na = 0, W = ca = !1)
         }
 
         function B(b) {
@@ -10623,7 +10710,7 @@ gui.SessionControllerOptions = function () {
         function I(a) {
             var b = k(a), d = null;
             "annotationRemoveButton" === b.className ? (runtime.assert(ea,
-                    "Remove buttons are displayed on annotations while annotation editing is disabled in the controller."), d = b.parentNode.getElementsByTagNameNS(odf.Namespaces.officens, "annotation").item(0), ga.removeAnnotation(d), L.focus()) : "webodf-draggable" !== b.getAttribute("class") && F(a)
+                "Remove buttons are displayed on annotations while annotation editing is disabled in the controller."), d = b.parentNode.getElementsByTagNameNS(odf.Namespaces.officens, "annotation").item(0), ga.removeAnnotation(d), L.focus()) : "webodf-draggable" !== b.getAttribute("class") && F(a)
         }
 
         function Q(a) {
@@ -10667,9 +10754,22 @@ gui.SessionControllerOptions = function () {
             a()
         }
 
-        var R = runtime.getWindow(), J = l.getOdtDocument(), G = new gui.SessionConstraints, ba = new gui.SessionContext(l, a), T = core.DomUtils, D = odf.OdfUtils, O = new gui.MimeDataExporter, Z = new gui.Clipboard(O), C = new gui.KeyboardHandler, V = new gui.KeyboardHandler, $ = new gui.KeyboardHandler, ca = !1, U = new odf.ObjectNameGenerator(J.getOdfCanvas().odfContainer(),
-            a), W = !1, P = null, aa, S = null, L = new gui.EventManager(J), ea = b.annotationsEnabled, ga = new gui.AnnotationController(l, G, a), da = new gui.DirectFormattingController(l, G, ba, a, U, b.directTextStylingEnabled, b.directParagraphStylingEnabled), ha = new gui.TextController(l, G, ba, a, da.createCursorStyleOp, da.createParagraphStyleOps), ma = new gui.ImageController(l, G, ba, a, U), la = new gui.ImageSelector(J.getOdfCanvas()), ia = J.createPositionIterator(J.getRootNode()), ja, fa, pa = new gui.PasteController(l, G, ba, a), ka = new gui.InputMethodEditor(a,
-            L), na = 0, oa = new gui.HyperlinkClickHandler(J.getOdfCanvas().getElement, C, $), qa = new gui.HyperlinkController(l, G, ba, a), X = new gui.SelectionController(l, a), ua = new gui.MetadataController(l, a), K = gui.KeyboardHandler.Modifier, M = gui.KeyboardHandler.KeyCode, ra = -1 !== R.navigator.appVersion.toLowerCase().indexOf("mac"), ta = -1 !== ["iPad", "iPod", "iPhone"].indexOf(R.navigator.platform), sa;
+        var R = runtime.getWindow(), J = l.getOdtDocument(), G = new gui.SessionConstraints,
+            ba = new gui.SessionContext(l, a), T = core.DomUtils, D = odf.OdfUtils, O = new gui.MimeDataExporter,
+            Z = new gui.Clipboard(O), C = new gui.KeyboardHandler, V = new gui.KeyboardHandler,
+            $ = new gui.KeyboardHandler, ca = !1, U = new odf.ObjectNameGenerator(J.getOdfCanvas().odfContainer(),
+            a), W = !1, P = null, aa, S = null, L = new gui.EventManager(J), ea = b.annotationsEnabled,
+            ga = new gui.AnnotationController(l, G, a),
+            da = new gui.DirectFormattingController(l, G, ba, a, U, b.directTextStylingEnabled, b.directParagraphStylingEnabled),
+            ha = new gui.TextController(l, G, ba, a, da.createCursorStyleOp, da.createParagraphStyleOps),
+            ma = new gui.ImageController(l, G, ba, a, U), la = new gui.ImageSelector(J.getOdfCanvas()),
+            ia = J.createPositionIterator(J.getRootNode()), ja, fa, pa = new gui.PasteController(l, G, ba, a),
+            ka = new gui.InputMethodEditor(a,
+                L), na = 0, oa = new gui.HyperlinkClickHandler(J.getOdfCanvas().getElement, C, $),
+            qa = new gui.HyperlinkController(l, G, ba, a), X = new gui.SelectionController(l, a),
+            ua = new gui.MetadataController(l, a), K = gui.KeyboardHandler.Modifier, M = gui.KeyboardHandler.KeyCode,
+            ra = -1 !== R.navigator.appVersion.toLowerCase().indexOf("mac"),
+            ta = -1 !== ["iPad", "iPod", "iPhone"].indexOf(R.navigator.platform), sa;
         runtime.assert(null !== R, "Expected to be run in an environment which has a global window, like a browser.");
         this.undo = m;
         this.redo =
@@ -10704,8 +10804,8 @@ gui.SessionControllerOptions = function () {
                 return !0
             }));
             ra ? (C.bind(M.Clear, K.None, ha.removeCurrentSelection), C.bind(M.B, K.Meta, z(da.toggleBold)), C.bind(M.I,
-                    K.Meta, z(da.toggleItalic)), C.bind(M.U, K.Meta, z(da.toggleUnderline)), C.bind(M.L, K.MetaShift, z(da.alignParagraphLeft)), C.bind(M.E, K.MetaShift, z(da.alignParagraphCenter)), C.bind(M.R, K.MetaShift, z(da.alignParagraphRight)), C.bind(M.J, K.MetaShift, z(da.alignParagraphJustified)), ea && C.bind(M.C, K.MetaShift, ga.addAnnotation), C.bind(M.Z, K.Meta, m), C.bind(M.Z, K.MetaShift, x)) : (C.bind(M.B, K.Ctrl, z(da.toggleBold)), C.bind(M.I, K.Ctrl, z(da.toggleItalic)), C.bind(M.U, K.Ctrl, z(da.toggleUnderline)), C.bind(M.L, K.CtrlShift,
-                    z(da.alignParagraphLeft)), C.bind(M.E, K.CtrlShift, z(da.alignParagraphCenter)), C.bind(M.R, K.CtrlShift, z(da.alignParagraphRight)), C.bind(M.J, K.CtrlShift, z(da.alignParagraphJustified)), ea && C.bind(M.C, K.CtrlAlt, ga.addAnnotation), C.bind(M.Z, K.Ctrl, m), C.bind(M.Z, K.CtrlShift, x));
+                K.Meta, z(da.toggleItalic)), C.bind(M.U, K.Meta, z(da.toggleUnderline)), C.bind(M.L, K.MetaShift, z(da.alignParagraphLeft)), C.bind(M.E, K.MetaShift, z(da.alignParagraphCenter)), C.bind(M.R, K.MetaShift, z(da.alignParagraphRight)), C.bind(M.J, K.MetaShift, z(da.alignParagraphJustified)), ea && C.bind(M.C, K.MetaShift, ga.addAnnotation), C.bind(M.Z, K.Meta, m), C.bind(M.Z, K.MetaShift, x)) : (C.bind(M.B, K.Ctrl, z(da.toggleBold)), C.bind(M.I, K.Ctrl, z(da.toggleItalic)), C.bind(M.U, K.Ctrl, z(da.toggleUnderline)), C.bind(M.L, K.CtrlShift,
+                z(da.alignParagraphLeft)), C.bind(M.E, K.CtrlShift, z(da.alignParagraphCenter)), C.bind(M.R, K.CtrlShift, z(da.alignParagraphRight)), C.bind(M.J, K.CtrlShift, z(da.alignParagraphJustified)), ea && C.bind(M.C, K.CtrlAlt, ga.addAnnotation), C.bind(M.Z, K.Ctrl, m), C.bind(M.Z, K.CtrlShift, x));
             V.setDefault(z(function (a) {
                 var b;
                 b = null === a.which || void 0 === a.which ? String.fromCharCode(a.keyCode) : 0 !== a.which && 0 !== a.charCode ? String.fromCharCode(a.which) : null;
@@ -10728,7 +10828,7 @@ gui.SessionControllerOptions = function () {
             C.unbind(M.Delete, K.None);
             C.unbind(M.Tab, K.None);
             ra ? (C.unbind(M.Clear,
-                    K.None), C.unbind(M.B, K.Meta), C.unbind(M.I, K.Meta), C.unbind(M.U, K.Meta), C.unbind(M.L, K.MetaShift), C.unbind(M.E, K.MetaShift), C.unbind(M.R, K.MetaShift), C.unbind(M.J, K.MetaShift), ea && C.unbind(M.C, K.MetaShift), C.unbind(M.Z, K.Meta), C.unbind(M.Z, K.MetaShift)) : (C.unbind(M.B, K.Ctrl), C.unbind(M.I, K.Ctrl), C.unbind(M.U, K.Ctrl), C.unbind(M.L, K.CtrlShift), C.unbind(M.E, K.CtrlShift), C.unbind(M.R, K.CtrlShift), C.unbind(M.J, K.CtrlShift), ea && C.unbind(M.C, K.CtrlAlt), C.unbind(M.Z, K.Ctrl), C.unbind(M.Z, K.CtrlShift));
+                K.None), C.unbind(M.B, K.Meta), C.unbind(M.I, K.Meta), C.unbind(M.U, K.Meta), C.unbind(M.L, K.MetaShift), C.unbind(M.E, K.MetaShift), C.unbind(M.R, K.MetaShift), C.unbind(M.J, K.MetaShift), ea && C.unbind(M.C, K.MetaShift), C.unbind(M.Z, K.Meta), C.unbind(M.Z, K.MetaShift)) : (C.unbind(M.B, K.Ctrl), C.unbind(M.I, K.Ctrl), C.unbind(M.U, K.Ctrl), C.unbind(M.L, K.CtrlShift), C.unbind(M.E, K.CtrlShift), C.unbind(M.R, K.CtrlShift), C.unbind(M.J, K.CtrlShift), ea && C.unbind(M.C, K.CtrlAlt), C.unbind(M.Z, K.Ctrl), C.unbind(M.Z, K.CtrlShift));
             V.setDefault(null);
             V.unbind(M.Enter, K.None)
         };
@@ -10815,8 +10915,8 @@ gui.SessionControllerOptions = function () {
         C.bind(M.Home, K.CtrlShift, z(X.extendSelectionToDocumentStart));
         C.bind(M.End, K.CtrlShift, z(X.extendSelectionToDocumentEnd));
         ra ? (C.bind(M.Left, K.Alt, z(X.moveCursorBeforeWord)), C.bind(M.Right, K.Alt, z(X.moveCursorPastWord)), C.bind(M.Left, K.Meta, z(X.moveCursorToLineStart)), C.bind(M.Right, K.Meta, z(X.moveCursorToLineEnd)), C.bind(M.Home, K.Meta, z(X.moveCursorToDocumentStart)), C.bind(M.End, K.Meta,
-                z(X.moveCursorToDocumentEnd)), C.bind(M.Left, K.AltShift, z(X.extendSelectionBeforeWord)), C.bind(M.Right, K.AltShift, z(X.extendSelectionPastWord)), C.bind(M.Left, K.MetaShift, z(X.extendSelectionToLineStart)), C.bind(M.Right, K.MetaShift, z(X.extendSelectionToLineEnd)), C.bind(M.Up, K.AltShift, z(X.extendSelectionToParagraphStart)), C.bind(M.Down, K.AltShift, z(X.extendSelectionToParagraphEnd)), C.bind(M.Up, K.MetaShift, z(X.extendSelectionToDocumentStart)), C.bind(M.Down, K.MetaShift, z(X.extendSelectionToDocumentEnd)),
-                C.bind(M.A, K.Meta, z(X.extendSelectionToEntireDocument))) : (C.bind(M.Left, K.Ctrl, z(X.moveCursorBeforeWord)), C.bind(M.Right, K.Ctrl, z(X.moveCursorPastWord)), C.bind(M.Left, K.CtrlShift, z(X.extendSelectionBeforeWord)), C.bind(M.Right, K.CtrlShift, z(X.extendSelectionPastWord)), C.bind(M.A, K.Ctrl, z(X.extendSelectionToEntireDocument)));
+            z(X.moveCursorToDocumentEnd)), C.bind(M.Left, K.AltShift, z(X.extendSelectionBeforeWord)), C.bind(M.Right, K.AltShift, z(X.extendSelectionPastWord)), C.bind(M.Left, K.MetaShift, z(X.extendSelectionToLineStart)), C.bind(M.Right, K.MetaShift, z(X.extendSelectionToLineEnd)), C.bind(M.Up, K.AltShift, z(X.extendSelectionToParagraphStart)), C.bind(M.Down, K.AltShift, z(X.extendSelectionToParagraphEnd)), C.bind(M.Up, K.MetaShift, z(X.extendSelectionToDocumentStart)), C.bind(M.Down, K.MetaShift, z(X.extendSelectionToDocumentEnd)),
+            C.bind(M.A, K.Meta, z(X.extendSelectionToEntireDocument))) : (C.bind(M.Left, K.Ctrl, z(X.moveCursorBeforeWord)), C.bind(M.Right, K.Ctrl, z(X.moveCursorPastWord)), C.bind(M.Left, K.CtrlShift, z(X.extendSelectionBeforeWord)), C.bind(M.Right, K.CtrlShift, z(X.extendSelectionPastWord)), C.bind(M.A, K.Ctrl, z(X.extendSelectionToEntireDocument)));
         ta && (sa = new gui.IOSSafariSupport(L));
         L.subscribe("keydown", C.handleEvent);
         L.subscribe("keypress", V.handleEvent);
@@ -10853,7 +10953,7 @@ gui.CaretManager = function (f, l) {
     function b(a) {
         var b = k[a];
         b && (delete k[a], a === f.getInputMemberId() ? (p.unsubscribe(ops.OdtDocument.signalProcessingBatchEnd, b.ensureVisible), p.unsubscribe(ops.Document.signalCursorMoved, b.refreshCursorBlinking), n.unsubscribe("compositionupdate", b.handleUpdate), n.unsubscribe("compositionend", b.handleUpdate), n.unsubscribe("focus", b.setFocus), n.unsubscribe("blur",
-                b.removeFocus), q.removeEventListener("focus", b.show, !1), q.removeEventListener("blur", b.hide, !1)) : p.unsubscribe(ops.OdtDocument.signalProcessingBatchEnd, b.handleUpdate), b.destroy(function () {
+            b.removeFocus), q.removeEventListener("focus", b.show, !1), q.removeEventListener("blur", b.hide, !1)) : p.unsubscribe(ops.OdtDocument.signalProcessingBatchEnd, b.handleUpdate), b.destroy(function () {
         }))
     }
 
@@ -10863,7 +10963,7 @@ gui.CaretManager = function (f, l) {
         a = new gui.Caret(a, l, b, d);
         k[e] = a;
         e === f.getInputMemberId() ? (runtime.log("Starting to track input on new cursor of " + e), p.subscribe(ops.OdtDocument.signalProcessingBatchEnd,
-                a.ensureVisible), p.subscribe(ops.Document.signalCursorMoved, a.refreshCursorBlinking), n.subscribe("compositionupdate", a.handleUpdate), n.subscribe("compositionend", a.handleUpdate), n.subscribe("focus", a.setFocus), n.subscribe("blur", a.removeFocus), q.addEventListener("focus", a.show, !1), q.addEventListener("blur", a.hide, !1), a.setOverlayElement(n.getEventTrap())) : p.subscribe(ops.OdtDocument.signalProcessingBatchEnd, a.handleUpdate);
+            a.ensureVisible), p.subscribe(ops.Document.signalCursorMoved, a.refreshCursorBlinking), n.subscribe("compositionupdate", a.handleUpdate), n.subscribe("compositionend", a.handleUpdate), n.subscribe("focus", a.setFocus), n.subscribe("blur", a.removeFocus), q.addEventListener("focus", a.show, !1), q.addEventListener("blur", a.hide, !1), a.setOverlayElement(n.getEventTrap())) : p.subscribe(ops.OdtDocument.signalProcessingBatchEnd, a.handleUpdate);
         return a
     };
     this.getCaret = a;
@@ -11181,8 +11281,8 @@ gui.SelectionViewManager = function (f) {
     this.destroy = function (a) {
         function b(l, p) {
             p ? a(p) : l < f.length ? f[l].destroy(function (a) {
-                        b(l + 1, a)
-                    }) : a()
+                b(l + 1, a)
+            }) : a()
         }
 
         var f = l();
@@ -11260,7 +11360,8 @@ gui.SessionViewOptions = function () {
 
         function s(a) {
             a = a.getMemberId();
-            var d = k.getSelectionView(l), e = k.getSelectionView(gui.ShadowCursor.ShadowCursorMemberId), c = b.getCaret(l);
+            var d = k.getSelectionView(l), e = k.getSelectionView(gui.ShadowCursor.ShadowCursorMemberId),
+                c = b.getCaret(l);
             a === l ? (e.hide(), d && d.show(), c && c.show()) : a === gui.ShadowCursor.ShadowCursorMemberId && (e.show(), d && d.hide(), c && c.hide())
         }
 
@@ -11306,12 +11407,15 @@ gui.SessionViewOptions = function () {
             r.parentNode.removeChild(r);
             (function Y(d, e) {
                 e ? a(e) : d < b.length ? b[d].destroy(function (a) {
-                            Y(d + 1, a)
-                        }) : a()
+                    Y(d + 1, a)
+                }) : a()
             })(0, void 0)
         }
 
-        var v, r, w = "urn:webodf:names:editinfo", u = {}, A, F, B, E = void 0 !== f.editInfoMarkersInitiallyVisible ? Boolean(f.editInfoMarkersInitiallyVisible) : !0, H = void 0 !== f.caretAvatarsInitiallyVisible ? Boolean(f.caretAvatarsInitiallyVisible) : !0, I = void 0 !== f.caretBlinksOnRangeSelect ? Boolean(f.caretBlinksOnRangeSelect) : !0;
+        var v, r, w = "urn:webodf:names:editinfo", u = {}, A, F, B,
+            E = void 0 !== f.editInfoMarkersInitiallyVisible ? Boolean(f.editInfoMarkersInitiallyVisible) : !0,
+            H = void 0 !== f.caretAvatarsInitiallyVisible ? Boolean(f.caretAvatarsInitiallyVisible) : !0,
+            I = void 0 !== f.caretBlinksOnRangeSelect ? Boolean(f.caretBlinksOnRangeSelect) : !0;
         this.showEditInfoMarkers = function () {
             E || (E = !0, g(E))
         };
@@ -11483,7 +11587,7 @@ gui.SvgSelectionView = function (f) {
                 n = u.translateRect(p(d, !1), e, g);
                 x = u.translateRect(p(h, !0), e, g);
                 s = (s = q(k)) ? u.translateRect(s,
-                        e, g) : b(n, x);
+                    e, g) : b(n, x);
                 w = s.left;
                 s = n.left + Math.max(0, s.width - (n.left - s.left));
                 e = Math.min(n.top, x.top);
@@ -11530,8 +11634,12 @@ gui.SvgSelectionView = function (f) {
         a()
     }
 
-    var e = f.getDocument(), s, m, x = e.getDOMDocument(), t = x.createElementNS("http://www.w3.org/2000/svg", "svg"), y = x.createElementNS("http://www.w3.org/2000/svg",
-        "polygon"), v = x.createElementNS("http://www.w3.org/2000/svg", "circle"), r = x.createElementNS("http://www.w3.org/2000/svg", "circle"), w = odf.OdfUtils, u = core.DomUtils, A = e.getCanvas().getZoomHelper(), F = !0, B = f.getDocument().createPositionIterator(e.getRootNode()), E = NodeFilter.FILTER_ACCEPT, H = NodeFilter.FILTER_REJECT, I;
+    var e = f.getDocument(), s, m, x = e.getDOMDocument(), t = x.createElementNS("http://www.w3.org/2000/svg", "svg"),
+        y = x.createElementNS("http://www.w3.org/2000/svg",
+            "polygon"), v = x.createElementNS("http://www.w3.org/2000/svg", "circle"),
+        r = x.createElementNS("http://www.w3.org/2000/svg", "circle"), w = odf.OdfUtils, u = core.DomUtils,
+        A = e.getCanvas().getZoomHelper(), F = !0, B = f.getDocument().createPositionIterator(e.getRootNode()),
+        E = NodeFilter.FILTER_ACCEPT, H = NodeFilter.FILTER_REJECT, I;
     this.rerender = function () {
         F && I.trigger()
     };
@@ -11750,7 +11858,9 @@ gui.UndoStateRules = function () {
             p(a)
         }
 
-        var s = this, m = "urn:webodf:names:cursor", x = core.DomUtils, t, y, v, r, w, u, A = [], F = [], B = new core.EventNotifier([gui.UndoManager.signalUndoStackChanged, gui.UndoManager.signalUndoStateCreated, gui.UndoManager.signalUndoStateModified, gui.UndoManager.signalDocumentModifiedChanged, gui.TrivialUndoManager.signalDocumentRootReplaced]), E = a || new gui.UndoStateRules, H = !1;
+        var s = this, m = "urn:webodf:names:cursor", x = core.DomUtils, t, y, v, r, w, u, A = [], F = [],
+            B = new core.EventNotifier([gui.UndoManager.signalUndoStackChanged, gui.UndoManager.signalUndoStateCreated, gui.UndoManager.signalUndoStateModified, gui.UndoManager.signalDocumentModifiedChanged, gui.TrivialUndoManager.signalDocumentRootReplaced]),
+            E = a || new gui.UndoStateRules, H = !1;
         this.subscribe = function (a, b) {
             B.subscribe(a, b)
         };
@@ -12057,7 +12167,8 @@ odf.StyleCache = function (f) {
         return p[a]
     }
 
-    var q = this, p, n, g, h, d, e, s, m = odf.Namespaces.textns, x = odf.Namespaces.stylens, t = new odf.StyleInfo, y = new odf.StyleParseUtils,
+    var q = this, p, n, g, h, d, e, s, m = odf.Namespaces.textns, x = odf.Namespaces.stylens, t = new odf.StyleInfo,
+        y = new odf.StyleParseUtils,
         v, r, w, u, A, F;
     this.getComputedGraphicStyle = function (a) {
         var b = [];
@@ -12293,7 +12404,7 @@ ops.OperationTransformMatrix = function () {
             }, MoveCursor: g, RemoveCursor: g, RemoveMember: g, RemoveStyle: g, RemoveText: function (a, b) {
                 var c = a.position + a.length, f = b.position + b.length, g = [a], h = [b];
                 f <= a.position ? a.position -= b.length : b.position < c && (a.position < b.position ? a.length = f < c ? a.length - b.length :
-                            b.position - a.position : (a.position = b.position, f < c ? a.length = c - f : g = []));
+                        b.position - a.position : (a.position = b.position, f < c ? a.length = c - f : g = []));
                 return {opSpecsA: g, opSpecsB: h}
             }, SetParagraphStyle: g, SplitParagraph: function (a, b) {
                 b.position < a.position ? a.position += 1 : b.position < a.position + a.length && (a.length += 1);
@@ -12318,12 +12429,12 @@ ops.OperationTransformMatrix = function () {
                 c = b.position + b.length;
                 var f = [a], g = [b];
                 c <= a.position ? a.position -= b.length : a.position <= b.position ? b.position += a.text.length : (b.length = a.position - b.position, c = {
-                            optype: "RemoveText",
-                            memberid: b.memberid,
-                            timestamp: b.timestamp,
-                            position: a.position + a.text.length,
-                            length: c - a.position
-                        }, g.unshift(c), a.position = b.position);
+                    optype: "RemoveText",
+                    memberid: b.memberid,
+                    timestamp: b.timestamp,
+                    position: a.position + a.text.length,
+                    length: c - a.position
+                }, g.unshift(c), a.position = b.position);
                 return {opSpecsA: f, opSpecsB: g}
             }, SetParagraphStyle: function (a, b) {
                 b.position > a.position && (b.position += a.text.length);
@@ -12341,24 +12452,24 @@ ops.OperationTransformMatrix = function () {
             MergeParagraph: function (a, b, c) {
                 var f = [a], g = [b], h;
                 a.destinationStartPosition === b.destinationStartPosition ? (f = [], g = [], a.moveCursor && (h = {
-                        optype: "MoveCursor",
-                        memberid: a.memberid,
-                        timestamp: a.timestamp,
-                        position: a.sourceStartPosition -
-                        1
-                    }, f.push(h)), b.moveCursor && (h = {
-                        optype: "MoveCursor",
-                        memberid: b.memberid,
-                        timestamp: b.timestamp,
-                        position: b.sourceStartPosition - 1
-                    }, g.push(h)), a = c ? a : b, a = {
-                        optype: "SetParagraphStyle",
-                        memberid: a.memberid,
-                        timestamp: a.timestamp,
-                        position: a.destinationStartPosition,
-                        styleName: a.paragraphStyleName
-                    }, c ? f.push(a) : g.push(a)) : b.sourceStartPosition === a.destinationStartPosition ? (a.destinationStartPosition = b.destinationStartPosition, a.sourceStartPosition -= 1, a.paragraphStyleName = b.paragraphStyleName) : a.sourceStartPosition ===
-                        b.destinationStartPosition ? (b.destinationStartPosition = a.destinationStartPosition, b.sourceStartPosition -= 1, b.paragraphStyleName = a.paragraphStyleName) : a.destinationStartPosition < b.destinationStartPosition ? (b.destinationStartPosition -= 1, b.sourceStartPosition -= 1) : (a.destinationStartPosition -= 1, a.sourceStartPosition -= 1);
+                    optype: "MoveCursor",
+                    memberid: a.memberid,
+                    timestamp: a.timestamp,
+                    position: a.sourceStartPosition -
+                    1
+                }, f.push(h)), b.moveCursor && (h = {
+                    optype: "MoveCursor",
+                    memberid: b.memberid,
+                    timestamp: b.timestamp,
+                    position: b.sourceStartPosition - 1
+                }, g.push(h)), a = c ? a : b, a = {
+                    optype: "SetParagraphStyle",
+                    memberid: a.memberid,
+                    timestamp: a.timestamp,
+                    position: a.destinationStartPosition,
+                    styleName: a.paragraphStyleName
+                }, c ? f.push(a) : g.push(a)) : b.sourceStartPosition === a.destinationStartPosition ? (a.destinationStartPosition = b.destinationStartPosition, a.sourceStartPosition -= 1, a.paragraphStyleName = b.paragraphStyleName) : a.sourceStartPosition ===
+                b.destinationStartPosition ? (b.destinationStartPosition = a.destinationStartPosition, b.sourceStartPosition -= 1, b.paragraphStyleName = a.paragraphStyleName) : a.destinationStartPosition < b.destinationStartPosition ? (b.destinationStartPosition -= 1, b.sourceStartPosition -= 1) : (a.destinationStartPosition -= 1, a.sourceStartPosition -= 1);
                 return {opSpecsA: f, opSpecsB: g}
             }, MoveCursor: function (a, b) {
                 var c = b.position, f = b.position + b.length, g = Math.min(c, f), c = Math.max(c, f);
@@ -12378,15 +12489,15 @@ ops.OperationTransformMatrix = function () {
             }, SplitParagraph: function (a, b) {
                 var c, f = [a], g = [b];
                 b.position < a.destinationStartPosition ? (a.destinationStartPosition += 1, a.sourceStartPosition += 1) : b.position >= a.destinationStartPosition && b.position < a.sourceStartPosition ? (b.paragraphStyleName = a.paragraphStyleName, c = {
-                            optype: "SetParagraphStyle", memberid: a.memberid, timestamp: a.timestamp,
-                            position: a.destinationStartPosition, styleName: a.paragraphStyleName
-                        }, f.push(c), b.position === a.sourceStartPosition - 1 && a.moveCursor && (c = {
-                            optype: "MoveCursor",
-                            memberid: a.memberid,
-                            timestamp: a.timestamp,
-                            position: b.position,
-                            length: 0
-                        }, f.push(c)), a.destinationStartPosition = b.position + 1, a.sourceStartPosition += 1) : b.position >= a.sourceStartPosition && (b.position -= 1, b.sourceParagraphPosition -= 1);
+                    optype: "SetParagraphStyle", memberid: a.memberid, timestamp: a.timestamp,
+                    position: a.destinationStartPosition, styleName: a.paragraphStyleName
+                }, f.push(c), b.position === a.sourceStartPosition - 1 && a.moveCursor && (c = {
+                    optype: "MoveCursor",
+                    memberid: a.memberid,
+                    timestamp: a.timestamp,
+                    position: b.position,
+                    length: 0
+                }, f.push(c)), a.destinationStartPosition = b.position + 1, a.sourceStartPosition += 1) : b.position >= a.sourceStartPosition && (b.position -= 1, b.sourceParagraphPosition -= 1);
                 return {opSpecsA: f, opSpecsB: g}
             }, UpdateMember: g, UpdateMetadata: g, UpdateParagraphStyle: g
         },
@@ -12461,7 +12572,7 @@ ops.OperationTransformMatrix = function () {
             RemoveText: function (a, b) {
                 var c = a.position + a.length, f = b.position + b.length, g = [a], h = [b];
                 f <= a.position ? a.position -= b.length : c <= b.position ? b.position -= a.length : b.position < c && (a.position <
-                        b.position ? (a.length = f < c ? a.length - b.length : b.position - a.position, c < f ? (b.position = a.position, b.length = f - c) : h = []) : (c < f ? b.length -= a.length : b.position < a.position ? b.length = a.position - b.position : h = [], f < c ? (a.position = b.position, a.length = c - f) : g = []));
+                    b.position ? (a.length = f < c ? a.length - b.length : b.position - a.position, c < f ? (b.position = a.position, b.length = f - c) : h = []) : (c < f ? b.length -= a.length : b.position < a.position ? b.length = a.position - b.position : h = [], f < c ? (a.position = b.position, a.length = c - f) : g = []));
                 return {opSpecsA: g, opSpecsB: h}
             }, SetParagraphStyle: function (a, b) {
                 a.position < b.position && (b.position -= a.length);
@@ -12496,7 +12607,7 @@ ops.OperationTransformMatrix = function () {
             SplitParagraph: function (a, b, c) {
                 var f, g;
                 a.position < b.position ? f = !0 : b.position < a.position ? g = !0 : a.position === b.position &&
-                        (c ? f = !0 : g = !0);
+                    (c ? f = !0 : g = !0);
                 f ? (b.position += 1, b.sourceParagraphPosition = a.position < b.sourceParagraphPosition ? b.sourceParagraphPosition + 1 : a.position + 1) : g && (a.position += 1, a.sourceParagraphPosition = b.position < b.sourceParagraphPosition ? a.sourceParagraphPosition + 1 : b.position + 1);
                 return {opSpecsA: [a], opSpecsB: [b]}
             }, UpdateMember: g, UpdateMetadata: g, UpdateParagraphStyle: g
@@ -12546,9 +12657,9 @@ ops.OperationTransformMatrix = function () {
         runtime.log(runtime.toJson(b));
         c || (f = a, a = b, b = f);
         (f = (f = h[a.optype]) && f[b.optype]) ? (f = f(a, b, !c), c || null === f || (f = {
-                opSpecsA: f.opSpecsB,
-                opSpecsB: f.opSpecsA
-            })) : f = null;
+            opSpecsA: f.opSpecsB,
+            opSpecsB: f.opSpecsA
+        })) : f = null;
         runtime.log("result:");
         f ? (runtime.log(runtime.toJson(f.opSpecsA)), runtime.log(runtime.toJson(f.opSpecsB))) : runtime.log("null");
         return f

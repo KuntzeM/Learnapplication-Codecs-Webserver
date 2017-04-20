@@ -82,4 +82,4 @@ class WideImage_PaletteImage_Test extends WideImage_TestCase
         $rgb = $copy->getTransparentColorRGB();
         $this->assertRGBEqual($img->getTransparentColorRGB(), $rgb['red'], $rgb['green'], $rgb['blue']);
     }
-}
+	}

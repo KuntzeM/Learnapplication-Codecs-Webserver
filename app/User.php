@@ -36,4 +36,14 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function accessMediasAll()
+    {
+        return Auth::check();// return true for access to all medias
+    }
+
+    public function accessMediasFolder()
+    {
+        return Auth::check(); // return true for access to one folder
+    }
+
 }

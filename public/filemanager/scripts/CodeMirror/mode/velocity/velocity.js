@@ -106,7 +106,8 @@
                     return "keyword";
                 // is it one of the listed functions?
                 if (functions && functions.propertyIsEnumerable(word) ||
-                    (stream.current().match(/^#@?[a-z0-9_]+ *$/i) && stream.peek() == "(") && !(functions && functions.propertyIsEnumerable(word.toLowerCase()))) {
+                    (stream.current().match(/^#@?[a-z0-9_]+ *$/i) && stream.peek() == "(") &&
+                    !(functions && functions.propertyIsEnumerable(word.toLowerCase()))) {
                     state.beforeParams = true;
                     state.lastTokenWasBuiltin = false;
                     return "keyword";

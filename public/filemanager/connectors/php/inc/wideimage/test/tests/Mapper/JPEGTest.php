@@ -94,4 +94,4 @@ class WideImage_Mapper_JPEG_Test extends WideImage_TestCase
         $this->assertTrue(strlen($hq) > strlen($lq));
         imagedestroy($handle);
     }
-}
+	}

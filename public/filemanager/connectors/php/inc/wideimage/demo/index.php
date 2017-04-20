@@ -51,7 +51,7 @@ foreach ($demos as $demo)
 
 if (!$activeDemo)
     $activeDemoName = null;
-
+	
 ?>
 <html>
 <head>
@@ -150,16 +150,16 @@ if (!$activeDemo)
 			This demo is primarily intended to easily try some of the features.
 			There may be some bugs that don't actually occur with WideImage if used properly.
 			<br/>
-			<br/>
+			<br />
 			
 			Version: <?php echo WideImage::version(); ?>
 
         <br/>
 			<br/>
-        &copy; 2007-2011
+			&copy; 2007-2011
 			<br/>
 			<a href="http://kozak.si/widethoughts/">Gasper Kozak</a><br/>
-			<br/>
+			<br />
 			Read more about WideImage on the 
 			<a href="http://wideimage.sourceforge.net">project page</a>.
 			</span>

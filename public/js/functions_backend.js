@@ -33,6 +33,11 @@ function checkMediaServerStatus(element) {
         },
         timeout: 2000 // sets timeout to 1 second
     });
+
+    $.ajax({
+        type: 'GET',
+        url: '/ajax/get_file_size'
+    });
 }
 
 function getTranscodingProcesses(token) {

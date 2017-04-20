@@ -102,4 +102,4 @@ class WideImage_Operation_Crop_Test extends WideImage_TestCase
         $img = WideImage::load(IMG_PATH . '100x100-blue-alpha.png');
         $cropped = $img->crop(-150, -200, 50, 50);
     }
-}
+	}

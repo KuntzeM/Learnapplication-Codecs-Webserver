@@ -49,7 +49,8 @@
                 if (keywords.propertyIsEnumerable(word)) {
                     // Block keywords start new blocks, except 'else if', which only starts
                     // one new block for the 'if', no block for the 'else'.
-                    if (blockkeywords.propertyIsEnumerable(word) && !stream.match(/\s*if(\s+|$)/, false))
+                    if (blockkeywords.propertyIsEnumerable(word) &&
+                        !stream.match(/\s*if(\s+|$)/, false))
                         curPunc = "block";
                     return "keyword";
                 }

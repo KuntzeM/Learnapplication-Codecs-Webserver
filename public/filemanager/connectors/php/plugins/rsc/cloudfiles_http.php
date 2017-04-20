@@ -51,7 +51,6 @@ define("AUTH_USER_HEADER_LEGACY", "X-Storage-User");
 define("AUTH_KEY_HEADER_LEGACY", "X-Storage-Pass");
 define("AUTH_TOKEN_LEGACY", "X-Storage-Token");
 define("CDN_EMAIL", "X-Purge-Email");
-
 /**
  * HTTP/cURL wrapper for Cloud Files
  *
@@ -1308,7 +1307,7 @@ class CF_Http
             throw new ConnectionNotOpenException (
                 "Connection is not open."
             );
-
+        
         switch ($method) {
             case "DELETE":
                 curl_setopt($this->connections[$conn_type],
@@ -1319,7 +1318,7 @@ class CF_Http
                     CURLOPT_CUSTOMREQUEST, "POST");
             default:
                 break;
-        }
+        }        
 
         curl_setopt($this->connections[$conn_type],
             CURLOPT_HTTPHEADER, $headers);
@@ -1345,7 +1344,6 @@ class CF_Http
             }
         }
     }
-
     private function create_array()
     {
         $this->_text_list = explode("\n", rtrim($this->_return_list, "\n\x0B"));

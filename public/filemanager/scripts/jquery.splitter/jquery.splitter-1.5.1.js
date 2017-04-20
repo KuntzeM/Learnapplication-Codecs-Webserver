@@ -13,12 +13,12 @@
  * The selected elements in the jQuery object are converted to a splitter;
  * each selected element should have two child elements, used for the panes
  * of the splitter. The plugin adds a third child element for the splitbar.
- *
+ * 
  * For more details see: http://methvin.com/splitter/
  *
  *
  * @example $('#MySplitter').splitter();
- * @desc Create a vertical splitter with default settings
+ * @desc Create a vertical splitter with default settings 
  *
  * @example $('#MySplitter').splitter({type: 'h', accessKey: 'M'});
  * @desc Create a horizontal splitter resizable via Alt+Shift+M
@@ -219,7 +219,7 @@
                 if (splitter._DF <= 0 || splitter._DA <= 0) return;
                 // Re-divvy the adjustable dimension; maintain size of the preferred pane
                 resplit(!isNaN(size) ? size : (!(opts.sizeRight || opts.sizeBottom) ? A[0][opts.pxSplit] :
-                        splitter._DA - B[0][opts.pxSplit] - bar._DA));
+                    splitter._DA - B[0][opts.pxSplit] - bar._DA));
             }).trigger("resize", [initPos]);
         });
     };

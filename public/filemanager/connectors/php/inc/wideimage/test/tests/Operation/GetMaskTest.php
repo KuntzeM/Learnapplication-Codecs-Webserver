@@ -56,5 +56,4 @@ class WideImage_Operation_GetMask_Test extends WideImage_TestCase
         $this->assertRGBNear($mask->getRGBAt(25, 75), 0, 0, 0);
     }
 }
-
 ?>

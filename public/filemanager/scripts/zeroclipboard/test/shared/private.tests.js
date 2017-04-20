@@ -777,7 +777,8 @@
 
         // Arrange
         var actual1, actual2, actual3, actual4, actual5, actual6, actual7, actual8, actual9, actual10, actual11;
-        var expected1, expected2, expected3, expected4, expected5, expected6, expected7, expected8, expected9, expected10, expected11;
+        var expected1, expected2, expected3, expected4, expected5, expected6, expected7, expected8, expected9,
+            expected10, expected11;
         expected1 = expected2 = expected3 = expected4 = expected5 = "http://example.com/blah/foo/ZeroClipboard.swf";
         expected6 = "http://example.com/blah/ZeroClipboard.swf";
         expected7 = expected8 = expected9 = expected10 = expected11 = "ZeroClipboard.swf";

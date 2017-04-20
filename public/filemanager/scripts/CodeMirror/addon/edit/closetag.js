@@ -105,7 +105,8 @@
             var pos = ranges[i].head, tok = cm.getTokenAt(pos);
             var inner = CodeMirror.innerMode(cm.getMode(), tok.state), state = inner.state;
             if (tok.type == "string" || tok.string.charAt(0) != "<" ||
-                tok.start != pos.ch - 1 || inner.mode.name != "xml" || !state.context || !state.context.tagName)
+                tok.start != pos.ch - 1 || inner.mode.name != "xml" ||
+                !state.context || !state.context.tagName)
                 return CodeMirror.Pass;
             replacements[i] = "/" + state.context.tagName + ">";
         }

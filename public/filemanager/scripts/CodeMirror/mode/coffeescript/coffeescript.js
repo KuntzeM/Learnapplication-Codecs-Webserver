@@ -277,7 +277,9 @@
             if (current === "return") {
                 state.dedent += 1;
             }
-            if (((current === "->" || current === "=>") && !state.lambda && !stream.peek())
+            if (((current === "->" || current === "=>") &&
+                !state.lambda &&
+                !stream.peek())
                 || style === "indent") {
                 indent(stream, state);
             }

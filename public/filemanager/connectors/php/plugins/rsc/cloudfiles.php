@@ -79,7 +79,6 @@ define("MAX_OBJECT_NAME_LEN", 1024);
 define("MAX_OBJECT_SIZE", 5 * 1024 * 1024 * 1024 + 1);
 define("US_AUTHURL", "https://auth.api.rackspacecloud.com");
 define("UK_AUTHURL", "https://lon.auth.api.rackspacecloud.com");
-
 /**
  * Class for handling Cloud Files Authentication, call it's {@link authenticate()}
  * method to obtain authorized service urls and an authentication token.
@@ -407,13 +406,13 @@ class CF_Connection
      *
      * Example:
      * <code>
-     *
+     *  
      * $conn->close();
-     *
+     * 
      * </code>
      *
      * Will close all current cUrl active connections.
-     *
+     * 
      */
     public function close()
     {
@@ -479,7 +478,7 @@ class CF_Connection
         if ($container_name != "0" and !isset($container_name))
             throw new SyntaxException("Container name not set.");
 
-        if (!isset($container_name) or $container_name == "")
+        if (!isset($container_name) or $container_name == "") 
             throw new SyntaxException("Container name not set.");
 
         if (strpos($container_name, "/") !== False) {
@@ -1067,7 +1066,6 @@ class CF_Container
         $this->cdn_acl_referrer = "";
         return $this->cdn_uri;
     }
-
     /**
      * Purge Containers objects from CDN Cache.
      * Example:
@@ -1079,7 +1077,7 @@ class CF_Container
      * $container->purge_from_cdn("user@domain.com");
      * # or
      * $container->purge_from_cdn();
-     * # or
+     * # or 
      * $container->purge_from_cdn("user1@domain.com,user2@domain.com");
      * @returns boolean True if successful
      * @throws CDNNotEnabledException if CDN Is not enabled on this connection
@@ -1095,10 +1093,9 @@ class CF_Container
         if ($status < 199 or $status > 299) {
             throw new InvalidResponseException(
                 "Invalid response (" . $status . "): " . $this->cfs_http->get_error());
-        }
+        } 
         return True;
     }
-
     /**
      * Enable ACL restriction by User Agent for this container.
      *
@@ -1189,7 +1186,7 @@ class CF_Container
      * uploaded to a ".CDN_ACCESS_LOGS" container in the form of
      * "container_name.YYYYMMDDHH-XXXX.gz". Requires CDN be enabled on
      * the account.
-     *
+     * 
      * Example:
      * <code>
      * # ... authentication code excluded (see previous examples) ...
@@ -1382,7 +1379,7 @@ class CF_Container
      * # Grab subsets of all storage objects
      * #
      * $first_ten = $images->list_objects(10);
-     *
+     * 
      * # Note the use of the previous result's last object name being
      * # used as the 'marker' parameter to fetch the next 10 objects
      * #
@@ -1619,7 +1616,7 @@ class CF_Container
  * Object operations
  *
  * An Object is analogous to a file on a conventional filesystem. You can
- * read data from, or write data to your Objects. You can also associate
+ * read data from, or write data to your Objects. You can also associate 
  * arbitrary metadata with them.
  *
  * @package php-cloudfiles
@@ -1696,7 +1693,7 @@ class CF_Object
      *
      * if fileinfo is not available it will try to use the internal
      * mime_content_type function.
-     *
+     * 
      * @param string $handle name of file or buffer to guess the type from
      * @return boolean <kbd>True</kbd> if successful
      * @throws BadContentTypeException
@@ -1710,14 +1707,14 @@ class CF_Object
             $local_magic = dirname(__FILE__) . "/share/magic";
             $finfo = @finfo_open(FILEINFO_MIME, $local_magic);
 
-            if (!$finfo)
+            if (!$finfo) 
                 $finfo = @finfo_open(FILEINFO_MIME);
 
             if ($finfo) {
 
                 if (is_file((string)$handle))
                     $ct = @finfo_file($finfo, $handle);
-                else
+                else 
                     $ct = @finfo_buffer($finfo, $handle);
 
                 /* PHP 5.3 fileinfo display extra information like
@@ -2122,7 +2119,7 @@ class CF_Object
      * $obj->purge_from_cdn("user@domain.com");
      * # or
      * $obj->purge_from_cdn();
-     * # or
+     * # or 
      * $obj->purge_from_cdn("user1@domain.com,user2@domain.com");
      * @returns boolean True if successful
      * @throws CDNNotEnabledException if CDN Is not enabled on this connection

@@ -134,8 +134,8 @@
 
     function repeated(cmd) {
         var f = typeof cmd == "string" ? function (cm) {
-                cm.execCommand(cmd);
-            } : cmd;
+            cm.execCommand(cmd);
+        } : cmd;
         return function (cm) {
             var prefix = getPrefix(cm);
             f(cm);

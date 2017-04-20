@@ -70,6 +70,7 @@ internal class ClipboardInjector {
     }
 
 
+
     /**
      * Inject plain text into the System clipboard (i.e. Flash 9+ Clipboard).
      *

@@ -89,4 +89,4 @@ class WideImage_Mapper_PNG_Test extends WideImage_TestCase
         unlink($file1);
         unlink($file2);
     }
-}
+	}

@@ -355,7 +355,7 @@
                     try { // #214, #257
                         if (io.contentWindow.document.execCommand) {
                             io.contentWindow.document.execCommand('Stop');
-                        }
+                    }
                     }
                     catch (ignore) {
                     }

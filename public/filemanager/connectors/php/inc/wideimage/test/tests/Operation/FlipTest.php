@@ -48,5 +48,4 @@ class FlipTest extends WideImage_TestCase
         $this->assertRGBEqual($new->getRGBAt(50, 50), $img->getTransparentColorRGB());
     }
 }
-
 ?>

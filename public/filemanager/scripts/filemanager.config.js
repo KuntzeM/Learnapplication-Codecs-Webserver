@@ -81,7 +81,7 @@
         false,
             "allowChangeExtensions"
     :
-        false,
+        true,
             "allowNoExtension"
     :
         false,
@@ -132,7 +132,7 @@
         5,
             "overwrite"
     :
-        false,
+        true,
             "imagesOnly"
     :
         false,

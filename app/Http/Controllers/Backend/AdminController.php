@@ -21,6 +21,7 @@ class AdminController extends Controller
      */
     public function __construct()
     {
+
         $config = ConfigData::getInstance();
         $this->url = $config->media_server;
     }

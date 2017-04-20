@@ -67,4 +67,4 @@ class WideImage_Mapper_GD2_Test extends WideImage_TestCase
         $this->assertTrue(WideImage::isValidImageHandle($handle));
         imagedestroy($handle);
     }
-}
+	}

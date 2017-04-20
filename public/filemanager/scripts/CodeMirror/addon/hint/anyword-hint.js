@@ -22,7 +22,8 @@
         var list = [], seen = {};
         var re = new RegExp(word.source, "g");
         for (var dir = -1; dir <= 1; dir += 2) {
-            var line = cur.line, endLine = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
+            var line = cur.line,
+                endLine = Math.min(Math.max(line + dir * range, editor.firstLine()), editor.lastLine()) + dir;
             for (; line != endLine; line += dir) {
                 var text = editor.getLine(line), m;
                 while (m = re.exec(text)) {

@@ -427,7 +427,8 @@
                         return this.element.classList.remove("dz-started");
                     },
                     addedfile: function (file) {
-                        var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
+                        var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2,
+                            _results;
                         if (this.element === this.previewsContainer) {
                             this.element.classList.add("dz-started");
                         }
@@ -1351,7 +1352,9 @@
                 };
 
                 Dropzone.prototype.uploadFiles = function (files) {
-                    var file, formData, handleError, headerName, headerValue, headers, i, input, inputName, inputType, key, option, progressObj, response, updateProgress, value, xhr, _i, _j, _k, _l, _len, _len1, _len2, _len3, _m, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
+                    var file, formData, handleError, headerName, headerValue, headers, i, input, inputName, inputType,
+                        key, option, progressObj, response, updateProgress, value, xhr, _i, _j, _k, _l, _len, _len1,
+                        _len2, _len3, _m, _ref, _ref1, _ref2, _ref3, _ref4, _ref5;
                     xhr = new XMLHttpRequest();
                     for (_i = 0, _len = files.length; _i < _len; _i++) {
                         file = files[_i];

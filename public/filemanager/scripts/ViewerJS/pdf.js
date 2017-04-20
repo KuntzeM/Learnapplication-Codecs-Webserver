@@ -4492,7 +4492,8 @@ PDFJS.build = '997096f';
                 var widthAdvanceScale = fontSize * current.fontMatrix[0];
 
                 var simpleFillText =
-                    current.textRenderingMode === TextRenderingMode.FILL && !font.disableFontFace;
+                    current.textRenderingMode === TextRenderingMode.FILL &&
+                    !font.disableFontFace;
 
                 ctx.save();
                 ctx.transform.apply(ctx, current.textMatrix);
@@ -7454,7 +7455,8 @@ PDFJS.build = '997096f';
                 var size = details[1];
                 this.current.font = fontObj;
 
-                if (this.embedFonts && fontObj.data && !this.embeddedFonts[fontObj.loadedName]) {
+                if (this.embedFonts && fontObj.data &&
+                    !this.embeddedFonts[fontObj.loadedName]) {
                     this.addFontStyle(fontObj);
                     this.embeddedFonts[fontObj.loadedName] = fontObj;
                 }

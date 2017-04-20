@@ -10,7 +10,7 @@
  */
 
 (function ($) {
-
+ 
 // function to retrieve GET params
     $.urlParam = function (name) {
         var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -24,7 +24,7 @@
      Setup, Layout, and Status Functions
      ---------------------------------------------------------*/
 
-// We retrieve config settings from filemanager.config.json
+// We retrieve config settings from filemanager.config.js
     var loadConfigFile = function (type) {
         var json = null;
         type = (typeof type === "undefined") ? "user" : type;
@@ -34,11 +34,11 @@
                 var url = './scripts/' + $.urlParam('config');
                 userconfig = $.urlParam('config');
             } else {
-                var url = './scripts/filemanager.config.json';
-                userconfig = 'filemanager.config.json';
+                var url = './scripts/filemanager.config.js';
+                userconfig = 'filemanager.config.js';
             }
         } else {
-            var url = './scripts/filemanager.config.json.default';
+            var url = './scripts/filemanager.config.js.default';
         }
 
         $.ajax({
@@ -59,6 +59,7 @@
     var config = loadConfigFile();
 // we remove version from user config file
     if (config !== null) delete config.version;
+
 
 
 // we merge default config and user config file
@@ -1985,7 +1986,7 @@
             $('.contextMenu .replace').remove();
             $('.contextMenu .delete').remove();
         }
-
+        
         // Adjust layout.
         setDimensions();
         $(window).resize(setDimensions);

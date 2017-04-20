@@ -106,7 +106,7 @@ class StorageMediaController extends Controller
      */
     public function getFileMetaData()
     {
-        $lockfile = 'metadata.lock';
+        $lockfile = join('/', [storage_path(), 'metadata.lock']);
 
         if (!file_exists($lockfile)) {
             $f = fopen($lockfile, "w");

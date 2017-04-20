@@ -1,4 +1,5 @@
 module.exports = (grunt) ->
+
   grunt.initConfig
     pkg: grunt.file.readJSON "package.json"
 
@@ -80,6 +81,7 @@ module.exports = (grunt) ->
           "downloads/dropzone-amd-module.min.js": "downloads/dropzone-amd-module.js"
           "downloads/dropzone.min.js": "downloads/dropzone.js"
         ]
+
 
 
   grunt.loadNpmTasks "grunt-contrib-coffee"

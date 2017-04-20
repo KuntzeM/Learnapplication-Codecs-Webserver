@@ -41,4 +41,4 @@ class WideImage_Canvas_Test extends WideImage_TestCase
         $canvas->filledRectangle(1, 1, 5, 5, $img->allocateColorAlpha(255, 0, 0, 64));
         $this->assertRGBAt($img, 3, 3, array('red' => 255, 'green' => 0, 'blue' => 0, 'alpha' => 64));
     }
-}
+	}

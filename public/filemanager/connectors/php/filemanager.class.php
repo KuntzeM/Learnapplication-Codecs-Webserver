@@ -1,5 +1,4 @@
 <?php
-
 /**
  *    Filemanager PHP class
  *
@@ -37,7 +36,7 @@ class Filemanager
     {
 
         // getting default config file
-        $content = file_get_contents("../../scripts/filemanager.config.json.default");
+        $content = file_get_contents("../../scripts/filemanager.config.js.default");
         $config_default = json_decode($content, true);
 
         // getting user config file
@@ -51,7 +50,7 @@ class Filemanager
                 $this->error("Given config file (" . basename($this->get['config']) . ") does not exist !");
             }
         } else {
-            $content = file_get_contents("../../scripts/filemanager.config.json");
+            $content = file_get_contents("../../scripts/filemanager.config.js");
         }
         $config = json_decode($content, true);
 
@@ -1588,5 +1587,4 @@ class Filemanager
         return implode('/', $fullPath);
     }
 }
-
 ?>

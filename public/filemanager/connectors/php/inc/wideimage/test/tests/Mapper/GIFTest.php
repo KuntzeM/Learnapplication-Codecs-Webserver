@@ -79,4 +79,4 @@ class WideImage_Mapper_GIF_Test extends WideImage_TestCase
         $this->assertTrue(is_resource($handle));
         imagedestroy($handle);
     }
-}
+	}

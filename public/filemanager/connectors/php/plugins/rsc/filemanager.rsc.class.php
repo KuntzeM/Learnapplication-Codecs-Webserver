@@ -1,5 +1,4 @@
 <?php
-
 /**
  *    Filemanager PHP RSC plugin class
  *
@@ -396,5 +395,4 @@ class FilemanagerRSC extends Filemanager
         return $object;
     }
 }
-
 ?>

@@ -29,7 +29,6 @@
     white-space: normal;
     vertical-align: top;
 }
-
 .CodeMirror-merge-pane-rightmost {
     position: absolute;
     right: 0px;
@@ -54,7 +53,6 @@
     bottom: 0;
     left: 50%;
 }
-
 .CodeMirror-merge-scrolllock {
     position: relative;
     left: -50%;

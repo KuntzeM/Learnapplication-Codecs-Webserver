@@ -1330,7 +1330,8 @@
     function updateSelectionRange(cm, range, output) {
         var display = cm.display, doc = cm.doc;
         var fragment = document.createDocumentFragment();
-        var padding = paddingH(cm.display), leftSide = padding.left, rightSide = display.lineSpace.offsetWidth - padding.right;
+        var padding = paddingH(cm.display), leftSide = padding.left,
+            rightSide = display.lineSpace.offsetWidth - padding.right;
 
         function add(left, top, width, bottom) {
             if (top < 0) top = 0;
@@ -2785,7 +2786,8 @@
                 var startCol = countColumn(getLine(doc, start.line).text, start.ch, tabSize);
                 var posCol = countColumn(getLine(doc, pos.line).text, pos.ch, tabSize);
                 var left = Math.min(startCol, posCol), right = Math.max(startCol, posCol);
-                for (var line = Math.min(start.line, pos.line), end = Math.min(cm.lastLine(), Math.max(start.line, pos.line));
+                for (var line = Math.min(start.line, pos.line),
+                         end = Math.min(cm.lastLine(), Math.max(start.line, pos.line));
                      line <= end; line++) {
                     var text = getLine(doc, line).text, leftPos = findColumn(text, left, tabSize);
                     if (left == right)
@@ -3980,8 +3982,8 @@
             var startChar = line.charAt(start);
             var check = isWordChar(startChar) ? isWordChar
                 : /\s/.test(startChar) ? function (ch) {
-                        return /\s/.test(ch);
-                    }
+                    return /\s/.test(ch);
+                }
                     : function (ch) {
                         return !/\s/.test(ch) && !isWordChar(ch);
                     };
@@ -4495,8 +4497,8 @@
         CodeMirror.defaults[name] = deflt;
         if (handle) optionHandlers[name] =
             notOnInit ? function (cm, val, old) {
-                    if (old != Init) handle(cm, val, old);
-                } : handle;
+                if (old != Init) handle(cm, val, old);
+            } : handle;
     }
 
     // Passed to option handlers when there is no old value.
@@ -7672,41 +7674,41 @@
     // See if "".split is the broken IE version, if so, provide an
     // alternative way to split lines.
     var splitLines = CodeMirror.splitLines = "\n\nb".split(/\n/).length != 3 ? function (string) {
-            var pos = 0, result = [], l = string.length;
-            while (pos <= l) {
-                var nl = string.indexOf("\n", pos);
-                if (nl == -1) nl = string.length;
-                var line = string.slice(pos, string.charAt(nl - 1) == "\r" ? nl - 1 : nl);
-                var rt = line.indexOf("\r");
-                if (rt != -1) {
-                    result.push(line.slice(0, rt));
-                    pos += rt + 1;
-                } else {
-                    result.push(line);
-                    pos = nl + 1;
-                }
+        var pos = 0, result = [], l = string.length;
+        while (pos <= l) {
+            var nl = string.indexOf("\n", pos);
+            if (nl == -1) nl = string.length;
+            var line = string.slice(pos, string.charAt(nl - 1) == "\r" ? nl - 1 : nl);
+            var rt = line.indexOf("\r");
+            if (rt != -1) {
+                result.push(line.slice(0, rt));
+                pos += rt + 1;
+            } else {
+                result.push(line);
+                pos = nl + 1;
             }
-            return result;
-        } : function (string) {
-            return string.split(/\r\n?|\n/);
-        };
+        }
+        return result;
+    } : function (string) {
+        return string.split(/\r\n?|\n/);
+    };
 
     var hasSelection = window.getSelection ? function (te) {
-            try {
-                return te.selectionStart != te.selectionEnd;
-            }
-            catch (e) {
-                return false;
-            }
-        } : function (te) {
-            try {
-                var range = te.ownerDocument.selection.createRange();
-            }
-            catch (e) {
-            }
-            if (!range || range.parentElement() != te) return false;
-            return range.compareEndPoints("StartToEnd", range) != 0;
-        };
+        try {
+            return te.selectionStart != te.selectionEnd;
+        }
+        catch (e) {
+            return false;
+        }
+    } : function (te) {
+        try {
+            var range = te.ownerDocument.selection.createRange();
+        }
+        catch (e) {
+        }
+        if (!range || range.parentElement() != te) return false;
+        return range.compareEndPoints("StartToEnd", range) != 0;
+    };
 
     var hasCopyEvent = (function () {
         var e = elt("div");

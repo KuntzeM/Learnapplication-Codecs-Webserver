@@ -27,6 +27,5 @@
  * @package Exceptions
  **/
 class WideImage_Exception extends RuntimeException
-{
-}
+{}
 	

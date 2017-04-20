@@ -47,7 +47,8 @@
                     x = w.innerWidth || e.clientWidth || g.clientWidth,
                     y = w.innerHeight || e.clientHeight || g.clientHeight;
 
-                var cmsURL = '{{URL::to('filemanager') }}?&field_name=' + field_name + '&langCode=' + tinymce.settings.language;
+                //var cmsURL = '{{URL::to('filemanager') }}?&field_name=' + field_name + '&langCode=en&token=faherstlwizto8ew5h4p5z8thgfoewz4o5z7thfpoet8zwg65745-sadtr43_w44wtrt';
+                var cmsURL = '{!! url('filemanager/index.html') !!}?&field_name=' + field_name + '&langCode=en&token=faherstlwizto8ew5h4p5z8thgfoewz4o5z7thfpoet8zwg65745-sadtr43_w44wtrt';
 
                 if (type == 'image') {
                     cmsURL = cmsURL + "&type=images";

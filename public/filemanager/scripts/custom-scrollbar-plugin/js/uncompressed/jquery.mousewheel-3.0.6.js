@@ -54,7 +54,8 @@
 
 
     function handler(event) {
-        var orgEvent = event || window.event, args = [].slice.call(arguments, 1), delta = 0, returnValue = true, deltaX = 0, deltaY = 0;
+        var orgEvent = event || window.event, args = [].slice.call(arguments, 1), delta = 0, returnValue = true,
+            deltaX = 0, deltaY = 0;
         event = $.event.fix(orgEvent);
         event.type = "mousewheel";
 

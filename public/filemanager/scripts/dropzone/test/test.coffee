@@ -14,7 +14,9 @@ describe "Dropzone", ->
 
 
   describe "static functions", ->
+
     describe "Dropzone.createElement()", ->
+
       element = Dropzone.createElement """<div class="test"><span>Hallo</span></div>"""
 
       it "should properly create an element from a string", ->
@@ -266,6 +268,7 @@ describe "Dropzone", ->
         expect(-> Dropzone.getElements ["lblasdlfsfl"], "clickable").to.throw errorMessage
 
   describe "constructor()", ->
+
     dropzone = null
 
     afterEach -> dropzone.destroy() if dropzone?
@@ -365,8 +368,11 @@ describe "Dropzone", ->
             clickable: ".some-invalid-clickable").to.throw "Invalid `clickable` option provided. Please provide a CSS selector, a plain HTML element or a list of those."
 
 
+
+
   describe "init()", ->
     describe "clickable", ->
+
       dropzones =
         "using acceptedFiles": new Dropzone(Dropzone.createElement("""<form action="/"></form>"""), {
           clickable: yes,
@@ -418,7 +424,9 @@ describe "Dropzone", ->
       element.querySelectorAll(".dz-message").length.should.equal 1
 
 
+
   describe "options", ->
+
     element = null
     dropzone = null
 
@@ -474,8 +482,10 @@ describe "Dropzone", ->
           file.previewElement.querySelector("[data-dz-uploadprogress]").style.width.should.eql "100%"
 
       describe ".resize()", ->
+
         describe "with default thumbnail settings", ->
           it "should properly return target dimensions", ->
+
             info = dropzone.options.resize.call dropzone, file
 
             info.optWidth.should.eql 100
@@ -508,6 +518,7 @@ describe "Dropzone", ->
                 info.optHeight.should.eql 75
 
   describe "instance", ->
+
     element = null
     dropzone = null
     requests = null
@@ -525,6 +536,7 @@ describe "Dropzone", ->
       xhr.restore()
 
     describe ".accept()", ->
+
       it "should pass if the filesize is OK", ->
         dropzone.accept {size: 2 * 1024 * 1024, type: "audio/mp3"}, (err) -> expect(err).to.be.undefined
 
@@ -576,6 +588,7 @@ describe "Dropzone", ->
 
         dropzone.accept file, (err) -> expect(err).to.equal "You can not upload any more files."
         called.should.be.ok
+
 
 
     describe ".removeFile()", ->
@@ -689,6 +702,7 @@ describe "Dropzone", ->
         , 10
 
 
+
     describe ".disable()", ->
       it "should properly cancel all pending uploads", (done) ->
         dropzone.accept = (file, done) -> done()
@@ -758,7 +772,9 @@ describe "Dropzone", ->
         (Dropzone.instances.indexOf(dropzone) == -1).should.be.ok
 
 
+
     describe ".filesize()", ->
+
       it "should convert to KiloBytes, etc.. not KibiBytes", ->
 
 # dropzone.filesize(2 * 1000 * 1000).should.eql "<strong>1.9</strong> MiB"
@@ -798,7 +814,9 @@ describe "Dropzone", ->
         dropzone.element.classList.contains("dz-max-files-reached").should.not.be.ok
 
     describe "events", ->
+
       describe "progress updates", ->
+
         it "should properly emit a totaluploadprogress event", (done) ->
           dropzone.files = [
             {
@@ -1504,7 +1522,7 @@ describe "Dropzone", ->
             @_finished files, null, null
           ), 1
 
-        completedFiles = 0
+        completedFiles = 0        
         dropzone.on "complete", (file) ->
           completedFiles++
 

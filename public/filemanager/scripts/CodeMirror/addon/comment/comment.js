@@ -148,7 +148,9 @@
             endLine = self.getLine(--end);
             close = endLine.lastIndexOf(endString);
         }
-        if (open == -1 || close == -1 || !/comment/.test(self.getTokenTypeAt(Pos(start, open + 1))) || !/comment/.test(self.getTokenTypeAt(Pos(end, close + 1))))
+        if (open == -1 || close == -1 ||
+            !/comment/.test(self.getTokenTypeAt(Pos(start, open + 1))) ||
+            !/comment/.test(self.getTokenTypeAt(Pos(end, close + 1))))
             return false;
 
         self.operation(function () {

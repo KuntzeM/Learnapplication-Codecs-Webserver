@@ -33,7 +33,7 @@
  * @version 21.08.2010
  *
  * @package Internal/Mappers
- */
+	 */
 class WideImage_vendor_de77_BMP
 {
     public static function imagebmp(&$img, $filename = false)
@@ -243,5 +243,5 @@ class WideImage_vendor_de77_BMP
     private static function word($n)
     {
         return pack("v", $n);
-    }
+	}
 }

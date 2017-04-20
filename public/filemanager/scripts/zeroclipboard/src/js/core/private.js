@@ -427,6 +427,7 @@ var _activeElement = function () {
 };
 
 
+
 //
 // Helper functions
 //
@@ -768,7 +769,8 @@ var _preprocessEvent = function (event) {
             if (_globalConfig.bubbleEvents === true && sourceIsSwf) {
                 if (
                     element &&
-                    element !== event.relatedTarget && !_containedBy(event.relatedTarget, element)
+                    element !== event.relatedTarget &&
+                    !_containedBy(event.relatedTarget, element)
                 ) {
                     _fireMouseEvent(
                         _extend({}, event, {
@@ -794,7 +796,8 @@ var _preprocessEvent = function (event) {
             if (_globalConfig.bubbleEvents === true && sourceIsSwf) {
                 if (
                     element &&
-                    element !== event.relatedTarget && !_containedBy(event.relatedTarget, element)
+                    element !== event.relatedTarget &&
+                    !_containedBy(event.relatedTarget, element)
                 ) {
                     _fireMouseEvent(
                         _extend({}, event, {

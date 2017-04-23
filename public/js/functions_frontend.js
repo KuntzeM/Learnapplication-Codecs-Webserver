@@ -85,7 +85,8 @@ var animationID = null;
 
 function sync() {
 
-    if (videos.b.media.readyState === 4) {
+    if (videos.b.media.readyState === 4 && videos.a.media.readyState === 4) {
+        console.log('sync');
         videos.b.currentTime(
             videos.a.currentTime()
         );
